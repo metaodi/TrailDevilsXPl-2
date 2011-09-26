@@ -1,7 +1,7 @@
 new Ext.Application({
-	tabletStartupScreen: 'phone_startup.png',
-	phoneStartupScreen: 'phone_startup.png',
-	icon: 'icon.jpg',
+	tabletStartupScreen: 'view/images/phone_startup.jpg',
+	phoneStartupScreen: 'view/images/phone_startup.jpg',
+	icon: 'view/images/app_icon.jpg',
 	glossOnIcon: false,
 	onReady: function() {
 		var timeline, map, panel, tabBar, refresh;
