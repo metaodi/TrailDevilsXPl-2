@@ -8,6 +8,7 @@ Ext.setup({
 		var markersArray = [];
 			
 		timeline = new Ext.Component({
+        	iconCls: 'time',
 			title: 'Timeline',
 			cls: 'timeline',
 			scroll: 'vertical',
@@ -25,6 +26,7 @@ Ext.setup({
 		});
 		
 		map = new Ext.Map({
+        	iconCls: 'maps',
 	        title: 'Map',        // Name that appears on this tab
 	        useCurrentLocation: true,   // Gets user's current location
 	        mapOptions: {        // Used in rendering map
@@ -36,8 +38,17 @@ Ext.setup({
 	    panel = new Ext.TabPanel({
 	        fullscreen: true,            // The panel will take up the full rather than partial screen
 	        cardSwitchAnimation: 'slide',       // Special effect for switching between cards
-			ui: 'light',
-	        items: [map, timeline]       // Components (cards) that the tabs correspond with
+	        items: [map, timeline],
+	        tabBar: {
+	        	dock: 'bottom',
+	        	scroll: {
+	        		direction: 'horizontal',
+	        		useIndicators: false
+	        	},
+	        	layout: {
+	        		pack: 'center'
+	        	}
+	        }
 	    });
 	    
 	    addMarker = function(tweet, position) {        // Define addMarker function
