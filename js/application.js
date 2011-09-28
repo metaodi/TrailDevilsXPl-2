@@ -4,7 +4,7 @@ new Ext.Application({
 	icon: 'view/images/app_icon.jpg',
 	glossOnIcon: false,
 	onReady: function() {
-		var timeline, map, panel, tabBar, refresh;
+		var timeline,  panel, tabBar, refresh;
 
 		timeline = new Ext.Component({
 			title: 'Timeline',
@@ -22,12 +22,20 @@ new Ext.Application({
 					'</tpl>'
 				 ]
 		});
+		
+		mapPanel = new Ext.Map({
+			title: 'Map',
+			useCurrentLocation: true,
+			mapOptions: {
+				zoom: 12
+			}
+		});
 	
 		panel = new Ext.TabPanel({
 			fullscreen: true,
 			cardSwitchAnimation: 'slide',
 			ui: 'light',
-			items: [timeline]
+			items: [timeline, mapPanel]
 		});
 	
 		panel.getTabBar().add([
