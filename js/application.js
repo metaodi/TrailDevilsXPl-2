@@ -26,7 +26,7 @@ Ext.setup({
 		});
 		
 		map = new Ext.Map({
-        	iconCls: 'maps',
+        	iconCls: 'locate',
 	        title: 'Map',        // Name that appears on this tab
 	        useCurrentLocation: true,   // Gets user's current location
 	        mapOptions: {        // Used in rendering map
@@ -34,11 +34,12 @@ Ext.setup({
 	        }
 	    });
 		
-
+		var trailslist = getTrailsList();
+		
 	    panel = new Ext.TabPanel({
 	        fullscreen: true,            // The panel will take up the full rather than partial screen
 	        cardSwitchAnimation: 'slide',       // Special effect for switching between cards
-	        items: [map, timeline],
+	        items: [map, timeline, trailslist],
 	        tabBar: {
 	        	dock: 'bottom',
 	        	scroll: {
