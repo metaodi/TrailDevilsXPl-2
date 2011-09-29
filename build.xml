@@ -1,0 +1,7 @@
+<project name="traildevils-build" basedir=".">
+	<target name="deploy">
+		<copy todir="/var/www/html" overwrite="true">
+    		<fileset dir="."/>
+  		</copy>
+	</target>
+</project>
