@@ -4,7 +4,7 @@ Ext.setup({
 	icon: 'view/images/app_icon.jpg',
 	glossOnIcon: true,
 	onReady: function() {
-		var timeline, map, panel, tabBar, refresh, addMarker, clearMarkers;
+		var timeline, map, ajax, panel, tabBar, refresh, addMarker, clearMarkers;
 		var markersArray = [];
 			
 		timeline = new Ext.Component({
@@ -25,6 +25,23 @@ Ext.setup({
 				 ]
 		});
 		
+		ajax = new Ext.Component({
+        	iconCls: 'info',
+			title: 'Ajax',
+			cls: 'ajax',
+			scroll: 'vertical',
+			tpl: [
+					'<tpl for=".">',
+					' <div class="ajax">',
+						' <div class="tweet-content">',
+							' <h2>{foo}</h2>',
+							' <p>{hello}</p>',
+						' </div>',
+					' </div>',
+					'</tpl>'
+				 ]
+		});
+		
 		map = new Ext.Map({
         	iconCls: 'maps',
 	        title: 'Map',        // Name that appears on this tab
@@ -38,7 +55,7 @@ Ext.setup({
 	    panel = new Ext.TabPanel({
 	        fullscreen: true,            // The panel will take up the full rather than partial screen
 	        cardSwitchAnimation: 'slide',       // Special effect for switching between cards
-	        items: [map, timeline],
+	        items: [map, timeline, ajax],
 	        tabBar: {
 	        	dock: 'bottom',
 	        	scroll: {
@@ -89,6 +106,17 @@ Ext.setup({
 						}
 					}
 				}
+			});
+			Ext.Ajax.request({
+				url : 'php/DataLoader.class.php' , 
+				params : { action : 'getData' },
+				method: 'GET',
+				success: function ( result, request ) { 
+					Ext.Msg.alert('Success', 'Data return from the server: '+ result.responseText); 
+				},
+				failure: function ( result, request) { 
+					Ext.Msg.alert('Failed', result.responseText); 
+				} 
 			});
 		};
 		
