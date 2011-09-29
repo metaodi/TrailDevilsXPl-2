@@ -1,6 +1,14 @@
 <project name="traildevils-build" basedir=".">
-	<target name="deploy">
-		<copy todir="/var/www/html" overwrite="true">
+	<property name="webapp.dir" value="/var/www/html" />
+	
+	<target name="clean">
+		<delete includeemptydirs="true">
+    		<fileset dir="${webapp.dir}" includes="**/*"/>
+  		</delete>
+	</target>
+	
+	<target name="deploy" depends="clean">
+		<copy todir="${webapp.dir}" overwrite="true">
     		<fileset dir="."/>
   		</copy>
 	</target>
