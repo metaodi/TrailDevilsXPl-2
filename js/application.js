@@ -112,7 +112,7 @@ Ext.setup({
 				url : 'php/DataLoader.class.php' , 
 				params : { 
 					functionName : 'getData' ,
-					params : 'reflection test'
+					params : 'reflection test,another param'
 				},
 				method: 'GET',
 				success: function ( result, request ) { 
