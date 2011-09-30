@@ -109,10 +109,11 @@ Ext.setup({
 				}
 			});
 			Ext.Ajax.request({
-				url : 'php/DataLoader.class.php' , 
+				url : 'php/AjaxHandler.class.php' , 
 				params : { 
-					functionName : 'getData' ,
-					params : 'reflection test,another param'
+					className : 'DataLoader' ,
+					functionName : 'echoData' ,
+					params : 'reflection_test,another_param'
 				},
 				method: 'GET',
 				success: function ( result, request ) { 

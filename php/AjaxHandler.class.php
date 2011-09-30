@@ -1,17 +1,16 @@
 <?php
-require_once('DataLoader.class.php');
-
 class AjaxHandler
 {
-	public function handleRequest($functionName,$params=array())
+	public function handleRequest($className,$functionName,$params=array())
 	{
-		$dataLoader = new DataLoader();
-		$reflectionMethod = new ReflectionMethod('DataLoader', $functionName);
-		return $reflectionMethod->invoke($dataLoader, $params[0]);
+		require_once($className.'.class.php');
+		$reflectionClass = new ReflectionClass($className); 
+		$reflectionMethod = new ReflectionMethod($className, $functionName);
+		return $reflectionMethod->invokeArgs($reflectionClass->newInstance(), $params);
 	}
 }
 
 $handler = new AjaxHandler();
-$handler->handleRequest($_REQUEST['functionName'],implode($_REQUEST['params'],',''));
+$handler->handleRequest($_REQUEST['className'],$_REQUEST['functionName'],explode(',',$_REQUEST['params']));
 
 ?>
