@@ -110,7 +110,10 @@ Ext.setup({
 			});
 			Ext.Ajax.request({
 				url : 'php/DataLoader.class.php' , 
-				params : { action : 'getData' },
+				params : { 
+					functionName : 'getData' ,
+					params : 'reflection test'
+				},
 				method: 'GET',
 				success: function ( result, request ) { 
 					Ext.Msg.alert('Success', 'Data return from the server: '+ result.responseText); 
