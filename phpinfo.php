@@ -1,5 +1,3 @@
 <?php
 phpinfo();
-
-echo "End";
 ?>
