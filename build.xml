@@ -6,7 +6,7 @@
 			<arg value="all_tests.php"/>
 		</exec>
 		
-		<exec executable="tail" dir="./">
+		<exec executable="tail" dir=".">
 			<arg value="-n 1"/>
 			<arg value="tests/AllTests.xml"/>
 		</exec>
