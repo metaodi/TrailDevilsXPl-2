@@ -4,7 +4,6 @@
 	<target name="test">
 		<exec executable="php" dir="php/test">
 			<arg value="all_tests.php"/>
-			<arg value="-xml"/>
 		</exec>
 
 	</target>
