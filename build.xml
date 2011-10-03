@@ -2,13 +2,13 @@
 	<property name="webapp.dir" value="/var/www/html" />
 	
 	<target name="test">
-		<exec executable="php" dir="php/test" output="AllTests.xml">
+		<exec executable="php" dir="php/test" output="tests/AllTests.xml">
 			<arg value="all_tests.php"/>
 		</exec>
 		
-		<exec executable="tail" dir="php/test">
+		<exec executable="tail" dir="./">
 			<arg value="-n 1"/>
-			<arg value="AllTests.xml"/>
+			<arg value="tests/AllTests.xml"/>
 		</exec>
 
 	</target>
