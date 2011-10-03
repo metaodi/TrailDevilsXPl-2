@@ -1,7 +1,4 @@
 <?php
-// set the default timezone to use
-date_default_timezone_set('Europe/Berlin');
-
 /**
  * A reporter that writes jUnit xml files
  */
