@@ -3,8 +3,8 @@
 	
 	<target name="test">
 		<exec executable="php" dir=".">
-			<arg value="-xml"/>
 			<arg value="php/test/all_tests.php"/>
+			<arg value="-xml"/>
 		</exec>
 
 	</target>
