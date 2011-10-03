@@ -1,6 +1,6 @@
 <?php
-require_once(dirname(__FILE__).'../../lib/simpletest/autorun.php');
-require_once(dirname(__FILE__).'../AjaxHandler.class.php');
+require_once('../../lib/simpletest/autorun.php');
+require_once('../AjaxHandler.class.php');
 
 class TestHandleRequest extends UnitTestCase {
     function testHandleValidRequest() {

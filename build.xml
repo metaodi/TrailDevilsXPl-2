@@ -2,8 +2,8 @@
 	<property name="webapp.dir" value="/var/www/html" />
 	
 	<target name="test">
-		<exec executable="php" dir=".">
-			<arg value="php/test/all_tests.php"/>
+		<exec executable="php" dir="php/test">
+			<arg value="all_tests.php"/>
 			<arg value="-xml"/>
 		</exec>
 
