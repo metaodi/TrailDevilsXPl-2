@@ -1,7 +1,15 @@
 <project name="traildevils-build" basedir=".">
 	<property name="webapp.dir" value="/var/www/html" />
 	
-	<target name="clean">
+	<target name="test">
+		<exec executable="php" dir=".">
+			<arg value="-xml"/>
+			<arg value="php/test/all_tests.php"/>
+		</exec>
+
+	</target>
+	
+	<target name="clean" depends="test">
 		<delete includeemptydirs="true">
     		<fileset dir="${webapp.dir}" includes="**/*"/>
   		</delete>
