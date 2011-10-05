@@ -27,7 +27,7 @@
 	</target>
 	
 	<target name="exec_php">
-		<exec executable="php" dir="${test.dir}" output="${result.dir}/${foreach.file}.xml">
+		<exec executable="php" dir="${test.dir}" output="${result.dir}/${filename}.xml">
 			<arg value="${filename}"/>
 		</exec>
 	</target>
