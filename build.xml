@@ -1,6 +1,14 @@
 <project name="traildevils-build" basedir=".">
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+	  <classpath>
+		<pathelement location="lib/antlibs/ant-contrib-0.3.jar"/>
+	  </classpath>
+	</taskdef>
+
+	
 	<property name="webapp.dir" value="/var/www/html" />
-	<property name="test.dir" value="test-results" />
+	<property name="result.dir" value="test-results" />
+	<property name="test.dir" value="php/test" />
 	
 	<target name="clean">
 		<delete includeemptydirs="true">
@@ -11,8 +19,15 @@
 	
 	<target name="test" depends="clean">
 		<mkdir dir="${test.dir}"/>
-		<exec executable="php" dir="php/test" output="${test.dir}/AllTests.xml">
-			<arg value="all_tests.php"/>
+		<foreach>
+			<fileset dir="${test.dir}" includes="Test*.php"/> 
+			<antcall target="exec_php"/>
+		</foreach>
+	</target>
+	
+	<target name="exec_php">
+		<exec executable="php" dir="${test.dir}" output="${result.dir}/${foreach.file}.xml">
+			<arg value="${foreach.file}"/>
 		</exec>
 	</target>
 	
