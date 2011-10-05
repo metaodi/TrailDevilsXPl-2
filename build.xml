@@ -1,7 +1,7 @@
 <project name="traildevils-build" basedir=".">
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
 	  <classpath>
-		<pathelement location="lib/antlibs/ant-contrib-0.3.jar"/>
+		<pathelement location="lib/antlibs/ant-contrib-1.0b3.jar"/>
 	  </classpath>
 	</taskdef>
 
