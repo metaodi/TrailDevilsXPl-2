@@ -19,7 +19,7 @@
 	
 	<target name="test" depends="clean">
 		<mkdir dir="${test.dir}"/>
-		<foreach target="exec_php">
+		<foreach target="exec_php" param="filename">
 			<path>
 				<fileset dir="${test.dir}" includes="Test*.php"/>
 			</path>
@@ -28,7 +28,7 @@
 	
 	<target name="exec_php">
 		<exec executable="php" dir="${test.dir}" output="${result.dir}/${foreach.file}.xml">
-			<arg value="${foreach.file}"/>
+			<arg value="${filename}"/>
 		</exec>
 	</target>
 	
