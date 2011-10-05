@@ -1,5 +1,6 @@
 <?php
 require_once(dirname(__FILE__) . '/../unit_tester.php');
+require_once('JUnitXMLReporter.php');
 /**
  * Description of ReportableUnitTestCase
  *
