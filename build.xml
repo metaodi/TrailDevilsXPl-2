@@ -16,7 +16,7 @@
 		</exec>
 	</target>
 	
-	<target name="deploy" depends="clean">
+	<target name="deploy" depends="test,clean">
 		<copy todir="${webapp.dir}" overwrite="true">
     		<fileset dir="."/>
   		</copy>
