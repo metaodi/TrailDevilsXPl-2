@@ -19,9 +19,10 @@
 	
 	<target name="test" depends="clean">
 		<mkdir dir="${test.dir}"/>
-		<foreach>
-			<fileset dir="${test.dir}" includes="Test*.php"/> 
-			<antcall target="exec_php"/>
+		<foreach target="exec_php">
+			<path>
+				<fileset dir="${test.dir}" includes="Test*.php"/>
+			</path>
 		</foreach>
 	</target>
 	
