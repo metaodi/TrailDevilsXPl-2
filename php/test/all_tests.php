@@ -1,5 +1,6 @@
 <?php
-//add files and inlcude them
+//include all files to show an overview of all tests. 
+//assuming that all files (except this file) in the directory are tests. 
 $dir_handle = opendir(dirname(__FILE__));
 while (false !== ($file = readdir($dir_handle))) 
 {
