@@ -5,6 +5,10 @@ class AjaxHandler
 
 	public function handleRequest($className, $functionName, $params=array()) 
 	{
+		if (!file_exists(dirname(__FILE__).'/'.$className . '.class.php'))
+		{
+			throw new FileDoesNotExistException($className . '.class.php');
+		}
 		require_once($className . '.class.php');
 		$reflectionClass = new ReflectionClass($className);
 		$reflectionMethod = new ReflectionMethod($className, $functionName);
