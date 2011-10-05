@@ -8,6 +8,5 @@ require_once('../../lib/simpletest/extensions/JUnitXMLReporter.php');
 $test = new TestSuite('All tests');
 $test->addFile('TestAjaxHandler.php');
 
-$reporter = new JUnitXMLReporter();
-$test->run($reporter);
+$test->run(new JUnitXMLReporter());
 ?>

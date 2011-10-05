@@ -2,21 +2,17 @@
 	<property name="webapp.dir" value="/var/www/html" />
 	
 	<target name="test">
-		<exec executable="php" dir="php/test" output="AllTests.xml">
+		
+		<exec executable="php" dir="php/test" output="test-results/AllTests.xml">
 			<arg value="all_tests.php"/>
 		</exec>
-		
-		<exec executable="tail" dir=".">
-			<arg value="-n 1"/>
-			<arg value="AllTests.xml"/>
-		</exec>
-
 	</target>
 	
 	<target name="clean" depends="test">
 		<delete includeemptydirs="true">
     		<fileset dir="${webapp.dir}" includes="**/*"/>
   		</delete>
+		<delete dir="test-results"/>
 	</target>
 	
 	<target name="deploy" depends="clean">

@@ -1,5 +1,8 @@
 <?php
-require_once('../../lib/simpletest/autorun.php');
+if (count(get_included_files()) == 1)
+{
+	require_once('../../lib/simpletest/autorun.php');
+}
 require_once('../AjaxHandler.class.php');
 
 class TestHandleRequest extends UnitTestCase {
