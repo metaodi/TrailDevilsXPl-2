@@ -27,7 +27,9 @@
 	</target>
 	
 	<target name="exec_php">
-		<basename file="${filename}" property="basename"/> 
+		<basename file="${filename}" property="basename"/>
+		<echo message="${filename}"/>
+		<echo message="${basename}"/>
 		<exec executable="php" dir="${test.dir}" output="${result.dir}/${basename}.xml">
 			<arg value="${basename}"/>
 		</exec>
