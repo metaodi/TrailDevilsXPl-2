@@ -5,5 +5,9 @@ class DataLoader
 	{
 		echo $data;
 	}
+        public function returnData($data)
+	{
+		return $data;
+	}
 }
 ?>
