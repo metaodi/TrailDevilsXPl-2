@@ -1,12 +1,9 @@
 <?php
-if (count(get_included_files()) == 1)
-{
-	require_once('../../lib/simpletest/autorun.php');
-}
+require_once('../../lib/simpletest/extensions/ReportableUnitTestCase.php');
 require_once('../AjaxHandler.class.php');
 require_once('../exceptions/FileDoesNotExistException.class.php');
 
-class TestHandleRequest extends UnitTestCase {
+class TestHandleRequest extends ReportableUnitTestCase {
     function testHandleValidRequest() {
         $handler = new AjaxHandler();
         $input = array("Testdata");
@@ -36,5 +33,8 @@ class TestHandleRequest extends UnitTestCase {
 		}
     }
 }
+
+$test = new TestHandleRequest();
+$test->report();
 
 ?>

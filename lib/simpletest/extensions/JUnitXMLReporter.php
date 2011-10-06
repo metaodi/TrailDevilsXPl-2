@@ -2,7 +2,7 @@
 class JUnitXMLReporter extends SimpleReporter {
     function __construct() {
         parent::__construct();
-
+		date_default_timezone_set('UTC');
         $this->doc = new DOMDocument();
         $this->doc->loadXML('<testsuite/>');
         $this->root = $this->doc->documentElement;
