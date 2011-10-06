@@ -33,10 +33,8 @@ Ext.setup({
 			tpl: [
 					'<tpl for=".">',
 					' <div class="ajax">',
-						' <div class="tweet-content">',
-							' <h2>{foo}</h2>',
-							' <p>{hello}</p>',
-						' </div>',
+							' <h2>Response:</h2>',
+							'<p> {response}</p>',
 					' </div>',
 					'</tpl>'
 				 ]
@@ -116,14 +114,28 @@ Ext.setup({
 					params : 'reflection_test,another_param'
 				},
 				method: 'GET',
-				success: function ( result, request ) { 
-					Ext.Msg.alert('Success', 'Data return from the server: '+ result.responseText); 
+				success: function ( result, request ) {
+					//Ext.Msg.alert('Sucess:', result.responseText); 
+					ajax.update(JSON.stringify(result.responseText)); 
+				},
+				failure: function ( result, request) { 
+					Ext.Msg.alert('Failed', result.responseText); 
+				} 
+			});
+			//Ext.Ajax.defaultHeaders = {'Accept': 'application/json'};
+			Ext.Ajax.request({
+				url : 'http://152.96.80.18:8080/api/trails' , 
+				method: 'GET',
+				success: function ( result, request ) {
+					Ext.Msg.alert('Sucess:', result.responseText); 
+					//ajax.update(JSON.stringify(result.responseText)); 
 				},
 				failure: function ( result, request) { 
 					Ext.Msg.alert('Failed', result.responseText); 
 				} 
 			});
 		};
+		
 		
 		panel.getTabBar().add([
 		    {xtype: 'spacer'},
