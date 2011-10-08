@@ -47,4 +47,5 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
     }
 });
 
+// Create xtype trailsList
 Ext.reg('trailsList', traildevils.views.TrailsList);

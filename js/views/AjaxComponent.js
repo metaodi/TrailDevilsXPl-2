@@ -21,4 +21,5 @@ traildevils.views.AjaxComponent = Ext.extend(Ext.Component, {
 	]
 });
 
+// Create xtype ajaxComponent
 Ext.reg('ajaxComponent', traildevils.views.AjaxComponent);

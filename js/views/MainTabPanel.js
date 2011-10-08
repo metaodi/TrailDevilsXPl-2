@@ -5,8 +5,7 @@ traildevils.views.MainTabPanel = Ext.extend(Ext.TabPanel, {
 	
 	initComponent: function() {
         Ext.apply(this, {
-			// @TODO why doesn't it work with the alias 'trailsList'
-			items: [new traildevils.views.TrailsList(), new traildevils.views.TrailsMap(), new traildevils.views.AjaxComponent(),
+			items: [{xtype: 'trailsList'}, {xtype: 'trailsMap'}, {xtype: 'ajaxComponent'},
 			{xtype: 'spacer'},{
 				xtype: 'button',
 				iconMask: true,
@@ -52,4 +51,5 @@ traildevils.refresh = function() {
 	});
 };
 
+// Create xtype mainTabPanel
 Ext.reg('mainTabPanel', traildevils.views.MainTabPanel);

@@ -13,4 +13,5 @@ traildevils.views.TrailsMap = Ext.extend(Ext.Map, {
 	}
 });
 
+// Create xtype trailsMap
 Ext.reg('trailsMap', traildevils.views.TrailsMap);
