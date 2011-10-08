@@ -5,11 +5,9 @@
  */
 
 traildevils.views.TrailsMap = Ext.extend(Ext.Map, {
-	iconCls: 'locate',
-	title: 'Map',
 	useCurrentLocation: true,   // Gets user's current location
 	mapOptions: {
-		  zoom: 12
+		zoom: 12
 	}
 });
 

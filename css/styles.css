@@ -1,28 +1,56 @@
-/*Stylesheet for geotweets.*/
-.tweet {
-  margin-top: 12px;
-  margin-left: 12px;
-  position: relative;
+
+#traildevils {
+	font-size: 0.8em;
 }
-.tweet .avatar {
-  position: absolute;
-  top:0; left: 0;
-  width: 60px;
-  float: left;
+
+/* TRAILSLIST */
+
+
+.trailslist .trail {
+	clear: both;
 }
-.tweet .avatar img {
-  width: 48px;
-  height: 48px;
+.trailslist .trail .trail-image,
+.trailslist .trail .trail-image img {
+	float: left;
+	width: 5em;
 }
-.tweet-content {
-  position: relative;
-  top: 0; left: 60px;
-  padding-right: 80px;
+.trailslist .trail .trail-description {
+	float: left;
+	width: 14em;
+	margin-left: 1em;
 }
-.tweet-content h2 {
-  font-size: 90%;
-  font-weight: bold;
+.trailslist .trail .trail-description h1 {
+	font-weight: bold;
 }
-.tweet-content p {
-  font-size: 80%;
+.trailslist .trail .trail-description p {
+	font-size: 0.8em;
 }
+
+
+/* ------------------------------------
+   A prettier search field for Senach Touch
+   Soruce: http://www.senchatouchbits.com/5/a-prettier-search-field.html 
+   -------------- START --------------- */
+.x-field {
+  margin-top: 0.25em;
+}
+.x-field .x-input-search {
+  font-size: 0.8em;
+  height: 26px;
+  line-height: 25px;
+  padding: 0px 15px;
+  border-radius: 12px;
+  border-top: 0.1em solid rgba(0, 0, 0, 0.2);
+  border-left: 0.1em solid rgba(0, 0, 0, 0.125);
+  border-right: 0.1em solid rgba(0, 0, 0, 0.125);
+  border-bottom: 0.1em solid rgba(0, 0, 0, 0.05);
+  background: white url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABUhJREFUeNrUW/1zFEUQ3b27JAYluUMNhCKU+EGiiCBUYSlIWer/rD+ohUjiVxVYCooCSUoMAXOBfEFIJFnfY99Z51Vumd6Zvdx11au9H3Zm+2339HT37MVJkkQ+EsdxCZcKUAb2AMNA86QxsAw8AraAJ3jmdrRLUvEg+gIue4ExYBTYB/RlDCHJOjCPsfdwvQ/iK50mHFstDGWHRPI14IDHs0l+FvgTOtS7jjCIDuLyDnAEGAqoA139DnAVuvy964RBNJZFz8hti5KHwI/AzSLXeCZhcO3H5STwts96NwiJXgd+gF6bHSUMsgxAH8mFOy0zIr3cEcIg+xwu54BXo92TJeAz6LcactJSmzX73i6TpVSph15+cYQViY9G3SF86SeV3IRPPDDxARGOc8630YRtzTMg5LUU9eF2NR2UMMjy9ylgMMc8i9pLF4AHWHeLLYlKTdkY8XKO+U9jnjnMuxEsaGFCus/Hbdw8a+/8nmQxzyOH5IVWPggcB/YbnkMlf8UzJoOsYWVR40ayd4HPocRNF7JPtU6SxwBd80vgVkuRkfmugMPQ86VQQYtudsgwju77RbPrWgTj1nC5APxmGMZC5fV0E/EgrAh42BCoGEAuuFo1gzRLxSngtmHYqEfw+8/Cg4Y9lySnZCFvUc58kYHOcUhN9bYX4RHDW7utSBxMQJqB72fDrlLzJXzIYN0biW+LZGeZA+453juiLTQ3YdfItwyudwrKqNYMa7nqU7mVHIt5WnW+qPxRTlNXdvYsGfIlPOBw35YUKlK4lh873MdGYTlk8dCuMH/YgeI/KfgZpsyq6NZqHHVASgZl+qPukbhowmVDNM8rA44vldvjEx/CDxzv218wYWZQfQ73bfosLxK573jvPp02hPfPtDs66nj7kq+FXbcbkn2lIOtWDRlf3ZfwnKOLcLOfgDUGAluX8eEtQ6el7tOoL8lFXI84ePJwImRTLUqb/K5Nw1Xp67UtMYuaNio47luIy7qsw08YhiyIdH7Cqn7+itIzXNcS7X26Yd6qJU7lDfw8byhN2cCb9q3WGq5Jsr8bxpHoWeADdSUtZJkLs/X6ofJiV2H5OOvrVRVVKwkUmZW7uipBn57QdsWXNY9pljKIVhUD2CwcM+rJvfeXEKeKlaYSbQlKXcXP08ZqZERYw/gV1barwh6hprJur0cq2RcFkP8dpunE8JMober5Vj7bWjKhIjqrte+g761gxQMm+4eTGrKvrHkrAclSnmewhFEOBq2WtA4vdaD+zSNcHud9SGcdiLNY+FRvttuEFdMkdJ8JRlikGYzOdaA0zLump6ykXT5qYdFwRoVDpQst/ZWlm+r02ZLSyDeBY1ExX/IwbqyoRLRuPxx30ZW06cM0ZVXHVcoNByDKvZqKXuPHaZif59OnckR3ZopfY467QQm3EK/JzceMKeJ6lB61cu0ttH6pg7knFDdKOdz7EuabDU64SbmKkn++gBdl9SFlaokypC25HYkt6vdmu++wtHwmlKuXcwSyb3UGHZ7wTlVQtHNHMbFWOZhqXJYuhwxkcTFnY8Fe4Lta0+VQgayrCYv0UVnauiWua03PZKaW3SZQ+I8o/VLAWhoOql4/0lOEJdeV31u7lUyLz4L0aKMl1ROEueyABumtPAVHIz3uFQs3u/eVHKS5XR5jS7inCIv0ZVnauqb5l4X+niMsYQ9t0kiaUX64JwlrTfOjtm+M7r3eqxZuEKelLzuSZga20dOERfqKLP2sLesn5vA9T7glOWn3x5Br3MvZ1+761NKQgvJSVaNiREUMrX4jSv8a9NTt/xVgADf/+DWpDs3NAAAAAElFTkSuQmCC") no-repeat 7px 5px;
+  background-size: 15px;
+  -webkit-background-image-opacity: 0.5;
+  -webkit-box-shadow: #DFDFDF 0px 1px 1px inset;
+}
+.x-phone .x-input-search,
+.x-tablet .x-input-search {
+  padding: 0.2em 25px !important;
+}
+/* ---------------- END ---------------- */

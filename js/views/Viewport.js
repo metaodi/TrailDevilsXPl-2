@@ -11,7 +11,7 @@
  * 
  */
 traildevils.Viewport = Ext.extend(Ext.Panel, {
-	id        : 'viewport',
+	id        : 'traildevils',
 	layout    : 'card',
 	fullscreen: true,
 	
