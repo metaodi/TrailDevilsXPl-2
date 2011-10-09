@@ -1,0 +1,29 @@
+/**
+ * @class traildevils.Viewport
+ * @extends Ext.Panel
+ * 
+ * The viewport is the application's shell - the parts of the UI that don't change. In the Twitter app, we only ever
+ * render a single view at a time, so we use a fullscreen card layout here. The other part of the UI is the search list
+ * on the left, which we add as a docked item.
+ * 
+ * Because the searchesList created below bubbles its selectionchange event, the object that creates this Viewport 
+ * (the Application instance created in app/app.js) can attach a listener to that event to initiate a new search.
+ * 
+ */
+traildevils.Viewport = Ext.extend(Ext.Panel, {
+	id        : 'traildevils',
+	layout    : 'card',
+	fullscreen: true,
+	
+	initComponent: function() {
+		Ext.apply(this, {
+			dockedItems: [{
+				dock : 'center',
+				xtype: 'mainTabPanel'
+			}]
+		});
+
+		traildevils.Viewport.superclass.initComponent.apply(this, arguments);
+	}
+});
+
