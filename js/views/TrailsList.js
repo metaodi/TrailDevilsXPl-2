@@ -14,27 +14,11 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
      */
     activeCls: 'trail-item-swiped',
 	
-	plugins: [
-		// @TODO unschön gelöst
-		new Ext.plugins.PullRefreshPlugin({
-			pullRefreshText: 'Zum Aktualisieren herunterziehen',
-			releaseRefreshText: 'Zum Aktualisieren loslassen...',
-			loadingText: 'wird aktualisiert...',
-			pullTpl: new Ext.XTemplate(
-				'<div class="x-list-pullrefresh">',
-				'	<div class="x-list-pullrefresh-arrow"></div>',
-				Ext.LoadingSpinner,
-				'	<div class="x-list-pullrefresh-wrap">',
-				'		<h3 class="x-list-pullrefresh-message">{message}</h3>',
-				'		<div class="x-list-pullrefresh-updated">Zuletzt aktualisiert: {lastUpdated:date("d.m.Y H:i:s")}</span></div>',
-				'	</div>',
-				'</div>'
-			)
-		})
-	],
+	plugins: {ptype: 'germanPullRefreshPlugin'},
 	
 	grouped : true,
 	indexBar: false,
+	
 	itemTpl: [
 		'<div class="trail-item">',
 		'	<div class="action fav x-button"><img class="x-icon-mask favorites" /></div>',
@@ -89,7 +73,12 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
             }
         } else {
             this.deactivateAll();
-            
+			Ext.dispatch({
+				controller: traildevils.controllers.TrailsController,
+				action: 'detail',
+				note: item
+			});
+		
             return traildevils.views.TrailsList.superclass.onItemTap.apply(this, arguments);
         }
     },

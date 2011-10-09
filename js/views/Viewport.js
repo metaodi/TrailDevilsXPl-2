@@ -14,6 +14,7 @@ traildevils.Viewport = Ext.extend(Ext.Panel, {
 	id        : 'traildevils',
 	layout    : 'card',
 	fullscreen: true,
+    cardSwitchAnimation: 'slide',
 	
 	initComponent: function() {
 		Ext.apply(this, {
@@ -26,4 +27,3 @@ traildevils.Viewport = Ext.extend(Ext.Panel, {
 		traildevils.Viewport.superclass.initComponent.apply(this, arguments);
 	}
 });
-
