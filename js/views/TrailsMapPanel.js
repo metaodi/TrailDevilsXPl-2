@@ -7,7 +7,7 @@
 traildevils.views.TrailsMapPanel = Ext.extend(Ext.Panel, {
 	iconCls: 'locate',
 	title: 'Map',
-	fullscreen : true,
+	
     dockedItems: [{		
 		xtype: 'toolbar',
 		title: 'Trails in der Nähe'

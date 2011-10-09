@@ -7,12 +7,15 @@
 traildevils.views.TrailsListPanel = Ext.extend(Ext.Panel, {
 	iconCls: 'maps',
 	title: 'Trails',
-    fullscreen : true,
+	
 	dockedItems: [{		
 		xtype: 'toolbar',
 		title: 'Trailliste'
 	}, {
-		xtype: 'trailsSearch'
+		xtype: 'toolbar',
+		items: [{
+			xtype: 'trailsSearch'
+		}]
 	}, {
 		xtype: 'trailsList'
 	}]
