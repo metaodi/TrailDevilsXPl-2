@@ -8,7 +8,6 @@
 Ext.regStore('Trails', {
 	model: 'Trail',
 
-	/*
 	// order by status descending (groups) and distance descending
 	sorters: [
 		{
@@ -16,8 +15,8 @@ Ext.regStore('Trails', {
 		direction: 'DESC'
 		}, 
 		{
-		property : 'distance', 
-		direction: 'DESC'
+		property : 'distance',
+		direction: 'ASC'
 		}
 	],
 	
@@ -26,7 +25,6 @@ Ext.regStore('Trails', {
 	getGroupString : function(record) {
 		return record.get('status');
 	},
-	*/
 	
 	proxy: {
         type: 'ajax',
