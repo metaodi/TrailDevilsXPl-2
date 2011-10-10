@@ -26,4 +26,3 @@ traildevils.Viewport = Ext.extend(Ext.Panel, {
 		traildevils.Viewport.superclass.initComponent.apply(this, arguments);
 	}
 });
-

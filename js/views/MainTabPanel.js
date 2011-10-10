@@ -1,12 +1,12 @@
 traildevils.views.MainTabPanel = Ext.extend(Ext.TabPanel, {
 	cardSwitchAnimation: 'slide',
 	fullscreen: true,
-	
+	layout: 'fit',
 	initComponent: function() {
         Ext.apply(this, {
-			items: [{
-				xtype: 'trailsListPanel'
-			}, {
+			items: [
+				traildevils.views.TrailsListPanel = new traildevils.views.TrailsListPanel()
+			, {
 				xtype: 'trailsMapPanel'
 			}, {
 				xtype: 'ajaxComponent'
