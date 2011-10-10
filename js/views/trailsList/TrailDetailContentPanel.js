@@ -4,8 +4,12 @@
  * 
  */
 
-traildevils.views.TrailDetailContentPanel = Ext.extend(Ext.Panel, {
-	html: 'test'
+traildevils.views.TrailDetailContentPanel = Ext.extend(Ext.TabPanel, {
+	fullscreen: true,
+	items: [
+		{ title: 'Info' },
+		{ title: 'Bilder/Videos' }
+	]
 });
 
 // Create xtype trailDetailContentPanel

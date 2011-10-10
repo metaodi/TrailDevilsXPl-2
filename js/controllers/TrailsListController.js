@@ -1,20 +1,20 @@
 Ext.regController('TrailsListController',{
     'index': function (options) {
-		if(!traildevils.views.TrailsListMainPanel) {
-			traildevils.views.TrailsListMainPanel = new traildevils.views.TrailsListMainPanel();
+		if(!traildevils.views.trailsListMainPanel) {
+			traildevils.views.trailsListMainPanel = traildevils.views.viewport.getComponent('trailsListMainPanel');
 		}
 		
-		traildevils.views.TrailsListMainPanel.setActiveItem(
-			traildevils.views.TrailsListPanel, {
-				type : 'slide',
-				direction : 'right'
+		traildevils.views.trailsListMainPanel.setActiveItem(
+			'trailsListPanel', {
+				type: 'slide',
+				direction: 'right'
 			}
 		);
 	},
 
     'detail': function (options) {
-		traildevils.views.TrailsListMainPanel.setActiveItem(
-			traildevils.views.TrailDetailPanel, {
+		traildevils.views.trailsListMainPanel.setActiveItem(
+			'trailDetailPanel', {
 				type: 'slide',
 				direction: 'left'
 			}

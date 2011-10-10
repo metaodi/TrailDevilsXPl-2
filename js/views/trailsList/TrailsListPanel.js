@@ -7,22 +7,20 @@
 traildevils.views.TrailsListPanel = Ext.extend(Ext.Panel, {
 	iconCls: 'maps',
 	title: 'Trails',
-	layout: 'card',
-    cardSwitchAnimation: 'slide',
 	
-	dockedItems: [{
-		xtype: 'toolbar',
-		title: 'Trailliste'
-	}, {
-		xtype: 'toolbar',
-		items: [{
-			xtype: 'trailsSearch'
-		}]
-	}],
+	dockedItems: [
+		{ xtype: 'toolbar', title: 'Trailliste' },
+		{
+			xtype: 'toolbar',
+			items: [
+				{ xtype: 'trailsSearch'	}
+			]
+		}
+	],
 	
 	initComponent: function () {
         this.items = [
-            traildevils.views.TrailsList = new traildevils.views.TrailsList()
+			{ xtype: 'trailsList', id: 'trailsList' }
         ]
 
         traildevils.views.TrailsListPanel.superclass.initComponent.call(this);

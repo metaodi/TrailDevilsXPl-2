@@ -1,28 +1,62 @@
 /**
- * @class traildevils.Viewport
- * @extends Ext.Panel
+ * @class traildevils.views.Viewport
+ * @extends Ext.TabPanel
  * 
- * The viewport is the application's shell - the parts of the UI that don't change. In the Twitter app, we only ever
- * render a single view at a time, so we use a fullscreen card layout here. The other part of the UI is the search list
- * on the left, which we add as a docked item.
- * 
- * Because the searchesList created below bubbles its selectionchange event, the object that creates this Viewport 
- * (the Application instance created in app/app.js) can attach a listener to that event to initiate a new search.
+ * The viewport is the application's shell - the parts of the UI that don't change. 
  * 
  */
-traildevils.Viewport = Ext.extend(Ext.Panel, {
+traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 	id        : 'traildevils',
-	layout    : 'card',
 	fullscreen: true,
+	cardSwitchAnimation: 'slide',
 	
 	initComponent: function() {
 		Ext.apply(this, {
-			dockedItems: [{
-				dock : 'center',
-				xtype: 'mainTabPanel'
-			}]
+			items: [
+				{ xtype: 'trailsListMainPanel', id: 'trailsListMainPanel' },
+				{ xtype: 'trailsMapPanel', id: 'trailsMapPanel' },
+				{ xtype: 'ajaxComponent', id: 'ajaxComponent' },
+				{ 
+					xtype: 'button',
+					iconMask: true,
+					iconCls: 'refresh',
+					ui: 'plain',
+					style: 'margin: 0;',
+					handler: traildevils.refresh
+				}
+			],
+			
+			tabBar: {
+				dock: 'bottom',
+				scroll: {
+					direction: 'horizontal',
+					useIndicators: false
+				},
+				layout: {
+					pack: 'center'
+				}
+			}
 		});
 
-		traildevils.Viewport.superclass.initComponent.apply(this, arguments);
+		traildevils.views.Viewport.superclass.initComponent.apply(this, arguments);
 	}
 });
+
+// @TODO unschön gelöst mit Funktion direkt in namespace
+traildevils.refresh = function() {
+	Ext.Ajax.request({
+		url : 'php/AjaxHandler.class.php' , 
+		params : { 
+			className : 'DataLoader' ,
+			functionName : 'echoData' ,
+			params : 'reflection_test,another_param'
+		},
+		method: 'GET',
+		success: function ( result, request ) { 
+			Ext.Msg.alert('Success', 'Data return from the server: '+ result.responseText); 
+		},
+		failure: function ( result, request) { 
+			Ext.Msg.alert('Failed', result.responseText); 
+		} 
+	});
+};

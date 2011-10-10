@@ -40,19 +40,14 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 		this.on({
             scope: this,
             itemswipe: this.onItemSwipe,
-			itemtap: this.onItemTap,
+			itemtap: this.onTrailItemTap,
             containertap: this.deactivateAll
         });
 		
         traildevils.views.TrailsList.superclass.initComponent.apply(this, arguments);
     },
 	
-	/**
-     * @private
-     * Here we intercept the normal tap handler. If the user tapped on the delete button we stop the event here
-     * and remove the item from the store, otherwise we allow the event to continue
-     */
-    onItemTap: function(event, target) {
+    onTrailItemTap: function(container, index, item, e) {
         /*if (event.getTarget('.' + this.activeCls + ' div.fav')) {
 				var store    = this.store,
                 selModel = this.getSelectionModel(),
@@ -77,7 +72,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 			Ext.dispatch({
 				controller: traildevils.controllers.trailsListController,
 				action: 'detail',
-				note: target
+				trail: this.store.getAt(index)
 			});
         
     },
