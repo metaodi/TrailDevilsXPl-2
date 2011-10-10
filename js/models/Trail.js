@@ -12,6 +12,7 @@ Ext.regModel('Trail', {
         {name: "location",		type: "string"},
         {name: "distance",		type: "int"},
         {name: "imagepath",		type: "string"},
-        {name: "description",	type: "string"}
+        {name: "description",	type: "string"},
+		{name: "status",		type: "string"}
     ]
 });

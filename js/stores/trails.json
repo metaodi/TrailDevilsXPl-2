@@ -1,0 +1,28 @@
+{
+	"trails": [
+		{
+			"title": "Gurten-Trail",
+			"location": "Gurten",
+			"distance": 200,
+			"imagepath": "http://traildevils.ch/media/img/trails/trailimg_120_1233.jpg",
+			"description": "Schöner Trail auf dem Gurten",
+			"status": "offen"
+		},
+		{
+			"title": "Der gleiche nochmals",
+			"location": "Somewhere",
+			"distance": 100,
+			"imagepath": "http://traildevils.ch/media/img/trails/trailimg_120_1233.jpg",
+			"description": "Zweiter Trail",
+			"status": "offen"
+		},
+		{
+			"title": "Üetliberg Trail",
+			"location": "Zürich",
+			"distance": 1000,
+			"imagepath": "http://traildevils.ch/media/img/trails/trailimg_120_121.jpg",
+			"description": "Schöner Trail auf dem Üetliberg",
+			"status": "geschlossen"   
+		}
+	]
+}
