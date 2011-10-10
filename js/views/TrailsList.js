@@ -6,31 +6,23 @@
 
 traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	cls: 'trailslist',
+	fullscreen: true,
+    singleSelect: true,
 	
-	plugins: [
-		// @TODO unschön gelöst
-		new Ext.plugins.PullRefreshPlugin({
-			pullRefreshText: 'Zum Aktualisieren herunterziehen',
-			releaseRefreshText: 'Zum Aktualisieren loslassen...',
-			loadingText: 'wird aktualisiert...',
-			pullTpl: new Ext.XTemplate(
-				'<div class="x-list-pullrefresh">',
-				'	<div class="x-list-pullrefresh-arrow"></div>',
-				Ext.LoadingSpinner,
-				'	<div class="x-list-pullrefresh-wrap">',
-				'		<h3 class="x-list-pullrefresh-message">{message}</h3>',
-				'		<div class="x-list-pullrefresh-updated">Zuletzt aktualisiert: {lastUpdated:date("d.m.Y H:i:s")}</span></div>',
-				'	</div>',
-				'</div>'
-			)
-		})
-	],
+    /**
+     * @cfg {String} activeCls The CSS class that is added to each item when swiped
+     */
+    activeCls: 'trail-item-swiped',
+	
+	plugins: {ptype: 'germanPullRefreshPlugin'},
 	
 	grouped : true,
 	indexBar: false,
+	
 	itemTpl: [
-		'<div class="trail">',
-		'	<div class="trail-image"><img src="{imagepath}" alt="{title}" /></div>',
+		'<div class="trail-item">',
+		'	<div class="action fav x-button"><img class="x-icon-mask favorites" /></div>',
+        '	<div class="trail-image"><img src="{imagepath}" alt="{title}" /></div>',
 		'	<div class="trail-description">',
 		'		<h1>{title}</h1>',
 		'		<p>{description}</p>',
@@ -42,23 +34,80 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	
 	initComponent: function() {
         Ext.apply(this, {
-            store: Ext.getStore('Trails'),
-			
-			dockedItems: [{
-				xtype: 'toolbar',
-				dock : 'top',
-				
-				items: [{
-					xtype: 'spacer'
-				}, {
-					xtype: 'trailSearchTextField'
-				}, {
-					xtype: 'spacer'
-				}]
-			}]
+            store: Ext.getStore('Trails')
+        });
+		
+		this.on({
+            scope: this,
+            itemswipe: this.onItemSwipe,
+            containertap: this.deactivateAll
         });
 		
         traildevils.views.TrailsList.superclass.initComponent.apply(this, arguments);
+    },
+	
+	/**
+     * @private
+     * Here we intercept the normal tap handler. If the user tapped on the delete button we stop the event here
+     * and remove the item from the store, otherwise we allow the event to continue
+     */
+    onItemTap: function(item, index, e) {
+        if (e.getTarget('.' + this.activeCls + ' div.fav')) {
+            var store    = this.store,
+                selModel = this.getSelectionModel(),
+                instance = store.getAt(index),
+                selected = selModel.isSelected(instance),
+                nearest  = store.getAt(index + 1) || store.getAt(index - 1);
+            
+            //if the item we are removing is currently selected, select the nearest item instead
+            if (selected && nearest) {
+                selModel.select(nearest);
+            }
+            
+            store.removeAt(index);
+            store.sync();
+            
+            //there were no other searches left so tell the user about that
+            if (!nearest) {
+                Ext.redirect('trails/first');
+            }
+        } else {
+            this.deactivateAll();
+			Ext.dispatch({
+				controller: traildevils.controllers.TrailsController,
+				action: 'detail',
+				note: item
+			});
+		
+            return traildevils.views.TrailsList.superclass.onItemTap.apply(this, arguments);
+        }
+    },
+	
+	/**
+     * @private
+     * Removes the 'Delete' button from all items
+     */
+    deactivateAll: function() {
+        Ext.select('div.trail-item', this.el.dom).removeCls(this.activeCls);
+    },
+	
+	/**
+     * @private
+     * Handler for the itemswipe event - shows the Delete button for the swiped item, hiding the Delete button
+     * on any other items
+     */
+    onItemSwipe: function(list, index, node) {
+        var el        = Ext.get(node),
+            activeCls = this.activeCls,
+            hasClass  = el.hasCls(activeCls);
+        
+        this.deactivateAll();
+        
+        if (hasClass) {
+            el.removeCls(activeCls);
+        } else {
+            el.addCls(activeCls);
+        }
     }
 });
 

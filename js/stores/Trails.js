@@ -44,5 +44,33 @@ Ext.regStore('Trails', {
 		imagepath: 'http://traildevils.ch/media/img/trails/trailimg_120_217.jpg',
 		description: 'Schöner immer geschlossener Trail',
 		status: 'geschlossen'  
+	}, {
+		title: 'Geschlossener Trail',
+		location: 'Nirgends',
+		distance: 500,
+		imagepath: 'http://traildevils.ch/media/img/trails/trailimg_120_217.jpg',
+		description: 'Schöner immer geschlossener Trail',
+		status: 'geschlossen'  
+	}, {
+		title: 'Geschlossener Trail',
+		location: 'Nirgends',
+		distance: 500,
+		imagepath: 'http://traildevils.ch/media/img/trails/trailimg_120_217.jpg',
+		description: 'Schöner immer geschlossener Trail',
+		status: 'geschlossen'  
+	}, {
+		title: 'Geschlossener Trail',
+		location: 'Nirgends',
+		distance: 500,
+		imagepath: 'http://traildevils.ch/media/img/trails/trailimg_120_217.jpg',
+		description: 'Schöner immer geschlossener Trail',
+		status: 'geschlossen'  
+	}, {
+		title: 'Geschlossener Trail',
+		location: 'Nirgends',
+		distance: 500,
+		imagepath: 'http://traildevils.ch/media/img/trails/trailimg_120_217.jpg',
+		description: 'Schöner immer geschlossener Trail',
+		status: 'geschlossen'  
 	}]
 });
