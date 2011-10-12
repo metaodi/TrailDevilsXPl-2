@@ -1,6 +1,6 @@
 <?php
-require_once('../../lib/simpletest/extensions/ReportableUnitTestCase.php');
-require_once('../DataLoader.class.php');
+require_once('lib/simpletest/extensions/ReportableUnitTestCase.php');
+require_once('../../php/DataLoader.class.php');
 
 class TestDataLoader extends ReportableUnitTestCase {
     function testReturnData() {

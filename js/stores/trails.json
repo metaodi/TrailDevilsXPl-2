@@ -3,7 +3,7 @@
 		{
 			"title": "Gurten-Trail",
 			"location": "Gurten",
-			"distance": 200,
+			"distance": 2000,
 			"imagepath": "http://traildevils.ch/media/img/trails/trailimg_120_1233.jpg",
 			"description": "Schöner Trail auf dem Gurten",
 			"status": "offen"
@@ -19,7 +19,7 @@
 		{
 			"title": "Üetliberg Trail",
 			"location": "Zürich",
-			"distance": 1000,
+			"distance": 50,
 			"imagepath": "http://traildevils.ch/media/img/trails/trailimg_120_121.jpg",
 			"description": "Schöner Trail auf dem Üetliberg",
 			"status": "geschlossen"   

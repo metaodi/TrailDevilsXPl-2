@@ -8,7 +8,7 @@
 	
 	<property name="webapp.dir" value="/var/www/html" />
 	<property name="result.dir" value="test-results" />
-	<property name="test.dir" value="php/test" />
+	<property name="test.dir" value="test/php" />
 	
 	<target name="clean">
 		<delete includeemptydirs="true">

@@ -1,7 +1,7 @@
 <?php
-require_once('../../lib/simpletest/extensions/ReportableUnitTestCase.php');
-require_once('../AjaxHandler.class.php');
-require_once('../exceptions/FileDoesNotExistException.class.php');
+require_once('lib/simpletest/extensions/ReportableUnitTestCase.php');
+require_once('../../php/AjaxHandler.class.php');
+require_once('../../php/exceptions/FileDoesNotExistException.class.php');
 
 class TestHandleRequest extends ReportableUnitTestCase {
     function testHandleValidRequest() {

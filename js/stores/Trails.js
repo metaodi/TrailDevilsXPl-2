@@ -11,12 +11,12 @@ Ext.regStore('Trails', {
 	// order by status descending (groups) and distance descending
 	sorters: [
 		{
-		property : 'status', 
-		direction: 'DESC'
+			property : 'status', 
+			direction: 'DESC'
 		}, 
 		{
-		property : 'distance',
-		direction: 'ASC'
+			property : 'distance',
+			direction: 'ASC'
 		}
 	],
 	
