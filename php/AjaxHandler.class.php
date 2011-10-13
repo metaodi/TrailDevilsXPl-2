@@ -12,13 +12,19 @@ class AjaxHandler
 		require_once($className . '.class.php');
 		$reflectionClass = new ReflectionClass($className);
 		$reflectionMethod = new ReflectionMethod($className, $functionName);
-		return $reflectionMethod->invokeArgs($reflectionClass->newInstance(), $params);
+		echo $reflectionMethod->invokeArgs($reflectionClass->newInstance(), $params);
 	}
 }
 
 if (isset($_REQUEST['className']) && isset($_REQUEST['functionName'])) 
 {
 	$handler = new AjaxHandler();
-	$handler->handleRequest($_REQUEST['className'], $_REQUEST['functionName'], explode(',', $_REQUEST['params']));
+	//add params if available
+	$paramString = array();
+	if (isset($_REQUEST['params']))
+	{
+		$paramString = explode(',', $_REQUEST['params']);
+	}
+	$handler->handleRequest($_REQUEST['className'], $_REQUEST['functionName'], $paramString);
 }
 ?>

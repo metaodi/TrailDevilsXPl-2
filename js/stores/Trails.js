@@ -28,7 +28,11 @@ Ext.regStore('Trails', {
 	
 	proxy: {
         type: 'ajax',
-        url : 'js/stores/trails.json',
+        url : 'php/AjaxHandler.class.php',
+		extraParams: {
+			className : 'DataLoader' ,
+			functionName : 'getTrails'
+		},
 		model: 'Trail',
         reader: {
             type: 'json',

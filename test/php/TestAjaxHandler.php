@@ -7,15 +7,18 @@ class TestHandleRequest extends ReportableUnitTestCase {
     function testHandleValidRequest() {
         $handler = new AjaxHandler();
         $input = array("Testdata");
-        $result = $handler->handleRequest("DataLoader", "returnData",$input);
-        
+		
+		ob_start();
+		$handler->handleRequest("DataLoader", "echoData",$input);
+		$result = ob_get_contents();
+        ob_end_clean();
         $this->assertEqual($result,$input[0]);
     }
 	function testHandleInvalidClass() {
         $handler = new AjaxHandler();
         $input = array("Testdata");
 		try {
-			$result = $handler->handleRequest("DataLoader2", "returnData",$input);
+			$handler->handleRequest("DataLoader2", "echoData",$input);
 			$this->fail("File does not exists, should not reach this line");
 		} catch (FileDoesNotExistException $e) {
 			$this->pass();
@@ -24,9 +27,9 @@ class TestHandleRequest extends ReportableUnitTestCase {
 	function testHandleInvalidMethod() {
         $handler = new AjaxHandler();
         $input = array("Testdata");
-        
+
 		try {
-			$result = $handler->handleRequest("DataLoader", "returnData2",$input);
+			$handler->handleRequest("DataLoader", "echoData2",$input);
 			$this->fail("Method does not exists, should not reach this line");
 		} catch (ReflectionException $e) {
 			$this->pass();

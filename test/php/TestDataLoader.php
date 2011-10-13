@@ -3,10 +3,15 @@ require_once('lib/simpletest/extensions/ReportableUnitTestCase.php');
 require_once('../../php/DataLoader.class.php');
 
 class TestDataLoader extends ReportableUnitTestCase {
-    function testReturnData() {
+    function testEchoData() {
         $loader = new DataLoader();
         $input = "Hallo Testwelt";
-        $this->assertEqual($loader->returnData($input),$input);
+		
+		ob_start();
+		$loader->echoData($input);
+		$result = ob_get_contents();
+		ob_end_clean();
+        $this->assertEqual($result,$input);
     }
 }
 
