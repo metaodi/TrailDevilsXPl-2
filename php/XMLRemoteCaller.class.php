@@ -11,7 +11,7 @@ require_once 'RemoteCaller.class.php';
  * @author odi
  */
 class XMLRemoteCaller extends RemoteCaller {
-	public function callRemoteSite();
+	public function callRemoteSite()
 	{
 		return "";
 	}

@@ -10,7 +10,7 @@ class TestJSONRemoteCaller extends ReportableUnitTestCase {
         $this->assertEqual($jsonCaller->getURL(),$url);
     }
 	function testCallRemoteSite() {
-		$url = "http://jenkins.rdmr.ch/test/js/trails.json";
+		$url = "http://jenkins.rdmr.ch/test/trails.json";
 		$trail = array(	"title" => "Test-Trail",
 						"location" =>"Testland",
 						"distance" => 2000,

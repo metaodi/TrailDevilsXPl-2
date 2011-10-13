@@ -5,7 +5,7 @@
 			"location": "Testland",
 			"distance": 2000,
 			"imagepath": "http://traildevils.ch/media/img/trails/trailimg_120_1233.jpg",
-			"description": "Trail für einen Test",
+			"description": "Trail-Beschreibung",
 			"status": "offen"
 		}
 	]

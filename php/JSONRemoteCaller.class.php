@@ -13,13 +13,11 @@ require_once 'RemoteCaller.class.php';
 class JSONRemoteCaller extends RemoteCaller {
 	public function callRemoteSite()
 	{
-		$trail = array(	"title" => "Test-Trail",
-						"location" =>"Testland",
-						"distance" => 2000,
-						"imagepath" => "http://traildevils.ch/media/img/trails/trailimg_120_1233.jpg",
-						"description" =>  "Trail-Beschreibung",
-						"status" =>  "offen");
-		return "{ \"trails\": [".json_encode($trail)."]}";
+		$curlHandler = curl_init ($this->getURL());
+		curl_setopt ($curlHandler, CURLOPT_RETURNTRANSFER, true);
+		$remote_answer = curl_exec ($curlHandler);
+		
+		return $remote_answer;
 	}
 }
 
