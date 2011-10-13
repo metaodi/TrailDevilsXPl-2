@@ -10,7 +10,11 @@ class DataLoader
 	public function getTrails()
 	{
 		$remote = new JSONRemoteCaller("http://152.96.80.18:8080/api/trails");
-		return $remote->callRemoteSite();
+		return getConvertedJSON($remote->callRemoteSite());
+	}
+	
+	protected function getConvertedJSON($externalJson) {
+		return json_encode(json_decode($externalJson));;
 	}
 }
 ?>
