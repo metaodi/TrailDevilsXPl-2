@@ -17,7 +17,7 @@ class TestJSONRemoteCaller extends ReportableUnitTestCase {
 						"imagepath" => "http://traildevils.ch/media/img/trails/trailimg_120_1233.jpg",
 						"description" =>  "Trail-Beschreibung",
 						"status" =>  "offen");
-		$jsonString = "{\"trails\":[".json_encode($trail)."]}";
+		$jsonString = "{\"trails\":[ ".json_encode($trail)."]}";
 		
         $jsonCaller = new JSONRemoteCaller($url);
         $this->assertEqual($jsonCaller->callRemoteSite(),$jsonString);
