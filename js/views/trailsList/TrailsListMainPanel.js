@@ -13,8 +13,7 @@ traildevils.views.TrailsListMainPanel = Ext.extend(Ext.Panel, {
 	
 	initComponent: function () {
         this.items = [
-            { xtype: 'trailsListPanel', id: 'trailsListPanel' },
-			{ xtype: 'trailDetailPanel', id: 'trailDetailPanel' }
+            { xtype: 'trailsListPanel', id: 'trailsListPanel' }
         ]
 		
 		traildevils.views.TrailsListMainPanel.superclass.initComponent.apply(this, arguments);

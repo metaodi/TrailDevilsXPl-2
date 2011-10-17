@@ -18,12 +18,8 @@ Ext.regApplication({
 		
 		// trailsListMainPanel Components
 		traildevils.views.trailsListPanel = traildevils.views.trailsListMainPanel.getComponent('trailsListPanel');
-		traildevils.views.trailDetailPanel = traildevils.views.trailsListMainPanel.getComponent('trailDetailPanel');
 		
 		// trailsListPanel Components
 		traildevils.views.trailsList = traildevils.views.trailsListPanel.getComponent('trailsList');
-		
-		// trailDetailPanel Components
-		traildevils.views.trailDetailContentPanel = traildevils.views.trailDetailPanel.getComponent('trailDetailContentPanel');
 	}
 });

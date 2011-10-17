@@ -13,12 +13,10 @@ Ext.regController('TrailsListController',{
 	},
 
     'detail': function (options) {
-		traildevils.views.trailsListMainPanel.setActiveItem(
-			'trailDetailPanel', {
-				type: 'slide',
-				direction: 'left'
-			}
-		);
+		var trailDetailPanel = new traildevils.views.TrailDetailPanel({
+			trail: options.trail
+		});
+		traildevils.views.trailsListMainPanel.setActiveItem(trailDetailPanel, 'slide');
 	}
 });
 
