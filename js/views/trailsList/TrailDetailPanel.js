@@ -6,9 +6,10 @@
 
 traildevils.views.TrailDetailPanel = Ext.extend(Ext.Panel, {
 	layout: 'fit',
-	scroll: 'vertical',
+	trail: null,
+	fullscreen: true,
 	
-	initComponent: function(){
+	initComponent: function() {
         this.dockedItems = [{
             xtype: 'toolbar',
             title: this.trail.data.title,
@@ -19,8 +20,9 @@ traildevils.views.TrailDetailPanel = Ext.extend(Ext.Panel, {
 					handler: function(button, event) {
 						Ext.dispatch({
 							controller: traildevils.controllers.trailsListController,
-							action: 'index'
-						})
+							action: 'index',
+							detailPanel: this.up()
+						});
 					}
 				},
 				{ xtype: 'spacer' },
@@ -29,9 +31,16 @@ traildevils.views.TrailDetailPanel = Ext.extend(Ext.Panel, {
         }];
         
         this.items = [{
-            styleHtmlContent: true,
-            tpl: new Ext.XTemplate( '<div>{description}</div>'),
-            data: this.trail.data
+			xtype: 'tabpanel',
+			items: [
+				{
+					xtype: 'trailDetailInfoPanel',
+					data: this.trail.data
+				}, {
+					xtype: 'trailDetailMediaMainPanel',
+					data: this.trail.data
+				}
+			]
         }];
         
         traildevils.views.TrailDetailPanel.superclass.initComponent.call(this);

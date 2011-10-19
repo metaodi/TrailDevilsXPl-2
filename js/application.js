@@ -9,6 +9,9 @@ Ext.regApplication({
 	phoneStartupScreen: 'view/images/phone_startup.jpg',
 	icon: 'view/images/app_icon.jpg',
 	glossOnIcon: true,
+	defaultUrl: 'TrailsListController/index',
+	statusBarStyle: 'black',
+	fullscreen: true,
 	
 	launch: function() {
 		traildevils.views.viewport = new traildevils.views.Viewport();

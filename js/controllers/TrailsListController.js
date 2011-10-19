@@ -1,15 +1,22 @@
 Ext.regController('TrailsListController',{
     'index': function (options) {
-		if(!traildevils.views.trailsListMainPanel) {
-			traildevils.views.trailsListMainPanel = traildevils.views.viewport.getComponent('trailsListMainPanel');
-		}
-		
-		traildevils.views.trailsListMainPanel.setActiveItem(
+		if(options.detailPanel === undefined) {
+			traildevils.views.trailsListMainPanel.setActiveItem(
 			'trailsListPanel', {
 				type: 'slide',
 				direction: 'right'
-			}
-		);
+			});
+		} else {
+			traildevils.views.trailsListMainPanel.setActiveItem(
+			'trailsListPanel', {
+				type: 'slide',
+				direction: 'right',
+				// destroy detail panel when returning to trailslist
+				after: function() {
+					options.detailPanel.destroy();
+				}
+			});
+		}
 	},
 
     'detail': function (options) {
