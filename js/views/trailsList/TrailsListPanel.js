@@ -5,6 +5,7 @@
  */
 
 traildevils.views.TrailsListPanel = Ext.extend(Ext.Panel, {	
+	layout: 'fit',
 	dockedItems: [
 		{ xtype: 'toolbar', title: 'Trailliste' },
 		{
