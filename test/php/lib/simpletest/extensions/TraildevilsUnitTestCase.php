@@ -43,9 +43,7 @@ abstract class TraildevilsUnitTestCase extends UnitTestCase {
 	
 	function getOutput()
 	{
-		$content = ob_get_contents();
-		//echo $content;
-		return $content;
+		return ob_get_contents();
 	}
 }
 

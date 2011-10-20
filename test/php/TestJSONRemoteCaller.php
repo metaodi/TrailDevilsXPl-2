@@ -1,8 +1,8 @@
 <?php
-require_once('lib/simpletest/extensions/ReportableUnitTestCase.php');
+require_once('lib/simpletest/extensions/TraildevilsUnitTestCase.php');
 require_once('../../php/JSONRemoteCaller.class.php');
 
-class TestJSONRemoteCaller extends ReportableUnitTestCase {
+class TestJSONRemoteCaller extends TraildevilsUnitTestCase {
     function testConstructor() {
 		$url = "http://example.com";
         $jsonCaller = new JSONRemoteCaller($url);
@@ -17,10 +17,12 @@ class TestJSONRemoteCaller extends ReportableUnitTestCase {
 						"imagepath" => "http://traildevils.ch/media/img/trails/trailimg_120_1233.jpg",
 						"description" =>  "Trail-Beschreibung",
 						"status" =>  "offen");
-		$jsonString = "{\"trails\":[ ".json_encode($trail)."]}";
+		$localJson = "{\"trails\":[ ".json_encode($trail)."]}";
 		
         $jsonCaller = new JSONRemoteCaller($url);
-        $this->assertEqual($jsonCaller->callRemoteSite(),$jsonString);
+		$remoteJson = $jsonCaller->callRemoteSite();
+		
+        $this->assertEqualsIgnoreWhitespace($remoteJson,$localJson);
     }
 }
 

@@ -1,9 +1,9 @@
 <?php
-require_once('lib/simpletest/extensions/ReportableUnitTestCase.php');
+require_once('lib/simpletest/extensions/TraildevilsUnitTestCase.php');
 require_once('../../php/AjaxHandler.class.php');
 require_once('../../php/exceptions/FileDoesNotExistException.class.php');
 
-class TestHandleRequest extends ReportableUnitTestCase {
+class TestHandleRequest extends TraildevilsUnitTestCase {
     function testHandleValidRequest() {
         $handler = new AjaxHandler();
         $input = array("Testdata");
@@ -14,6 +14,7 @@ class TestHandleRequest extends ReportableUnitTestCase {
         ob_end_clean();
         $this->assertEqual($result,$input[0]);
     }
+	
 	function testHandleInvalidClass() {
         $handler = new AjaxHandler();
         $input = array("Testdata");
@@ -24,6 +25,7 @@ class TestHandleRequest extends ReportableUnitTestCase {
 			$this->pass();
 		}
     }
+	
 	function testHandleInvalidMethod() {
         $handler = new AjaxHandler();
         $input = array("Testdata");
