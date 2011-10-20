@@ -49,7 +49,7 @@ abstract class TraildevilsUnitTestCase extends UnitTestCase {
 		$trailJson .= "\"IsCommercial\":\"false\",\n";
 		$trailJson .= "\"IsOpen\":null,\n";
 		$trailJson .= "\"Journey\":\"Kurze Reiseanweisungen\",\n";
-		$trailJson .= "\"Name\":\"Startbock\",\n";
+		$trailJson .= "\"Name\":\"Testtrail\",\n";
 		$trailJson .= "\"NextCity\":\"Zürich\",\n";
 		$trailJson .= "\"State\":\"ok\",\n";
 		$trailJson .= "\"TrailId\":11,\n";
