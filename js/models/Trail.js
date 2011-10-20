@@ -11,7 +11,7 @@ Ext.regModel('Trail', {
         {name: "title",			type: "string"},
         {name: "distance",		type: "int"},
         {name: "location",		type: "string"},
-        {name: "imagepath",		type: "string"},
+        {name: "thumb",			type: "string"},
         {name: "description",	type: "string"},
 		{name: "status",		type: "string"},
         {name: "latitude",		type: "float"},

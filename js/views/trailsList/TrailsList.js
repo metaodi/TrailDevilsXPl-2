@@ -22,7 +22,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	itemTpl: [
 		'<div class="trail-item">',
 		'	<div class="action fav x-button"><img class="x-icon-mask favorites" /></div>',
-        '	<div class="trail-image"><img src="{imagepath}" alt="{title}" /></div>',
+        '	<div class="trail-image"><img src="{thumb}" alt="{title}" /></div>',
 		'	<div class="trail-description">',
 		'		<h1>{title}</h1>',
 		'		<p>{description}</p>',
