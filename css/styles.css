@@ -11,18 +11,6 @@
 	font-size: 0.8em;
 }
 
-.trailslist .trail-item {
-	clear: both;
-}
-.trailslist .trail-item  img.trail-image {
-	float: left;
-	width: 5em;
-}
-.trailslist .trail-item .trail-description {
-	float: left;
-	width: 14em;
-	margin-left: 1em;
-}
 .trailslist .trail-item .trail-description h1 {
 	font-weight: bold;
 }
