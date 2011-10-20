@@ -36,11 +36,12 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
         Ext.apply(this, {
             store: Ext.getStore('Trails')
         });
-		this.store.load();
+		// @TODO load data to store
+		//this.store.load();
 		
 		this.on({
-            scope: this,
-            itemswipe: this.onItemSwipe,
+            //scope: this,
+            //itemswipe: this.onItemSwipe,
 			itemtap: this.onTrailItemTap
         });
 		
@@ -48,22 +49,14 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
     },
 	
     onTrailItemTap: function(container, index, item, e) {
-        var trail = this.store.getAt(index)
-        if (trail !== undefined) {
+        var _trailData = this.store.getAt(index)
+        if (_trailData !== undefined) {
 			Ext.dispatch({
 				controller: traildevils.controllers.trailsListController,
 				action: 'detail',
-				trail: this.store.getAt(index)
+				trail: _trailData
 			});
         }
-    },
-	
-	/**
-     * @private
-     * Removes the 'Delete' button from all items
-     */
-    deactivateAll: function() {
-        Ext.select('div.trail-item', this.el.dom).removeCls(this.activeCls);
     },
 	
 	/**

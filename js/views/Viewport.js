@@ -6,7 +6,7 @@
  * 
  */
 traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
-	id        : 'traildevils',
+	id: 'traildevils',
 	fullscreen: true,
 	cardSwitchAnimation: 'slide',
 	
