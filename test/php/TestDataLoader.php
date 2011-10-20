@@ -22,7 +22,12 @@ class TestDataLoader extends TraildevilsUnitTestCase
 		 $convertedJson = json_decode($loader->convertJson($this->getTestTrailJson()), true);
 		 $values = $convertedJson["trails"][0];
 		 
-		 $this->assertEqual($values["title"], "Test");
+		 $this->assertEqual($values["title"], "Testtrail");
+		 $this->assertEqual($values["location"], "Zürich, Switzerland");
+		 $this->assertEqual($values["distance"], "100");
+		 $this->assertEqual($values["thumb"], "http://www.traildevils.ch/media/img/trails/trailimg_120_34.jpg");
+		 $this->assertEqual($values["description"], "Test-Description");
+		 $this->assertEqual($values["status"], "geschlossen");
 	}
 	
 	function testGetTrails() {
