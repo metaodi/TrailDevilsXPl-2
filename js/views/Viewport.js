@@ -14,26 +14,16 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 		Ext.apply(this, {
 			items: [
 				{ xtype: 'trailsListMainPanel', id: 'trailsListMainPanel' },
-				{ xtype: 'trailsMapPanel', id: 'trailsMapPanel' },
-				{ xtype: 'ajaxComponent', id: 'ajaxComponent' },
-				{ 
-					xtype: 'button',
-					iconMask: true,
-					iconCls: 'refresh',
-					ui: 'plain',
-					style: 'margin: 0;',
-					handler: traildevils.refresh
-				}
+				{ xtype: 'trailsMapPanel', id: 'trailsMapPanel' }
 			],
 			
 			tabBar: {
 				dock: 'bottom',
 				scroll: {
-					direction: 'horizontal',
-					useIndicators: false
+					direction: 'horizontal'
 				},
 				layout: {
-					pack: 'center'
+					align: 'left'
 				}
 			}
 		});
@@ -41,22 +31,3 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 		traildevils.views.Viewport.superclass.initComponent.apply(this, arguments);
 	}
 });
-
-// @TODO unschön gelöst mit Funktion direkt in namespace
-traildevils.refresh = function() {
-	Ext.Ajax.request({
-		url : 'php/AjaxHandler.class.php' , 
-		params : { 
-			className : 'DataLoader' ,
-			functionName : 'echoData' ,
-			params : 'reflection_test,another_param'
-		},
-		method: 'GET',
-		success: function ( result, request ) { 
-			Ext.Msg.alert('Success', 'Data return from the server: '+ result.responseText); 
-		},
-		failure: function ( result, request) { 
-			Ext.Msg.alert('Failed', result.responseText); 
-		} 
-	});
-};
