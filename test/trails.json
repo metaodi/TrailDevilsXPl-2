@@ -1,20 +1,42 @@
-{
-	"Country":"Switzerland",
-	"CountryId":176,
-	"CreatedDate":"\/Date(1077573600000+0100)\/",
-	"Desc":"Test-Description",
-	"Favorits":0,
-	"GmapX":"47.224931",
-	"GmapY":"8.746147",
-	"ImageUrl120":"http:\/\/www.traildevils.ch\/media\/img\/trails\/trailimg_120_34.jpg",
-	"ImageUrl800":"http:\/\/www.traildevils.ch\/media\/img\/trails\/trailimg_800_34.jpg",
-	"Info":null,
-	"IsCommercial":"false",
-	"IsOpen":null,
-	"Journey":"Kurze Reiseanweisungen",
-	"Name":"Testtrail",
-	"NextCity":"Zürich",
-	"State":"ok",
-	"TrailId":11,
-	"Url":null
-}
+[
+	{
+		"Country":"Switzerland",
+		"CountryId":176,
+		"CreatedDate":"\/Date(1077573600000+0100)\/",
+		"Desc":"Test-Description",
+		"Favorits":0,
+		"GmapX":"47.224931",
+		"GmapY":"8.746147",
+		"ImageUrl120":"http:\/\/www.traildevils.ch\/media\/img\/trails\/trailimg_120_34.jpg",
+		"ImageUrl800":"http:\/\/www.traildevils.ch\/media\/img\/trails\/trailimg_800_34.jpg",
+		"Info":null,
+		"IsCommercial":"false",
+		"IsOpen":null,
+		"Journey":"Kurze Reiseanweisungen",
+		"Name":"Testtrail",
+		"NextCity":"Zürich",
+		"State":"ok",
+		"TrailId":11,
+		"Url":null
+	}
+	{
+		"Country":"Switzerland",
+		"CountryId":176,
+		"CreatedDate":"\/Date(1077573600000+0100)\/",
+		"Desc":"Test-Description2",
+		"Favorits":0,
+		"GmapX":"47.218271",
+		"GmapY":"8.657247",
+		"ImageUrl120":"http:\/\/www.traildevils.ch\/media\/img\/trails\/trailimg_120_34.jpg",
+		"ImageUrl800":"http:\/\/www.traildevils.ch\/media\/img\/trails\/trailimg_800_34.jpg",
+		"Info":null,
+		"IsCommercial":"false",
+		"IsOpen":null,
+		"Journey":"Kurze Reiseanweisungen für Trail 2",
+		"Name":"Testtrail2",
+		"NextCity":"Zürich",
+		"State":"ok",
+		"TrailId":12,
+		"Url":null
+	}
+]
