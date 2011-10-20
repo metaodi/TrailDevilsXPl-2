@@ -36,8 +36,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
         Ext.apply(this, {
             store: Ext.getStore('Trails')
         });
-		// @TODO load data to store
-		//this.store.load();
+		this.store.load();
 		
 		this.on({
             //scope: this,

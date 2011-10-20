@@ -35,7 +35,7 @@ abstract class TraildevilsUnitTestCase extends UnitTestCase {
 	
 	protected function getTestTrailJson()
 	{
-		$trailJson = "{\n";
+		$trailJson = "[{\n";
 		$trailJson .= "\"Country\":\"Switzerland\",\n";
 		$trailJson .= "\"CountryId\":176,\n";
 		$trailJson .= "\"CreatedDate\":\"\/Date(1077573600000+0100)\/\",\n";
@@ -54,7 +54,27 @@ abstract class TraildevilsUnitTestCase extends UnitTestCase {
 		$trailJson .= "\"State\":\"ok\",\n";
 		$trailJson .= "\"TrailId\":11,\n";
 		$trailJson .= "\"Url\":null\n";
-		$trailJson .= "}";
+		$trailJson .= "},\n";
+		$trailJson .= "{\n";
+		$trailJson .= "\"Country\":\"Switzerland\",\n";
+		$trailJson .= "\"CountryId\":176,\n";
+		$trailJson .= "\"CreatedDate\":\"\/Date(1077573600000+0100)\/\",\n";
+		$trailJson .= "\"Desc\":\"Test-Description2\",\n";
+		$trailJson .= "\"Favorits\":0,\n";
+		$trailJson .= "\"GmapX\":\"47.218271\",\n";
+		$trailJson .= "\"GmapY\":\"8.657247\",\n";
+		$trailJson .= "\"ImageUrl120\":\"http:\/\/www.traildevils.ch\/media\/img\/trails\/trailimg_120_34.jpg\",\n";
+		$trailJson .= "\"ImageUrl800\":\"http:\/\/www.traildevils.ch\/media\/img\/trails\/trailimg_800_34.jpg\",\n";
+		$trailJson .= "\"Info\":null,\n";
+		$trailJson .= "\"IsCommercial\":\"false\",\n";
+		$trailJson .= "\"IsOpen\":null,\n";
+		$trailJson .= "\"Journey\":\"Kurze Reiseanweisungen für Trail 2\",\n";
+		$trailJson .= "\"Name\":\"Testtrail2\",\n";
+		$trailJson .= "\"NextCity\":\"Zürich\",\n";
+		$trailJson .= "\"State\":\"ok\",\n";
+		$trailJson .= "\"TrailId\":12,\n";
+		$trailJson .= "\"Url\":null\n";
+		$trailJson .= "}]";
 		return $trailJson;
 	}
 	

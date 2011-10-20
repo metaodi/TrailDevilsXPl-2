@@ -15,15 +15,16 @@ class DataLoader
 	
 	public function convertJson($externalTrailJson) {
 		$externalTrailArray = json_decode($externalTrailJson,true);
-		
 		$convertedArray = array();
 		for($i = 0; $i < count($externalTrailArray); $i++) {
-			$convertedArray[$i]["title"] = $externalTrailArray["Name"];
-			$convertedArray[$i]["location"] = ($externalTrailArray["NextCity"] ? $externalTrailArray["NextCity"].", " : "") . $externalTrailArray["Country"];
+			$convertedArray[$i]["title"] = $externalTrailArray[$i]["Name"];
+			$convertedArray[$i]["location"] = ($externalTrailArray[$i]["NextCity"] ? $externalTrailArray[$i]["NextCity"].", " : "") . $externalTrailArray[$i]["Country"];
 			$convertedArray[$i]["distance"] = 100;
-			$convertedArray[$i]["thumb"] = $externalTrailArray["ImageUrl120"];
-			$convertedArray[$i]["description"] = $externalTrailArray["Desc"];
-			$convertedArray[$i]["status"] = $externalTrailArray["IsOpen"] ? "offen" : "geschlossen";
+			$convertedArray[$i]["thumb"] = $externalTrailArray[$i]["ImageUrl120"];
+			$convertedArray[$i]["description"] = $externalTrailArray[$i]["Desc"];
+			$convertedArray[$i]["status"] = $externalTrailArray[$i]["IsOpen"] ? "offen" : "geschlossen";
+			$convertedArray[$i]["latitude"] = $externalTrailArray[$i]["GmapX"];
+			$convertedArray[$i]["longitude"] = $externalTrailArray[$i]["GmapY"];
 		}
 		return json_encode(array("trails" => $convertedArray));
 	}
