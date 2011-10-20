@@ -11,13 +11,7 @@ class TestJSONRemoteCaller extends TraildevilsUnitTestCase {
     }
 	function testCallRemoteSite() {
 		$url = "http://jenkins.rdmr.ch/test/trails.json";
-		$trail = array(	"title" => "Test-Trail",
-						"location" =>"Testland",
-						"distance" => 2000,
-						"imagepath" => "http://traildevils.ch/media/img/trails/trailimg_120_1233.jpg",
-						"description" =>  "Trail-Beschreibung",
-						"status" =>  "offen");
-		$localJson = "{\"trails\":[ ".json_encode($trail)."]}";
+		$localJson = $this->getTestTrailJson();
 		
         $jsonCaller = new JSONRemoteCaller($url);
 		$remoteJson = $jsonCaller->callRemoteSite();
