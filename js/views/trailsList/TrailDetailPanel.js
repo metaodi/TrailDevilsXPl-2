@@ -7,7 +7,6 @@
 traildevils.views.TrailDetailPanel = Ext.extend(Ext.Panel, {
 	layout: 'fit',
 	trail: null,
-	fullscreen: true,
 	
 	initComponent: function() {
         this.dockedItems = [{

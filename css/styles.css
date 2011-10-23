@@ -32,3 +32,13 @@
 	opacity: 0
 }
 
+
+
+/* styles for pull to refresh */
+.x-list-pullrefresh-arrow {
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 250ms;
+	-webkit-mask: none;
+	background: transparent url('../resources/images/blackArrow.png') center center no-repeat;
+	width: 4em;
+}

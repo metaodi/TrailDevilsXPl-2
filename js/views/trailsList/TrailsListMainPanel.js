@@ -9,14 +9,13 @@ traildevils.views.TrailsListMainPanel = Ext.extend(Ext.Panel, {
 	title: 'Trails',
 	layout: 'card',
     cardSwitchAnimation: 'slide',
-	activeItem: 'trailsListPanel',
 	
 	initComponent: function () {
         this.items = [
             { xtype: 'trailsListPanel', id: 'trailsListPanel' }
-        ]
+        ];
 		
-		traildevils.views.TrailsListMainPanel.superclass.initComponent.apply(this, arguments);
+		traildevils.views.TrailsListMainPanel.superclass.initComponent.call(this);
     }
 });
 

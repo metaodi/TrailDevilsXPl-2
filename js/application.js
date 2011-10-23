@@ -5,9 +5,9 @@
  */ 
 Ext.regApplication({
 	name: 'traildevils',
-	tabletStartupScreen: 'view/images/phone_startup.jpg',
-	phoneStartupScreen: 'view/images/phone_startup.jpg',
-	icon: 'view/images/app_icon.jpg',
+	tabletStartupScreen: 'resources/images/phone_startup.jpg',
+	phoneStartupScreen: 'resources/images/phone_startup.jpg',
+	icon: 'resources/images/app_icon.jpg',
 	glossOnIcon: true,
 	defaultUrl: 'TrailsListController/index',
 	statusBarStyle: 'black',

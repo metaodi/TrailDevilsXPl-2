@@ -8,7 +8,6 @@
 traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 	id: 'traildevils',
 	fullscreen: true,
-	cardSwitchAnimation: 'slide',
 	
 	initComponent: function() {
 		Ext.apply(this, {
@@ -27,7 +26,7 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 				}
 			}
 		});
-
-		traildevils.views.Viewport.superclass.initComponent.apply(this, arguments);
+		
+        traildevils.views.Viewport.superclass.initComponent.call(this);
 	}
 });

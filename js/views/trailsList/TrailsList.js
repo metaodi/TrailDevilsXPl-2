@@ -14,7 +14,6 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
      */
     activeCls: 'trail-item-swiped',
 	
-	plugins: {ptype: 'germanPullRefreshPlugin'},
 	
 	grouped : true,
 	indexBar: false,
@@ -33,6 +32,11 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	],
 	
 	initComponent: function() {
+
+		this.plugins = {
+			ptype: 'germanPullRefreshPlugin'
+		};
+	
         Ext.apply(this, {
             store: Ext.getStore('Trails')
         });
