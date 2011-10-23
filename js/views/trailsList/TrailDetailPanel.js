@@ -6,12 +6,19 @@
 
 traildevils.views.TrailDetailPanel = Ext.extend(Ext.Panel, {
 	layout: 'fit',
+	cls: 'trailDetailPanel',
 	trail: null,
 	
 	initComponent: function() {
+		// corp title to max. 12 characters
+		var title = this.trail.data.title;
+		if(title.length > 12) {
+			title = this.trail.data.title.substring(0, 12) + "...";
+		}
+		
         this.dockedItems = [{
             xtype: 'toolbar',
-            title: this.trail.data.title,
+            title: title,
             items: [
 				{
 					text: 'Zurück',
@@ -35,10 +42,10 @@ traildevils.views.TrailDetailPanel = Ext.extend(Ext.Panel, {
 				{
 					xtype: 'trailDetailInfoPanel',
 					data: this.trail.data
-				}, {
+				}/*, {
 					xtype: 'trailDetailMediaMainPanel',
 					data: this.trail.data
-				}
+				}*/
 			]
         }];
         

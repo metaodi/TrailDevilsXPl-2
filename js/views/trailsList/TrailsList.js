@@ -5,9 +5,7 @@
  */
 
 traildevils.views.TrailsList = Ext.extend(Ext.List, {
-	cls: 'trailslist',
 	fullscreen: true,
-    singleSelect: true,
 	
     /**
      * @cfg {String} activeCls The CSS class that is added to each item when swiped
@@ -16,17 +14,19 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	
 	
 	grouped : true,
-	indexBar: false,
 	
 	itemTpl: [
 		'<div class="trail-item">',
 		'	<div class="action fav x-button"><img class="x-icon-mask favorites" /></div>',
         '	<div class="trail-image"><img src="{thumb}" alt="{title}" /></div>',
-		'	<div class="trail-description">',
+		'	<div class="trail-info">',
 		'		<h1>{title}</h1>',
-		'		<p>{description}</p>',
-		'		<p>Ort: {location}</p>',
-		'		<p>Entfernung: {distance}m</p>',
+		'		<dl>',
+		'			<dt>Ort:</dt>',
+		'			<dd>{location}</dd>',
+		'			<dt>Entfernung:</dt>',
+		'			<dd>{distance}m</dd>',
+		'		</dl>',
 		'	</div>',
 		'</div>'
 	],

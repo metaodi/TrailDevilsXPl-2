@@ -7,27 +7,57 @@
 /* ====================================
    TRAILLIST
    -------------- START --------------- */
-#traildevils .trailslist {
+#trailsList {
 	font-size: 0.8em;
+}
+#trailsList .trail-item .trail-image,
+.trailDetailPanel .trail-detail .trail-image {
+	float: left;
+	margin-right: 0.8em;
+	width: 6.5em;
+	min-height: 5.5em;
+}
+#trailsList .trail-item .trail-image img,
+.trailDetailPanel .trail-detail .trail-image img {
+	width: 6.5em;
+}
+#trailsList .trail-item .trail-info h1 {
+	font-weight: bold;
+	margin-bottom: 0.2em;
+}
+#trailsList .trail-item .trail-info dl,
+.trailDetailPanel .trail-detail .trail-info dl {
+	font-family: Verdana;
+	font-size: 0.8em;
+	line-height: 1.5em;
+	color: #323232;
+}
+#trailsList .trail-item .trail-info dt,
+.trailDetailPanel .trail-detail .trail-info dt {
+	margin-right: 0.8em;
+	float: left;
+	font-weight: normal;
 }
 
-.trailslist .trail-item .trail-description h1 {
+.trailDetailPanel .trail-detail .trail-info h1 {
+	font-size: 1em;
 	font-weight: bold;
+	margin-bottom: 0.2em;
 }
-.trailslist .trail-item .trail-description p {
-	font-size: 0.8em;
+.trailDetailPanel .trail-detail .trail-description {
+	clear: both;
 }
 /* =============== END ================ */
 
-.trailslist .trail-item .fav {
+#trailsList .trail-item .fav {
 	float: right;
 }
-.trailslist .trail-item-swiped .trail-item .action {
+#trailsList .trail-item-swiped .trail-item .action {
 	display: block;
 	opacity: 1;
 	-webkit-transition: opacity 0.3s linear
 }
-.trailslist .trail-item .action {
+#trailsList .trail-item .action {
 	display: none;
 	opacity: 0
 }
@@ -35,6 +65,9 @@
 
 
 /* styles for pull to refresh */
+.x-list-pullrefresh {
+	color: #6c6c6c;
+}
 .x-list-pullrefresh-arrow {
 	-webkit-transition-property: -webkit-transform;
 	-webkit-transition-duration: 250ms;
