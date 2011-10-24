@@ -1,21 +1,20 @@
 /**
- * @class traildevils.views.TrailDetailMediaPanel
+ * @class traildevils.views.TrailDetailMediaThumbPanel
  * @extends Ext.Panel
  * 
  */
 
-traildevils.views.TrailDetailMediaPanel = Ext.extend(Ext.Panel, {
-	layout: 'card',
+traildevils.views.TrailDetailMediaThumbPanel = Ext.extend(Ext.Panel, {
+	layout: 'fit',
 	fullscreen: true,
-
 	
 	initComponent: function () {
         this.store = Ext.getStore('TrailImages');
 		
         this.xtpl = new Ext.XTemplate(
-			'<div style="padding:10px 5px 5px 5px;">',
+			'<div>',
 			'	<tpl for=".">',
-			'		<div class="node" style="background:url({thumb}); width: 100px; height: 100px;">',
+			'		<div class="node" style="background:url({thumb}); width: 100px; height: 100px; border: solid 1px red;">',
 			'		</div>',
 			'	</tpl>',
 			'</div>'
@@ -38,9 +37,9 @@ traildevils.views.TrailDetailMediaPanel = Ext.extend(Ext.Panel, {
 
         this.items = [this.dataView];
 		
-		traildevils.views.TrailDetailMediaPanel.superclass.initComponent.apply(this, arguments);
+		traildevils.views.TrailDetailMediaThumbPanel.superclass.initComponent.apply(this, arguments);
     }
 });
 
-// Create xtype trailDetailMediaPanel
-Ext.reg('trailDetailMediaPanel', traildevils.views.TrailDetailMediaPanel);
+// Create xtype
+Ext.reg('trailDetailMediaThumbPanel', traildevils.views.TrailDetailMediaThumbPanel);

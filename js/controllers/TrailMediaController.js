@@ -1,7 +1,7 @@
 Ext.regController('TrailMediaController',{
     'index': function() {
-		Ext.Msg.alert('TODO', 'Thumbslist laden');
-		//traildevils.views.trailDetailMediaPanel.setActiveItem(trailDetailMediaPanelOriginal, 'slide');
+		//Ext.Msg.alert('TODO', 'Thumbslist laden');
+		traildevils.views.trailDetailMediaMainPanel.setActiveItem(traildevils.views.trailDetailMediaThumbPanel, 'slide');
 	},
 
     'carousel': function (options) {
@@ -19,7 +19,7 @@ Ext.regController('TrailMediaController',{
 			});
 		}
 		
-		traildevils.views.trailDetailMediaPanel.setActiveItem(mediaCarousel, 'slide');
+		traildevils.views.trailDetailMediaMainPanel.setActiveItem(mediaCarousel, 'slide');
 		mediaCarousel.carousel.setActiveItem(options.index);
 	}
 });

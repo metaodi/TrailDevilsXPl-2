@@ -1,6 +1,6 @@
 Ext.regController('TrailsListController',{
     'index': function (options) {
-		if(options.detailPanel === undefined) {
+		if(traildevils.views.trailDetailTabPanel === undefined) {
 			traildevils.views.trailsListMainPanel.setActiveItem(
 			'trailsListPanel', {
 				type: 'slide',
@@ -13,17 +13,26 @@ Ext.regController('TrailsListController',{
 				direction: 'right',
 				// destroy detail panel when returning to trailslist
 				after: function() {
-					options.detailPanel.destroy();
+					traildevils.views.trailDetailTabPanel.destroy();
 				}
 			});
 		}
 	},
 
     'detail': function (options) {
-		var trailDetailPanel = new traildevils.views.TrailDetailPanel({
+		traildevils.views.trailDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
 			trail: options.trail
 		});
-		traildevils.views.trailsListMainPanel.setActiveItem(trailDetailPanel, 'slide');
+		
+		var backBtn = traildevils.views.trailDetailTabPanel.backBtn;
+		backBtn.setHandler(function(){
+			Ext.dispatch({
+					controller: traildevils.controllers.trailsListController,
+					action: 'index',
+			});
+		});
+		
+		traildevils.views.trailsListMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
 	}
 });
 
