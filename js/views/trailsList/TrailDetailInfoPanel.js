@@ -41,16 +41,7 @@ traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 		);
 		
         traildevils.views.TrailDetailInfoPanel.superclass.initComponent.call(this);
-    },
-	
-	// @TODO doesn't work
-	addMarker: function() {
-		var marker = new google.maps.Marker({
-			map: this.items[0].map,
-			position: new google.maps.LatLng(this.data.latitude, this.data.longitude),
-			title: 'test'
-		});
-	}
+    }
 });
 
 // Create xtype trailDetailInfoPanel
