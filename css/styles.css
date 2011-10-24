@@ -39,10 +39,16 @@
 	font-weight: normal;
 }
 
-.trailDetailTabPanel .trail-detail .trail-info h1 {
-	font-size: 1em;
+.trailDetailTabPanel .trail-detail h1 {
+	font-size: 1.1em;
 	font-weight: bold;
 	margin-bottom: 0.2em;
+}
+
+.trailDetailTabPanel .trail-detail h2 {
+	font-size: 1em;
+	font-weight: bold;
+	margin-top: 1em;
 }
 .trailDetailTabPanel .trail-detail .trail-description {
 	clear: both;

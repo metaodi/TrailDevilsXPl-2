@@ -7,11 +7,17 @@
 traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 	title: 'Info',
 	scroll: 'vertical',
+	layout: 'fit',
 	
 	styleHtmlContent: true,
 	
 	initComponent: function() {
 		var trailLocation = new google.maps.LatLng(this.data.latitude, this.data.longitude);
+		
+		var trailMapImageUrl = 'http://maps.google.com/maps/api/staticmap?';
+		trailMapImageUrl += 'center=' + this.data.latitude + "," + this.data.longitude;
+		trailMapImageUrl += '&markers=color:red|label:A|' + this.data.latitude + ',' + this.data.longitude;
+		trailMapImageUrl += '&zoom=12&size=300x300&maptype=roadmap&sensor=false';
 		
         this.tpl = new Ext.XTemplate(
 			'<div class="trail-detail">',
@@ -26,25 +32,13 @@ traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 			'		</dl>',
 			'	</div>',
 			'	<div class="trail-description">{description}</div>',
+			'	<div class="trail-map">',
+			'		<h2>Kartenansicht:</h2>',
+			'		<img src="' + trailMapImageUrl + '" alt="Kartenansicht des Trails: {title}" />',
+			'		<p><a href="#" target="_blank">Hier klicken um auf Karte zu öffnen</a></p>',
+			'	</div>',
 			'</div>'
 		);
-		
-		var map = new Ext.Map({
-			height: 300,
-			width: 250,
-			mapOptions: {
-				zoom: 12,
-				center: trailLocation,
-                disableDefaultUI: true
-			},
-            maskMap: true
-		});
-		/*
-		this.items = new Ext.DataView({
-			store: this.data,
-			tpl: this.tpl,
-			itemSelector: 'div.trail-detail'
-		});*/
 		
         traildevils.views.TrailDetailInfoPanel.superclass.initComponent.call(this);
     },
