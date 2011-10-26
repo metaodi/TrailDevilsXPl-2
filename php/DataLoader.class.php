@@ -7,7 +7,7 @@ class DataLoader
 		echo $data;
 	}
 	
-	public function getTrails($url="http://jenkins.rdmr.ch/php/mock_api.json") /*http://152.96.80.18:8080/api/trails*/
+	public function getTrails($url="http://152.96.80.18:8080/api/trails") /*http://jenkins.rdmr.ch/php/mock_api.json*/
 	{
 		$remote = new JSONRemoteCaller($url);
 		return $this->convertJson($remote->callRemoteSite());

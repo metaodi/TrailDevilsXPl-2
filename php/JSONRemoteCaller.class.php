@@ -17,6 +17,11 @@ class JSONRemoteCaller extends RemoteCaller {
 		curl_setopt ($curlHandler, CURLOPT_RETURNTRANSFER, true);
 		$remote_answer = curl_exec ($curlHandler);
 		
+		if(curl_errno($curlHandler) != 0) {
+			echo "cURL Errornumber: ".curl_errno($curlHandler)."<br />";
+			echo "cURL Error: ".curl_error($curlHandler)."<br />";
+		}
+		
 		return $remote_answer;
 	}
 }
