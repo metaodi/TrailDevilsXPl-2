@@ -6,12 +6,11 @@
 
 traildevils.views.TrailDetailMediaThumbPanel = Ext.extend(Ext.Panel, {
 	layout: 'fit',
-	fullscreen: true,
 	
 	initComponent: function () {
         this.store = Ext.getStore('TrailImages');
 		
-        this.xtpl = new Ext.XTemplate(
+        var tpl = new Ext.XTemplate(
 			'<div>',
 			'	<tpl for=".">',
 			'		<div class="node" style="background:url({thumb}); width: 100px; height: 100px; border: solid 1px red;">',
@@ -19,12 +18,13 @@ traildevils.views.TrailDetailMediaThumbPanel = Ext.extend(Ext.Panel, {
 			'	</tpl>',
 			'</div>'
         );
-
-        this.dataView = new Ext.DataView({
-            store: this.store,
-            tpl: this.xtpl,
-            itemSelector: 'div.node',
 			
+        var dataView = new Ext.DataView({
+            store: this.store,
+            tpl: tpl,
+            itemSelector: 'div.node'
+			
+			/*
 			onItemTap: function(list, index) {
 				Ext.dispatch({
 					controller: traildevils.controllers.trailMediaController,
@@ -32,12 +32,12 @@ traildevils.views.TrailDetailMediaThumbPanel = Ext.extend(Ext.Panel, {
 					imgdata: this.store.data.items,
 					index: index
 				});
-			}
+			}*/
         });
 
-        this.items = [this.dataView];
+        this.items = [dataView];
+		traildevils.views.TrailDetailMediaThumbPanel.superclass.initComponent.call(this);
 		
-		traildevils.views.TrailDetailMediaThumbPanel.superclass.initComponent.apply(this, arguments);
     }
 });
 
