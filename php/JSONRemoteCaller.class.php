@@ -13,9 +13,11 @@ require_once 'RemoteCaller.class.php';
 class JSONRemoteCaller extends RemoteCaller {
 	public function callRemoteSite()
 	{
-		$curlHandler = curl_init ($this->getURL());
-		curl_setopt ($curlHandler, CURLOPT_RETURNTRANSFER, true);
-		$remote_answer = curl_exec ($curlHandler);
+		$curlHandler = curl_init($this->getURL());
+		curl_setopt($curlHandler, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curlHandler, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+		curl_setopt($curlHandler, CURLOPT_TIMEOUT, 30);
+		$remote_answer = curl_exec($curlHandler);
 		
 		if(curl_errno($curlHandler) != 0) {
 			echo "cURL Errornumber: ".curl_errno($curlHandler)."<br />";
