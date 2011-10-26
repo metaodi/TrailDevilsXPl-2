@@ -25,5 +25,8 @@ Ext.regApplication({
 		
 		// trailsListPanel Components
 		traildevils.views.trailsList = traildevils.views.trailsListPanel.getComponent('trailsList');
+		
+		traildevils.lat = 47.223357;
+		traildevils.lng = 8.816614;
 	}
 });

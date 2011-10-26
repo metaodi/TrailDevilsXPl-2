@@ -7,8 +7,8 @@ class TestDataLoader extends TraildevilsUnitTestCase
 	function testConvertJsonKeys()
 	{
 		 $loader = new DataLoader();
-		 $keys = array(	"title","location","distance","thumb","description","status","latitude","longitude");
-		 $convertedJson = json_decode($loader->convertJson($this->getTestTrailJson()), true);
+		 $keys = array("title","location","distance","thumb","description","status","latitude","longitude");
+		 $convertedJson = json_decode($loader->convertJson($this->getTestTrailJson(),$this->getTestGeoLocation()), true);
 		 
 		 foreach ($keys as $key)
 		 {
@@ -19,30 +19,30 @@ class TestDataLoader extends TraildevilsUnitTestCase
 	function testConvertJsonValues()
 	{
 		 $loader = new DataLoader();
-		 $convertedJson = json_decode($loader->convertJson($this->getTestTrailJson()), true);
+		 $location = $this->getTestGeoLocation();
+		 $convertedJson = json_decode($loader->convertJson($this->getTestTrailJson(),$location), true);
 		 $this->assertEqual(count($convertedJson["trails"]), 2, "Array should contain exactly 2 trails: %s");
 		 
 		 $values = $convertedJson["trails"][0];
 		 $this->assertEqual($values["title"], "Testtrail");
 		 $this->assertEqual($values["location"], "Zürich, Switzerland");
-		 $this->assertEqual($values["distance"], "100");
+		 $this->assertEqual($values["distance"], 0.0);
 		 $this->assertEqual($values["thumb"], "http://www.traildevils.ch/media/img/trails/trailimg_120_34.jpg");
 		 $this->assertEqual($values["description"], "Test-Description");
 		 $this->assertEqual($values["status"], "geschlossen");
-		 $this->assertEqual($values["latitude"], "47.224931");
-		 $this->assertEqual($values["longitude"], "8.746147");
+		 $this->assertEqual($values["latitude"], $location->getLatitude());
+		 $this->assertEqual($values["longitude"], $location->getLongitude());
 	}
 	
-	function testGetTrails() {
+	function testGetTrailsNear() {
         $loader = new DataLoader();
         $url = "http://jenkins.rdmr.ch/test/trails.json";
-		$localJson = $loader->convertJson($this->getTestTrailJson());
-		$result = $loader->getTrails($url);
+		$location = $this->getTestGeoLocation();
+		
+		$localJson = $loader->convertJson($this->getTestTrailJson(), $location);
+		$result = $loader->getTrailsNear($location->getLatitude(),$location->getLongitude(),$url);
 		
         $this->assertEqualsIgnoreWhitespace($result,$localJson);
     }
 }
-
-$test = new TestDataLoader();
-$test->report();
 ?>

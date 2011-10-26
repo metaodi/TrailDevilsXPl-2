@@ -30,7 +30,8 @@ Ext.regStore('Trails', {
         url : 'php/AjaxHandler.class.php',
 		extraParams: {
 			className : 'DataLoader' ,
-			functionName : 'getTrails'
+			functionName : 'getTrailsNear',
+			params: traildevils.lat + ',' + traildevils.lng
 		},
 		model: 'Trail',
         reader: {

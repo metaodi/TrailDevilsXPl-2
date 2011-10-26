@@ -3,7 +3,7 @@ require_once('lib/simpletest/extensions/TraildevilsUnitTestCase.php');
 require_once('../../php/AjaxHandler.class.php');
 require_once('../../php/exceptions/FileDoesNotExistException.class.php');
 
-class TestHandleRequest extends TraildevilsUnitTestCase {
+class TestAjaxHandler extends TraildevilsUnitTestCase {
     function testHandleValidRequest() {
         $handler = new AjaxHandler();
         $input = array("Testdata");
@@ -38,8 +38,4 @@ class TestHandleRequest extends TraildevilsUnitTestCase {
 		}
     }
 }
-
-$test = new TestHandleRequest();
-$test->report();
-
 ?>

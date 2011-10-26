@@ -19,8 +19,4 @@ class TestJSONRemoteCaller extends TraildevilsUnitTestCase {
         $this->assertEqualsIgnoreWhitespace($remoteJson,$localJson);
     }
 }
-
-$test = new TestJSONRemoteCaller();
-$test->report();
-
 ?>
