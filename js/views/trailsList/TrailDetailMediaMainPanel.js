@@ -13,7 +13,7 @@ traildevils.views.TrailDetailMediaMainPanel = Ext.extend(Ext.Panel, {
 	initComponent: function () {
 		traildevils.views.trailDetailMediaThumbPanel = new traildevils.views.TrailDetailMediaThumbPanel();
 		
-        this.items = [
+		this.items = [
             traildevils.views.trailDetailMediaThumbPanel
         ]
 		
