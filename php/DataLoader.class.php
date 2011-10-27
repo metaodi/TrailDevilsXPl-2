@@ -16,7 +16,7 @@ class DataLoader
 	 * @param $userLng Longitude of user's current position
 	 * @return JSON result
 	 */
-	public function getTrailsNear($userLat,$userLng,$url="http://152.96.80.18:8080/api/trails?\$skip=10&\$top=10&\$orderby=TrailId") /*http://jenkins.rdmr.ch/php/mock_api.json*/
+	public function getTrailsNear($userLat=47.5101756,$userLng=8.7221472,$url="http://152.96.80.18:8080/api/trails?\$skip=10&\$top=10&\$orderby=Name") /*http://jenkins.rdmr.ch/php/mock_api.json*/
 	{
 		$remote = new JSONRemoteCaller($url);
 		$userGeo = new GeoLocation($userLat, $userLng);
@@ -30,6 +30,7 @@ class DataLoader
 			$convertedArray[$i]["title"] = $externalTrailArray[$i]["Name"];
 			$convertedArray[$i]["location"] = ($externalTrailArray[$i]["NextCity"] ? $externalTrailArray[$i]["NextCity"].", " : "") . $externalTrailArray[$i]["Country"];
 			$convertedArray[$i]["distance"] = $userGeo->distance(new GeoLocation($externalTrailArray[$i]["GmapX"], $externalTrailArray[$i]["GmapY"]));
+			$convertedArray[$i]["formattedDistance"] = $convertedArray[$i]["distance"];
 			$convertedArray[$i]["thumb"] = $externalTrailArray[$i]["ImageUrl120"];
 			$convertedArray[$i]["description"] = nl2br($externalTrailArray[$i]["Desc"]);
 			$convertedArray[$i]["status"] = $externalTrailArray[$i]["IsOpen"] ? "offen" : "geschlossen";

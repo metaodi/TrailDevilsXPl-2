@@ -20,7 +20,7 @@ Ext.regController('TrailsMapController', {
 					this.markerInfoWindow = new google.maps.InfoWindow({
 						content: this.content
 					});
-				};
+				}
 				this.markerInfoWindow.open(options.map, this);
 			});
 			

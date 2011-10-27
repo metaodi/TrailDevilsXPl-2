@@ -10,6 +10,7 @@ Ext.regModel('Trail', {
 	fields: [
         {name: "title",			type: "string"},
         {name: "distance",		type: "int"},
+		{name: "formattedDistance", type: "string"},
         {name: "location",		type: "string"},
         {name: "thumb",			type: "string"},
         {name: "description",	type: "string"},

@@ -24,9 +24,10 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 		'		<dl>',
 		'			<dt>Ort:</dt>',
 		'			<dd>{location}</dd>',
-		'			<dt>Entfernung:</dt>',
-		'			<dd>{distance}m</dd>',
 		'		</dl>',
+		'	</div>',
+		'	<div class="trail-distance">',
+		'		<p>{formattedDistance}</p>',
 		'	</div>',
 		'</div>'
 	],
@@ -37,15 +38,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 			ptype: 'germanPullRefreshPlugin'
 		};
 	
-        Ext.apply(this, {
-            store: Ext.getStore('Trails')
-        });
-		this.store.load();
-		
-		// calculate distance for all trails
-		for(var i = 0; i < this.store.data.length; i++) {
-			this.store.data.items[i].data.distance = traildevils.views.geoLocation.getDistance(this.store.data.items[i].data.latitude, this.store.data.items[i].data.longitude);
-		}
+        this.store = traildevils.store;
 		
 		this.on({
             //scope: this,

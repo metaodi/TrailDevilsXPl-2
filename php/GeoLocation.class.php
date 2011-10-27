@@ -27,21 +27,22 @@ class GeoLocation {
 	public function getLongitude() {
 		return $this->lng;
 	}
-
-	/* http://www.zipcodeworld.com/samples/distance.php.html */
+	
+	/* source: http://www.movable-type.co.uk/scripts/latlong.html */
 	public function distance(GeoLocation $to) {
-		$toLat = $to->getLatitude();
-		$toLng = $to->getLongitude();
+		$earthRadius = 6371000; // in meter
 		
-		$theta = $this->lng - $toLng;
-		$dist = sin(deg2rad($this->lat)) * sin(deg2rad($toLat)) + cos(deg2rad($this->lat)) * cos(deg2rad($toLat)) * cos(deg2rad($theta));
-		$dist = acos($dist);
-		$dist = rad2deg($dist);
+		$fromLat = deg2rad($this->lat);
+		$fromLng = deg2rad($this->lng);
+		$toLat = deg2rad($to->getLatitude());
+		$toLng = deg2rad($to->getLongitude());
+		$deltaLat = $toLat - $fromLat;
+		$deltaLng = $toLng - $fromLng;
 		
-		$meters = $dist * 60 * 1853.159616;
-		return $meters;
+		$a = sin($deltaLat / 2) * sin($deltaLat / 2) + sin($deltaLng / 2) * sin($deltaLng / 2) * cos($fromLat) * cos($toLat); 
+		$c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+		return $c * $earthRadius;
 	}
-
 }
 
 ?>
