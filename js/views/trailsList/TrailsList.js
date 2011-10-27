@@ -42,6 +42,11 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
         });
 		this.store.load();
 		
+		// calculate distance for all trails
+		for(var i = 0; i < this.store.data.length; i++) {
+			this.store.data.items[i].data.distance = traildevils.views.geoLocation.getDistance(this.store.data.items[i].data.latitude, this.store.data.items[i].data.longitude);
+		}
+		
 		this.on({
             //scope: this,
             //itemswipe: this.onItemSwipe,
