@@ -1,4 +1,4 @@
-Ext.regController('TrailMediaController', {
+Ext.regController('trailmedia', {
     'openMediaCarousel': function (options) {
 		var mediaCarousel = new Ext.Carousel({		
             indicator: true,
@@ -10,7 +10,7 @@ Ext.regController('TrailMediaController', {
 		// adding images to carousel
 		for(var i = 0; i < options.imgdata.length; i++) {
 			mediaCarousel.add({
-				html: '<div class="image"><img src="' + options.imgdata[i].data.path+'" /></div>'
+				html: '<div class="image"><img src="' + options.imgdata[i].data.path+'" style="width: 100%;" /></div>'
 			});
 		}
 		
@@ -27,4 +27,4 @@ Ext.regController('TrailMediaController', {
 	}
 });
 
-traildevils.controllers.trailMediaController = Ext.ControllerManager.get('TrailMediaController');
+traildevils.controllers.trailMediaController = Ext.ControllerManager.get('trailmedia');

@@ -1,4 +1,4 @@
-Ext.regController('TrailsMapController', {
+Ext.regController('trailsmap', {
 	trailMarkers: [],
 	
     'addMarkers': function (options) {
@@ -29,4 +29,4 @@ Ext.regController('TrailsMapController', {
 	}
 });
 
-traildevils.controllers.trailsMapController = Ext.ControllerManager.get('TrailsMapController');
+traildevils.controllers.trailsMapController = Ext.ControllerManager.get('trailsmap');

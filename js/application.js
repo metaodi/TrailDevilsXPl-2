@@ -9,7 +9,7 @@ Ext.regApplication({
 	phoneStartupScreen: 'resources/images/phone_startup.jpg',
 	icon: 'resources/images/app_icon.jpg',
 	glossOnIcon: true,
-	defaultUrl: 'TrailsListController/index',
+	//defaultUrl: 'list',
 	statusBarStyle: 'black',
 	fullscreen: true,
 	

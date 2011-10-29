@@ -11,8 +11,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
      * @cfg {String} activeCls The CSS class that is added to each item when swiped
      */
     activeCls: 'trail-item-swiped',
-	
-	
+	disableSelection: true,
 	grouped : true,
 	
 	itemTpl: [
@@ -33,7 +32,6 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	],
 	
 	initComponent: function() {
-
 		this.plugins = {
 			ptype: 'germanPullRefreshPlugin'
 		};
@@ -50,22 +48,20 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
     },
 	
     onTrailItemTap: function(container, index, item, e) {
-        var _trailData = this.store.getAt(index)
-        if (_trailData !== undefined) {
-			Ext.dispatch({
-				controller: traildevils.controllers.trailsListController,
-				action: 'detail',
-				trail: _trailData
-			});
-        }
-    },
+		var trail = this.store.getAt(index);
+        Ext.dispatch({
+			controller: traildevils.controllers.trailsListController,
+			action: 'detail',
+			trail: trail
+		});
+    }
 	
 	/**
      * @private
      * Handler for the itemswipe event - shows the Delete button for the swiped item, hiding the Delete button
      * on any other items
      */
-    onItemSwipe: function(list, index, node) {
+    /*onItemSwipe: function(list, index, node) {
         var el        = Ext.get(node),
             activeCls = this.activeCls,
             hasClass  = el.hasCls(activeCls);
@@ -77,7 +73,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
         } else {
             el.addCls(activeCls);
         }
-    }
+    }*/
 });
 
 // Create xtype trailsList

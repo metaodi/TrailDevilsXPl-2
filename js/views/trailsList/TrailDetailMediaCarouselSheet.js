@@ -5,7 +5,6 @@
  */
 
 traildevils.views.TrailDetailMediaCarouselSheet = Ext.extend(Ext.Sheet, {
-	title: 'test',
 	layout: 'fit',
 	fullscreen: true,
 	stretchX: true,
@@ -24,23 +23,23 @@ traildevils.views.TrailDetailMediaCarouselSheet = Ext.extend(Ext.Sheet, {
 				thisCmp.destroy();
 			}
 		};
-			
+		
+		this.closeBtn = new Ext.Button({
+			ui: 'round',
+			text: 'Schliessen',
+			handler: function(button, event) {
+				Ext.dispatch({
+					controller: traildevils.controllers.trailMediaController,
+					action: 'closeMediaCarousel'
+				});
+			}
+		})
+		
         this.dockedItems = [{
             xtype: 'toolbar',
 			dock: 'top',
-			items: [
-				{
-					ui: 'decline-round',
-					text: 'X',
-					handler: function(button, event) {
-						Ext.dispatch({
-							controller: traildevils.controllers.trailMediaController,
-							action: 'closeMediaCarousel'
-						});
-					}
-				}
-			]
-        }];
+			items: [ this.closeBtn ]
+		}];
         
         this.items = [
 			this.carousel

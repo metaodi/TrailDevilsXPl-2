@@ -1,11 +1,5 @@
 /* ====================================
-   GLOBAL
-   -------------- START --------------- */
-
-/* =============== END ================ */
-
-/* ====================================
-   TRAILLIST
+   TRAILSLIST
    -------------- START --------------- */
 #trailsList {
 	font-size: 0.8em;
@@ -46,7 +40,12 @@
 	float: left;
 	font-weight: normal;
 }
+/* =============== END ================ */
 
+
+/* ====================================
+   TRAILDETAIL
+   -------------- START --------------- */
 .trailDetailTabPanel .trail-detail h1 {
 	font-size: 1.1em;
 	font-weight: bold;
@@ -71,8 +70,8 @@
 	padding: 0.4em;
 }
 .trailDetailMediaThumbPanel .trail-images-thumblist .imagebox .image {
-	width: 5em;
-	height: 4em;
+	width: 4em;
+	height: 3em;
 	overflow: hidden;
 	text-align: center;
 }
@@ -83,6 +82,9 @@
 }
 
 /* =============== END ================ */
+
+
+
 
 #trailsList .trail-item .fav {
 	float: right;
@@ -107,7 +109,7 @@
 	-webkit-transition-property: -webkit-transform;
 	-webkit-transition-duration: 250ms;
 	-webkit-mask: none;
-	background: transparent url('../resources/images/blackArrow.png') center center no-repeat;
+	background: transparent url('../images/blackArrow.png') center center no-repeat;
 	width: 4em;
 }
 
