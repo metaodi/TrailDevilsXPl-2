@@ -8,7 +8,7 @@ traildevils.views.TrailsSearch = Ext.extend(Ext.form.Search, {
 	placeHolder: 'Suche...',
 	
 	initComponent: function() {
-		var _trailsStore = Ext.getStore('Trails');
+		var _trailsStore = traildevils.store;
 		Ext.apply(this, {
             listeners: {
 				scope: this,

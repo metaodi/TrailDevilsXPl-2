@@ -34,7 +34,7 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 			xtype: 'trailDetailInfoPanel',
 			data: this.trail.data
 		}, {
-			xtype: 'trailDetailMediaMainPanel',
+			xtype: 'trailDetailMediaThumbPanel',
 			data: this.trail.data
         }];
         

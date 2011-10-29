@@ -1,26 +1,29 @@
-Ext.regController('TrailMediaController',{
-    'index': function() {
-		//Ext.Msg.alert('TODO', 'Thumbslist laden');
-		traildevils.views.trailDetailMediaMainPanel.setActiveItem(traildevils.views.trailDetailMediaThumbPanel, 'slide');
-	},
-
-    'carousel': function (options) {
-		var mediaCarousel = new traildevils.views.TrailDetailMediaCarouselPanel({
-			listeners: {
-				deactivate: function(mediaCarousel) {
-					mediaCarousel.destroy();
-				}
-			}
-		});
-
+Ext.regController('TrailMediaController', {
+    'openMediaCarousel': function (options) {
+		var mediaCarousel = new Ext.Carousel({		
+            indicator: true,
+            defaults: {
+                scroll: 'vertical'
+            }
+        });
+		
+		// adding images to carousel
 		for(var i = 0; i < options.imgdata.length; i++) {
-			mediaCarousel.carousel.add({
-				html: '<div class="img" style="background: url('+options.imgdata[i].data.path+'); width: 300px; height: 400px;"></div>'
+			mediaCarousel.add({
+				html: '<div class="image"><img src="' + options.imgdata[i].data.path+'" /></div>'
 			});
 		}
 		
-		traildevils.views.trailDetailMediaMainPanel.setActiveItem(mediaCarousel, 'slide');
-		mediaCarousel.carousel.setActiveItem(options.index);
+		traildevils.views.mediaCarouselSheet = new traildevils.views.TrailDetailMediaCarouselSheet({
+			carousel: mediaCarousel,
+			activeCarouselItem: options.index
+		});
+		traildevils.views.mediaCarouselSheet.show();
+		
+	},
+	
+	'closeMediaCarousel': function (options) {
+		traildevils.views.mediaCarouselSheet.hide();
 	}
 });
 

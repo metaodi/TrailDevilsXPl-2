@@ -27,8 +27,8 @@ Ext.regController('TrailsListController',{
 		var backBtn = traildevils.views.trailDetailTabPanel.backBtn;
 		backBtn.setHandler(function(){
 			Ext.dispatch({
-					controller: traildevils.controllers.trailsListController,
-					action: 'index'
+				controller: traildevils.controllers.trailsListController,
+				action: 'index'
 			});
 		});
 		

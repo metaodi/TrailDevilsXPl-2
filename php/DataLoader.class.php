@@ -20,13 +20,14 @@ class DataLoader
 	{
 		$remote = new JSONRemoteCaller($url);
 		$userGeo = new GeoLocation($userLat, $userLng);
-		return $this->convertJson($remote->callRemoteSite(),$userGeo);
+		return $this->convertTrailsJson($remote->callRemoteSite(),$userGeo);
 	}
 	
-	public function convertJson($externalTrailJson, GeoLocation $userGeo) {
+	public function convertTrailsJson($externalTrailJson, GeoLocation $userGeo) {
 		$externalTrailArray = json_decode($externalTrailJson,true);
 		$convertedArray = array();
 		for($i = 0; $i < count($externalTrailArray); $i++) {
+			$convertedArray[$i]["id"] = $externalTrailArray[$i]["TrailId"];
 			$convertedArray[$i]["title"] = $externalTrailArray[$i]["Name"];
 			$convertedArray[$i]["location"] = ($externalTrailArray[$i]["NextCity"] ? $externalTrailArray[$i]["NextCity"].", " : "") . $externalTrailArray[$i]["Country"];
 			$convertedArray[$i]["distance"] = $userGeo->distance(new GeoLocation($externalTrailArray[$i]["GmapX"], $externalTrailArray[$i]["GmapY"]));
@@ -39,5 +40,32 @@ class DataLoader
 		}
 		return json_encode(array("trails" => $convertedArray));
 	}
+	
+	/**
+	 * Get images from trail
+	 * 
+	 * @param $trailId Id of trail
+	 * @param $url JSON returning API
+	 * @return JSON result
+	 */
+	public function getTrailIamges($trailId, $url)
+	{
+		if($url == "") {
+			$url = "http://152.96.80.18:8080/api/trails/".$trailId."/images";
+		}
+		$remote = new JSONRemoteCaller($url);
+		return $this->convertTrailImagesJson($remote->callRemoteSite());
+	}
+	
+	public function convertTrailImagesJson($externalTrailImagesJson) {
+		$externalTrailImagesArray = json_decode($externalTrailImagesJson,true);
+		$convertedArray = array();
+		for($i = 0; $i < count($externalTrailImagesArray); $i++) {
+			$convertedArray[$i]["name"] = $externalTrailImagesArray[$i]["name"];
+			$convertedArray[$i]["path"] = $externalTrailImagesArray[$i]["path"];
+		}
+		return json_encode(array("trailImages" => $convertedArray));
+	}
+	
 }
 ?>
