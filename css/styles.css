@@ -62,7 +62,7 @@
 	clear: both;
 }
 
-/* images */
+/* Trail Detail - Thumblist */
 .trailDetailMediaThumbPanel .trail-images-thumblist .imagebox {
 	border: 0.083em solid #C7C7C7;
 	background-color: #fff;
@@ -81,13 +81,6 @@
 .trailDetailMediaThumbPanel .trail-images-thumblist .imagebox:active {
 	border: 0.083em solid #A3A3A3;
 }
-.tx-jhphotogallery-pi1 .list .imagelist .images a.firstCol {
-	margin-left: 0;
-}
-.tx-jhphotogallery-pi1 .list .imagelist .images a.lastCol {
-	margin-right: 0;
-}
-
 
 /* =============== END ================ */
 
