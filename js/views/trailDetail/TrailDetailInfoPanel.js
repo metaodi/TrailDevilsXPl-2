@@ -28,7 +28,7 @@ traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 			'			<dt>Ort:</dt>',
 			'			<dd>{location}</dd>',
 			'			<dt>Entfernung:</dt>',
-			'			<dd>{distance}m</dd>',
+			'			<dd>{formattedDistance}</dd>',
 			'		</dl>',
 			'	</div>',
 			'	<div class="trail-description">{description}</div>',

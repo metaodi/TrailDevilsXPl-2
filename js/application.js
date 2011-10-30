@@ -25,18 +25,13 @@ Ext.regApplication({
 		traildevils.store = Ext.getStore('Trails');
 		
 		// get current geolocation
-		traildevils.views.geoLocation = new Ext.util.GeoLocation({
-			firstUpdate: true,
-			
+		traildevils.views.geoLocation = new traildevils.views.TrailGeoLocation({
 			listeners: {
+				firstUpdate: true,
+				
 				locationupdate: function(geo) {
 					if(this.firstUpdate) {
-						traildevils.store.load({
-							scope: this,
-							callback: function(records, operation, success) {
-								traildevils.views.trailsList.refresh();
-							}
-						});
+						traildevils.store.load();
 						this.firstUpdate = false;
 					} else {
 						traildevils.store.updateDistances();
@@ -50,18 +45,6 @@ Ext.regApplication({
 						alert('Error occurred.');
 					}
 				}
-			},
-			
-			getDistance: function(lat, lng) {
-				var earthRadius = 6371000; // m
-				var dLat = (lat - this.latitude).toRad();
-				var dLng = (lng - this.longitude).toRad();
-				var thisLatitude = this.latitude.toRad();
-				var otherLatitude = lat.toRad();
-
-				var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLng/2) * Math.sin(dLng/2) * Math.cos(thisLatitude) * Math.cos(otherLatitude); 
-				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-				return earthRadius * c;
 			}
 		});
 		

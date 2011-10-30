@@ -22,6 +22,7 @@ Ext.regStore('Trails', {
 	listeners: {
 		load: function() {
 			this.updateDistances();
+			traildevils.views.trailsList.refresh();
 		}
 	},
 	
