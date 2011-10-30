@@ -16,8 +16,8 @@ class GeoLocation {
 	private $lng;
 
 	public function __construct($lat, $lng) {
-		$this->lat = (double) $lat;
-		$this->lng = (double) $lng;
+		$this->lat = $lat;
+		$this->lng = $lng;
 	}
 
 	public function getLatitude() {
@@ -32,16 +32,23 @@ class GeoLocation {
 	public function distance(GeoLocation $to) {
 		$earthRadius = 6371000; // in meter
 		
-		$fromLat = deg2rad($this->lat);
-		$fromLng = deg2rad($this->lng);
-		$toLat = deg2rad($to->getLatitude());
-		$toLng = deg2rad($to->getLongitude());
-		$deltaLat = $toLat - $fromLat;
-		$deltaLng = $toLng - $fromLng;
+		$deltaLat = deg2rad($to->getLatitude() - $this->lat);
+		$deltaLng = deg2rad($to->getLongitude() - $this->lng);
+		$thisLat = deg2rad($this->lat);
+		$otherLat = deg2rad($to->getLatitude());
 		
-		$a = sin($deltaLat / 2) * sin($deltaLat / 2) + sin($deltaLng / 2) * sin($deltaLng / 2) * cos($fromLat) * cos($toLat); 
+		$a = sin($deltaLat / 2) * sin($deltaLat / 2) + sin($deltaLng / 2) * sin($deltaLng / 2) * cos($thisLat) * cos($otherLat); 
 		$c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-		return $c * $earthRadius;
+		return  $earthRadius * $c;
+	}
+	
+	public function getFormattedDistance($distance) {
+		if($distance > 999) {
+			// round to one decimal
+			return round(($distance / 1000), 1)."km";
+		} else {
+			return round($distance)."m";
+		}
 	}
 }
 

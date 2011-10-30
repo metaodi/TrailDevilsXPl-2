@@ -27,11 +27,12 @@ class DataLoader
 		$externalTrailArray = json_decode($externalTrailJson,true);
 		$convertedArray = array();
 		for($i = 0; $i < count($externalTrailArray); $i++) {
+			$fromGeoLocation = new GeoLocation($externalTrailArray[$i]["GmapX"], $externalTrailArray[$i]["GmapY"]);
 			$convertedArray[$i]["id"] = $externalTrailArray[$i]["TrailId"];
 			$convertedArray[$i]["title"] = $externalTrailArray[$i]["Name"];
 			$convertedArray[$i]["location"] = ($externalTrailArray[$i]["NextCity"] ? $externalTrailArray[$i]["NextCity"].", " : "") . $externalTrailArray[$i]["Country"];
-			$convertedArray[$i]["distance"] = $userGeo->distance(new GeoLocation($externalTrailArray[$i]["GmapX"], $externalTrailArray[$i]["GmapY"]));
-			$convertedArray[$i]["formattedDistance"] = $convertedArray[$i]["distance"];
+			$convertedArray[$i]["distance"] = $userGeo->distance($fromGeoLocation);
+			$convertedArray[$i]["formattedDistance"] = $userGeo->getFormattedDistance($convertedArray[$i]["distance"]);
 			$convertedArray[$i]["thumb"] = $externalTrailArray[$i]["ImageUrl120"];
 			$convertedArray[$i]["description"] = nl2br($externalTrailArray[$i]["Desc"]);
 			$convertedArray[$i]["status"] = $externalTrailArray[$i]["IsOpen"] ? "offen" : "geschlossen";
