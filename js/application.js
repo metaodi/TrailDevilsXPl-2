@@ -69,7 +69,7 @@ Ext.regApplication({
 		
 		// viewport Components
 		traildevils.views.trailsListMainPanel = traildevils.views.viewport.getComponent('trailsListMainPanel');
-		traildevils.views.trailsMapPanel = traildevils.views.viewport.getComponent('trailsMapPanel');
+		traildevils.views.trailsMapMainPanel = traildevils.views.viewport.getComponent('trailsMapMainPanel');
 		
 		// trailsListMainPanel Components
 		traildevils.views.trailsListPanel = traildevils.views.trailsListMainPanel.getComponent('trailsListPanel');

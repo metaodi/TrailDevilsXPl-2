@@ -20,13 +20,7 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 		
 		this.backBtn = new Ext.Button({
 			text: 'Zurück',
-			ui: 'back',
-			handler: function() {
-				Ext.dispatch({
-					controller: traildevils.controllers.trailsListController,
-					action: 'list'
-				});
-			}
+			ui: 'back'
 		});
 		
         this.dockedItems = [{
