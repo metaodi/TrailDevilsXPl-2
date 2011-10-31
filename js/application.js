@@ -31,7 +31,8 @@ Ext.regApplication({
 				
 				locationupdate: function(geo) {
 					if(this.firstUpdate) {
-						traildevils.store.load();
+						// load first page of data
+						traildevils.store.loadPage(1);
 						this.firstUpdate = false;
 					} else {
 						traildevils.store.updateDistances();

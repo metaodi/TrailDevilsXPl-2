@@ -25,15 +25,15 @@ class DataLoader
 	 * 
 	 * @TODO delete default params for latitude/longitude
 	 */
-	public function getTrailsNear($userLat=47.5101756, $userLng=8.7221472, $url="http://152.96.80.18:8080/api/trails") /*http://jenkins.rdmr.ch/php/mock_api.json*/
+	public function getTrailsNear($userLat=47.5101756, $userLng=8.7221472, $page=1, $url="http://152.96.80.18:8080/api/trails") /*http://jenkins.rdmr.ch/php/mock_api.json*/
 	{
 		$remote = new JSONRemoteCaller($url);
 		$userGeo = new GeoLocation($userLat, $userLng);
-		return $this->convertTrailsJson($remote->callRemoteSite(),$userGeo);
+		return $this->convertTrailsJson($remote->callRemoteSite(), $userGeo, $page);
 	}
 	
-	public function convertTrailsJson($externalTrailJson, GeoLocation $userGeo) {
-		$externalTrailArray = json_decode($externalTrailJson,true);
+	public function convertTrailsJson($externalTrailJson, GeoLocation $userGeo, $page) {
+		$externalTrailArray = json_decode($externalTrailJson, true);
 		$convertedArray = array();
 		
 		// calculate distance for each trail
@@ -45,7 +45,7 @@ class DataLoader
 		usort($externalTrailArray, array($this, "distanceCmp"));
 		
 		// only take the nearest 10 trails
-		$externalTrailArray = array_slice($externalTrailArray, 0, 10);
+		$externalTrailArray = array_slice($externalTrailArray, (($page-1) * 10), 10);
 		
 		for($i = 0; $i < count($externalTrailArray); $i++) {
 			$convertedArray[$i]["id"] = $externalTrailArray[$i]["TrailId"];

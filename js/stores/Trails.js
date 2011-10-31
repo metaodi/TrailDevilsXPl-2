@@ -6,6 +6,7 @@
  */
 Ext.regStore('Trails', {
 	model: 'Trail',
+	clearOnPageLoad: false,
 	
 	// order by status descending (groups) and distance ascending
 	sorters: [
@@ -14,9 +15,11 @@ Ext.regStore('Trails', {
 	],
 	
 	listeners: {
-		load: function() {
-			// set proxy paramts to current geolocation
+		beforeload: function() {
+			// before each data load set proxy params to current geolocation
 			this.proxy.extraParams.params = traildevils.views.geoLocation.latitude + ',' + traildevils.views.geoLocation.longitude;
+		},
+		load: function() {
 			this.updateDistances();
 			this.sort();
 			traildevils.views.trailsList.refresh();
@@ -29,7 +32,7 @@ Ext.regStore('Trails', {
 		extraParams: {
 			className: 'DataLoader',
 			functionName: 'getTrailsNear',
-			// @TODO pass correct geolocation values
+			// geolocation params are set before each data load
 			params: '0,0'
 		},
 		model: 'Trail',
@@ -47,6 +50,7 @@ Ext.regStore('Trails', {
 	getDistance: function(lat, lng) {
 		return traildevils.views.geoLocation.getDistance(lat, lng);
 	},
+	
 	getFormattedDistance: function(distanceInMeters) {
 		if(distanceInMeters > 999) {
 			// round to one decimal

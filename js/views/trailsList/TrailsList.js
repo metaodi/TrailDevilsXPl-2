@@ -32,9 +32,10 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	],
 	
 	initComponent: function() {
-		this.plugins = {
-			ptype: 'trailsListPullRefreshPlugin'
-		};
+		this.plugins = [
+			{ ptype: 'trailsListPullRefreshPlugin' },
+			{ ptype: 'trailsListPagingPlugin' }
+		];
 	
         this.store = traildevils.store;
 		
