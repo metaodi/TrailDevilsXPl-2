@@ -1,0 +1,122 @@
+/* ------------------------------------
+   TRAILSLIST
+   ------------------------------------ */
+#trailsList {
+	font-size: 0.8em;
+}
+#trailsList .trail-item .trail-image,
+.trailDetailTabPanel .trail-detail .trail-image {
+	float: left;
+	margin-right: 0.8em;
+	width: 6.5em;
+	min-height: 5.5em;
+}
+#trailsList .trail-item .trail-distance {
+	font-size: 0.8em;
+	float: right;
+	margin-left: 0.8em;
+	font-weight: bold;
+	color: #000080;
+	width: 4em;
+	text-align: right;
+}
+#trailsList .trail-item .trail-image img,
+.trailDetailTabPanel .trail-detail .trail-image img {
+	width: 6.5em;
+}
+#trailsList .trail-item .trail-info h1 {
+	font-weight: bold;
+	margin-bottom: 0.2em;
+}
+#trailsList .trail-item .trail-info dl,
+.trailDetailTabPanel .trail-detail .trail-info dl {
+	font-family: Verdana;
+	font-size: 0.8em;
+	line-height: 1.5em;
+	color: #323232;
+}
+#trailsList .trail-item .trail-info dt,
+.trailDetailTabPanel .trail-detail .trail-info dt {
+	margin-right: 0.8em;
+	float: left;
+	font-weight: normal;
+}
+
+/* styles for pull to refresh */
+.x-list-pullrefresh {
+	color: #6c6c6c;
+}
+.x-list-pullrefresh-arrow {
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 250ms;
+	-webkit-mask: none;
+	background: transparent url('../images/blackArrow.png') center center no-repeat;
+	width: 4em;
+}
+
+
+/* ------------------------------------
+   TRAILDETAIL
+   ------------------------------------ */
+.trailDetailTabPanel .trail-detail h1 {
+	font-size: 1.1em;
+	font-weight: bold;
+	margin-bottom: 0.2em;
+}
+
+.trailDetailTabPanel .trail-detail h2 {
+	font-size: 1em;
+	font-weight: bold;
+	margin-top: 1em;
+}
+.trailDetailTabPanel .trail-detail .trail-description {
+	clear: both;
+}
+
+/* Trail Detail - Thumblist */
+.trailDetailMediaThumbPanel .trail-images-thumblist .imagebox {
+	border: 0.083em solid #C7C7C7;
+	background-color: #fff;
+	float: left;
+	margin: 0.4em;
+	padding: 0.4em;
+}
+.trailDetailMediaThumbPanel .trail-images-thumblist .imagebox .image {
+	width: 4em;
+	height: 3em;
+	overflow: hidden;
+	text-align: center;
+}
+.trailDetailMediaThumbPanel .trail-images-thumblist .imagebox:hover,
+.trailDetailMediaThumbPanel .trail-images-thumblist .imagebox:focus,
+.trailDetailMediaThumbPanel .trail-images-thumblist .imagebox:active {
+	border: 0.083em solid #A3A3A3;
+}
+
+
+/* ------------------------------------
+   TRAILSMAP
+   ------------------------------------ */
+/* disable box-sizing for google map */
+#trailsMap div {
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+
+
+/* ------------------------------------
+   NOT USED
+   ------------------------------------ */
+#trailsList .trail-item .fav {
+	float: right;
+}
+#trailsList .trail-item-swiped .trail-item .action {
+	display: block;
+	opacity: 1;
+	-webkit-transition: opacity 0.3s linear
+}
+#trailsList .trail-item .action {
+	display: none;
+	opacity: 0
+}

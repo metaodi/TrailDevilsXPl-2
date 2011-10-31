@@ -1,14 +1,14 @@
 /**
- * @class traildevils.views.TrailsSerach
+ * @class traildevils.views.TrailsListSearch
  * @extends Ext.form.Search
  * 
  */
 
-traildevils.views.TrailsSearch = Ext.extend(Ext.form.Search, {
+traildevils.views.TrailsListSearch = Ext.extend(Ext.form.Search, {
 	placeHolder: 'Suche...',
 	
 	initComponent: function() {
-		var _trailsStore = Ext.getStore('Trails');
+		var _trailsStore = traildevils.store;
 		Ext.apply(this, {
             listeners: {
 				scope: this,
@@ -27,7 +27,7 @@ traildevils.views.TrailsSearch = Ext.extend(Ext.form.Search, {
 								return;
 							}
 							regexps.push(new RegExp(searches[i], 'i'));
-						};
+						}
 						
 						_trailsStore.filterBy(function(record) {
 							var matched = [];
@@ -35,9 +35,12 @@ traildevils.views.TrailsSearch = Ext.extend(Ext.form.Search, {
 							for (i = 0; i < regexps.length; i++) {
 								var search = regexps[i];
 
-								if (record.get('description').match(search) || record.get('title').match(search)) matched.push(true);
-								else matched.push(false);
-							};
+								if (record.get('title').match(search) || record.get('location').match(search)) {
+									matched.push(true);
+								} else {
+									matched.push(false);
+								}
+							}
 
 							if (regexps.length > 1 && matched.indexOf(false) != -1) {
 								return false;
@@ -46,13 +49,15 @@ traildevils.views.TrailsSearch = Ext.extend(Ext.form.Search, {
 							}
 						});
 					}
+					
+					_trailsStore.sort();
 				}
 			}
         });
 		
-        traildevils.views.TrailsSearch.superclass.initComponent.apply(this, arguments);
+        traildevils.views.TrailsListSearch.superclass.initComponent.apply(this, arguments);
     }			
 });
 
-// Create xtype trailsSearch
-Ext.reg('trailsSearch', traildevils.views.TrailsSearch);
+// Create xtype
+Ext.reg('trailsListSearch', traildevils.views.TrailsListSearch);

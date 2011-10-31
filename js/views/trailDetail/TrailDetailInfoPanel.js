@@ -17,18 +17,18 @@ traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 		var trailMapImageUrl = 'http://maps.google.com/maps/api/staticmap?';
 		trailMapImageUrl += 'center=' + this.data.latitude + "," + this.data.longitude;
 		trailMapImageUrl += '&markers=color:red|label:A|' + this.data.latitude + ',' + this.data.longitude;
-		trailMapImageUrl += '&zoom=12&size=300x300&maptype=roadmap&sensor=false';
+		trailMapImageUrl += '&zoom=12&size=250x300&maptype=roadmap&sensor=false';
 		
         this.tpl = new Ext.XTemplate(
 			'<div class="trail-detail">',
-			'	<div class="trail-image"><img src="{thumb}" alt="{title}" /></div>',
+			'	<tpl if="thumb != &quot;&quot;"><div class="trail-image"><img src="{thumb}" alt="{title}" /></div></tpl>',
 			'	<div class="trail-info">',
 			'		<h1>{title}</h1>',
 			'		<dl>',
 			'			<dt>Ort:</dt>',
 			'			<dd>{location}</dd>',
 			'			<dt>Entfernung:</dt>',
-			'			<dd>{distance}m</dd>',
+			'			<dd>{formattedDistance}</dd>',
 			'		</dl>',
 			'	</div>',
 			'	<div class="trail-description">{description}</div>',

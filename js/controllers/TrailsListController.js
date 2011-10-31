@@ -1,6 +1,6 @@
-Ext.regController('TrailsListController',{
-    'index': function (options) {
-		if(traildevils.views.trailDetailTabPanel === undefined) {
+Ext.regController('trailslist', {
+    'list': function (options) {
+		if(traildevils.views.trailListDetailTabPanel === undefined) {
 			traildevils.views.trailsListMainPanel.setActiveItem(
 			'trailsListPanel', {
 				type: 'slide',
@@ -13,27 +13,28 @@ Ext.regController('TrailsListController',{
 				direction: 'right',
 				// destroy detail panel when returning to trailslist
 				after: function() {
-					traildevils.views.trailDetailTabPanel.destroy();
+					traildevils.views.trailListDetailTabPanel.destroy();
 				}
 			});
 		}
 	},
 
     'detail': function (options) {
-		traildevils.views.trailDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
+		traildevils.views.trailListDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
 			trail: options.trail
 		});
 		
-		var backBtn = traildevils.views.trailDetailTabPanel.backBtn;
-		backBtn.setHandler(function(){
-			Ext.dispatch({
+		traildevils.views.trailListDetailTabPanel.backBtn.setHandler(
+			function() {
+				Ext.dispatch({
 					controller: traildevils.controllers.trailsListController,
-					action: 'index'
-			});
-		});
+					action: 'list'
+				});
+			}
+		);
 		
-		traildevils.views.trailsListMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
+		traildevils.views.trailsListMainPanel.setActiveItem(traildevils.views.trailListDetailTabPanel, 'slide');
 	}
 });
 
-traildevils.controllers.trailsListController = Ext.ControllerManager.get('TrailsListController');
+traildevils.controllers.trailsListController = Ext.ControllerManager.get('trailslist');

@@ -13,7 +13,7 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 		Ext.apply(this, {
 			items: [
 				{ xtype: 'trailsListMainPanel', id: 'trailsListMainPanel' },
-				{ xtype: 'trailsMapPanel', id: 'trailsMapPanel' }
+				{ xtype: 'trailsMapMainPanel', id: 'trailsMapMainPanel' }
 			],
 			
 			tabBar: {

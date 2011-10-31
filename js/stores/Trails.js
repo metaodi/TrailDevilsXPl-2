@@ -6,37 +6,64 @@
  */
 Ext.regStore('Trails', {
 	model: 'Trail',
-
-	// order by status descending (groups) and distance descending
+	clearOnPageLoad: false,
+	
+	// order by status descending (groups) and distance ascending
 	sorters: [
-		{
-			property : 'status', 
-			direction: 'DESC'
-		}, 
-		{
-			property : 'distance',
-			direction: 'ASC'
-		}
+		{ property: 'status', direction: 'DESC'}, 
+		{ property: 'distance', direction: 'ASC' }
 	],
 	
-
-	// group by status
-	getGroupString : function(record) {
-		return record.get('status');
+	listeners: {
+		beforeload: function() {
+			// before each data load set proxy params to current geolocation
+			this.proxy.extraParams.params = traildevils.views.geoLocation.latitude + ',' + traildevils.views.geoLocation.longitude;
+		},
+		load: function() {
+			this.updateDistances();
+			this.sort();
+			traildevils.views.trailsList.refresh();
+		}
 	},
 	
 	proxy: {
         type: 'ajax',
         url : 'php/AjaxHandler.class.php',
 		extraParams: {
-			className : 'DataLoader' ,
-			functionName : 'getTrailsNear',
-			params: traildevils.lat + ',' + traildevils.lng
+			className: 'DataLoader',
+			functionName: 'getTrailsNear',
+			// geolocation params are set before each data load
+			params: '0,0'
 		},
 		model: 'Trail',
         reader: {
             type: 'json',
 			root: 'trails'
         }
+	},
+	
+	// group by status
+	getGroupString : function(record) {
+		return record.get('status');
+	},
+	
+	getDistance: function(lat, lng) {
+		return traildevils.views.geoLocation.getDistance(lat, lng);
+	},
+	
+	getFormattedDistance: function(distanceInMeters) {
+		if(distanceInMeters > 999) {
+			// round to one decimal
+			return (Math.round(distanceInMeters / 100) / 10) + "km";
+		} else {
+			return Math.round(distanceInMeters) + "m";
+		}
+	},
+	
+	updateDistances: function() {
+		this.each(function(store) {
+			store.data.distance = traildevils.store.getDistance(store.data.latitude, store.data.longitude);
+			store.data.formattedDistance = traildevils.store.getFormattedDistance(store.data.distance);
+		});
 	}
 });

@@ -7,6 +7,9 @@
 traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 	cls: 'trailDetailTabPanel',
 	trail: null,
+	tabBar: {
+        ui: 'light'
+    },
 	
 	initComponent: function() {
 		// corp title to max. 12 characters
@@ -30,13 +33,15 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 			]
         }];
         
-        this.items = [{
-			xtype: 'trailDetailInfoPanel',
-			data: this.trail.data
-		}, {
-			xtype: 'trailDetailMediaMainPanel',
-			data: this.trail.data
-        }];
+        this.items = [
+			{
+				xtype: 'trailDetailInfoPanel',
+				data: this.trail.data
+			}, {
+				xtype: 'trailDetailMediaThumbDataView',
+				data: this.trail.data
+			}
+		];
         
         traildevils.views.TrailDetailTabPanel.superclass.initComponent.call(this);
     }

@@ -1,11 +1,10 @@
 /**
- * @class traildevils.views.GermanPullRefreshPlugin
+ * @class traildevils.views.TrailsListPullRefreshPlugin
  * @extends Ext.plugins.PullRefreshPlugin
  * 
  */
 
-traildevils.views.GermanPullRefreshPlugin = Ext.extend(Ext.plugins.PullRefreshPlugin, {
-	
+traildevils.views.TrailsListPullRefreshPlugin = Ext.extend(Ext.plugins.PullRefreshPlugin, {
 	pullRefreshText: 'Zum Aktualisieren herunterziehen',
 	releaseRefreshText: 'Zum Aktualisieren loslassen...',
 	loadingText: 'wird aktualisiert...',
@@ -42,5 +41,5 @@ traildevils.views.GermanPullRefreshPlugin = Ext.extend(Ext.plugins.PullRefreshPl
     }
 });
 
-// Create ptype germanPullRefreshPlugin
-Ext.preg('germanPullRefreshPlugin', traildevils.views.GermanPullRefreshPlugin);
+// Create ptype
+Ext.preg('trailsListPullRefreshPlugin', traildevils.views.TrailsListPullRefreshPlugin);
