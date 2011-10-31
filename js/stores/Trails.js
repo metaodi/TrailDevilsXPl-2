@@ -6,22 +6,17 @@
  */
 Ext.regStore('Trails', {
 	model: 'Trail',
-
-	// order by status descending (groups) and distance descending
+	
+	// order by status descending (groups) and distance ascending
 	sorters: [
-		{
-			property : 'status', 
-			direction: 'DESC'
-		}, 
-		{
-			property : 'distance',
-			direction: 'ASC'
-		}
+		{ property: 'status', direction: 'DESC'}, 
+		{ property: 'distance', direction: 'ASC' }
 	],
 	
 	listeners: {
 		load: function() {
 			this.updateDistances();
+			this.sort();
 			traildevils.views.trailsList.refresh();
 		}
 	},

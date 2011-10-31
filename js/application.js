@@ -35,6 +35,7 @@ Ext.regApplication({
 						this.firstUpdate = false;
 					} else {
 						traildevils.store.updateDistances();
+						traildevils.store.sort();
 						traildevils.views.trailsList.refresh();
 					}
 				},

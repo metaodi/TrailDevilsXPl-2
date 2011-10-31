@@ -35,7 +35,7 @@ traildevils.views.TrailsListSearch = Ext.extend(Ext.form.Search, {
 							for (i = 0; i < regexps.length; i++) {
 								var search = regexps[i];
 
-								if (record.get('description').match(search) || record.get('title').match(search)) {
+								if (record.get('title').match(search) || record.get('location').match(search)) {
 									matched.push(true);
 								} else {
 									matched.push(false);
@@ -49,6 +49,8 @@ traildevils.views.TrailsListSearch = Ext.extend(Ext.form.Search, {
 							}
 						});
 					}
+					
+					_trailsStore.sort();
 				}
 			}
         });
