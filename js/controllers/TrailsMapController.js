@@ -12,7 +12,9 @@ Ext.regController('trailsmap', {
 			});
 			marker.content = '<h1>' + trailData.title + '</h1><a href="#" onclick="Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'detail\', storeIndex: ' + i + ' });">klick mich</a>';
 			
-			google.maps.event.addListener(marker, 'click', function() {
+			// use mouseup event instead of click event
+			// click event doesn't work on mobile safari with google maps api v3 
+			google.maps.event.addListener(marker, 'mouseup', function() {
 				if(!this.markerInfoWindow) { // um bestehende infowindows wiederzuverwenden
 					this.markerInfoWindow = new google.maps.InfoWindow({
 						content: this.content
