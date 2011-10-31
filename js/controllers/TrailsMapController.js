@@ -1,7 +1,16 @@
 Ext.regController('trailsmap', {
 	trailMarkers: [],
 	
-    'addMarkers': function (options) {		
+    'addMarkers': function (options) {
+		// remove all markers and listeners
+		google.maps.event.clearInstanceListeners(options.map);
+		this.removeAllMarkers();
+		
+		// create infowindow (all the markers will use this infowindow)
+		var markerInfoWindow = new google.maps.InfoWindow({
+			maxWidth: 300
+		});
+		
 		for(var i = 0; i < traildevils.store.data.length; i++) {
 			var trailData = traildevils.store.data.items[i].data;
 			var trailPosition = new google.maps.LatLng(trailData.latitude, trailData.longitude);
@@ -10,17 +19,15 @@ Ext.regController('trailsmap', {
 				position: trailPosition,
 				title: trailData.title
 			});
-			marker.content = '<h1>' + trailData.title + '</h1><a href="#" onclick="Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'detail\', storeIndex: ' + i + ' });">klick mich</a>';
+			
+			marker.content = '<div class="infowindow-content"><h1>' + trailData.title + '</h1><a href="#" onclick="Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'detail\', storeIndex: ' + i + ' });">klick mich</a></div>';
 			
 			// use mouseup event instead of click event
 			// click event doesn't work on mobile safari with google maps api v3 
 			google.maps.event.addListener(marker, 'mouseup', function() {
-				if(!this.markerInfoWindow) { // um bestehende infowindows wiederzuverwenden
-					this.markerInfoWindow = new google.maps.InfoWindow({
-						content: this.content
-					});
-				}
-				this.markerInfoWindow.open(options.map, this);
+				// this attribute references to the current marker
+				markerInfoWindow.setContent(this.content);
+				markerInfoWindow.open(options.map, this);
 			});
 			
 			this.trailMarkers.push(marker);
@@ -55,6 +62,13 @@ Ext.regController('trailsmap', {
 		);
 		
 		traildevils.views.trailsMapMainPanel.setActiveItem(traildevils.views.trailMapDetailTabPanel, 'slide');
+	},
+	
+	removeAllMarkers: function() {
+		for(var i = 0; i < this.trailMarkers.length; i++) {
+			this.trailMarkers[i].setMap(null);
+		}
+		this.trailMarkers = [];
 	}
 });
 

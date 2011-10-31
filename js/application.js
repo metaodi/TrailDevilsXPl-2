@@ -42,9 +42,9 @@ Ext.regApplication({
 				},
 				locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
 					if(bTimeout){
-						alert('Timeout occurred.');
+						console.log('Timeout occurred.');
 					} else {
-						alert('Error occurred.');
+						console.log('Error occurred.');
 					}
 				}
 			}

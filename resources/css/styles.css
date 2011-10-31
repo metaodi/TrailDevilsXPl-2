@@ -1,6 +1,6 @@
-/* ====================================
+/* ------------------------------------
    TRAILSLIST
-   -------------- START --------------- */
+   ------------------------------------ */
 #trailsList {
 	font-size: 0.8em;
 }
@@ -41,12 +41,23 @@
 	float: left;
 	font-weight: normal;
 }
-/* =============== END ================ */
+
+/* styles for pull to refresh */
+.x-list-pullrefresh {
+	color: #6c6c6c;
+}
+.x-list-pullrefresh-arrow {
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 250ms;
+	-webkit-mask: none;
+	background: transparent url('../images/blackArrow.png') center center no-repeat;
+	width: 4em;
+}
 
 
-/* ====================================
+/* ------------------------------------
    TRAILDETAIL
-   -------------- START --------------- */
+   ------------------------------------ */
 .trailDetailTabPanel .trail-detail h1 {
 	font-size: 1.1em;
 	font-weight: bold;
@@ -82,11 +93,21 @@
 	border: 0.083em solid #A3A3A3;
 }
 
-/* =============== END ================ */
+
+/* ------------------------------------
+   TRAILSMAP
+   ------------------------------------ */
+/* disable box-sizing for google map */
+#trailsMap div {
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
 
 
 
-
+/* ------------------------------------
+   NOT USED
+   ------------------------------------ */
 #trailsList .trail-item .fav {
 	float: right;
 }
@@ -99,19 +120,3 @@
 	display: none;
 	opacity: 0
 }
-
-
-
-/* styles for pull to refresh */
-.x-list-pullrefresh {
-	color: #6c6c6c;
-}
-.x-list-pullrefresh-arrow {
-	-webkit-transition-property: -webkit-transform;
-	-webkit-transition-duration: 250ms;
-	-webkit-mask: none;
-	background: transparent url('../images/blackArrow.png') center center no-repeat;
-	width: 4em;
-}
-
-
