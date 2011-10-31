@@ -15,6 +15,8 @@ Ext.regStore('Trails', {
 	
 	listeners: {
 		load: function() {
+			// set proxy paramts to current geolocation
+			this.proxy.extraParams.params = traildevils.views.geoLocation.latitude + ',' + traildevils.views.geoLocation.longitude;
 			this.updateDistances();
 			this.sort();
 			traildevils.views.trailsList.refresh();
@@ -25,8 +27,8 @@ Ext.regStore('Trails', {
         type: 'ajax',
         url : 'php/AjaxHandler.class.php',
 		extraParams: {
-			className : 'DataLoader' ,
-			functionName : 'getTrailsNear',
+			className: 'DataLoader',
+			functionName: 'getTrailsNear',
 			// @TODO pass correct geolocation values
 			params: '0,0'
 		},
