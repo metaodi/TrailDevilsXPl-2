@@ -28,7 +28,6 @@ class GeoLocation {
 		return $this->lng;
 	}
 	
-	/* source: http://www.movable-type.co.uk/scripts/latlong.html */
 	public function distance(GeoLocation $to) {
 		$earthRadius = 6371000; // in meter
 		
