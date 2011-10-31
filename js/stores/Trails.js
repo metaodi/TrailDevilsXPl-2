@@ -20,9 +20,7 @@ Ext.regStore('Trails', {
 			this.proxy.extraParams.params = traildevils.views.geoLocation.latitude + ',' + traildevils.views.geoLocation.longitude;
 		},
 		load: function() {
-			this.updateDistances();
-			this.sort();
-			traildevils.views.trailsList.refresh();
+			traildevils.store.refreshData();
 		}
 	},
 	
