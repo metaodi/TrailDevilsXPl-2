@@ -30,25 +30,30 @@ Ext.regStore('TrailsLocal', {
 	//try to get data from remote
 	refreshData : function() {
 		this.removeAllRecordsFromStore();
-		for(var i = 0; i < traildevils.remotestore.getCount(); i++)
-		{
-			var record = traildevils.remotestore.getAt(i).data;
-			this.add(record);
-			this.save();
-		}
+		traildevils.remotestore.each(function (record) {
+			var trail = traildevils.store.add(record.data)[0];
+			trail.setThumbUrl();
+			traildevils.store.sync();
+		});
 		this.sync();
 		this.refreshView();
-		console.log('Data refreshed!');
 	},
 	
 	removeAllRecordsFromStore : function() {
-		this.getProxy().clear();
+		this.proxy.clear();
 	},
 	
 	refreshView : function() {
 		this.updateDistances();
 		this.sort();
 		traildevils.views.trailsList.refresh();
+	},
+	
+	setPhotoUrl: function (id, dataUrl) {
+		var trail = this.getById(id);
+		trail.set('thumb', dataUrl);
+		this.sync();
+		this.refreshView();
 	},
 	
 	// group by status
