@@ -8,7 +8,7 @@ class TestDataLoader extends TraildevilsUnitTestCase
 	{
 		 $loader = new DataLoader();
 		 $keys = array("title","location","distance","thumb","description","status","latitude","longitude");
-		 $convertedJson = json_decode($loader->convertJson($this->getTestTrailJson(),$this->getTestGeoLocation()), true);
+		 $convertedJson = json_decode($loader->convertTrailsJson($this->getTestTrailJson(),$this->getTestGeoLocation()), true);
 		 
 		 foreach ($keys as $key)
 		 {
@@ -20,7 +20,7 @@ class TestDataLoader extends TraildevilsUnitTestCase
 	{
 		 $loader = new DataLoader();
 		 $location = $this->getTestGeoLocation();
-		 $convertedJson = json_decode($loader->convertJson($this->getTestTrailJson(),$location), true);
+		 $convertedJson = json_decode($loader->convertTrailsJson($this->getTestTrailJson(),$location), true);
 		 $this->assertEqual(count($convertedJson["trails"]), 2, "Array should contain exactly 2 trails: %s");
 		 
 		 $values = $convertedJson["trails"][0];
@@ -39,7 +39,7 @@ class TestDataLoader extends TraildevilsUnitTestCase
         $url = "http://jenkins.rdmr.ch/test/trails.json";
 		$location = $this->getTestGeoLocation();
 		
-		$localJson = $loader->convertJson($this->getTestTrailJson(), $location);
+		$localJson = $loader->convertTrailsJson($this->getTestTrailJson(), $location);
 		$result = $loader->getTrailsNear($location->getLatitude(),$location->getLongitude(),$url);
 		
         $this->assertEqualsIgnoreWhitespace($result,$localJson);
