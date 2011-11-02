@@ -13,6 +13,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
     activeCls: 'trail-item-swiped',
 	disableSelection: true,
 	grouped : true,
+	loadingText: 'Lade Trails...',
 	
 	itemTpl: [
 		'<div class="trail-item">',

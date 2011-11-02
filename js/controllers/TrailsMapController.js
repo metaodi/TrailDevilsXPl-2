@@ -20,7 +20,29 @@ Ext.regController('trailsmap', {
 				title: trailData.title
 			});
 			
-			marker.content = '<div class="infowindow-content"><h1>' + trailData.title + '</h1><a href="#" onclick="Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'detail\', storeIndex: ' + i + ' });">klick mich</a></div>';
+			var shortDescription = trailData.description
+			if(shortDescription.length > 100) {
+				shortDescription = shortDescription.substring(0, 100) + "...";
+			}
+			
+			var trailDetailEventLink = 'Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'detail\', storeIndex: ' + i + ' });';
+		
+			marker.content =
+				'<div class="infowindow-content">' +
+				'	<h1>' +
+				'		<a href="#" onclick="' + trailDetailEventLink + '" title="Details anzeigen" >' + trailData.title + '</a>' +
+				'	</h1>' +
+				'	<div class="trail-info">' +
+				'		<p class="trail-location">' + trailData.location + '</p>';
+			if(trailData.thumb != "") {
+				marker.content +=
+					'	<img class="trail-image" src="' + trailData.thumb + '" alt="' + trailData.title + '" />';
+			}
+			marker.content +=
+				'		<p class="trail-description">' + shortDescription + '</p>' +
+				'		<p><a href="#" onclick="' + trailDetailEventLink + '" title="Details anzeigen" >weitere Informationen...</a></p>' +
+				'	</div>' +
+				'</div>';
 			
 			// use mouseup event instead of click event
 			// click event doesn't work on mobile safari with google maps api v3 
