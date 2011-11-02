@@ -11,24 +11,19 @@ resources/css/styles.css
 js/application.js
 js/app/routes.js
 
-
 js/controllers/TrailsListController.js
 js/controllers/TrailsMapController.js
 js/controllers/TrailMediaController.js
 
-
 js/models/Trail.js
 js/models/TrailImage.js
-
 
 js/stores/Trails.js
 js/stores/TrailsLocal.js
 js/stores/TrailImages.js
 
-
 js/views/Viewport.js
 js/views/TrailGeoLocation.js
-
 
 js/views/trailsList/TrailsListPullRefreshPlugin.js
 js/views/trailsList/TrailsListPagingPlugin.js
@@ -37,11 +32,9 @@ js/views/trailsList/TrailsList.js
 js/views/trailsList/TrailsListPanel.js
 js/views/trailsList/TrailsListMainPanel.js
 
-
 js/views/trailsMap/TrailsMap.js
 js/views/trailsMap/TrailsMapPanel.js
 js/views/trailsMap/TrailsMapMainPanel.js
-
 
 js/views/trailDetail/TrailDetailInfoPanel.js
 js/views/trailDetail/TrailDetailMediaThumbDataView.js
