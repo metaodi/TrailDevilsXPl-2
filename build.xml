@@ -44,8 +44,8 @@
 			<replacevalue></replacevalue>
 		</replace>
 		<replace file="${webapp.dir}/index.html">
-			<replacetoken><html></replacetoken>
-			<replacevalue><html manifest="app.manifest"></replacevalue>
+			<replacetoken><![CDATA[<html>]]</replacetoken>
+			<replacevalue><![CDATA[<html manifest="app.manifest">]]</replacevalue>
 		</replace>
 	</target>
 </project>
