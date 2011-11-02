@@ -3,7 +3,7 @@ require_once('lib/simpletest/extensions/TraildevilsUnitTestCase.php');
 require_once('lib/simpletest/extensions/TestRunner.class.php');
 
 //run one specific Testfile or all available tests in this directory
-if (!isset($_GET['file']))
+if (!isset($argv[1]))
 {
 	//include all files to show an overview of all tests. 
 	//assuming that all files (except this file) in the directory are tests.
@@ -16,7 +16,7 @@ if (!isset($_GET['file']))
 		}
 	}
 } else {
-	$filename = $_GET['file'];
+	$filename = $argv[1];
 	if(file_exists($filename))
 	{
 		TestRunner::runTestFile($filename);
