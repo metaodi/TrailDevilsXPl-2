@@ -39,11 +39,11 @@
 	</target>
 	
 	<target name="patch" depends="deploy">
-		<replace file="${webapp.dir}/index.html">
+		<replace file="${webapp.dir}/index.html" summary="true">
 			<replacetoken>-debug</replacetoken>
 			<replacevalue></replacevalue>
 		</replace>
-		<replace file="${webapp.dir}/index.html">
+		<replace file="${webapp.dir}/index.html" summary="true">
 			<replacetoken><![CDATA[<html>]]></replacetoken>
 			<replacevalue><![CDATA[<html manifest="app.manifest">]]></replacevalue>
 		</replace>
