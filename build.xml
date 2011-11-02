@@ -28,7 +28,9 @@
 	<target name="exec_php">
 		<basename file="${filename}" property="basename"/>
 		<exec executable="php" dir="${test.dir}" output="${result.dir}/${basename}.xml">
-			<arg value="index.php ${basename}"/>
+			<arg value="-f"/>
+			<arg value="index.php"/>
+			<arg value="${basename}" />
 		</exec>
 	</target>
 	
