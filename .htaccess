@@ -1,4 +1,4 @@
 RewriteEngine on
-RewriteRule ^l$ local.html
+RewriteRule   ^local$ local.html
 
 AddType text/cache-manifest manifest
