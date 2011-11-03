@@ -19,7 +19,7 @@ Ext.regModel('TrailImage', {
     ],
 	
 	getSideToStretch: function(panelSize) {
-		var widthRatio = this.data.width / panelSize.width;
+		var widthRatio = panelSize.width / this.data.width;
 		var newHeight = widthRatio * this.data.height;
 		
 		if(newHeight > panelSize.height) {
