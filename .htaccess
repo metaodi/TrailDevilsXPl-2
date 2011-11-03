@@ -1,4 +1,5 @@
 RewriteEngine on
+RewriteLog "/var/log/httpd/rewrite.log" 
 RewriteRule   ^local$ local.html
 
 AddType text/cache-manifest manifest
