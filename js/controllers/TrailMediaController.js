@@ -10,7 +10,21 @@ Ext.regController('trailmedia', {
 		// adding images to carousel
 		for(var i = 0; i < options.imgdata.length; i++) {
 			mediaCarousel.add({
-				html: '<div class="image"><img src="' + options.imgdata[i].data.path+'" style="width: 100%;" /></div>'
+				scroll: false,
+				image: options.imgdata[i],
+				layoutOnOrientationChange: true,
+				
+				layout: {
+					type: 'hbox',
+					align: 'stretch'
+				},
+				listeners: {
+					render: function() {
+						var sideToStrech = this.image.getSideToStretch(this.getSize());
+						this.data = this.image.data;
+						this.tpl = new Ext.XTemplate('<div class="image"><img src="{path}" alt="{name}" style="min-' + sideToStrech + ': 100%; max-' + sideToStrech + ': 100%;" /></div>');
+					}
+				}
 			});
 		}
 		
