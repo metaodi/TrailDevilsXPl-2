@@ -16,7 +16,7 @@ traildevils.views.TrailDetailMediaThumbDataView = Ext.extend(Ext.DataView, {
 			'	<tpl for=".">',
 			'		<div class="imagebox">',
 			'			<div class="image">',
-			'				<img src="{thumb}" />',
+			'				<img src="{thumb}" alt="{name}" />',
 			'			</div>',
 			'		</div>',
 			'	</tpl>',

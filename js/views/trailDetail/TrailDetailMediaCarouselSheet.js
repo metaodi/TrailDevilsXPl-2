@@ -9,6 +9,8 @@ traildevils.views.TrailDetailMediaCarouselSheet = Ext.extend(Ext.Sheet, {
 	fullscreen: true,
 	stretchX: true,
 	stretchY: true,
+	padding: '0',
+	cls: 'trailDetailMediaCarouselSheet',
 	
 	// have to be set from the controller
 	carousel: null,
