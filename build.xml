@@ -51,7 +51,7 @@
 		</replace>
 		
 		<!-- create a version that uses the app.manifest to test offline functionality -->
-		<copy file="${webapp.dir}/index.html" tofile="${webapp.dir}/off.html" overwrite="true" />
+		<copy file="${webapp.dir}/index.html" tofile="${webapp.dir}/off.html" overwrite="true" verbose="true" />
 		<replace file="${webapp.dir}/off.html" summary="true">
 			<replacetoken><![CDATA[<html>]]></replacetoken>
 			<replacevalue><![CDATA[<html manifest="app.manifest">]]></replacevalue>
