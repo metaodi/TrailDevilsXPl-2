@@ -15,11 +15,11 @@ traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 		var trailLocation = new google.maps.LatLng(this.data.latitude, this.data.longitude);
 		
 		var trailMapImageUrl = 'http://maps.google.com/maps/api/staticmap?';
-		trailMapImageUrl += 'center=' + this.data.latitude + "," + this.data.longitude;
-		trailMapImageUrl += '&icon=' + window.location.href + 'resources/images/gmap_marker_cycling.png';
-		trailMapImageUrl += '&markers=color:red|label:T|' + this.data.latitude + ',' + this.data.longitude;
+		// TODO change url to windows.location.href (doesn't work for development on localhost)
+		//trailMapImageUrl += 'markers=icon:' + window.location.href + 'resources/images/gmap_marker_cycling.png|' + this.data.latitude + ',' + this.data.longitude;
+		trailMapImageUrl += 'markers=icon:http://jenkins.rdmr.ch/resources/images/gmap_marker_cycling.png|' + this.data.latitude + ',' + this.data.longitude;
 		trailMapImageUrl += '&zoom=12&size=270x300&maptype=roadmap&sensor=false';
-		console.log(trailMapImageUrl);
+		
         this.tpl = new Ext.XTemplate(
 			'<div class="trail-detail">',
 			'	<tpl if="thumb != &quot;&quot;"><div class="trail-image"><img src="{thumb}" alt="{title}" /></div></tpl>',
