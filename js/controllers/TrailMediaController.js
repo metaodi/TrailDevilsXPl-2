@@ -17,16 +17,29 @@ Ext.regController('trailmedia', {
 			});
 		}
 		
-		traildevils.views.mediaCarouselSheet = new traildevils.views.TrailDetailMediaCarouselSheet({
+		traildevils.views.trailDetailMediaCarouselSheet = new traildevils.views.TrailDetailMediaCarouselSheet({
 			carousel: mediaCarousel,
 			activeCarouselItem: options.index
 		});
-		traildevils.views.mediaCarouselSheet.show();
+		traildevils.views.trailDetailMediaCarouselSheet.show();
 		
 	},
 	
 	'closeMediaCarousel': function (options) {
-		traildevils.views.mediaCarouselSheet.hide();
+		traildevils.views.trailDetailMediaCarouselSheet.hide();
+	},
+	
+	'carouselImagePanelTap': function(options) {
+		// doesn't work on orientation change (should relayout the carousel sheet)
+		var sheetToolbar = traildevils.views.trailDetailMediaCarouselSheet.sheetToolbar;
+		if(sheetToolbar.isHidden()) {
+			sheetToolbar.rendered = true;
+			sheetToolbar.show();
+		} else {
+			sheetToolbar.hide();
+			sheetToolbar.rendered = false;
+		}
+		traildevils.views.trailDetailMediaCarouselSheet.doComponentLayout();
 	}
 });
 

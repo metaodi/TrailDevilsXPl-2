@@ -2,8 +2,11 @@ Ext.regController('trailsmap', {
 	trailMarkers: [],
 	
     'addMarkers': function (options) {
+		// center map to current position
+		traildevils.views.trailsMap.map.center = new google.maps.LatLng(traildevils.views.geoLocation.latitude, traildevils.views.geoLocation.longitude);
+		
 		// remove all markers and listeners
-		google.maps.event.clearInstanceListeners(options.map);
+		google.maps.event.clearInstanceListeners(traildevils.views.trailsMap.map);
 		this.removeAllMarkers();
 		
 		// create infowindow (all the markers will use this infowindow)
@@ -15,7 +18,7 @@ Ext.regController('trailsmap', {
 			var trailData = traildevils.store.data.items[i].data;
 			var trailPosition = new google.maps.LatLng(trailData.latitude, trailData.longitude);
 			var marker = new google.maps.Marker({
-				map: options.map,
+				map: traildevils.views.trailsMap.map,
 				position: trailPosition,
 				title: trailData.title
 			});
@@ -49,7 +52,7 @@ Ext.regController('trailsmap', {
 			google.maps.event.addListener(marker, 'mouseup', function() {
 				// this attribute references to the current marker
 				markerInfoWindow.setContent(this.content);
-				markerInfoWindow.open(options.map, this);
+				markerInfoWindow.open(traildevils.views.trailsMap.map, this);
 			});
 			
 			this.trailMarkers.push(marker);

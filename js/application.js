@@ -64,5 +64,8 @@ Ext.regApplication({
 		
 		// trailsListPanel Components
 		traildevils.views.trailsList = traildevils.views.trailsListPanel.getComponent('trailsList');
+		
+		
+		traildevils.views.trailsMap = Ext.getCmp('trailsMap');
 	}
 });

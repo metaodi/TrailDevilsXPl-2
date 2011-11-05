@@ -5,7 +5,8 @@
  */
 
 traildevils.views.TrailsMap = Ext.extend(Ext.Map, {
-	useCurrentLocation: true,   // Gets user's current location
+	rendered: false,
+	
 	mapOptions: {
 		zoom: 12,
 		streetViewControl: false,
@@ -17,9 +18,9 @@ traildevils.views.TrailsMap = Ext.extend(Ext.Map, {
 			maprender: function() {
 				Ext.dispatch({
 					controller: traildevils.controllers.trailsMapController,
-					action: 'addMarkers',
-					map: this.map
+					action: 'addMarkers'
 				});
+				this.rendered = true;
 			}
 		}
 		

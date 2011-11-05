@@ -18,11 +18,22 @@ traildevils.views.TrailDetailMediaCarouselImagePanel = Ext.extend(Ext.Panel, {
 			orientationchange: function() {
 				this.setTpl();
 				this.update();
-			}
+			}/*,
+			tap: {
+				element: 'el', //bind to the underlying el property on the panel
+				fn: this.panelTap
+			}*/
 		}
 		
         traildevils.views.TrailDetailMediaCarouselImagePanel.superclass.initComponent.call(this);
     },
+	
+	panelTap: function() {
+		Ext.dispatch({
+			controller: traildevils.controllers.trailMediaController,
+			action: 'carouselImagePanelTap'
+		});
+	},
 	
 	setTpl: function() {
 		// use getSize() function of carousel-body because this.height isn't set at render time

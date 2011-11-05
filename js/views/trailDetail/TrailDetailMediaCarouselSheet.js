@@ -25,7 +25,6 @@ traildevils.views.TrailDetailMediaCarouselSheet = Ext.extend(Ext.Sheet, {
 				thisCmp.destroy();
 			}
 		};
-		
 		this.closeBtn = new Ext.Button({
 			ui: 'round',
 			text: 'Schliessen',
@@ -37,11 +36,15 @@ traildevils.views.TrailDetailMediaCarouselSheet = Ext.extend(Ext.Sheet, {
 			}
 		})
 		
-        this.dockedItems = [{
-            xtype: 'toolbar',
+		this.sheetToolbar = new Ext.Toolbar({
 			dock: 'top',
+			showAnimation: 'fade',
 			items: [ this.closeBtn ]
-		}];
+		});
+		
+        this.dockedItems = [
+			this.sheetToolbar
+		];
         
         this.items = [
 			this.carousel
