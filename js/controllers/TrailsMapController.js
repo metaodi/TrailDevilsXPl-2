@@ -14,13 +14,30 @@ Ext.regController('trailsmap', {
 			maxWidth: 300
 		});
 		
+		// prepare custom marker image with shadow
+		// - image created with: http://mapicons.nicolasmollet.com/
+		// - shadow created with: http://www.cycloloco.com/shadowmaker/shadowmaker.htm
+		var markerImage = new google.maps.MarkerImage("resources/images/gmap_marker_cycling.png",
+			new google.maps.Size(32.0, 37.0),
+			new google.maps.Point(0, 0),
+			new google.maps.Point(16.0, 18.0)
+		);
+		var markerShadow = new google.maps.MarkerImage("resources/images/gmap_marker_cycling-shadow.png",
+			new google.maps.Size(51.0, 37.0),
+			new google.maps.Point(0, 0),
+			new google.maps.Point(16.0, 18.0)
+		);
+		
 		for(var i = 0; i < traildevils.store.data.length; i++) {
 			var trailData = traildevils.store.data.items[i].data;
 			var trailPosition = new google.maps.LatLng(trailData.latitude, trailData.longitude);
+			
 			var marker = new google.maps.Marker({
 				map: traildevils.views.trailsMap.map,
 				position: trailPosition,
-				title: trailData.title
+				title: trailData.title,
+				icon: markerImage,
+				shadow: markerShadow
 			});
 			
 			var shortDescription = trailData.description

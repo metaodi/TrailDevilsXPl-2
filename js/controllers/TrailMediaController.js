@@ -9,9 +9,16 @@ Ext.regController('trailmedia', {
 		
 		// adding images to carousel
 		for(var i = 0; i < options.imgdata.length; i++) {
+			var cls = 'trailDetailMediaCarouselImagePanel';
+			if(i == 0) {
+				cls = 'trailDetailMediaCarouselImagePanel first';
+			} else if(i == (options.imgdata.length - 1)) {
+				cls = 'trailDetailMediaCarouselImagePanel last';
+			}
 			mediaCarousel.add({
 				xtype: 'trailDetailMediaCarouselImagePanel',
 				image: options.imgdata[i],
+				cls: cls,
 				// scroll-flag has to be set in definition. doesn't work in class directly.
 				scroll: false
 			});

@@ -14,8 +14,13 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 	initComponent: function() {
 		// corp title to max. 12 characters
 		var title = this.trail.data.title;
-		if(title.length > 12) {
-			title = this.trail.data.title.substring(0, 12) + "...";
+		if(title.length > 20) {
+			title = this.trail.data.title.substring(0, 20) + "...";
+			this.addCls('title20chars');
+		} else if(title.length > 15) {
+			this.addCls('title15chars');
+		} else if(title.length > 12) {
+			this.addCls('title12chars');
 		}
 		
 		this.backBtn = new Ext.Button({

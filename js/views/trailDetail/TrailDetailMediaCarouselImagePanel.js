@@ -6,6 +6,7 @@
 
 traildevils.views.TrailDetailMediaCarouselImagePanel = Ext.extend(Ext.Panel, {
 	layout: 'fit',
+	cls: 'trailDetailMediaCarouselImagePanel',
 	monitorOrientation: true,
 	image: null,
 	
