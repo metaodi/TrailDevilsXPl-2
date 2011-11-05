@@ -23,9 +23,12 @@
 	float: right;
 	margin-left: 0.8em;
 	font-weight: bold;
-	color: #000080;
-	width: 4em;
+	color: #1e3c63;
 	text-align: right;
+	padding: 0.5em 1em;
+	margin: 0.2em;
+	border-radius: 1em;
+	background-color: #e7e7e7;
 }
 #trailsList .trail-item .trail-image img,
 .trailDetailTabPanel .trail-detail .trail-image img {
@@ -47,6 +50,24 @@
 	margin-right: 0.8em;
 	float: left;
 	font-weight: normal;
+}
+
+/* search field */
+.trailsListSearchToolbar {
+	font-size: 0.9em;
+}
+/* TODO delete (not used with sencha apple style) */
+.trailsListSearchToolbar.x-toolbar-grey {
+  background-color: #C7C7C7;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c7dcee), color-stop(2%, #a0b2c2), color-stop(100%, #8797a5));
+  background-image: linear-gradient(#c7dcee, #a0b2c2 2%, #8f8f8f);
+  border-color: #3b3b3b;
+}
+.trailsListSearchToolbar .trailsListSearch {
+	width: 95%;
+}
+.trailsListSearchToolbar .trailsListSearch .x-input-search {
+	height: 1.7em;
 }
 
 /* styles for paging plugin */
@@ -73,6 +94,7 @@
 }
 #trailsList .x-list-paging .x-list-paging-msg {
 	padding-top: 0;
+	color: #3364a1;
 }
 #trailsList .x-list-paging .x-list-paging-loadingmsg {
 	margin-left: 0.8em;
