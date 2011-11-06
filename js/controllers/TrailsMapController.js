@@ -3,7 +3,7 @@ Ext.regController('trailsmap', {
 	
     'addMarkers': function (options) {
 		// center map to current position
-		traildevils.views.trailsMap.map.center = new google.maps.LatLng(traildevils.views.geoLocation.latitude, traildevils.views.geoLocation.longitude);
+		traildevils.views.trailsMap.setCenterPosition(traildevils.views.geoLocation.latitude, traildevils.views.geoLocation.longitude);
 		
 		// remove all markers and listeners
 		google.maps.event.clearInstanceListeners(traildevils.views.trailsMap.map);
@@ -78,14 +78,16 @@ Ext.regController('trailsmap', {
 	
 	'map': function (options) {
 		traildevils.views.trailsMapMainPanel.setActiveItem(
-		'trailsMapPanel', {
-			type: 'slide',
-			direction: 'right',
-			// destroy detail panel when returning to trailslist
-			after: function() {
-				traildevils.views.trailMapDetailTabPanel.destroy();
+			'trailsMapPanel',
+			{
+				type: 'slide',
+				direction: 'right',
+				// destroy detail panel when returning to trailslist
+				after: function() {
+					traildevils.views.trailMapDetailTabPanel.destroy();
+				}
 			}
-		});
+		);
 	},
 	
 	'detail': function (options) {
@@ -104,6 +106,12 @@ Ext.regController('trailsmap', {
 		);
 		
 		traildevils.views.trailsMapMainPanel.setActiveItem(traildevils.views.trailMapDetailTabPanel, 'slide');
+	},
+	
+	'showtrailonmap': function (options) {
+		traildevils.views.viewport.setActiveItem('trailsMapMainPanel', { type: 'slide', direction: 'right' });
+		// center map to trails position
+		traildevils.views.trailsMap.setCenterPosition(options.latitude, options.longitude);
 	},
 	
 	removeAllMarkers: function() {

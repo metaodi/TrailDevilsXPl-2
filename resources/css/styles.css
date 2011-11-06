@@ -15,8 +15,12 @@
 .trailDetailTabPanel .trail-detail .trail-image {
 	float: left;
 	margin-right: 0.8em;
-	width: 6.5em;
-	min-height: 5.5em;
+	width: 6em;
+	min-height: 5em;
+}
+#trailsList .trail-item .trail-image img,
+.trailDetailTabPanel .trail-detail .trail-image img {
+	width: 6em;
 }
 #trailsList .trail-item .trail-distance {
 	font-size: 0.8em;
@@ -29,10 +33,6 @@
 	margin: 0.2em;
 	border-radius: 1em;
 	background-color: #e7e7e7;
-}
-#trailsList .trail-item .trail-image img,
-.trailDetailTabPanel .trail-detail .trail-image img {
-	width: 6.5em;
 }
 #trailsList .trail-item .trail-info h1 {
 	font-weight: bold;
@@ -142,6 +142,11 @@
 	font-size: 1em;
 	font-weight: bold;
 	margin-top: 1em;
+}
+.trailDetailTabPanel .trail-detail h2 span {
+	font-size: 0.9em;
+	margin-left: 0.5em;
+	font-weight: normal;
 }
 .trailDetailTabPanel .trail-detail .trail-description {
 	clear: both;
