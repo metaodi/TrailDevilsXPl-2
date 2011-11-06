@@ -1,8 +1,11 @@
 CACHE MANIFEST
+#rev2
  
 index.html
 lib/sencha-touch-1.1.1/sencha-touch-debug.js
 lib/sencha-touch-1.1.1/resources/css-debug/sencha-touch.css
+
+http://maps.google.com/maps/api/js?sensor=true
   
 resources/css/styles.css
 resources/images/app_icon.jpg

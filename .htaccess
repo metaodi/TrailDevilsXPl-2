@@ -1,3 +1,8 @@
+<Files app.manifest>
+    ExpiresActive On
+    ExpiresDefault "access"
+</Files>
+
 RewriteEngine on
 RewriteRule   ^local$ local.html
 

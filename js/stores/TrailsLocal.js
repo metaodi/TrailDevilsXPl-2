@@ -15,8 +15,21 @@ Ext.regStore('TrailsLocal', {
 	],
 	
 	listeners: {
+		beforeload: function() {
+			this.loadMask = new Ext.LoadMask(Ext.getBody(),{
+                msg: traildevils.views.trailsList.loadingText
+            });
+            this.loadMask.show();
+		},
 		load: function() {
-			traildevils.remotestore.load();
+			traildevils.remotestore.load({
+				callback: function(r,options,success){
+					console.log('remotestore loaded');
+					traildevils.store.refreshData();
+					console.log('store refreshed');
+					traildevils.store.loadMask.hide();
+				}
+			});
 		}
 	},
 	
@@ -31,31 +44,26 @@ Ext.regStore('TrailsLocal', {
 	refreshData : function() {
 		this.removeAllRecordsFromStore();
 		traildevils.remotestore.each(function (record) {
-			if (!traildevils.store.getById(record.data.id))
-				{
-					var trail = traildevils.store.add(record.data)[0];
-					trail.setThumbUrl();
-				}
+			var trail = traildevils.store.add(record.data)[0];
+			trail.setThumbUrl();
+			console.log('record added!');
 		});
+		this.updateDistances();
+		this.sort();
 		this.sync();
-		this.refreshView();
+		traildevils.views.trailsList.refresh();
 	},
 	
 	removeAllRecordsFromStore : function() {
-		this.proxy.clear();
-	},
-	
-	refreshView : function() {
-		this.updateDistances();
-		this.sort();
-		traildevils.views.trailsList.refresh();
+	    this.removeAll();
+		this.getProxy().clear();
+		this.sync();
 	},
 	
 	setPhotoUrl: function (id, dataUrl) {
 		var trail = this.getById(id);
 		trail.set('thumb', dataUrl);
 		this.sync();
-		this.refreshView();
 	},
 	
 	// group by status

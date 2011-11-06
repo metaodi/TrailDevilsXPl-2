@@ -13,14 +13,16 @@ Ext.regStore('Trails', {
 		{ property: 'status', direction: 'DESC'}, 
 		{ property: 'distance', direction: 'ASC' }
 	],
+	timeout: 2000,
 	
 	listeners: {
 		beforeload: function() {
 			// before each data load set proxy params to current geolocation
 			this.proxy.extraParams.params = traildevils.views.geoLocation.latitude + ',' + traildevils.views.geoLocation.longitude;
 		},
-		load: function() {
-			traildevils.store.refreshData();
+		load : function() {
+			traildevils.online = true;
+			console.log('App ist online!');
 		}
 	},
 	
@@ -37,6 +39,21 @@ Ext.regStore('Trails', {
         reader: {
             type: 'json',
 			root: 'trails'
+        },
+        listeners: {
+			/*
+			exception: {
+				fn: function(proxy, response, operation ) {                         
+					console.log('Start exception.')                     
+				}
+			}
+			*/
+			exception: function() {
+				console.log('Start exception.')
+				traildevils.online = false;
+				traildevils.store.loadMask.hide();
+				console.log('App ist offline!');
+			}
         }
 	},
 	
