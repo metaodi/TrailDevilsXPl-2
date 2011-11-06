@@ -28,6 +28,11 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 			ui: 'back'
 		});
 		
+		var initFavIcon = 'favstar';
+		if(this.trail.data.favorite) {
+			initFavIcon = 'favstar-act';
+		}
+		
         this.dockedItems = [{
             xtype: 'toolbar',
             title: title,
@@ -35,21 +40,30 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 				this.backBtn,
 				{ xtype: 'spacer' },
 				{ 
-					iconCls: 'star',
+					iconCls: initFavIcon,
 					iconMask: true,
 					ui: 'plain',
 					listeners: {
 						tap: function() {
+							var oldFavoriteState = this.up().up().trail.data.favorite;
+							
 							// TODO remove duplicated code (already in TrailsList.js)
 							traildevils.views.favoritePopupPanel = new traildevils.views.FavoritePopupPanel({
-								popupText: 'unstarred'
+								active: !oldFavoriteState
 							});
-							traildevils.views.favoritePopupPanel.addCls('act');
-
+							
 							traildevils.views.favoritePopupPanel.show('pop');
 							// hide popup after 600ms and destroy after 1000ms
 							setTimeout('traildevils.views.favoritePopupPanel.hide()', 800);
 							setTimeout('traildevils.views.favoritePopupPanel.destroy()', 1200);
+							
+							this.up().up().trail.data.favorite = !oldFavoriteState;
+							
+							if(this.up().up().trail.data.favorite) {
+								this.setIconClass('favstar-act');
+							} else {
+								this.setIconClass('favstar');
+							}
 						}
 					}
 				}

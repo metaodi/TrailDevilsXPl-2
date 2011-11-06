@@ -251,6 +251,9 @@
 
 .x-panel.favoritePopupPanel {
 	background-color: rgba(0, 0, 0, 0.7);
+	-webkit-border-radius: 0.5em;
+	border-radius: 0.5em;
+	-webkit-box-shadow: none;
 }
 .x-panel.favoritePopupPanel .x-panel-body {
 	color: #fff;
@@ -262,4 +265,11 @@
 }
 .x-panel.favoritePopupPanel.act .x-panel-body {
 	background: url(../images/fav_act.png) no-repeat 50% 0 transparent;
+}
+
+.trailDetailTabPanel .x-button img.x-icon-mask.favstar {
+	-webkit-mask-image: url('../images/fav.png');
+}
+.trailDetailTabPanel .x-button img.x-icon-mask.favstar-act {
+	-webkit-mask-image: url('../images/fav_act.png');
 }
