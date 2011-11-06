@@ -24,13 +24,15 @@ traildevils.views.TrailDetailMediaThumbDataView = Ext.extend(Ext.DataView, {
         );
         this.itemSelector = 'div.imagebox';
 		
-		this.onItemTap = function(list, index) {
-			Ext.dispatch({
-				controller: traildevils.controllers.trailMediaController,
-				action: 'openMediaCarousel',
-				imgdata: this.store.data.items,
-				index: index
-			});
+		this.listeners = {
+			itemtap: function(cmp, index, item, e){ 
+				Ext.dispatch({
+					controller: traildevils.controllers.trailMediaController,
+					action: 'openMediaCarousel',
+					imgdata: this.store.data.items,
+					index: index
+				});
+			}
 		}
 		
 		traildevils.views.TrailDetailMediaThumbDataView.superclass.initComponent.call(this);

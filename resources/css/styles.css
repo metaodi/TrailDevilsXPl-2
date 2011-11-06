@@ -15,21 +15,24 @@
 .trailDetailTabPanel .trail-detail .trail-image {
 	float: left;
 	margin-right: 0.8em;
-	width: 6.5em;
-	min-height: 5.5em;
+	width: 6em;
+	min-height: 5em;
+}
+#trailsList .trail-item .trail-image img,
+.trailDetailTabPanel .trail-detail .trail-image img {
+	width: 6em;
 }
 #trailsList .trail-item .trail-distance {
 	font-size: 0.8em;
 	float: right;
 	margin-left: 0.8em;
 	font-weight: bold;
-	color: #000080;
-	width: 4em;
+	color: #1e3c63;
 	text-align: right;
-}
-#trailsList .trail-item .trail-image img,
-.trailDetailTabPanel .trail-detail .trail-image img {
-	width: 6.5em;
+	padding: 0.5em 1em;
+	margin: 0.2em;
+	border-radius: 1em;
+	background-color: #e7e7e7;
 }
 #trailsList .trail-item .trail-info h1 {
 	font-weight: bold;
@@ -47,6 +50,24 @@
 	margin-right: 0.8em;
 	float: left;
 	font-weight: normal;
+}
+
+/* search field */
+.trailsListSearchToolbar {
+	font-size: 0.9em;
+}
+/* TODO delete (not used with sencha apple style) */
+.trailsListSearchToolbar.x-toolbar-grey {
+  background-color: #C7C7C7;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c7dcee), color-stop(2%, #a0b2c2), color-stop(100%, #8797a5));
+  background-image: linear-gradient(#c7dcee, #a0b2c2 2%, #8f8f8f);
+  border-color: #3b3b3b;
+}
+.trailsListSearchToolbar .trailsListSearch {
+	width: 95%;
+}
+.trailsListSearchToolbar .trailsListSearch .x-input-search {
+	height: 1.7em;
 }
 
 /* styles for paging plugin */
@@ -73,6 +94,7 @@
 }
 #trailsList .x-list-paging .x-list-paging-msg {
 	padding-top: 0;
+	color: #3364a1;
 }
 #trailsList .x-list-paging .x-list-paging-loadingmsg {
 	margin-left: 0.8em;
@@ -120,6 +142,11 @@
 	font-size: 1em;
 	font-weight: bold;
 	margin-top: 1em;
+}
+.trailDetailTabPanel .trail-detail h2 span {
+	font-size: 0.9em;
+	margin-left: 0.5em;
+	font-weight: normal;
 }
 .trailDetailTabPanel .trail-detail .trail-description {
 	clear: both;
@@ -219,4 +246,30 @@
 #trailsList .trail-item .action {
 	display: none;
 	opacity: 0
+}
+
+
+.x-panel.favoritePopupPanel {
+	background-color: rgba(0, 0, 0, 0.7);
+	-webkit-border-radius: 0.5em;
+	border-radius: 0.5em;
+	-webkit-box-shadow: none;
+}
+.x-panel.favoritePopupPanel .x-panel-body {
+	color: #fff;
+	text-align: center;
+	margin-top: 0.8em;
+	padding-top: 2.7em;
+	background: url(../images/fav.png) no-repeat 50% 0 transparent;
+	overflow: hidden;
+}
+.x-panel.favoritePopupPanel.act .x-panel-body {
+	background: url(../images/fav_act.png) no-repeat 50% 0 transparent;
+}
+
+.trailDetailTabPanel .x-button img.x-icon-mask.favstar {
+	-webkit-mask-image: url('../images/fav.png');
+}
+.trailDetailTabPanel .x-button img.x-icon-mask.favstar-act {
+	-webkit-mask-image: url('../images/fav_act.png');
 }

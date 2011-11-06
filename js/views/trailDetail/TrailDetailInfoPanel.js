@@ -18,7 +18,7 @@ traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 		// TODO change url to windows.location.href (doesn't work for development on localhost)
 		//trailMapImageUrl += 'markers=icon:' + window.location.href + 'resources/images/gmap_marker_cycling.png|' + this.data.latitude + ',' + this.data.longitude;
 		trailMapImageUrl += 'markers=icon:http://jenkins.rdmr.ch/resources/images/gmap_marker_cycling.png|' + this.data.latitude + ',' + this.data.longitude;
-		trailMapImageUrl += '&zoom=12&size=270x300&maptype=roadmap&sensor=false';
+		trailMapImageUrl += '&zoom=12&size=280x300&maptype=roadmap&sensor=false';
 		
         this.tpl = new Ext.XTemplate(
 			'<div class="trail-detail">',
@@ -34,7 +34,9 @@ traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 			'	</div>',
 			'	<div class="trail-description">{description}</div>',
 			'	<div class="trail-map">',
-			'		<h2>Kartenansicht:</h2>',
+			'		<h2>',
+			'			Kartenansicht <span>(<a href="#" onclick="Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'showtrailonmap\', latitude: ' + this.data.latitude + ', longitude: ' + this.data.longitude + ' });">auf Karte anzeigen</a>)</span>',
+			'		</h2>',
 			'		<img src="' + trailMapImageUrl + '" alt="Kartenansicht des Trails: {title}" />',
 			'	</div>',
 			'</div>'
