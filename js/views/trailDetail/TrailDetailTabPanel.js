@@ -34,7 +34,25 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
             items: [
 				this.backBtn,
 				{ xtype: 'spacer' },
-				{ iconCls: 'star', iconMask: true, ui: 'plain' }
+				{ 
+					iconCls: 'star',
+					iconMask: true,
+					ui: 'plain',
+					listeners: {
+						tap: function() {
+							// TODO remove duplicated code (already in TrailsList.js)
+							traildevils.views.favoritePopupPanel = new traildevils.views.FavoritePopupPanel({
+								popupText: 'unstarred'
+							});
+							traildevils.views.favoritePopupPanel.addCls('act');
+
+							traildevils.views.favoritePopupPanel.show('pop');
+							// hide popup after 600ms and destroy after 1000ms
+							setTimeout('traildevils.views.favoritePopupPanel.hide()', 800);
+							setTimeout('traildevils.views.favoritePopupPanel.destroy()', 1200);
+						}
+					}
+				}
 			]
         }];
         
