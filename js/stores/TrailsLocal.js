@@ -24,9 +24,7 @@ Ext.regStore('TrailsLocal', {
 		load: function() {
 			traildevils.remotestore.load({
 				callback: function(r,options,success){
-					console.log('remotestore loaded');
 					traildevils.store.refreshData();
-					console.log('store refreshed');
 					traildevils.store.loadMask.hide();
 				}
 			});
@@ -46,7 +44,6 @@ Ext.regStore('TrailsLocal', {
 		traildevils.remotestore.each(function (record) {
 			var trail = traildevils.store.add(record.data)[0];
 			trail.setThumbUrl();
-			console.log('record added!');
 		});
 		this.updateDistances();
 		this.sort();
