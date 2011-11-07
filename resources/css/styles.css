@@ -5,6 +5,16 @@
 	clear: both;
 }
 
+a, .x-html a {
+	text-decoration: none;
+	color: #06C;
+}
+a:hover, a:active, a:focus,
+.x-html a:hover, .x-html a:active, .x-html a:focus {
+	text-decoration: underline;
+	color: #06C;
+}
+
 /* ------------------------------------
    TRAILSLIST
    ------------------------------------ */
@@ -68,7 +78,7 @@
 	height: 1.7em;
 }
 
-/* styles for paging plugin */
+/* list paging plugin */
 #trailsList .x-list-paging {
 	font-weight: bold;
 	background-color: #d1d1d1;
@@ -102,7 +112,7 @@
 	display: block;
 }
 
-/* styles for pull to refresh */
+/* pull to refresh plugin */
 #trailsList .x-list-pullrefresh {
 	padding-top: 0.6em;
 	color: #6c6c6c;
@@ -115,7 +125,7 @@
 	width: 4em;
 }
 
-/* listoptions plugin */
+/* list options plugin */
 #trailsList .x-list-options {
 	background-image: url(../images/swipe_background.png);
 	background-repeat: repeat;
@@ -238,6 +248,7 @@
 	background-color: rgba(255, 255, 255, 0.4);
 }
 
+
 /* ------------------------------------
    TRAILSMAP
    ------------------------------------ */
@@ -253,15 +264,6 @@
 	font-size: 1.2em;
 	font-weight: bold;
 	margin-bottom: 0.2em;
-}
-#trailsMap .infowindow-content a {
-	text-decoration: none;
-	color: #000080;
-}
-#trailsMap .infowindow-content a:hover,
-#trailsMap .infowindow-content a:active,
-#trailsMap .infowindow-content a:focus {
-	text-decoration: underline;
 }
 #trailsMap .infowindow-content .trail-info img {
 	margin: 0.5em 0;
