@@ -3,15 +3,7 @@ require_once('lib/simpletest/extensions/TraildevilsUnitTestCase.php');
 require_once('../../php/DataLoader.class.php');
 
 class TestDataLoader extends TraildevilsUnitTestCase 
-{
-	function checkJsonFormat($json) {
-		$keys = array("title","location","distance","thumb","description","status","latitude","longitude");
-		foreach ($keys as $key)
-		{
-			$this->assertTrue(array_key_exists($key, $json),"Key \"$key\" must exist in converted JSON array.");
-		}
-	}
-	
+{	
 	function testConvertJsonKeys()
 	{
 		 $loader = new DataLoader();
@@ -37,18 +29,37 @@ class TestDataLoader extends TraildevilsUnitTestCase
 		 $this->assertEqual($values["longitude"], $location->getLongitude());
 	}
 	
-	function testGetTrailsNear() {
-        $loader = new DataLoader();
+	function testGetTrailsNearWithLocalAPI() {
+		$loader = new DataLoader();
         $url = "file://".dirname(__FILE__)."/trails.json";
 		$location = $this->getTestGeoLocation();
 		
 		$localJson = $loader->convertTrailsJson($this->getTestTrailJson(), $location, 1);
-		$localJsonArray = json_decode($localJson, true);
-		$this->checkJsonFormat($localJsonArray["trails"][0]);
+		$this->checkJson($localJson);
 		
 		$result = $loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 1, $url);
-		
-        $this->assertEqualsIgnoreWhitespace($result,$localJson);
+		$this->assertEqualsIgnoreWhitespace($result,$localJson);
     }
+	
+	function testGetTrailsNearWithRemoteAPI() {
+		$loader = new DataLoader();
+		$location = $this->getTestGeoLocation();
+		
+		$remoteJson = $loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 1);
+		$this->checkJson($remoteJson);
+    }
+	
+	function checkJson($json) {
+		$jsonArray = json_decode($json, true);
+		$this->checkJsonFormat($jsonArray["trails"][0]);
+	}
+	
+	function checkJsonFormat($json) {
+		$keys = array("title","location","distance","thumb","description","status","latitude","longitude");
+		foreach ($keys as $key)
+		{
+			$this->assertTrue(array_key_exists($key, $json),"Key \"$key\" must exist in converted JSON array.");
+		}
+	}
 }
 ?>
