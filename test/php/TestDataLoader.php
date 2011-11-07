@@ -39,7 +39,7 @@ class TestDataLoader extends TraildevilsUnitTestCase
 	
 	function testGetTrailsNear() {
         $loader = new DataLoader();
-        $url = "http://jenkins.rdmr.ch/test/trails.json";
+        $url = "file://".dirname(__FILE__)."/../trails.json";
 		$location = $this->getTestGeoLocation();
 		
 		$localJson = $loader->convertTrailsJson($this->getTestTrailJson(), $location, 1);
