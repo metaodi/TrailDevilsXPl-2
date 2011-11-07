@@ -117,10 +117,41 @@
 	width: 4em;
 }
 
+/* listoptions plugin */
+#trailsList .x-list-options {
+	background-image: url(../images/swipe_background.png);
+	background-repeat: repeat;
+	-webkit-box-shadow: inset 0 0 2em #252525;
+}
+#trailsList .x-list-options ul {
+	width: 1%;
+}
+#trailsList .x-list-options ul li.x-menu-option {
+	margin: 0 1em 0 0;
+	height: 100%;
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+}
+#trailsList .x-list-options ul li.favorite {
+	background-image: url('../images/fav_black.png');
+}
+#trailsList .x-list-options ul li.favorite-act {
+	background-image: url('../images/fav_black_act.png');
+}
+#trailsList .x-list-options ul li.x-menu-option-pressed {
+	/* TODO implement option-pressed style */
+}
+
 
 /* ------------------------------------
    TRAILDETAIL
    ------------------------------------ */
+.trailDetailTabPanel .x-button img.x-icon-mask.favstar {
+	-webkit-mask-image: url('../images/fav.png');
+}
+.trailDetailTabPanel .x-button img.x-icon-mask.favstar-act {
+	-webkit-mask-image: url('../images/fav_act.png');
+}
 .trailDetailTabPanel.title20chars .x-toolbar-title {
 	font-size: 0.7em;
 	line-height: 3.7em;
@@ -232,23 +263,10 @@
 	margin: 0.5em 0;
 }
 
+
 /* ------------------------------------
-   NOT USED
+   FAVORITE POPUP
    ------------------------------------ */
-#trailsList .trail-item .fav {
-	float: right;
-}
-#trailsList .trail-item-swiped .trail-item .action {
-	display: block;
-	opacity: 1;
-	-webkit-transition: opacity 0.3s linear
-}
-#trailsList .trail-item .action {
-	display: none;
-	opacity: 0
-}
-
-
 .x-panel.favoritePopupPanel {
 	background-color: rgba(0, 0, 0, 0.7);
 	-webkit-border-radius: 0.5em;
@@ -262,14 +280,8 @@
 	padding-top: 2.7em;
 	background: url(../images/fav.png) no-repeat 50% 0 transparent;
 	overflow: hidden;
+	font-weight: bold;
 }
 .x-panel.favoritePopupPanel.act .x-panel-body {
 	background: url(../images/fav_act.png) no-repeat 50% 0 transparent;
-}
-
-.trailDetailTabPanel .x-button img.x-icon-mask.favstar {
-	-webkit-mask-image: url('../images/fav.png');
-}
-.trailDetailTabPanel .x-button img.x-icon-mask.favstar-act {
-	-webkit-mask-image: url('../images/fav_act.png');
 }

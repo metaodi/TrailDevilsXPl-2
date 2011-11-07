@@ -43,23 +43,21 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 					iconCls: initFavIcon,
 					iconMask: true,
 					ui: 'plain',
+					trail: this.trail,
 					listeners: {
 						tap: function() {
-							var oldFavoriteState = this.up().up().trail.data.favorite;
-							
-							// TODO remove duplicated code (already in TrailsList.js)
-							traildevils.views.favoritePopupPanel = new traildevils.views.FavoritePopupPanel({
-								active: !oldFavoriteState
+							// toggle favorite flag on trail
+							this.trail.toggleFavorite();
+
+							// show favorite popup
+							Ext.dispatch({
+								controller: traildevils.controllers.favoritePopupController,
+								action: 'showpopup',
+								favorite: this.trail.data.favorite
 							});
 							
-							traildevils.views.favoritePopupPanel.show('pop');
-							// hide popup after 600ms and destroy after 1000ms
-							setTimeout('traildevils.views.favoritePopupPanel.hide()', 800);
-							setTimeout('traildevils.views.favoritePopupPanel.destroy()', 1200);
-							
-							this.up().up().trail.data.favorite = !oldFavoriteState;
-							
-							if(this.up().up().trail.data.favorite) {
+							// set correct icon class
+							if(this.trail.data.favorite) {
 								this.setIconClass('favstar-act');
 							} else {
 								this.setIconClass('favstar');

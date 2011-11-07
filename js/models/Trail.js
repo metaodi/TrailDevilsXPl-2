@@ -20,6 +20,7 @@ Ext.regModel('Trail', {
         {name: "longitude",			type: "float"},
         {name: "favorite",			type: "boolean"},
     ],
+	
 	setThumbUrl: function() {
 		if (this.get('thumb') != '')
 		{
@@ -31,5 +32,9 @@ Ext.regModel('Trail', {
 			script.setAttribute("type","text/javascript");
 			document.body.appendChild(script);
 		}
+	},
+	
+	toggleFavorite: function() {
+		this.data.favorite = !this.data.favorite;
 	}
 });

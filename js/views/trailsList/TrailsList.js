@@ -17,8 +17,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	
 	itemTpl: [
 		'<div class="trail-item">',
-		'	<div class="action fav x-button"><img class="x-icon-mask favorites" /></div>',
-        '	<div class="trail-image"><tpl if="thumb != &quot;&quot;"><img src="{thumb}" alt="{title}" /></tpl></div>',
+		'	<div class="trail-image"><tpl if="thumb != &quot;&quot;"><img src="{thumb}" alt="{title}" /></tpl></div>',
 		'	<div class="trail-info">',
 		'		<h1>{title}</h1>',
 		'		<dl>',
@@ -33,19 +32,21 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	],
 	
 	initComponent: function() {
+		this.listOptionsPlugin = new traildevils.views.TrailsListOptionsPlugin();
 		this.plugins = [
 			{ ptype: 'trailsListPullRefreshPlugin' },
-			{ ptype: 'trailsListPagingPlugin' }
+			{ ptype: 'trailsListPagingPlugin' },
+			this.listOptionsPlugin
 		];
 	
         this.store = traildevils.store;
 		
 		this.listeners = {
-            itemswipe: function(container, index, item, e) {
-				this.onTrailItemSwipe(container, index, item, e);
-			},
 			itemtap: function(container, index, item, e) {
 				this.onTrailItemTap(container, index, item, e);
+			},
+			menuoptiontap: function(option, record) {
+				this.onListOptionTap(option, record);
 			}
         };
 		
@@ -53,57 +54,32 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
     },
 	
     onTrailItemTap: function(container, index, item, e) {
-		// if favorite button is clicked
-		if (e.getTarget('.favorites')) {
-            this.handleFavButtonTap(index);
+		var trail = this.store.getAt(index);
+		Ext.dispatch({
+			controller: traildevils.controllers.trailsListController,
+			action: 'detail',
+			trail: trail
+		});
+    },
+	onListOptionTap: function(option, record) {
+		// if favorite option was tapped
+		if(option.cls == 'favorite' || option.cls == 'favorite-act') {
+			// add trail to favorite store
+			//favStore.add(record)
 			
-			traildevils.views.favoritePopupPanel = new traildevils.views.FavoritePopupPanel({
-				popupText: 'unstarred'
-			});
-			traildevils.views.favoritePopupPanel.addCls('act');
+			// toggle favorite flag on trail
+			record.toggleFavorite();
 			
-			traildevils.views.favoritePopupPanel.show('pop');
-			// hide popup after 600ms and destroy after 1000ms
-			setTimeout('traildevils.views.favoritePopupPanel.hide()', 800);
-			setTimeout('traildevils.views.favoritePopupPanel.destroy()', 1200);
-		} else {
-			// deactivate all swipe classes
-			this.removeAllSwipeClasses();
-
-			var trail = this.store.getAt(index);
+			// show favorite popup
 			Ext.dispatch({
-				controller: traildevils.controllers.trailsListController,
-				action: 'detail',
-				trail: trail
+				controller: traildevils.controllers.favoritePopupController,
+				action: 'showpopup',
+				favorite: record.data.favorite
 			});
 		}
-    },
-    onTrailItemSwipe: function(container, index, item, e) {
-		// deactivate all swipe classes
-		this.removeAllSwipeClasses();
 		
-        var el = Ext.get(item);
-        var hasClass  = el.hasCls(this.swipedCls);
-        
-        if (hasClass) {
-            el.removeCls(this.swipedCls);
-        } else {
-            el.addCls(this.swipedCls);
-        }
-    },
-	removeAllSwipeClasses: function() {
-		console.log("remove");
-		Ext.select(('div.' + this.swipedCls), this.el.dom).removeCls(this.swipedCls);
-	},
-	handleFavButtonTap: function(index) {
-		var favStore = this.store;
-		var trail = this.store.getAt(index);
-		
-		// add trail to favorite store
-		//favStore.add(trail)
-		console.log("trail " + trail.data.title + " added to favstore");
-		
-		this.removeAllSwipeClasses();
+		// close options menu
+		this.listOptionsPlugin.hideOptionsMenu(record);
 	}
 });
 
