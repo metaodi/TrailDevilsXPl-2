@@ -10,7 +10,7 @@ if (!isset($argv[1]))
 	$dir_handle = opendir(dirname(__FILE__));
 	while (false !== ($file = readdir($dir_handle))) 
 	{
-		if (!is_dir($file) && $file != basename(__FILE__)) 
+		if (!is_dir($file) && $file != basename(__FILE__) && preg_match("/\.php$/",$file)) 
 		{
 			TestRunner::runTestFile($file);
 		}
