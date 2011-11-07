@@ -4,16 +4,19 @@ require_once('../../php/DataLoader.class.php');
 
 class TestDataLoader extends TraildevilsUnitTestCase 
 {
+	function checkJsonFormat($json) {
+		$keys = array("title","location","distance","thumb","description","status","latitude","longitude");
+		foreach ($keys as $key)
+		{
+			$this->assertTrue(array_key_exists($key, $json),"Key \"$key\" must exist in converted JSON array.");
+		}
+	}
+	
 	function testConvertJsonKeys()
 	{
 		 $loader = new DataLoader();
-		 $keys = array("title","location","distance","thumb","description","status","latitude","longitude");
 		 $convertedJson = json_decode($loader->convertTrailsJson($this->getTestTrailJson(),$this->getTestGeoLocation(), 1), true);
-		 
-		 foreach ($keys as $key)
-		 {
-			 $this->assertTrue(array_key_exists($key, $convertedJson["trails"][0]),"Key \"$key\" must exist in converted JSON array.");
-		 }
+		 $this->checkJsonFormat($convertedJson["trails"][0]);
 	}
 	
 	function testConvertJsonValues()
@@ -40,6 +43,9 @@ class TestDataLoader extends TraildevilsUnitTestCase
 		$location = $this->getTestGeoLocation();
 		
 		$localJson = $loader->convertTrailsJson($this->getTestTrailJson(), $location, 1);
+		$localJsonArray = json_decode($localJson, true);
+		$this->checkJsonFormat($localJsonArray["trails"][0]);
+		
 		$result = $loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 1, $url);
 		
         $this->assertEqualsIgnoreWhitespace($result,$localJson);
