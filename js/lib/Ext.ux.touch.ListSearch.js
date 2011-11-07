@@ -1,12 +1,12 @@
 /**
- * @class Ext.plugins.ListSearchPlugin
+ * @class Ext.ux.ListSearchPlugin
  * @extends Ext.form.Search
  * Adds a search input form at the top of the list.
  */
 
-Ext.ns('Ext.ux.touch');
+Ext.ns('Ext.ux');
 
-Ext.ux.touch.ListSearchPlugin = Ext.extend(Ext.util.Observable, {
+Ext.ux.ListSearchPlugin = Ext.extend(Ext.util.Observable, {
     
     init: function(list) {
         this.list = list;
@@ -66,4 +66,4 @@ Ext.ux.touch.ListSearchPlugin = Ext.extend(Ext.util.Observable, {
     }
 });
 
-Ext.preg('listsearch', Ext.ux.touch.ListSearchPlugin);
+Ext.preg('listsearch', Ext.ux.ListSearchPlugin);

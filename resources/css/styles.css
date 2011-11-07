@@ -11,6 +11,10 @@
 #trailsList {
 	font-size: 0.8em;
 }
+#trailsList .x-list-item.x-item-pressed {
+	border-top-color: #D1D1D1;
+	background: #dfe3ec none;
+}
 #trailsList .trail-item .trail-image,
 .trailDetailTabPanel .trail-detail .trail-image {
 	float: left;
@@ -33,6 +37,7 @@
 	margin: 0.2em;
 	border-radius: 1em;
 	background-color: #e7e7e7;
+	border: dotted 1px #a5a5a5;
 }
 #trailsList .trail-item .trail-info h1 {
 	font-weight: bold;
@@ -55,13 +60,6 @@
 /* search field */
 .trailsListSearchToolbar {
 	font-size: 0.9em;
-}
-/* TODO delete (not used with sencha apple style) */
-.trailsListSearchToolbar.x-toolbar-grey {
-  background-color: #C7C7C7;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c7dcee), color-stop(2%, #a0b2c2), color-stop(100%, #8797a5));
-  background-image: linear-gradient(#c7dcee, #a0b2c2 2%, #8f8f8f);
-  border-color: #3b3b3b;
 }
 .trailsListSearchToolbar .trailsListSearch {
 	width: 95%;
@@ -124,22 +122,28 @@
 	-webkit-box-shadow: inset 0 0 2em #252525;
 }
 #trailsList .x-list-options ul {
-	width: 1%;
+	width: 5em;
 }
 #trailsList .x-list-options ul li.x-menu-option {
-	margin: 0 1em 0 0;
+	width: 5em;
+	margin: 0;
 	height: 100%;
-	background-position: 0 50%;
-	background-repeat: no-repeat;
+	-webkit-border-radius: 0;
 }
-#trailsList .x-list-options ul li.favorite {
+#trailsList .x-list-options ul li.x-menu-option .x-menu-option-image {
+	background-position: 50%;
+	background-repeat: no-repeat;
+	height: 100%;
+}
+#trailsList .x-list-options ul li.x-menu-option .x-menu-option-image.favorite {
 	background-image: url('../images/fav_black.png');
 }
-#trailsList .x-list-options ul li.favorite-act {
+#trailsList .x-list-options ul li.x-menu-option .x-menu-option-image.favorite-act {
 	background-image: url('../images/fav_black_act.png');
 }
 #trailsList .x-list-options ul li.x-menu-option-pressed {
-	/* TODO implement option-pressed style */
+	background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 30, color-stop(0%, rgba(248, 251, 254, 0.5)), color-stop(100%, rgba(248, 251, 254, 0)));
+	background-image: radial-gradient(rgba(248, 251, 254, 0.5), rgba(248, 251, 254, 0) 30px);
 }
 
 

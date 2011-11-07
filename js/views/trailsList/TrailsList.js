@@ -6,11 +6,6 @@
 
 traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	fullscreen: true,
-	
-    /**
-     * @cfg {String} activeCls The CSS class that is added to each item when swiped
-     */
-    swipedCls: 'trail-item-swiped',
 	disableSelection: true,
 	grouped : true,
 	loadingText: 'Lade Trails...',
@@ -54,6 +49,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
     },
 	
     onTrailItemTap: function(container, index, item, e) {
+		// TODO close options menu on item tap
 		var trail = this.store.getAt(index);
 		Ext.dispatch({
 			controller: traildevils.controllers.trailsListController,
