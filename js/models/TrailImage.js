@@ -9,10 +9,8 @@
 Ext.regModel('TrailImage', {
 	fields: [
         {name: "id", type: "string"},
-        {name: "name", type: "string"},
-        {name: "size", type: "string"},
-        {name: "date", type: "string"},
-        {name: "path", type: "string"},
+        {name: "description", type: "string"},
+        {name: "image", type: "string"},
         {name: "thumb", type: "string"},
 		{name: "width", type: "int"},
 		{name: "height", type: "int"}

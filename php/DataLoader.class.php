@@ -25,8 +25,7 @@ class DataLoader
 	 * 
 	 * @TODO delete default params for latitude/longitude
 	 */
-	public function getTrailsNear($userLat=47.5101756, $userLng=8.7221472, $page=1, $url="http://152.96.80.18:8080/api/trails") /*http://jenkins.rdmr.ch/php/mock_api.json*/
-	{
+	public function getTrailsNear($userLat=47.5101756, $userLng=8.7221472, $page=1, $url="http://152.96.80.18:8080/api/trails") { /*http://jenkins.rdmr.ch/php/mock_api.json*/
 		$remote = new JSONRemoteCaller($url);
 		$userGeo = new GeoLocation($userLat, $userLng);
 		return $this->convertTrailsJson($remote->callRemoteSite(), $userGeo, $page);
@@ -48,7 +47,7 @@ class DataLoader
 		$externalTrailArray = array_slice($externalTrailArray, (($page-1) * 10), 10);
 		
 		for($i = 0; $i < count($externalTrailArray); $i++) {
-			$convertedArray[$i]["id"] = $externalTrailArray[$i]["TrailId"];
+			$convertedArray[$i]["id"] = $externalTrailArray[$i]["Id"];
 			$convertedArray[$i]["title"] = $externalTrailArray[$i]["Name"];
 			$convertedArray[$i]["location"] = ($externalTrailArray[$i]["NextCity"] ? $externalTrailArray[$i]["NextCity"].", " : "") . $externalTrailArray[$i]["Country"];
 			$convertedArray[$i]["distance"] = $externalTrailArray[$i]['distance'];
@@ -58,8 +57,36 @@ class DataLoader
 			$convertedArray[$i]["status"] = $externalTrailArray[$i]["IsOpen"] ? "offen" : "geschlossen";
 			$convertedArray[$i]["latitude"] = $externalTrailArray[$i]["GmapX"];
 			$convertedArray[$i]["longitude"] = $externalTrailArray[$i]["GmapY"];
+			
+			$types = array();
+			$types[0]['id'] = 5;
+			$types[0]['name'] = "t1";
+			$types[0]['description'] = "t1 desc";
+			$types[1]['id'] = 10;
+			$types[1]['name'] = "t2";
+			$types[1]['description'] = "t2 desc";
+			//$convertedArray[$i]["types"] = $this->getTrailTypes($convertedArray[$i]["id"]);
+			$convertedArray[$i]["types"] = $types;
 		}
 		return json_encode(array("trails" => $convertedArray));
+	}
+	
+	public function getTrailTypes($trailId, $url = "") {
+		if($url == "") {
+			$url = "http://152.96.80.18:8080/api/trails/".$trailId."/types";
+		}
+		$remote = new JSONRemoteCaller($url);
+		return $this->convertTrailTypesJson($remote->callRemoteSite());
+	}
+	public function convertTrailTypesJson($externalTrailTypesJson) {
+		$externalTrailTypesArray = json_decode($externalTrailTypesJson, true);
+		$convertedTypesArray = array();
+		for($i = 0; $i < count($externalTrailTypesArray); $i++) {
+			$convertedTypesArray[$i]["id"] = $externalTrailTypesArray[$i]["Id"];
+			$convertedTypesArray[$i]["name"] = $externalTrailTypesArray[$i]["Name"];
+			$convertedTypesArray[$i]["description"] = $externalTrailTypesArray[$i]["Description"];
+		}
+		return $convertedTypesArray;
 	}
 	
 	/**
@@ -69,23 +96,28 @@ class DataLoader
 	 * @param $url JSON returning API
 	 * @return JSON result
 	 */
-	public function getTrailIamges($trailId, $url)
-	{
+	public function getTrailImages($trailId, $url = "") {
 		if($url == "") {
 			$url = "http://152.96.80.18:8080/api/trails/".$trailId."/images";
 		}
 		$remote = new JSONRemoteCaller($url);
 		return $this->convertTrailImagesJson($remote->callRemoteSite());
 	}
-	
 	public function convertTrailImagesJson($externalTrailImagesJson) {
-		$externalTrailImagesArray = json_decode($externalTrailImagesJson,true);
-		$convertedArray = array();
-		for($i = 0; $i < count($externalTrailImagesArray); $i++) {
-			$convertedArray[$i]["name"] = $externalTrailImagesArray[$i]["name"];
-			$convertedArray[$i]["path"] = $externalTrailImagesArray[$i]["path"];
+		$externalTrailImagesArray = json_decode($externalTrailImagesJson, true);
+		$convertedTrailImagesArray = array();
+		for($i = 0; $i < count($externalTrailImagesJson); $i++) {
+			$imageSizeArray = getimagesize($externalTrailImagesArray[$i]["ImageUrl800"]);
+			
+			$convertedTrailImagesArray[$i]["id"] = $externalTrailImagesArray[$i]["Id"];
+			$convertedTrailImagesArray[$i]["description"] = $externalTrailImagesArray[$i]["Description"];
+			$convertedTrailImagesArray[$i]["image"] = $externalTrailImagesArray[$i]["ImageUrl800"];
+			$convertedTrailImagesArray[$i]["thumb"] = $externalTrailImagesArray[$i]["ImageUrl120"];
+			$convertedTrailImagesArray[$i]["width"] = $imageSizeArray[0];
+			$convertedTrailImagesArray[$i]["height"] = $imageSizeArray[1];
 		}
-		return json_encode(array("trailImages" => $convertedArray));
+		
+		return json_encode(array("images" => $convertedTrailImagesArray));
 	}
 }
 ?>

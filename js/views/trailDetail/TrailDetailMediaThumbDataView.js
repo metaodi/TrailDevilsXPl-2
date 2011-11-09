@@ -25,6 +25,9 @@ traildevils.views.TrailDetailMediaThumbDataView = Ext.extend(Ext.DataView, {
         this.itemSelector = 'div.imagebox';
 		
 		this.listeners = {
+			afterrender: function(cmp) {
+				this.store.load();
+			},
 			itemtap: function(cmp, index, item, e){ 
 				Ext.dispatch({
 					controller: traildevils.controllers.trailMediaController,

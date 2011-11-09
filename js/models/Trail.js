@@ -8,18 +8,20 @@
 
 Ext.regModel('Trail', {
 	fields: [
-        {name: "id",				type: "string"},
-        {name: "title",				type: "string"},
-        {name: "distance",			type: "float"},
-		{name: "formattedDistance", type: "string"},
-        {name: "location",			type: "string"},
-        {name: "thumb",				type: "string"},
-        {name: "description",		type: "string"},
-		{name: "status",			type: "string"},
-        {name: "latitude",			type: "float"},
-        {name: "longitude",			type: "float"},
-        {name: "favorite",			type: "boolean"},
+        { name: "id",					type: "string" },
+        { name: "title",				type: "string" },
+        { name: "distance",				type: "float" },
+		{ name: "formattedDistance",	type: "string" },
+        { name: "location",				type: "string" },
+        { name: "thumb",				type: "string" },
+        { name: "description",			type: "string" },
+		{ name: "status",				type: "string" },
+        { name: "latitude",				type: "float" },
+        { name: "longitude",			type: "float" },
+        { name: "favorite",				type: "boolean" }
     ],
+	
+    hasMany: { model: 'Type', name: 'types' },
 	
 	setThumbUrl: function() {
 		if (this.get('thumb') != '')

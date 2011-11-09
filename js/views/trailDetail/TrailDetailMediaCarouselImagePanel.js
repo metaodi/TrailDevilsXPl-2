@@ -45,7 +45,7 @@ traildevils.views.TrailDetailMediaCarouselImagePanel = Ext.extend(Ext.Panel, {
 		} else {
 			backgroundSize = 'auto 100%';
 		}
-		this.tpl = new Ext.XTemplate('<div class="image" style="background-image: url(' + this.image.data.path + '); background-size: ' + backgroundSize + ';"></div>');
+		this.tpl = new Ext.XTemplate('<div class="image" style="background-image: url(' + this.image.data.image + '); background-size: ' + backgroundSize + ';"></div>');
 	}
 });
 

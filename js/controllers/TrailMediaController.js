@@ -11,9 +11,10 @@ Ext.regController('trailmedia', {
 		for(var i = 0; i < options.imgdata.length; i++) {
 			var cls = 'trailDetailMediaCarouselImagePanel';
 			if(i == 0) {
-				cls = 'trailDetailMediaCarouselImagePanel first';
-			} else if(i == (options.imgdata.length - 1)) {
-				cls = 'trailDetailMediaCarouselImagePanel last';
+				cls += ' first';
+			}
+			if(i == (options.imgdata.length - 1)) {
+				cls += ' last';
 			}
 			mediaCarousel.add({
 				xtype: 'trailDetailMediaCarouselImagePanel',

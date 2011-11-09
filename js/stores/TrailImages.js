@@ -7,8 +7,30 @@
 Ext.regStore('TrailImages', {
 	model: 'TrailImage',
 
+	listeners: {
+		beforeload: function() {
+			// before each data load set proxy params to current trailid
+			this.proxy.extraParams.params = traildevils.views.trailListDetailTabPanel.trail.data.id;
+		}
+	},
+	
+	proxy: {
+        type: 'ajax',
+        url : 'php/AjaxHandler.class.php',
+		extraParams: {
+			className: 'DataLoader',
+			functionName: 'getTrailImages',
+			// trailid params are set before each data load
+			params: '0'
+		},
+		model: 'TrailImage',
+        reader: {
+            type: 'json',
+			root: 'images'
+        }
+	}
 	// setup dummy data
-	data: [
+	/*data: [
 		{
 			id: '1',
 			name: 'bild1',
@@ -64,5 +86,5 @@ Ext.regStore('TrailImages', {
 			width: 332,
 			height: 499
 		}
-	]
+	]*/
 });
