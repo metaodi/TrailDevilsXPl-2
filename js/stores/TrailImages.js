@@ -9,8 +9,13 @@ Ext.regStore('TrailImages', {
 
 	listeners: {
 		beforeload: function() {
+			// TODO very ugly implementation!
 			// before each data load set proxy params to current trailid
-			this.proxy.extraParams.params = traildevils.views.trailListDetailTabPanel.trail.data.id;
+			if(traildevils.views.trailListDetailTabPanel !== undefined) {
+				this.proxy.extraParams.params = traildevils.views.trailListDetailTabPanel.trail.data.id;
+			} else if(traildevils.views.trailMapDetailTabPanel !== undefined) {
+				this.proxy.extraParams.params = traildevils.views.trailMapDetailTabPanel.trail.data.id;
+			}
 		}
 	},
 	
