@@ -121,7 +121,7 @@ a:hover, a:active, a:focus,
 	-webkit-transition-property: -webkit-transform;
 	-webkit-transition-duration: 250ms;
 	-webkit-mask: none;
-	background: transparent url('../images/blackArrow.png') center center no-repeat;
+	background: transparent url('../images/arrow_black.png') center center no-repeat;
 	width: 4em;
 }
 
@@ -146,10 +146,10 @@ a:hover, a:active, a:focus,
 	height: 100%;
 }
 #trailsList .x-list-options ul li.x-menu-option .x-menu-option-image.favorite {
-	background-image: url('../images/fav_black.png');
+	background-image: url('../images/fav_silver.png');
 }
 #trailsList .x-list-options ul li.x-menu-option .x-menu-option-image.favorite-act {
-	background-image: url('../images/fav_black_act.png');
+	background-image: url('../images/fav_silver_act.png');
 }
 #trailsList .x-list-options ul li.x-menu-option-pressed {
 	background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 30, color-stop(0%, rgba(248, 251, 254, 0.5)), color-stop(100%, rgba(248, 251, 254, 0)));
@@ -161,10 +161,10 @@ a:hover, a:active, a:focus,
    TRAILDETAIL
    ------------------------------------ */
 .trailDetailTabPanel .x-button img.x-icon-mask.favstar {
-	-webkit-mask-image: url('../images/fav.png');
+	-webkit-mask-image: url('../images/fav_white.png');
 }
 .trailDetailTabPanel .x-button img.x-icon-mask.favstar-act {
-	-webkit-mask-image: url('../images/fav_act.png');
+	-webkit-mask-image: url('../images/fav_white_act.png');
 }
 .trailDetailTabPanel.title20chars .x-toolbar-title {
 	font-size: 0.7em;
@@ -284,10 +284,10 @@ a:hover, a:active, a:focus,
 	text-align: center;
 	margin-top: 0.8em;
 	padding-top: 2.7em;
-	background: url(../images/fav.png) no-repeat 50% 0 transparent;
+	background: url(../images/fav_white.png) no-repeat 50% 0 transparent;
 	overflow: hidden;
 	font-weight: bold;
 }
 .x-panel.favoritePopupPanel.act .x-panel-body {
-	background: url(../images/fav_act.png) no-repeat 50% 0 transparent;
+	background: url(../images/fav_white_act.png) no-repeat 50% 0 transparent;
 }
