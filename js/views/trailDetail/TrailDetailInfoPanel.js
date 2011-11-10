@@ -20,7 +20,7 @@ traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 		trailMapImageUrl += 'markers=icon:http://jenkins.rdmr.ch/resources/images/gmap_marker_cycling.png|' + this.data.latitude + ',' + this.data.longitude;
 		trailMapImageUrl += '&zoom=12&size=280x300&maptype=roadmap&sensor=false';
 		
-		var showOnMapLinkEvent = "Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'showtrailonmap\', latitude: ' + this.data.latitude + ', longitude: ' + this.data.longitude + ' });";
+		var showOnMapLinkEvent = "Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'showtrailonmap\', latitude: '" + this.data.latitude + "', longitude: '" + this.data.longitude + "' });";
 		
         this.tpl = new Ext.XTemplate(
 			'<div class="trail-detail">',
