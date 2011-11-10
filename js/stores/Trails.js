@@ -7,10 +7,11 @@
 Ext.regStore('Trails', {
 	model: 'Trail',
 	clearOnPageLoad: false,
+    pageSize: 5,
 	
 	// order by status descending (groups) and distance ascending
 	sorters: [
-		{ property: 'status', direction: 'DESC'}, 
+		{ property: 'status', direction: 'DESC' }, 
 		{ property: 'distance', direction: 'ASC' }
 	],
 	timeout: 2000,
@@ -21,6 +22,9 @@ Ext.regStore('Trails', {
 			this.proxy.extraParams.params = traildevils.views.geoLocation.latitude + ',' + traildevils.views.geoLocation.longitude;
 		},
 		load : function() {
+			traildevils.store.refreshData();
+			traildevils.store.loadMask.hide();
+			
 			traildevils.online = true;
 			console.log('App ist online!');
 		}
@@ -41,13 +45,6 @@ Ext.regStore('Trails', {
 			root: 'trails'
         },
         listeners: {
-			/*
-			exception: {
-				fn: function(proxy, response, operation ) {                         
-					console.log('Start exception.')                     
-				}
-			}
-			*/
 			exception: function() {
 				console.log('Start exception.')
 				traildevils.online = false;

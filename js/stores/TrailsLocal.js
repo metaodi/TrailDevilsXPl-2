@@ -16,18 +16,15 @@ Ext.regStore('TrailsLocal', {
 	
 	listeners: {
 		beforeload: function() {
+			console.log("Current Page: " + this.currentPage);
+			traildevils.remotestore.currentPage = this.currentPage;
 			this.loadMask = new Ext.LoadMask(Ext.getBody(),{
                 msg: traildevils.views.trailsList.loadingText
             });
             this.loadMask.show();
 		},
 		load: function() {
-			traildevils.remotestore.load({
-				callback: function(r,options,success){
-					traildevils.store.refreshData();
-					traildevils.store.loadMask.hide();
-				}
-			});
+			traildevils.remotestore.loadPage(this.currentPage);
 		}
 	},
 	

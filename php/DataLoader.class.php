@@ -32,6 +32,7 @@ class DataLoader
 	}
 	
 	public function convertTrailsJson($externalTrailJson, GeoLocation $userGeo, $page) {
+		$pageSize = 5;
 		$externalTrailArray = json_decode($externalTrailJson, true);
 		$convertedArray = array();
 		
@@ -44,11 +45,11 @@ class DataLoader
 		usort($externalTrailArray, array($this, "distanceCmp"));
 		
 		// only take the nearest 10 trails
-		$externalTrailArray = array_slice($externalTrailArray, (($page-1) * 10), 10);
+		$externalTrailArray = array_slice($externalTrailArray, (($page-1) * $pageSize), $pageSize);
 		
 		for($i = 0; $i < count($externalTrailArray); $i++) {
 			$convertedArray[$i]["id"] = $externalTrailArray[$i]["Id"];
-			$convertedArray[$i]["title"] = $externalTrailArray[$i]["Name"];
+			$convertedArray[$i]["title"] = $externalTrailArray[$i]["Name"]." Page: ".$page;
 			$convertedArray[$i]["location"] = ($externalTrailArray[$i]["NextCity"] ? $externalTrailArray[$i]["NextCity"].", " : "") . $externalTrailArray[$i]["Country"];
 			$convertedArray[$i]["distance"] = $externalTrailArray[$i]['distance'];
 			$convertedArray[$i]["formattedDistance"] = $userGeo->getFormattedDistance($convertedArray[$i]["distance"]);
