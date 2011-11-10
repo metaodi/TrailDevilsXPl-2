@@ -45,12 +45,12 @@ Ext.regController('trailsmap', {
 				shortDescription = shortDescription.substring(0, 100) + "...";
 			}
 			
-			var trailDetailEventLink = 'Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'detail\', storeIndex: ' + i + ' });';
+			var trailDetailLinkEvent = 'Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'detail\', trail: traildevils.store.getAt(' + i + ') });';
 		
 			marker.content =
 				'<div class="infowindow-content">' +
 				'	<h1>' +
-				'		<a href="#" onclick="' + trailDetailEventLink + '" title="Details anzeigen" >' + trailData.title + '</a>' +
+				'		<a href="#" onclick="' + trailDetailLinkEvent + '" title="Details anzeigen" >' + trailData.title + '</a>' +
 				'	</h1>' +
 				'	<div class="trail-info">' +
 				'		<p class="trail-location">' + trailData.location + '</p>';
@@ -60,7 +60,7 @@ Ext.regController('trailsmap', {
 			}
 			marker.content +=
 				'		<p class="trail-description">' + shortDescription + '</p>' +
-				'		<p><a href="#" onclick="' + trailDetailEventLink + '" title="Details anzeigen" >weitere Informationen...</a></p>' +
+				'		<p><a href="#" onclick="' + trailDetailLinkEvent + '" title="Details anzeigen" >weitere Informationen...</a></p>' +
 				'	</div>' +
 				'</div>';
 			
@@ -84,19 +84,18 @@ Ext.regController('trailsmap', {
 				direction: 'right',
 				// destroy detail panel when returning to trailslist
 				after: function() {
-					traildevils.views.trailMapDetailTabPanel.destroy();
+					traildevils.views.trailDetailTabPanel.destroy();
 				}
 			}
 		);
 	},
 	
 	'detail': function (options) {
-		traildevils.views.trailMapDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
-			// @TODO unschön gelöst. konnte nicht das trail-Objekt übergeben da Aufruf aus <a href...>
-			trail: traildevils.store.getAt(options.storeIndex)
+		traildevils.views.trailDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
+			trail: options.trail
 		});
 		
-		traildevils.views.trailMapDetailTabPanel.backBtn.setHandler(
+		traildevils.views.trailDetailTabPanel.backBtn.setHandler(
 			function() {
 				Ext.dispatch({
 					controller: traildevils.controllers.trailsMapController,
@@ -105,7 +104,7 @@ Ext.regController('trailsmap', {
 			}
 		);
 		
-		traildevils.views.trailsMapMainPanel.setActiveItem(traildevils.views.trailMapDetailTabPanel, 'slide');
+		traildevils.views.trailsMapMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
 	},
 	
 	'showtrailonmap': function (options) {

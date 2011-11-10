@@ -36,12 +36,19 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 						});
 					}
 				}
+				
+				// TODO implement this in controllers
 				if(oldCard === traildevils.views.trailsMapMainPanel) {
 					// if another tab than trailsMap is selected set current view of trailsMap back to map
-					Ext.dispatch({
-						controller: traildevils.controllers.trailsMapController,
-						action: 'map'
-					});
+					traildevils.views.trailsMapMainPanel.setActiveItem('trailsMapPanel', false);
+				}
+				if(oldCard === traildevils.views.trailsListMainPanel) {
+					// if another tab than trailsList is selected set current view of trailsList back to list
+					traildevils.views.trailsListMainPanel.setActiveItem('trailsListPanel', false);
+				}
+				// destory detail panel on each cardswitch
+				if(traildevils.views.trailDetailTabPanel !== undefined && !traildevils.views.trailDetailTabPanel.isDestroyed) {
+					traildevils.views.trailDetailTabPanel.destroy();
 				}
 			}
 		};

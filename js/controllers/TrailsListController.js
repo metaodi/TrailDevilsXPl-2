@@ -1,6 +1,6 @@
 Ext.regController('trailslist', {
-    'list': function (options) {
-		if(traildevils.views.trailListDetailTabPanel === undefined) {
+    'list': function(options) {
+		if(traildevils.views.trailDetailTabPanel === undefined) {
 			traildevils.views.trailsListMainPanel.setActiveItem(
 			'trailsListPanel', {
 				type: 'slide',
@@ -13,18 +13,18 @@ Ext.regController('trailslist', {
 				direction: 'right',
 				// destroy detail panel when returning to trailslist
 				after: function() {
-					traildevils.views.trailListDetailTabPanel.destroy();
+					traildevils.views.trailDetailTabPanel.destroy();
 				}
 			});
 		}
 	},
 
     'detail': function (options) {
-		traildevils.views.trailListDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
+		traildevils.views.trailDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
 			trail: options.trail
 		});
 		
-		traildevils.views.trailListDetailTabPanel.backBtn.setHandler(
+		traildevils.views.trailDetailTabPanel.backBtn.setHandler(
 			function() {
 				Ext.dispatch({
 					controller: traildevils.controllers.trailsListController,
@@ -33,7 +33,7 @@ Ext.regController('trailslist', {
 			}
 		);
 		
-		traildevils.views.trailsListMainPanel.setActiveItem(traildevils.views.trailListDetailTabPanel, 'slide');
+		traildevils.views.trailsListMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
 	}
 });
 
