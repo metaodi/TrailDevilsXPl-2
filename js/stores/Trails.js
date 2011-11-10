@@ -7,7 +7,7 @@
 Ext.regStore('Trails', {
 	model: 'Trail',
 	clearOnPageLoad: false,
-    pageSize: 5,
+    pageSize: 10,
 	
 	// order by status descending (groups) and distance ascending
 	sorters: [
@@ -19,7 +19,7 @@ Ext.regStore('Trails', {
 	listeners: {
 		beforeload: function() {
 			// before each data load set proxy params to current geolocation
-			this.proxy.extraParams.params = traildevils.views.geoLocation.latitude + ',' + traildevils.views.geoLocation.longitude;
+			this.proxy.extraParams.params = traildevils.views.geoLocation.latitude + ',' + traildevils.views.geoLocation.longitude + ',' + this.pageSize;
 		},
 		load : function() {
 			traildevils.store.refreshData();
