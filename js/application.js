@@ -22,10 +22,11 @@ Ext.regApplication({
 		}
 		
 		// initialize store
-		//traildevils.store = Ext.getStore('Trails');
 		traildevils.store = Ext.getStore('TrailsLocal');
 		traildevils.remotestore = Ext.getStore('Trails');
 		
+		//app is offline until told otherwise
+		traildevils.online = false;
 		
 		// get current geolocation
 		traildevils.views.geoLocation = new traildevils.views.TrailGeoLocation({
