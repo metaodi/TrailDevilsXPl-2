@@ -9,55 +9,67 @@ traildevils.views.TrailsListSearch = Ext.extend(Ext.form.Search, {
 	cls: 'trailsListSearch',
 	
 	initComponent: function() {
-		var _trailsStore = traildevils.store;
+		this.store = traildevils.store;
 		Ext.apply(this, {
             listeners: {
 				scope: this,
 				keyup: function(field) {
-					var value = field.getValue();
-					
-					if (!value) {
-						_trailsStore.filterBy(function() {
-							return true;
-						});
-					} else {
-						var searches = value.split(' '), regexps  = [], i;
-						
-						for (i = 0; i < searches.length; i++) {
-							if (!searches[i]) {
-								return;
-							}
-							regexps.push(new RegExp(searches[i], 'i'));
-						}
-						
-						_trailsStore.filterBy(function(record) {
-							var matched = [];
-
-							for (i = 0; i < regexps.length; i++) {
-								var search = regexps[i];
-
-								if (record.get('title').match(search) || record.get('location').match(search)) {
-									matched.push(true);
-								} else {
-									matched.push(false);
-								}
-							}
-
-							if (regexps.length > 1 && matched.indexOf(false) != -1) {
-								return false;
-							} else {
-								return matched[0];
-							}
-						});
-					}
-					
-					_trailsStore.sort();
+					this.filterByValue(field.getValue());
+					this.store.sort();
 				}
 			}
         });
 		
         traildevils.views.TrailsListSearch.superclass.initComponent.apply(this, arguments);
-    }			
+    },
+	
+	filterByValue: function(value) {
+		if(!value) {
+			this.store.filterBy(function() {
+				return true;
+			});
+		} else {
+			var searches = value.split(' ');
+			var regexps = [];
+			var i;
+
+			for(i = 0; i < searches.length; i++) {
+				if (!searches[i]) {
+					return;
+				}
+				regexps.push(new RegExp(searches[i], 'i'));
+			}
+
+			this.store.filterBy(function(record) {
+				var matched = [];
+				
+				for(i = 0; i < regexps.length; i++) {
+					var search = regexps[i];
+					
+					if(record.get('title').match(search) || record.get('location').match(search)) {
+						matched.push(true);
+					} else {
+						// search matching trail types
+						var match = false;
+						var trailTypesArr = record.data.types;
+						for(var j = 0; j < trailTypesArr.length; j++) {
+							if(trailTypesArr[j].name.match(search)) {
+								match = true;
+								break;
+							}
+						}
+						matched.push(match);
+					}
+				}
+
+				if(regexps.length > 1 && matched.indexOf(false) != -1) {
+					return false;
+				} else {
+					return matched[0];
+				}
+			});
+		}
+	}
 });
 
 // Create xtype
