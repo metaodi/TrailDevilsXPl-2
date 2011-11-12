@@ -108,7 +108,7 @@ Ext.regController('trailsmap', {
 	},
 	
 	'showtrailonmap': function (options) {
-		traildevils.views.viewport.setActiveItem('trailsMapMainPanel', { type: 'slide', direction: 'right' });
+		traildevils.views.viewport.setActiveItem('trailsMapMainPanel', 'slide' );
 		// center map to trails position
 		traildevils.views.trailsMap.setCenterPosition(options.latitude, options.longitude);
 	},

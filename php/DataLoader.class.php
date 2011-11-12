@@ -57,16 +57,7 @@ class DataLoader
 			$convertedArray[$i]["status"] = $externalTrailArray[$i]["IsOpen"] ? "offen" : "geschlossen";
 			$convertedArray[$i]["latitude"] = $externalTrailArray[$i]["GmapX"];
 			$convertedArray[$i]["longitude"] = $externalTrailArray[$i]["GmapY"];
-			
-			$types = array();
-			$types[0]['id'] = 5;
-			$types[0]['name'] = "t1";
-			$types[0]['description'] = "t1 desc";
-			$types[1]['id'] = 10;
-			$types[1]['name'] = "t2";
-			$types[1]['description'] = "t2 desc";
-			//$convertedArray[$i]["types"] = $this->getTrailTypes($convertedArray[$i]["id"]);
-			$convertedArray[$i]["types"] = $types;
+			$convertedArray[$i]["types"] = $this->getTrailTypes($convertedArray[$i]["id"]);
 		}
 		return json_encode(array("trails" => $convertedArray));
 	}
@@ -76,13 +67,14 @@ class DataLoader
 			$url = "http://152.96.80.18:8080/api/trails/".$trailId."/types";
 		}
 		$remote = new JSONRemoteCaller($url);
-		return $this->convertTrailTypesJson($remote->callRemoteSite());
+		return $this->convertTrailTypesJson($remote->callRemoteSite(), $trailId);
 	}
-	public function convertTrailTypesJson($externalTrailTypesJson) {
+	public function convertTrailTypesJson($externalTrailTypesJson, $trailId) {
 		$externalTrailTypesArray = json_decode($externalTrailTypesJson, true);
 		$convertedTypesArray = array();
 		for($i = 0; $i < count($externalTrailTypesArray); $i++) {
 			$convertedTypesArray[$i]["id"] = $externalTrailTypesArray[$i]["Id"];
+			$convertedTypesArray[$i]["trail_id"] = $trailId;
 			$convertedTypesArray[$i]["name"] = $externalTrailTypesArray[$i]["Name"];
 			$convertedTypesArray[$i]["description"] = $externalTrailTypesArray[$i]["Description"];
 		}

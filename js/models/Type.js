@@ -8,9 +8,10 @@
 
 Ext.regModel('Type', {
 	fields: [
-        { name: "id",				type: "string" },
-        { name: "name",				type: "string" },
-        { name: "description",		type: "string" },
+        { name: 'id',				type: 'string' },
+        { name: 'trail_id',			type: 'int' },
+        { name: 'name',				type: 'string' },
+        { name: 'description',		type: 'string' },
     ],
 	belongsTo: 'Trail'
 });

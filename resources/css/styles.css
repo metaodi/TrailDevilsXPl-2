@@ -66,6 +66,22 @@ a:hover, a:active, a:focus,
 	float: left;
 	font-weight: normal;
 }
+#trailsList .trail-types,
+.trailDetailTabPanel .trail-detail .trail-types {
+	float: left;
+	margin-top: 0.2em;
+}
+#trailsList .trail-types .trail-type,
+.trailDetailTabPanel .trail-detail .trail-types .trail-type {
+	font-size: 0.7em;
+	float: left;
+	margin-right: 0.5em;
+	padding: 0.1em 0.4em;
+	border-radius: 1em;
+	background-color: #e7e7e7;
+	border: solid 1px #a5a5a5;
+	color: #6c6c6c;
+}
 
 /* search field */
 .trailsListSearchToolbar {
@@ -192,6 +208,12 @@ a:hover, a:active, a:focus,
 	font-size: 0.9em;
 	margin-left: 0.5em;
 	font-weight: normal;
+}
+.trailDetailTabPanel .trail-detail dl {
+	margin-bottom: 0;
+}
+.trailDetailTabPanel .trail-detail .trail-info {
+	margin-bottom: 0.5em;
 }
 .trailDetailTabPanel .trail-detail .trail-description {
 	clear: both;
