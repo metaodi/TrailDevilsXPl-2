@@ -95,10 +95,8 @@ a:hover, a:active, a:focus,
 /* list paging plugin */
 #trailsList .x-list-paging {
 	font-weight: bold;
-	background-color: #d1d1d1;
 	border-top: dashed #A3A3A3 1px;
 	color: #6c6c6c;
-	
 	display: -webkit-box; 
 	display: box; 
     -webkit-box-orient: horizontal;
