@@ -8,6 +8,7 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 	cls: 'trailDetailTabPanel',
 	trail: null,
 	tabBar: {
+		cls: 'trailDetailTabPanelTabBar',
         ui: 'light'
     },
 	
@@ -16,11 +17,11 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 		var title = this.trail.data.title;
 		if(title.length > 20) {
 			title = this.trail.data.title.substring(0, 20) + "...";
-			this.addCls('title20chars');
+			this.addCls('title-long');
 		} else if(title.length > 15) {
-			this.addCls('title15chars');
+			this.addCls('title-middle');
 		} else if(title.length > 12) {
-			this.addCls('title12chars');
+			this.addCls('title-short');
 		}
 		
 		this.backBtn = new Ext.Button({

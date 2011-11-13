@@ -9,43 +9,43 @@ traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 	scroll: 'vertical',
 	layout: 'fit',
 	
-	styleHtmlContent: true,
-	
 	initComponent: function() {
-		var trailLocation = new google.maps.LatLng(this.data.latitude, this.data.longitude);
-		
 		var trailMapImageUrl = 'http://maps.google.com/maps/api/staticmap?';
 		// TODO change url to windows.location.href (doesn't work for development on localhost)
 		//trailMapImageUrl += 'markers=icon:' + window.location.href + 'resources/images/gmap_marker_cycling.png|' + this.data.latitude + ',' + this.data.longitude;
 		trailMapImageUrl += 'markers=icon:http://jenkins.rdmr.ch/resources/images/gmap_marker_cycling.png|' + this.data.latitude + ',' + this.data.longitude;
-		trailMapImageUrl += '&zoom=12&size=280x300&maptype=roadmap&sensor=false';
+		trailMapImageUrl += '&zoom=12&size=290x300&maptype=roadmap&sensor=false';
 		
 		var showOnMapLinkEvent = "Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'showtrailonmap\', latitude: '" + this.data.latitude + "', longitude: '" + this.data.longitude + "' });";
 		
         this.tpl = new Ext.XTemplate(
 			'<div class="trail-detail">',
-			'	<tpl if="thumb != &quot;&quot;"><div class="trail-image"><img src="{thumb}" alt="{title}" /></div></tpl>',
-			'	<div class="trail-info">',
-			'		<h1>{title}</h1>',
-			'		<dl>',
-			'			<dt>Ort:</dt>',
-			'			<dd>{location}</dd>',
-			'			<dt>Entfernung:</dt>',
-			'			<dd>{formattedDistance}</dd>',
-			'		</dl>',
-			'		<div class="trail-types">',
-			'			<tpl for="types">',
+			'	<div class="trail-detail-head">',
+			'		<div class="trail-info">',
+			'			<tpl if="thumb != &quot;&quot;"><div class="trail-image"><img src="{thumb}" alt="{title}" /></div></tpl>',
+			'			<h1>{title}</h1>',
+			'			<dl>',
+			'				<dt>Ort:</dt>',
+			'				<dd>{location}</dd>',
+			'				<dt>Entfernung:</dt>',
+			'				<dd>{formattedDistance}</dd>',
+			'			</dl>',
+			'				<div class="trail-types">',
+			'				<tpl for="types">',
 			'				<div class="trail-type">{name}</div>',
-			'			</tpl>',
+			'				</tpl>',
+			'			</div>',
 			'		</div>',
 			'		<div class="clear"></div>',
 			'	</div>',
-			'	<div class="trail-description">{description}</div>',
-			'	<div class="trail-map">',
-			'		<h2>',
-			'			Kartenansicht <span>(<a href="#" onclick="' + showOnMapLinkEvent + '">auf Karte anzeigen</a>)</span>',
-			'		</h2>',
-			'		<img src="' + trailMapImageUrl + '" alt="Kartenansicht des Trails: {title}" />',
+			'	<div class="trail-detail-body">',
+			'		<div class="trail-description">{description}</div>',
+			'		<div class="trail-map">',
+			'			<h2>',
+			'				Kartenansicht <span>(<a href="#" onclick="' + showOnMapLinkEvent + '">auf Karte anzeigen</a>)</span>',
+			'			</h2>',
+			'			<img src="' + trailMapImageUrl + '" alt="Kartenansicht des Trails: {title}" />',
+			'		</div>',
 			'	</div>',
 			'</div>'
 		);

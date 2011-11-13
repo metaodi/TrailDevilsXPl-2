@@ -58,7 +58,7 @@ a:hover, a:active, a:focus,
 	font-family: Verdana;
 	font-size: 0.8em;
 	line-height: 1.5em;
-	color: #323232;
+	color: #6c6c6c;
 }
 #trailsList .trail-item .trail-info dt,
 .trailDetailTabPanel .trail-detail .trail-info dt {
@@ -66,13 +66,11 @@ a:hover, a:active, a:focus,
 	float: left;
 	font-weight: normal;
 }
-#trailsList .trail-types,
-.trailDetailTabPanel .trail-detail .trail-types {
+#trailsList .trail-types {
 	float: left;
-	margin-top: 0.2em;
+	margin-top: 0.3em;
 }
-#trailsList .trail-types .trail-type,
-.trailDetailTabPanel .trail-detail .trail-types .trail-type {
+#trailsList .trail-types .trail-type {
 	font-size: 0.7em;
 	float: left;
 	margin-right: 0.5em;
@@ -176,23 +174,66 @@ a:hover, a:active, a:focus,
 /* ------------------------------------
    TRAILDETAIL
    ------------------------------------ */
+/* Trail Detail - TabBar */
+.trailDetailTabPanel .trailDetailTabPanelTabBar {
+	font-size: 0.9em;
+}
+.trailDetailTabPanel .trailDetailTabPanelTabBar .x-tab {
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	height: auto;
+	margin: 0;
+	padding: 0.6em 0.8em;
+}
+/* Trail Detail - Toolbar */
 .trailDetailTabPanel .x-button img.x-icon-mask.favstar {
 	-webkit-mask-image: url('../images/fav_white.png');
 }
 .trailDetailTabPanel .x-button img.x-icon-mask.favstar-act {
 	-webkit-mask-image: url('../images/fav_white_act.png');
 }
-.trailDetailTabPanel.title20chars .x-toolbar-title {
+.trailDetailTabPanel.title-long .x-toolbar-title {
 	font-size: 0.7em;
 	line-height: 3.7em;
 }
-.trailDetailTabPanel.title15chars .x-toolbar-title {
+.trailDetailTabPanel.title-middle .x-toolbar-title {
 	font-size: 0.8em;
 	line-height: 3.2em;
 }
-.trailDetailTabPanel.title12chars .x-toolbar-title {
+.trailDetailTabPanel.title-short .x-toolbar-title {
 	font-size: 0.9em;
 	line-height: 2.9em;
+}
+
+/* Trail Detail - Info */
+.trailDetailTabPanel .trail-detail {
+	font-size: 0.8em;
+}
+.trailDetailTabPanel .trail-detail .trail-detail-head {
+	overflow: hidden;
+	background-color: #EEE;
+	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(2%, #ffffff), color-stop(100%, #dcdcdc));
+	background-image: linear-gradient(#ffffff,#ffffff 2%,#dcdcdc);
+	text-shadow: rgba(255, 255, 255, 0.2) 0 0.1em 0;
+	border-bottom: 1px solid #CCC;
+	padding: 0.9em;
+}
+.trailDetailTabPanel .trail-detail .trail-detail-body {
+	padding: 0.9em;
+}
+.trailDetailTabPanel .trail-detail .trail-types {
+	float: left;
+	margin-top: 0.3em;
+}
+.trailDetailTabPanel .trail-detail .trail-types .trail-type {
+	font-size: 0.7em;
+	float: left;
+	margin-right: 0.5em;
+	padding: 0.1em 0.4em;
+	border-radius: 1em;
+	background-color: #fff;
+	border: solid 1px #a5a5a5;
+	color: #6c6c6c;
 }
 .trailDetailTabPanel .trail-detail h1 {
 	font-size: 1.1em;
@@ -202,7 +243,7 @@ a:hover, a:active, a:focus,
 .trailDetailTabPanel .trail-detail h2 {
 	font-size: 1em;
 	font-weight: bold;
-	margin-top: 1em;
+	margin: 1em 0 0.5em 0;
 }
 .trailDetailTabPanel .trail-detail h2 span {
 	font-size: 0.9em;
@@ -212,11 +253,12 @@ a:hover, a:active, a:focus,
 .trailDetailTabPanel .trail-detail dl {
 	margin-bottom: 0;
 }
-.trailDetailTabPanel .trail-detail .trail-info {
-	margin-bottom: 0.5em;
-}
 .trailDetailTabPanel .trail-detail .trail-description {
 	clear: both;
+}
+
+.trailDetailTabPanel .trail-detail .trail-map {
+	overflow: hidden;
 }
 
 /* Trail Detail - Thumblist */
@@ -243,6 +285,7 @@ a:hover, a:active, a:focus,
 	border: 0.083em solid #A3A3A3;
 }
 
+/* Trail Detail - Carousel Sheet */
 .trailDetailMediaCarouselSheet .x-carousel-body {
 	background-color: #323232;
 }
@@ -262,7 +305,6 @@ a:hover, a:active, a:focus,
 	background-repeat: no-repeat;
 	background-position: 50%;
 }
-
 .trailDetailMediaCarouselSheet .x-carousel-body .x-carousel-indicator-dark span {
 	background-color: rgba(255, 255, 255, 0.2);
 }
