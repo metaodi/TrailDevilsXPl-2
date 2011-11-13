@@ -16,7 +16,7 @@
 		"Name":"Testtrail",
 		"NextCity":"Zürich",
 		"State":"ok",
-		"TrailId":11,
+		"Id":11,
 		"Url":null
 	},
 	{
@@ -36,7 +36,7 @@
 		"Name":"Testtrail2",
 		"NextCity":"Zürich",
 		"State":"ok",
-		"TrailId":12,
+		"Id":12,
 		"Url":null
 	}
 ]

@@ -55,7 +55,7 @@ abstract class TraildevilsUnitTestCase extends UnitTestCase {
 		$trailJson .= "\"Name\":\"Testtrail\",\n";
 		$trailJson .= "\"NextCity\":\"Zürich\",\n";
 		$trailJson .= "\"State\":\"ok\",\n";
-		$trailJson .= "\"TrailId\":11,\n";
+		$trailJson .= "\"Id\":11,\n";
 		$trailJson .= "\"Url\":null\n";
 		$trailJson .= "},\n";
 		$trailJson .= "{\n";
@@ -75,7 +75,7 @@ abstract class TraildevilsUnitTestCase extends UnitTestCase {
 		$trailJson .= "\"Name\":\"Testtrail2\",\n";
 		$trailJson .= "\"NextCity\":\"Zürich\",\n";
 		$trailJson .= "\"State\":\"ok\",\n";
-		$trailJson .= "\"TrailId\":12,\n";
+		$trailJson .= "\"Id\":12,\n";
 		$trailJson .= "\"Url\":null\n";
 		$trailJson .= "}]";
 		return $trailJson;
