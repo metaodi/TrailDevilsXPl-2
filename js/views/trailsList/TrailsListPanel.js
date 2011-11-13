@@ -12,11 +12,12 @@ traildevils.views.TrailsListPanel = Ext.extend(Ext.Panel, {
 			{ xtype: 'toolbar', title: 'Trailliste' },
 			{
 				xtype: 'toolbar',
+				id: 'trailsListSearchToolbar',
 				cls: 'trailsListSearchToolbar',
 				ui: 'light',
 				
 				items: [
-					{ xtype: 'trailsListSearch' }
+					{ xtype: 'trailsListSearch', id: 'trailsListSearch' }
 				]
 			}
 		];

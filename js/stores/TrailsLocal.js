@@ -17,6 +17,12 @@ Ext.regStore('TrailsLocal', {
 	listeners: {
 		beforeload: function() {
 			traildevils.remotestore.currentPage = this.currentPage;
+			
+			// reset search filter
+			if(traildevils.views.trailsListSearch !== undefined) {
+				traildevils.views.trailsListSearch.reset();
+			}
+			
 			this.loadMask = new Ext.LoadMask(Ext.getBody(),{
                 msg: traildevils.views.trailsList.loadingText
             });

@@ -65,6 +65,8 @@ Ext.regApplication({
 		
 		// trailsListPanel Components
 		traildevils.views.trailsList = traildevils.views.trailsListPanel.getComponent('trailsList');
+		traildevils.views.trailsListSearchToolbar = traildevils.views.trailsListPanel.getComponent('trailsListSearchToolbar');
+		traildevils.views.trailsListSearch = traildevils.views.trailsListSearchToolbar.getComponent('trailsListSearch');
 		
 		
 		traildevils.views.trailsMap = Ext.getCmp('trailsMap');

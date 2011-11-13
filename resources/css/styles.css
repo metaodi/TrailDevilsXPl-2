@@ -168,6 +168,29 @@ a:hover, a:active, a:focus,
 	background-image: radial-gradient(rgba(248, 251, 254, 0.5), rgba(248, 251, 254, 0) 30px);
 }
 
+/* WORKAROUND FOR SENCHA BUG: Clear icon wasn't correctly styled if form field was in a toolbar
+   Source: http://www.sencha.com/forum/showthread.php?121347-OPEN-726-bad-clear-icon-handling-when-Text-field-is-in-a-toolbar */
+.x-toolbar .x-field-clear-container {    
+	min-height: 0;
+	min-height: 0;
+	position: absolute;
+	top: 0.35em;
+	right: 0.5em;
+	font-size: 1em;
+	border-radius: 3em;
+	background-color: inherit !important;
+}
+.x-toolbar .x-input-text.x-field-clearable, .x-toolbar .x-input-search, .x-toolbar .x-input-number.x-field-clearable {
+	padding-right: 2em;
+}
+.x-toolbar .x-field-clear {
+	padding: 0.1em 0 0 0;
+	cursor: pointer;
+}
+.x-desktop .x-toolbar .x-input-search {
+	padding-left: 1.5em;
+}
+
 
 /* ------------------------------------
    TRAILDETAIL

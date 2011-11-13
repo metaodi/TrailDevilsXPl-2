@@ -7,9 +7,11 @@
 traildevils.views.TrailsListSearch = Ext.extend(Ext.form.Search, {
 	placeHolder: 'Suche...',
 	cls: 'trailsListSearch',
+	useClearIcon: true,
 	store: null,
 	
 	initComponent: function() {
+		this.originalValue = '';
 		this.store = traildevils.store;
 		Ext.apply(this, {
             listeners: {
@@ -26,6 +28,16 @@ traildevils.views.TrailsListSearch = Ext.extend(Ext.form.Search, {
         });
 		
         traildevils.views.TrailsListSearch.superclass.initComponent.apply(this, arguments);
+    },
+	
+	// @private
+    onClearIconTap: function() {
+        if(!this.disabled) {
+            this.setValue('');
+			
+			// clear filter of store
+			this.store.clearFilter();
+        }
     },
 	
 	filterByValue: function(value) {
