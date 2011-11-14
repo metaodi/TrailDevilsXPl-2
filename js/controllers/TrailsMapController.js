@@ -109,7 +109,14 @@ Ext.regController('trailsmap', {
 	},
 	
 	'showtrailonmap': function (options) {
-		traildevils.views.viewport.setActiveItem('trailsMapMainPanel', 'slide' );
+		if(traildevils.views.viewport.getActiveItem() === traildevils.views.trailsMapMainPanel) {
+			Ext.dispatch({
+				controller: traildevils.controllers.trailsMapController,
+				action: 'map'
+			});
+		} else {
+			traildevils.views.viewport.setActiveItem('trailsMapMainPanel', 'slide' );
+		}
 		// center map to trails position
 		traildevils.views.trailsMap.setCenterPosition(options.latitude, options.longitude);
 	},
