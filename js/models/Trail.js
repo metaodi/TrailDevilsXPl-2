@@ -24,19 +24,6 @@ Ext.regModel('Trail', {
 	
     hasMany: { model: 'Type', name: 'types' },
 	
-	setThumbUrl: function() {
-		if (this.get('thumb') != '')
-		{
-			var script = document.createElement("script");
-			script.setAttribute("src",
-				"http://src.sencha.io/data.traildevils.store.setPhotoUrl-" + this.getId() +
-				"/" + this.get('thumb')
-			);
-			script.setAttribute("type","text/javascript");
-			document.body.appendChild(script);
-		}
-	},
-	
 	toggleFavorite: function() {
 		this.data.favorite = !this.data.favorite;
 	}

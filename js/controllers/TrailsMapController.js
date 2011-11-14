@@ -103,6 +103,7 @@ Ext.regController('trailsmap', {
 				});
 			}
 		);
+		traildevils.views.trailDetailTabPanel.backBtn.setText('Map');
 		
 		traildevils.views.trailsMapMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
 	},

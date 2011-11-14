@@ -41,11 +41,11 @@ Ext.regStore('TrailsLocal', {
     },
 	
 	//try to get data from remote
-	refreshData : function() {
+	refreshData: function() {
 		this.removeAllRecordsFromStore();
 		traildevils.remotestore.each(function (record) {
 			var trail = traildevils.store.add(record.data)[0];
-			trail.setThumbUrl();
+			//trail.setThumbUrl();
 		});
 		this.updateDistances();
 		this.sort();
@@ -53,20 +53,14 @@ Ext.regStore('TrailsLocal', {
 		traildevils.views.trailsList.refresh();
 	},
 	
-	removeAllRecordsFromStore : function() {
+	removeAllRecordsFromStore: function() {
 	    this.removeAll();
 		this.getProxy().clear();
 		this.sync();
 	},
 	
-	setPhotoUrl: function (id, dataUrl) {
-		var trail = this.getById(id);
-		trail.set('thumb', dataUrl);
-		this.sync();
-	},
-	
 	// group by status
-	getGroupString : function(record) {
+	getGroupString: function(record) {
 		return record.get('status');
 	},
 	

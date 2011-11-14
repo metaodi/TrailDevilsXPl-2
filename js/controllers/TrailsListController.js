@@ -32,6 +32,7 @@ Ext.regController('trailslist', {
 				});
 			}
 		);
+		traildevils.views.trailDetailTabPanel.backBtn.setText('Trails');
 		
 		traildevils.views.trailsListMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
 	}

@@ -3,6 +3,12 @@ require_once 'JSONRemoteCaller.class.php';
 require_once 'GeoLocation.class.php';
 class DataLoader
 {
+	protected $filetypeArray = array(
+		'jpg' => 'data:image/jpeg;base64,',
+		'gif' => 'data:image/gif;base64,',
+		'png' => 'data:image/png;base64,',
+	);
+	
 	public function echoData($data)
 	{
 		echo $data;
@@ -52,7 +58,7 @@ class DataLoader
 			$convertedArray[$i]["location"] = ($externalTrailArray[$i]["NextCity"] ? $externalTrailArray[$i]["NextCity"].", " : "") . $externalTrailArray[$i]["Country"];
 			$convertedArray[$i]["distance"] = $externalTrailArray[$i]['distance'];
 			$convertedArray[$i]["formattedDistance"] = $userGeo->getFormattedDistance($convertedArray[$i]["distance"]);
-			$convertedArray[$i]["thumb"] = $externalTrailArray[$i]["ImageUrl120"];
+			$convertedArray[$i]["thumb"] = $this->imageToBase64($externalTrailArray[$i]["ImageUrl120"]);
 			$convertedArray[$i]["description"] = nl2br($externalTrailArray[$i]["Desc"]);
 			$convertedArray[$i]["status"] = $externalTrailArray[$i]["IsOpen"] ? "offen" : "geschlossen";
 			$convertedArray[$i]["latitude"] = $externalTrailArray[$i]["GmapX"];
@@ -110,6 +116,18 @@ class DataLoader
 		}
 		
 		return json_encode(array("images" => $convertedTrailImagesArray));
+	}
+	
+	function imageToBase64($file = NULL) {
+		if($file != NULL) {
+			$content = file_get_contents($file);
+			$filetype = strtolower(substr(strrchr($file,'.'),1));
+			
+			if($content) {
+				return $this->filetypeArray[$filetype].base64_encode($content);
+			}
+		}
+		return "";
 	}
 }
 ?>
