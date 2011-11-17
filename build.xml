@@ -49,37 +49,29 @@
 	</target>
 	
 	<target name="generate_manifest" depends="deploy">
-		<echo message="Generating manifest file ${manifest}"/>
+		<echo message="Generating manifest file ${manifest}" />
 
-		<echo message="Updating the ${manifest} version date to today"/>
+		<echo message="Updating the ${manifest} version date to today" />
 		<tstamp>
-			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss"/>
+			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
 		</tstamp>
-		<replace value="# version" token="${TODAY}" file="${webapp.dir}/${manifest}"/>
+		<replace value="# version" token="${TODAY}" file="${webapp.dir}/${manifest}" summary="true" />
 
 		<!-- replace css files -->
-		<fileset id="css.fileset" dir="${webapp.dir}/${css.dir}/" includes="**/*.css"/>
-		<property name="css.files" refid="css.fileset"/>
-		<replace value="# css files" token="${css.files}" file="${webapp.dir}/${manifest}"/>
+		<fileset id="css.fileset" dir="${webapp.dir}/${css.dir}/" includes="**/*.css" />
+		<property name="css.files" refid="css.fileset" />
+		<replace value="# css files" token="${css.files}" file="${webapp.dir}/${manifest}" summary="true" />
 	</target>
 	
 	<target name="patch" depends="generate_manifest">
-		<replace file="${webapp.dir}/index.html" summary="true">
-			<replacetoken>-debug</replacetoken>
-			<replacevalue></replacevalue>
-		</replace>
-		<replace file="${webapp.dir}/app.manifest" summary="true">
-			<replacetoken>-debug</replacetoken>
-			<replacevalue></replacevalue>
-		</replace>
+		<replace value="-debug" token="" file="${webapp.dir}/index.html" summary="true" />
+		<replace value="-debug" token="" file="${webapp.dir}/app.manifest" summary="true" />
 		
 		<!-- create a version that uses the app.manifest to test offline functionality -->
 		<copy file="${webapp.dir}/index.html" tofile="${webapp.dir}/local.html" overwrite="true" verbose="true" />
 		<replace file="${webapp.dir}/local.html" summary="true">
-			<replacetoken><![CDATA[<html>]]>
-			</replacetoken>
-			<replacevalue><![CDATA[<html manifest="app.manifest">]]>
-			</replacevalue>
+			<replacetoken><![CDATA[<html>]]></replacetoken>
+			<replacevalue><![CDATA[<html manifest="app.manifest">]]></replacevalue>
 		</replace>
 	</target>
 </project>
