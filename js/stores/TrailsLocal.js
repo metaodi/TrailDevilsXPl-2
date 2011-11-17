@@ -16,7 +16,6 @@ Ext.regStore('TrailsLocal', {
 	
 	listeners: {
 		beforeload: function() {
-			console.log("localstore beforeload");
 			traildevils.remotestore.currentPage = this.currentPage;
 			
 			this.sorters.clear();
@@ -46,10 +45,7 @@ Ext.regStore('TrailsLocal', {
                 msg: traildevils.views.trailsList.loadingText
             });
             this.loadMask.show();
-			console.log("localstore beforeload end");
-		},
-		load: function() {
-			console.log("localstore load");
+			
 			traildevils.remotestore.loadPage(this.currentPage);
 		}
 	},

@@ -19,13 +19,11 @@ Ext.regStore('Trails', {
 	
 	listeners: {
 		beforeload: function() {
-			console.log("remotestore beforeload");
 			if(traildevils.util.geoLocation.locationAvailable) {
 				this.proxy.extraParams.params = traildevils.util.geoLocation.latitude + ',' + traildevils.util.geoLocation.longitude + ',' + this.pageSize;
 			} else {
 				this.proxy.extraParams.params = '0,0,' + this.pageSize;
 			}
-			console.log(this.proxy.extraParams.params);
 		},
 		load: function() {
 			traildevils.store.refreshData();
