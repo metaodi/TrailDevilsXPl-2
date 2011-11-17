@@ -1,62 +1,20 @@
 CACHE MANIFEST
-#rev2
- 
+
+# version 2011/07/04 15:29:22
+
+# html files
 index.html
-lib/sencha-touch-1.1.1/sencha-touch-debug.js
+
+# css files
 lib/sencha-touch-1.1.1/resources/css-debug/sencha-touch.css
 
+# image files
+		
+# js files
+lib/sencha-touch-1.1.1/sencha-touch-debug.js
 http://maps.google.com/maps/api/js?sensor=true
 
-resources/css/styles.css
-resources/css/Ext.ux.touch.ListOptions.css
-resources/images/app_icon.jpg
-resources/images/arrow_black.png
-resources/images/fav_silver.png
-resources/images/fav_silver_act.png
-resources/images/fav_white.png
-resources/images/fav_white_act.png
-resources/images/gmap_marker_cycling-shadow.png
-resources/images/gmap_marker_cycling.png
-resources/images/phone_startup.jpg
-resources/images/swipe_background.png
-		
-js/application.js
-js/app/routes.js
-
-js/controllers/FavoritePopupController.js
-js/controllers/TrailMediaController.js
-js/controllers/TrailsListController.js
-js/controllers/TrailsMapController.js
-
-js/models/Trail.js
-js/models/TrailImage.js
-js/models/Type.js
-
-js/stores/TrailImages.js
-js/stores/Trails.js
-js/stores/TrailsLocal.js
-
-js/views/FavoritePopupPanel.js
-js/views/TrailGeoLocation.js
-js/views/Viewport.js
-
-js/views/trailDetail/TrailDetailInfoPanel.js
-js/views/trailDetail/TrailDetailMediaCarouselImagePanel.js
-js/views/trailDetail/TrailDetailMediaCarouselSheet.js
-js/views/trailDetail/TrailDetailMediaThumbDataView.js
-js/views/trailDetail/TrailDetailTabPanel.js
-
-js/views/trailsList/TrailsList.js
-js/views/trailsList/TrailsListMainPanel.js
-js/views/trailsList/TrailsListOptionsPlugin.js
-js/views/trailsList/TrailsListPagingPlugin.js
-js/views/trailsList/TrailsListPanel.js
-js/views/trailsList/TrailsListPullRefreshPlugin.js
-js/views/trailsList/TrailsListSearch.js
-
-js/views/trailsMap/TrailsMap.js
-js/views/trailsMap/TrailsMapMainPanel.js
-js/views/trailsMap/TrailsMapPanel.js
+FALLBACK:
 
 NETWORK:
 *
