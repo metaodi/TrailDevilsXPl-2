@@ -19,5 +19,5 @@ traildevils.views.TrailsListMainPanel = Ext.extend(Ext.Panel, {
     }
 });
 
-// Create xtype trailsListMainPanel
+// Create xtype
 Ext.reg('trailsListMainPanel', traildevils.views.TrailsListMainPanel);

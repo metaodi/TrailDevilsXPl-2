@@ -1,8 +1,11 @@
 /**
- * This file sets up the TrailDevils application. We register an application called 'traildevils' - this automatically sets up
- * a global variable with the same name.
+ * This file sets up the Traildevils application. We register an application called 'traildevils'.
+ * This automatically sets up a global variable with the same name and the following namespaces:
+ * - traildevils.controllers
+ * - traildevils.views
  * 
  */ 
+
 Ext.regApplication({
 	name: 'traildevils',
 	tabletStartupScreen: 'resources/images/phone_startup.jpg',
@@ -29,31 +32,14 @@ Ext.regApplication({
 		traildevils.online = false;
 		
 		// get current geolocation
-		traildevils.views.geoLocation = new traildevils.views.TrailGeoLocation({
-			listeners: {
-				firstUpdate: true,
-				
-				locationupdate: function(geo) {
-					if(this.firstUpdate) {
-						// load first page of data
-						traildevils.store.loadPage(1);
-						this.firstUpdate = false;
-					} else {
-						traildevils.store.updateDistances();
-						traildevils.store.sort();
-						traildevils.views.trailsList.refresh();
-					}
-				},
-				locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
-					if(bTimeout){
-						console.log('Timeout occurred.');
-					} else {
-						console.log('Error occurred.');
-					}
-				}
-			}
+		traildevils.util.geoLocation = new traildevils.util.TrailGeoLocation();
+		traildevils.util.geoLocation.updateLocation(function() {
+			traildevils.store.loadPage(1);
 		});
+		traildevils.util.geoLocation.setAutoUpdate(true);
 		
+		
+		// initialize viewport
 		traildevils.views.viewport = new traildevils.views.Viewport();
 		
 		// viewport Components
@@ -66,6 +52,8 @@ Ext.regApplication({
 		// trailsListPanel Components
 		traildevils.views.trailsList = traildevils.views.trailsListPanel.getComponent('trailsList');
 		traildevils.views.trailsListSearchToolbar = traildevils.views.trailsListPanel.getComponent('trailsListSearchToolbar');
+		
+		// trailsListSearchToolbar Components
 		traildevils.views.trailsListSearch = traildevils.views.trailsListSearchToolbar.getComponent('trailsListSearch');
 		
 		

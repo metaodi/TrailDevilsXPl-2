@@ -3,7 +3,7 @@ Ext.regController('trailsmap', {
 	
     'addMarkers': function (options) {
 		// center map to current position
-		traildevils.views.trailsMap.setCenterPosition(traildevils.views.geoLocation.latitude, traildevils.views.geoLocation.longitude);
+		traildevils.views.trailsMap.setCenterPosition(traildevils.util.geoLocation.latitude, traildevils.util.geoLocation.longitude);
 		
 		// remove all markers and listeners
 		google.maps.event.clearInstanceListeners(traildevils.views.trailsMap.map);

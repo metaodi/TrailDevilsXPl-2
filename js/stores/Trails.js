@@ -19,7 +19,7 @@ Ext.regStore('Trails', {
 	listeners: {
 		beforeload: function() {
 			// before each data load set proxy params to current geolocation
-			this.proxy.extraParams.params = traildevils.views.geoLocation.latitude + ',' + traildevils.views.geoLocation.longitude + ',' + this.pageSize;
+			this.proxy.extraParams.params = traildevils.util.geoLocation.latitude + ',' + traildevils.util.geoLocation.longitude + ',' + this.pageSize;
 		},
 		load : function() {
 			traildevils.store.refreshData();
@@ -60,7 +60,7 @@ Ext.regStore('Trails', {
 	},
 	
 	getDistance: function(lat, lng) {
-		return traildevils.views.geoLocation.getDistance(lat, lng);
+		return traildevils.util.geoLocation.getDistance(lat, lng);
 	},
 	
 	getFormattedDistance: function(distanceInMeters) {

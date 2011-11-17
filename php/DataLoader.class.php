@@ -65,6 +65,21 @@ class DataLoader
 			$convertedArray[$i]["longitude"] = $externalTrailArray[$i]["GmapY"];
 			$convertedArray[$i]["types"] = $this->getTrailTypes($convertedArray[$i]["id"]);
 		}
+		
+		// TODO delete after development: add closed trail
+		$nextIndex = count($convertedArray);
+		$convertedArray[$nextIndex]["id"] = "100";
+		$convertedArray[$nextIndex]["title"] = "Geschlossener Trail";
+		$convertedArray[$nextIndex]["location"] = "Rapperswil";
+		$convertedArray[$nextIndex]["distance"] = $userGeo->distance(new GeoLocation("47.5101756", "8.7221472"));
+		$convertedArray[$nextIndex]["formattedDistance"] = $userGeo->getFormattedDistance($convertedArray[$nextIndex]["distance"]);
+		$convertedArray[$nextIndex]["thumb"] = "";
+		$convertedArray[$nextIndex]["description"] = "description";
+		$convertedArray[$nextIndex]["status"] = "geschlossen";
+		$convertedArray[$nextIndex]["latitude"] = "47.5101756";
+		$convertedArray[$nextIndex]["longitude"] = "8.7221472";
+		$convertedArray[$nextIndex]["types"] = "";
+		
 		return json_encode(array("trails" => $convertedArray));
 	}
 	
