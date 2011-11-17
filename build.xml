@@ -55,12 +55,12 @@
 		<tstamp>
 			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss"/>
 		</tstamp>
-		<replaceregexp match="# version .+" replace="# version ${TODAY}" file="${webapp.dir}/${manifest}"/>
+		<replace value="# version" token="${TODAY}" file="${webapp.dir}/${manifest}"/>
 
 		<!-- replace css files -->
 		<fileset id="css.fileset" dir="${webapp.dir}/${css.dir}/" includes="**/*.css"/>
 		<property name="css.files" refid="css.fileset"/>
-		<replaceregexp match="# css files .+" replace="${css.files}" file="${webapp.dir}/${manifest}" />
+		<replace value="# css files" token="${css.files}" file="${webapp.dir}/${manifest}"/>
 	</target>
 	
 	<target name="patch" depends="generate_manifest">
