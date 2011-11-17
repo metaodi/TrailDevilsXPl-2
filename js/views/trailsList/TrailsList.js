@@ -10,27 +10,6 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	grouped : true,
 	loadingText: 'Lade Trails...',
 	
-	itemTpl: [
-		'<div class="trail-item">',
-		'	<div class="trail-image"><tpl if="thumb != &quot;&quot;"><img src="{thumb}" alt="{title}" /></tpl></div>',
-		'	<div class="trail-info">',
-		'		<h1>{title}</h1>',
-		'		<dl>',
-		'			<dt>Ort:</dt>',
-		'			<dd>{location}</dd>',
-		'		</dl>',
-		'	</div>',
-		'	<div class="trail-types">',
-		'		<tpl for="types">',
-		'			<div class="trail-type">{name}</div>',
-		'		</tpl>',
-		'	</div>',
-		'	<div class="trail-distance">',
-		'		<p>{formattedDistance}</p>',
-		'	</div>',
-		'</div>'
-	],
-	
 	initComponent: function() {
 		this.listOptionsPlugin = new traildevils.views.TrailsListOptionsPlugin();
 		this.plugins = [
@@ -40,6 +19,31 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 		];
 	
         this.store = traildevils.store;
+		
+		var tpl =
+			'<div class="trail-item">' +
+			'	<div class="trail-image"><tpl if="thumb"><img src="{thumb}" alt="{title}" /></tpl></div>' +
+			'	<div class="trail-info">' +
+			'		<h1>{title}</h1>' +
+			'		<dl>' +
+			'			<dt>Ort:</dt>' +
+			'			<dd>{location}</dd>' +
+			'		</dl>' +
+			'	</div>' +
+			'	<div class="trail-types">' +
+			'		<tpl for="types">' +
+			'			<div class="trail-type">{name}</div>' +
+			'		</tpl>' +
+			'	</div>' +
+			'	<tpl if="distance">' +
+			'		<div class="trail-distance">' +
+			'			<p>{formattedDistance}</p>' +
+			'		</div>'+
+			'	</tpl>'+
+			'</div>';
+		
+		this.itemTpl = tpl;
+		
 		
 		this.listeners = {
 			itemtap: function(container, index, item, e) {

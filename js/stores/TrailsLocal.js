@@ -18,6 +18,7 @@ Ext.regStore('TrailsLocal', {
 		beforeload: function() {
 			traildevils.remotestore.currentPage = this.currentPage;
 			
+			// reset store sorters depending on geolocation availability
 			this.sorters.clear();
 			this.sorters.add(new Ext.util.Sorter(
 				{ property: 'status', direction: 'DESC' }
@@ -41,6 +42,7 @@ Ext.regStore('TrailsLocal', {
 				traildevils.views.trailsListSearch.reset();
 			}
 			
+			// show load mask
 			this.loadMask = new Ext.LoadMask(Ext.getBody(),{
                 msg: traildevils.views.trailsList.loadingText
             });
