@@ -68,8 +68,8 @@
 	
 	<target name="patch" depends="update_manifest">-->
 	<target name="patch" depends="deploy">
-		<replace value="-debug" token="" file="${webapp.dir}/index.html" summary="true" />
-		<replace value="-debug" token="" file="${webapp.dir}/app.manifest" summary="true" />
+		<replace token="-debug" value=""  file="${webapp.dir}/index.html" summary="true" />
+		<replace token="-debug" value=""  file="${webapp.dir}/app.manifest" summary="true" />
 		
 		<!-- create a version that uses the app.manifest to test offline functionality -->
 		<copy file="${webapp.dir}/index.html" tofile="${webapp.dir}/local.html" overwrite="true" verbose="true" />
