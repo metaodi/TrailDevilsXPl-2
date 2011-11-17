@@ -2,9 +2,8 @@
  * @class traildevils.views.Viewport
  * @extends Ext.TabPanel
  * 
- * The viewport is the application's shell - the parts of the UI that don't change. 
- * 
  */
+
 traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 	id: 'traildevils',
 	fullscreen: true,

@@ -1,10 +1,13 @@
+// create traildevils.util namespace
+Ext.namespace('traildevils.util');
+
 /**
  * @class traildevils.util.TrailGeoLocation
  * @extends Ext.util.GeoLocation
  * 
  */
 
-traildevils.views.TrailGeoLocation = Ext.extend(Ext.util.GeoLocation, {
+traildevils.util.TrailGeoLocation = Ext.extend(Ext.util.GeoLocation, {
     firstUpdate: true,
 	
 	initComponent: function () {
@@ -27,7 +30,7 @@ traildevils.views.TrailGeoLocation = Ext.extend(Ext.util.GeoLocation, {
 			}
 		};
 		
-        traildevils.views.TrailGeoLocation.superclass.initComponent.call(this);
+        traildevils.util.TrailGeoLocation.superclass.initComponent.call(this);
     },
 	
 	/* source: http://www.movable-type.co.uk/scripts/latlong.html */
@@ -45,4 +48,4 @@ traildevils.views.TrailGeoLocation = Ext.extend(Ext.util.GeoLocation, {
 });
 
 // Create xtype
-Ext.reg('trailGeoLocation', traildevils.views.TrailGeoLocation);
+Ext.reg('trailGeoLocation', traildevils.util.TrailGeoLocation);

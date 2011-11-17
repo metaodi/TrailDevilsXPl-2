@@ -1,8 +1,11 @@
 /**
- * This file sets up the TrailDevils application. We register an application called 'traildevils' - this automatically sets up
- * a global variable with the same name.
+ * This file sets up the Traildevils application. We register an application called 'traildevils'.
+ * This automatically sets up a global variable with the same name and the following namespaces:
+ * - traildevils.controllers
+ * - traildevils.views
  * 
  */ 
+
 Ext.regApplication({
 	name: 'traildevils',
 	tabletStartupScreen: 'resources/images/phone_startup.jpg',
@@ -29,7 +32,7 @@ Ext.regApplication({
 		traildevils.online = false;
 		
 		// get current geolocation
-		traildevils.views.geoLocation = new traildevils.views.TrailGeoLocation({
+		traildevils.util.geoLocation = new traildevils.util.TrailGeoLocation({
 			listeners: {
 				firstUpdate: true,
 				
@@ -66,6 +69,8 @@ Ext.regApplication({
 		// trailsListPanel Components
 		traildevils.views.trailsList = traildevils.views.trailsListPanel.getComponent('trailsList');
 		traildevils.views.trailsListSearchToolbar = traildevils.views.trailsListPanel.getComponent('trailsListSearchToolbar');
+		
+		// trailsListSearchToolbar Components
 		traildevils.views.trailsListSearch = traildevils.views.trailsListSearchToolbar.getComponent('trailsListSearch');
 		
 		

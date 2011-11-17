@@ -65,7 +65,7 @@ Ext.regStore('TrailsLocal', {
 	},
 	
 	getDistance: function(lat, lng) {
-		return traildevils.views.geoLocation.getDistance(lat, lng);
+		return traildevils.util.geoLocation.getDistance(lat, lng);
 	},
 	
 	getFormattedDistance: function(distanceInMeters) {
