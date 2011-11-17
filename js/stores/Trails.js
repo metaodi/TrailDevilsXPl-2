@@ -7,6 +7,7 @@
 Ext.regStore('Trails', {
 	model: 'Trail',
 	clearOnPageLoad: false,
+	remoteSort: true,
     pageSize: 10,
 	
 	// order by status descending (groups) and distance ascending
@@ -18,10 +19,15 @@ Ext.regStore('Trails', {
 	
 	listeners: {
 		beforeload: function() {
-			// before each data load set proxy params to current geolocation
-			this.proxy.extraParams.params = traildevils.util.geoLocation.latitude + ',' + traildevils.util.geoLocation.longitude + ',' + this.pageSize;
+			console.log("remotestore beforeload");
+			if(traildevils.util.geoLocation.locationAvailable) {
+				this.proxy.extraParams.params = traildevils.util.geoLocation.latitude + ',' + traildevils.util.geoLocation.longitude + ',' + this.pageSize;
+			} else {
+				this.proxy.extraParams.params = '0,0,' + this.pageSize;
+			}
+			console.log(this.proxy.extraParams.params);
 		},
-		load : function() {
+		load: function() {
 			traildevils.store.refreshData();
 			traildevils.store.loadMask.hide();
 			
@@ -35,9 +41,7 @@ Ext.regStore('Trails', {
         url : 'php/AjaxHandler.class.php',
 		extraParams: {
 			className: 'DataLoader',
-			functionName: 'getTrailsNear',
-			// geolocation params are set before each data load
-			params: '0,0'
+			functionName: 'getTrailsNear'
 		},
 		model: 'Trail',
         reader: {
@@ -57,25 +61,5 @@ Ext.regStore('Trails', {
 	// group by status
 	getGroupString : function(record) {
 		return record.get('status');
-	},
-	
-	getDistance: function(lat, lng) {
-		return traildevils.util.geoLocation.getDistance(lat, lng);
-	},
-	
-	getFormattedDistance: function(distanceInMeters) {
-		if(distanceInMeters > 999) {
-			// round to one decimal
-			return (Math.round(distanceInMeters / 100) / 10) + "km";
-		} else {
-			return Math.round(distanceInMeters) + "m";
-		}
-	},
-	
-	updateDistances: function() {
-		this.each(function(store) {
-			store.data.distance = traildevils.store.getDistance(store.data.latitude, store.data.longitude);
-			store.data.formattedDistance = traildevils.store.getFormattedDistance(store.data.distance);
-		});
 	}
 });

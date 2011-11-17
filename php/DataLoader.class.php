@@ -20,6 +20,9 @@ class DataLoader
 		}
 		return ($a['distance'] < $b['distance']) ? -1 : 1;
 	}
+	public function titleCmp($a, $b) {
+	    return strcmp($a['Name'], $b['Name']);
+	}
 	
 	/**
 	 * Get trails near the users current position
@@ -31,23 +34,30 @@ class DataLoader
 	 * 
 	 * @TODO delete default params for latitude/longitude
 	 */
-	public function getTrailsNear($userLat=47.5101756, $userLng=8.7221472, $pageSize=10, $page=1, $url="http://152.96.80.18:8080/api/trails") { /*http://jenkins.rdmr.ch/php/mock_api.json*/
+	public function getTrailsNear($userLat=47.5101756, $userLng=8.7221472, $pageSize=10, $page=1, $sort="", $url="http://152.96.80.18:8080/api/trails") { /*http://jenkins.rdmr.ch/php/mock_api.json*/
 		$remote = new JSONRemoteCaller($url);
 		$userGeo = new GeoLocation($userLat, $userLng);
-		return $this->convertTrailsJson($remote->callRemoteSite(), $userGeo, $pageSize, $page);
+		$sortArray = json_decode($sort, true);
+		return $this->convertTrailsJson($remote->callRemoteSite(), $userGeo, $pageSize, $page, $sortArray);
 	}
 	
-	public function convertTrailsJson($externalTrailJson, GeoLocation $userGeo, $pageSize, $page) {
+	public function convertTrailsJson($externalTrailJson, GeoLocation $userGeo, $pageSize, $page, $sortArray) {
 		$externalTrailArray = json_decode($externalTrailJson, true);
 		$convertedArray = array();
 		
-		// calculate distance for each trail
-		for($i = 0; $i < count($externalTrailArray); $i++) {
-			$externalTrailArray[$i]['distance'] = $userGeo->distance(new GeoLocation($externalTrailArray[$i]["GmapX"], $externalTrailArray[$i]["GmapY"]));
+		// handle sorters
+		if($sortArray[count($sortArray)-1]['property'] == 'distance') {
+			// calculate distance for each trail
+			for($i = 0; $i < count($externalTrailArray); $i++) {
+				$externalTrailArray[$i]['distance'] = $userGeo->distance(new GeoLocation($externalTrailArray[$i]["GmapX"], $externalTrailArray[$i]["GmapY"]));
+			}
+
+			// sort array by distance
+			usort($externalTrailArray, array($this, "distanceCmp"));
+		} else {
+			// sort array by title
+			usort($externalTrailArray, array($this, "titleCmp"));
 		}
-		
-		// sort array by distance
-		usort($externalTrailArray, array($this, "distanceCmp"));
 		
 		// only take the nearest 10 trails
 		$externalTrailArray = array_slice($externalTrailArray, (($page-1) * $pageSize), $pageSize);
@@ -56,8 +66,10 @@ class DataLoader
 			$convertedArray[$i]["id"] = $externalTrailArray[$i]["Id"];
 			$convertedArray[$i]["title"] = $externalTrailArray[$i]["Name"];
 			$convertedArray[$i]["location"] = ($externalTrailArray[$i]["NextCity"] ? $externalTrailArray[$i]["NextCity"].", " : "") . $externalTrailArray[$i]["Country"];
-			$convertedArray[$i]["distance"] = $externalTrailArray[$i]['distance'];
-			$convertedArray[$i]["formattedDistance"] = $userGeo->getFormattedDistance($convertedArray[$i]["distance"]);
+			if($sortArray[count($sortArray)-1]['property'] == 'distance') {
+				$convertedArray[$i]["distance"] = $externalTrailArray[$i]['distance'];
+				$convertedArray[$i]["formattedDistance"] = $userGeo->getFormattedDistance($convertedArray[$i]["distance"]);
+			}
 			$convertedArray[$i]["thumb"] = $this->imageToBase64($externalTrailArray[$i]["ImageUrl120"]);
 			$convertedArray[$i]["description"] = nl2br($externalTrailArray[$i]["Desc"]);
 			$convertedArray[$i]["status"] = $externalTrailArray[$i]["IsOpen"] ? "offen" : "geschlossen";
