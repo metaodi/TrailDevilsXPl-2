@@ -56,8 +56,9 @@
 			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
 		</tstamp>
 		<replace value="# version" token="${TODAY}" file="${webapp.dir}/${manifest}" summary="true" />
-
-		<!-- replace css files -->
+		
+		<!-- add css files -->
+		<echo message="Adding css files to manifest" />
 		<fileset id="css.fileset" dir="${webapp.dir}/${css.dir}/" includes="**/*.css" />
 		<property name="css.files" refid="css.fileset" />
 		<replace value="# css files" token="${css.files}" file="${webapp.dir}/${manifest}" summary="true" />
