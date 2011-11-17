@@ -14,6 +14,10 @@
 	<property name="js.dir"		value="js" />
 	<property name="manifest"	value="app.manifest" />
 	
+	<tstamp>
+		<format property="TODAY" pattern="dd.MM.yyyy HH:mm:ss" />
+	</tstamp>
+	
 	<target name="clean">
 		<echo message="Clean previously deployed files"/>
 		<delete includeemptydirs="true">
@@ -48,13 +52,10 @@
 		</copy>
 	</target>
 	
-	<target name="generate_manifest" depends="deploy">
-		<echo message="Generating manifest file ${manifest}" />
+	<target name="update_manifest" depends="deploy">
+		<echo message="Updating manifest file ${manifest}" />
 
-		<echo message="Updating the ${manifest} version date to today" />
-		<tstamp>
-			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
-		</tstamp>
+		<echo message="Updating the ${manifest} version date to today (${TODAY})" />
 		<replace value="# version" token="${TODAY}" file="${webapp.dir}/${manifest}" summary="true" />
 		
 		<!-- add css files -->
@@ -64,7 +65,7 @@
 		<replace value="# css files" token="${css.files}" file="${webapp.dir}/${manifest}" summary="true" />
 	</target>
 	
-	<target name="patch" depends="generate_manifest">
+	<target name="patch" depends="update_manifest">
 		<replace value="-debug" token="" file="${webapp.dir}/index.html" summary="true" />
 		<replace value="-debug" token="" file="${webapp.dir}/app.manifest" summary="true" />
 		
