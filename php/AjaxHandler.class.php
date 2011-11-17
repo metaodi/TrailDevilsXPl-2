@@ -21,13 +21,16 @@ if (isset($_REQUEST['className']) && isset($_REQUEST['functionName']))
 	$handler = new AjaxHandler();
 	//add params if available
 	$paramArray = array();
-	if (isset($_REQUEST['params']))
-	{
+	
+	if (isset($_REQUEST['params'])) {
 		$paramArray = explode(',', $_REQUEST['params']);
 	}
 	
 	if(isset($_GET['page'])) {
 		$paramArray[] = $_GET['page'];
+	}
+	if(isset($_GET['sort'])) {
+		$paramArray[] = $_GET['sort'];
 	}
 	
 	$handler->handleRequest($_REQUEST['className'], $_REQUEST['functionName'], $paramArray);

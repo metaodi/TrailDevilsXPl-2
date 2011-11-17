@@ -14,13 +14,15 @@ traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 			'<div class="trail-detail">' +
 			'	<div class="trail-detail-head">' +
 			'		<div class="trail-info">' +
-			'			<tpl if="thumb != &quot;&quot;"><div class="trail-image"><img src="{thumb}" alt="{title}" /></div></tpl>' +
+			'			<tpl if="thumb"><div class="trail-image"><img src="{thumb}" alt="{title}" /></div></tpl>' +
 			'			<h1>{title}</h1>' +
 			'			<dl>' +
 			'				<dt>Ort:</dt>' +
 			'				<dd>{location}</dd>' +
-			'				<dt>Entfernung:</dt>' +
-			'				<dd>{formattedDistance}</dd>' +
+			'				<tpl if="distance">' +
+			'					<dt>Entfernung:</dt>' +
+			'					<dd>{formattedDistance}</dd>' +
+			'				</tpl>' +
 			'			</dl>' +
 			'				<div class="trail-types">' +
 			'				<tpl for="types">' +

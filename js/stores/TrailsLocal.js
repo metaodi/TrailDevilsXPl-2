@@ -18,17 +18,36 @@ Ext.regStore('TrailsLocal', {
 		beforeload: function() {
 			traildevils.remotestore.currentPage = this.currentPage;
 			
+			// reset store sorters depending on geolocation availability
+			this.sorters.clear();
+			this.sorters.add(new Ext.util.Sorter(
+				{ property: 'status', direction: 'DESC' }
+			));
+			if(traildevils.util.geoLocation.locationAvailable) {
+				// order by status descending (groups) and distance ascending
+				this.sorters.add(new Ext.util.Sorter(
+					{ property: 'distance', direction: 'ASC' }
+				));
+			} else {
+				// order by status descending (groups) and title ascending
+				this.sorters.add(new Ext.util.Sorter(
+					{ property: 'title', direction: 'ASC' }
+				));
+			}
+			
+			traildevils.remotestore.sorters = this.sorters;
+			
 			// reset search filter
 			if(traildevils.views.trailsListSearch !== undefined) {
 				traildevils.views.trailsListSearch.reset();
 			}
 			
+			// show load mask
 			this.loadMask = new Ext.LoadMask(Ext.getBody(),{
                 msg: traildevils.views.trailsList.loadingText
             });
             this.loadMask.show();
-		},
-		load: function() {
+			
 			traildevils.remotestore.loadPage(this.currentPage);
 		}
 	},
@@ -46,7 +65,6 @@ Ext.regStore('TrailsLocal', {
 		traildevils.remotestore.each(function (record) {
 			traildevils.store.add(record.data);
 		});
-		this.updateDistances();
 		this.sort();
 		this.sync();
 		traildevils.views.trailsList.refresh();
