@@ -44,8 +44,7 @@ Ext.regStore('TrailsLocal', {
 	refreshData: function() {
 		this.removeAllRecordsFromStore();
 		traildevils.remotestore.each(function (record) {
-			var trail = traildevils.store.add(record.data)[0];
-			//trail.setThumbUrl();
+			traildevils.store.add(record.data);
 		});
 		this.updateDistances();
 		this.sort();
