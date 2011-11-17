@@ -8,30 +8,23 @@ Ext.namespace('traildevils.util');
  */
 
 traildevils.util.TrailGeoLocation = Ext.extend(Ext.util.GeoLocation, {
-    firstUpdate: true,
+	autoUpdate: false,
 	
-	initComponent: function () {
-		this.listeners = {
-			locationupdate: function(geo) {
-				if(this.firstUpdate) {
-					traildevils.store.load();
-					this.firstUpdate = false;
-				} else {
-					traildevils.store.updateDistances();
-					traildevils.views.trailsList.refresh();
-				}
-			},
-			locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
-				if(bTimeout){
-					alert('Timeout occurred.');
-				} else {
-					alert('Error occurred.');
-				}
+    listeners: {
+		locationupdate: function(geo) {
+			console.log("loc upt");
+			traildevils.store.updateDistances();
+			traildevils.store.sort();
+			traildevils.views.trailsList.refresh();
+		},
+		locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
+			if(bTimeout){
+				console.log('GeoLocation: Timeout occurred');
+			} else {
+				console.log('GeoLocation: Error occurred.');
 			}
-		};
-		
-        traildevils.util.TrailGeoLocation.superclass.initComponent.call(this);
-    },
+		}
+	},
 	
 	/* source: http://www.movable-type.co.uk/scripts/latlong.html */
 	getDistance: function(lat, lng) {

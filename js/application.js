@@ -32,31 +32,14 @@ Ext.regApplication({
 		traildevils.online = false;
 		
 		// get current geolocation
-		traildevils.util.geoLocation = new traildevils.util.TrailGeoLocation({
-			listeners: {
-				firstUpdate: true,
-				
-				locationupdate: function(geo) {
-					if(this.firstUpdate) {
-						// load first page of data
-						traildevils.store.loadPage(1);
-						this.firstUpdate = false;
-					} else {
-						traildevils.store.updateDistances();
-						traildevils.store.sort();
-						traildevils.views.trailsList.refresh();
-					}
-				},
-				locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
-					if(bTimeout){
-						console.log('Timeout occurred.');
-					} else {
-						console.log('Error occurred.');
-					}
-				}
-			}
+		traildevils.util.geoLocation = new traildevils.util.TrailGeoLocation();
+		traildevils.util.geoLocation.updateLocation(function() {
+			traildevils.store.loadPage(1);
 		});
+		traildevils.util.geoLocation.setAutoUpdate(true);
 		
+		
+		// initialize viewport
 		traildevils.views.viewport = new traildevils.views.Viewport();
 		
 		// viewport Components

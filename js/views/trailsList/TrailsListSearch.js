@@ -18,7 +18,6 @@ traildevils.views.TrailsListSearch = Ext.extend(Ext.form.Search, {
 				scope: this,
 				keyup: function(field) {
 					this.filterByValue(field.getValue());
-					this.store.sort();
 					
 					// WORKAROUND FOR SENCHA BUG: Scroll to top of list after filtering
 					// Source: http://www.sencha.com/forum/showthread.php?132969-Problems-filtering-list-store-after-scrolling-to-bottom
