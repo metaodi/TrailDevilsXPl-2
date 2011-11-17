@@ -52,20 +52,22 @@
 		</copy>
 	</target>
 	
-	<target name="update_manifest" depends="deploy">
+	
+<!--	<target name="update_manifest" depends="deploy">
 		<echo message="Updating manifest file ${manifest}" />
 
 		<echo message="Updating the ${manifest} version date to today (${TODAY})" />
 		<replace value="# version" token="${TODAY}" file="${webapp.dir}/${manifest}" summary="true" />
 		
-		<!-- add css files -->
+		 add css files 
 		<echo message="Adding css files to manifest" />
 		<fileset id="css.fileset" dir="${webapp.dir}/${css.dir}/" includes="**/*.css" />
 		<property name="css.files" refid="css.fileset" />
 		<replace value="# css files" token="${css.files}" file="${webapp.dir}/${manifest}" summary="true" />
 	</target>
 	
-	<target name="patch" depends="update_manifest">
+	<target name="patch" depends="update_manifest">-->
+	<target name="patch" depends="deploy">
 		<replace value="-debug" token="" file="${webapp.dir}/index.html" summary="true" />
 		<replace value="-debug" token="" file="${webapp.dir}/app.manifest" summary="true" />
 		
