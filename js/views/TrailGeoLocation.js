@@ -9,20 +9,17 @@ Ext.namespace('traildevils.util');
 
 traildevils.util.TrailGeoLocation = Ext.extend(Ext.util.GeoLocation, {
 	autoUpdate: false,
+	locationAvailable: true,
 	
     listeners: {
 		locationupdate: function(geo) {
-			console.log("loc upt");
+			this.locationAvailable = true;
 			traildevils.store.updateDistances();
 			traildevils.store.sort();
 			traildevils.views.trailsList.refresh();
 		},
 		locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
-			if(bTimeout){
-				console.log('GeoLocation: Timeout occurred');
-			} else {
-				console.log('GeoLocation: Error occurred.');
-			}
+			this.locationAvailable = false;
 		}
 	},
 	
