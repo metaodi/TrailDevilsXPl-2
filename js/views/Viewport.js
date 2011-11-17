@@ -27,16 +27,6 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 		
 		this.listeners = {
 			beforecardswitch: function(container, newCard, oldCard, index, animated) {
-				if(newCard === traildevils.views.trailsMapMainPanel) {
-					// if trailsMap is opened and map is already rendered redraw all markers
-					if(traildevils.views.trailsMap.rendered) {
-						Ext.dispatch({
-							controller: traildevils.controllers.trailsMapController,
-							action: 'addMarkers'
-						});
-					}
-				}
-				
 				// TODO implement this in controllers
 				if(oldCard === traildevils.views.trailsMapMainPanel) {
 					// if another tab than trailsMap is selected set current view of trailsMap back to map
@@ -49,6 +39,16 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 				// destory detail panel on each cardswitch
 				if(traildevils.views.trailDetailTabPanel !== undefined && !traildevils.views.trailDetailTabPanel.isDestroyed) {
 					traildevils.views.trailDetailTabPanel.destroy();
+				}
+			},
+			// after cardswitch
+			cardswitch: function(container, newCard, oldCard, index, animated) {
+				if(newCard === traildevils.views.trailsMapMainPanel) {
+					// if trailsMap is opened redraw all markers
+					Ext.dispatch({
+						controller: traildevils.controllers.trailsMapController,
+						action: 'addMarkers'
+					});
 				}
 			}
 		};

@@ -9,9 +9,9 @@ Ext.regController('trailsmap', {
 		google.maps.event.clearInstanceListeners(traildevils.views.trailsMap.map);
 		this.removeAllMarkers();
 		
-		// create infowindow (all the markers will use this infowindow)
+		// create infowindow with maxWidth depending on trailsMap Panelsize (all the markers will use this infowindow)
 		var markerInfoWindow = new google.maps.InfoWindow({
-			maxWidth: 300
+			maxWidth: traildevils.views.trailsMap.getSize().width - 50
 		});
 		
 		// prepare custom marker image with shadow
