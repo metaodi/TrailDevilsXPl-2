@@ -32,11 +32,11 @@ Ext.regApplication({
 		traildevils.online = false;
 		
 		// get current geolocation
-		traildevils.util.geoLocation = new traildevils.util.TrailGeoLocation();
-		traildevils.util.geoLocation.updateLocation(function() {
+		traildevils.geo = new traildevils.util.TrailGeoLocation();
+		traildevils.geo.updateLocation(function() {
 			traildevils.store.loadPage(1);
 		});
-		traildevils.util.geoLocation.setAutoUpdate(true);
+		traildevils.geo.setAutoUpdate(true);
 		
 		
 		// initialize viewport

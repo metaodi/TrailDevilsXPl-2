@@ -23,7 +23,7 @@ Ext.regStore('TrailsLocal', {
 			this.sorters.add(new Ext.util.Sorter(
 				{ property: 'status', direction: 'DESC' }
 			));
-			if(traildevils.util.geoLocation.locationAvailable) {
+			if(traildevils.geo.available) {
 				// order by status descending (groups) and distance ascending
 				this.sorters.add(new Ext.util.Sorter(
 					{ property: 'distance', direction: 'ASC' }
@@ -82,7 +82,7 @@ Ext.regStore('TrailsLocal', {
 	},
 	
 	getDistance: function(lat, lng) {
-		return traildevils.util.geoLocation.getDistance(lat, lng);
+		return traildevils.geo.getDistance(lat, lng);
 	},
 	
 	getFormattedDistance: function(distanceInMeters) {

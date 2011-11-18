@@ -19,8 +19,8 @@ Ext.regStore('Trails', {
 	
 	listeners: {
 		beforeload: function() {
-			if(traildevils.util.geoLocation.locationAvailable) {
-				this.proxy.extraParams.params = traildevils.util.geoLocation.latitude + ',' + traildevils.util.geoLocation.longitude + ',' + this.pageSize;
+			if(traildevils.geo.available) {
+				this.proxy.extraParams.params = traildevils.geo.latitude + ',' + traildevils.geo.longitude + ',' + this.pageSize;
 			} else {
 				this.proxy.extraParams.params = '0,0,' + this.pageSize;
 			}

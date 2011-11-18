@@ -12,6 +12,7 @@ traildevils.views.TrailsMap = Ext.extend(Ext.Map, {
 	},
 	
 	setCenterPosition: function(lat, lng) {
+		console.log("center to: lat" + lat + " / lng: " + lng);
 		// use panTo() instead of setCenter() because of setCenter doens't really work many times
 		this.map.panTo(new google.maps.LatLng(lat, lng));
 	}

@@ -1,9 +1,22 @@
 Ext.regController('trailsmap', {
 	trailMarkers: [],
+	mapCenterLatitude: 0,
+	mapCenterLongitude: 0,
 	
     'addMarkers': function (options) {
+		// TODO unschoen geloest (mapCenter-Variabeln werden je nachdem woher 'addMarkers' aufgerufen wird, anders gesetzt)
+		if(this.mapCenterLatitude == 0 && this.mapCenterLongitude == 0) {
+			// reset center position to current position
+			this.mapCenterLatitude = traildevils.geo.latitude;
+			this.mapCenterLongitude = traildevils.geo.longitude;
+		}
+		
 		// center map to current position
-		traildevils.views.trailsMap.setCenterPosition(traildevils.util.geoLocation.latitude, traildevils.util.geoLocation.longitude);
+		traildevils.views.trailsMap.setCenterPosition(this.mapCenterLatitude, this.mapCenterLongitude);
+		
+		// reset center position to current position (for next call)
+		this.mapCenterLatitude = traildevils.geo.latitude;
+		this.mapCenterLongitude = traildevils.geo.longitude;
 		
 		// remove all markers and listeners
 		google.maps.event.clearInstanceListeners(traildevils.views.trailsMap.map);
@@ -114,11 +127,12 @@ Ext.regController('trailsmap', {
 				controller: traildevils.controllers.trailsMapController,
 				action: 'map'
 			});
+			traildevils.views.trailsMap.setCenterPosition(options.latitude, options.longitude);
 		} else {
-			traildevils.views.viewport.setActiveItem('trailsMapMainPanel', 'slide' );
+			this.mapCenterLatitude = options.latitude;
+			this.mapCenterLongitude = options.longitude;
+			traildevils.views.viewport.setActiveItem('trailsMapMainPanel', 'slide');
 		}
-		// center map to trails position
-		traildevils.views.trailsMap.setCenterPosition(options.latitude, options.longitude);
 	},
 	
 	removeAllMarkers: function() {
