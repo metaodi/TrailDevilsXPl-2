@@ -28,7 +28,7 @@ Ext.regStore('Trails', {
 		load: function() {
 			traildevils.store.refreshData();
 			traildevils.store.loadMask.hide();
-			
+			traildevils.store.onResetComplete();
 			traildevils.online = true;
 			console.log('App ist online!');
 		}
@@ -59,5 +59,9 @@ Ext.regStore('Trails', {
 	// group by status
 	getGroupString : function(record) {
 		return record.get('status');
+	},
+	
+	removeAllRecordsFromStore: function() {
+	    this.removeAll();
 	}
 });

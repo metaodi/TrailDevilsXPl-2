@@ -18,6 +18,10 @@ traildevils.views.TrailsListPullRefreshPlugin = Ext.extend(Ext.plugins.PullRefre
 		'	</div>',
 		'</div>'
 	),
+	
+	refreshFn: function(callbackFn, plugin) {
+		traildevils.store.reset(callbackFn, plugin);
+	},
 		
 	/**
      * This function is called after the List has been refreshed. It resets the Pull to Refresh markup and
@@ -37,6 +41,18 @@ traildevils.views.TrailsListPullRefreshPlugin = Ext.extend(Ext.plugins.PullRefre
             setTimeout(function() {
                 me.scroller.updateBoundary(me.snappingAnimationDuration);
             }, 100);
+        }
+    },
+	
+	/**
+     * This function makes sure that the Stores LoadMask is not shown when the list is being reloaded by
+     * this plugin.
+     * @private
+     */
+    onBeforeLoad: function() {
+        if (this.isLoading && this.list.store.getCount() > 0) {
+            traildevils.store.loadMask.hide();
+            return false;
         }
     }
 });

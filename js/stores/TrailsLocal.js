@@ -8,6 +8,9 @@ Ext.regStore('TrailsLocal', {
 	model: 'Trail',
 	clearOnPageLoad: false,
 	
+	resetCompleteCallbackFn: null,
+	resetCompleteCallbackCmp: null,
+	
 	// order by status descending (groups) and distance ascending
 	sorters: [
 		{ property: 'status', direction: 'DESC'}, 
@@ -16,8 +19,6 @@ Ext.regStore('TrailsLocal', {
 	
 	listeners: {
 		beforeload: function() {
-			traildevils.remotestore.currentPage = this.currentPage;
-			
 			// reset store sorters depending on geolocation availability
 			this.sorters.clear();
 			this.sorters.add(new Ext.util.Sorter(
@@ -58,6 +59,21 @@ Ext.regStore('TrailsLocal', {
 		model: 'Trail',
 		idProperty: 'id'
     },
+	
+	reset: function(callbackFn, cmp) {
+		this.currentPage = 1;
+		traildevils.remotestore.removeAllRecordsFromStore();
+		this.loadPage(this.currentPage);
+		// TODO very ugly implementation (please refactor me!)
+		this.resetCompleteCallbackFn = callbackFn;
+		this.resetCompleteCallbackCmp = cmp;
+	},
+	onResetComplete: function() {
+		if(this.resetCompleteCallbackFn !== null) {
+			this.resetCompleteCallbackFn.call(this.resetCompleteCallbackCmp);
+		}
+		this.resetCompleteCallbackFn = null;
+	},
 	
 	//try to get data from remote
 	refreshData: function() {

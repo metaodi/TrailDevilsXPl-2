@@ -30,6 +30,13 @@ traildevils.views.TrailsListPagingPlugin = Ext.extend(Ext.plugins.ListPagingPlug
         }
 
         this.rendered = true;
+    },
+	
+    onBeforeLoad : function() {
+        if (this.loading && this.list.store.getCount() > 0) {
+            traildevils.store.loadMask.hide();
+            return false;
+        }
     }
 });
 
