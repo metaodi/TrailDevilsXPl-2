@@ -117,8 +117,10 @@ a:hover, a:active, a:focus,
 	color: #3364a1;
 }
 #trailsList .x-list-paging .x-list-paging-loadingmsg {
-	margin-left: 0.8em;
 	display: none;
+	font-size: 0.8em;
+	margin-left: 1em;
+	font-weight: normal;
 }
 #trailsList .x-list-paging.x-loading .x-list-paging-loadingmsg {
 	display: block;
@@ -126,7 +128,7 @@ a:hover, a:active, a:focus,
 
 /* pull to refresh plugin */
 #trailsList .x-list-pullrefresh {
-	padding-top: 0.6em;
+	margin-top: 0.6em;
 	color: #6c6c6c;
 }
 #trailsList .x-list-pullrefresh-arrow {

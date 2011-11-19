@@ -6,17 +6,14 @@ Ext.regController('trailsmap', {
     'addMarkers': function (options) {
 		// TODO unschoen geloest (mapCenter-Variabeln werden je nachdem woher 'addMarkers' aufgerufen wird, anders gesetzt)
 		if(this.mapCenterLatitude == 0 && this.mapCenterLongitude == 0) {
-			// reset center position to current position
-			this.mapCenterLatitude = traildevils.geo.latitude;
-			this.mapCenterLongitude = traildevils.geo.longitude;
+			this.resetMapCenterPosition();
 		}
 		
-		// center map to current position
+		// center map to correct position
 		traildevils.views.trailsMap.setCenterPosition(this.mapCenterLatitude, this.mapCenterLongitude);
 		
-		// reset center position to current position (for next call)
-		this.mapCenterLatitude = traildevils.geo.latitude;
-		this.mapCenterLongitude = traildevils.geo.longitude;
+		// reset map center position
+		this.resetMapCenterPosition();
 		
 		// remove all markers and listeners
 		google.maps.event.clearInstanceListeners(traildevils.views.trailsMap.map);
@@ -140,6 +137,18 @@ Ext.regController('trailsmap', {
 			this.trailMarkers[i].setMap(null);
 		}
 		this.trailMarkers = [];
+	},
+	
+	resetMapCenterPosition: function() {
+		if(traildevils.geo.available) {
+			// reset center position to current position
+			this.mapCenterLatitude = traildevils.geo.latitude;
+			this.mapCenterLongitude = traildevils.geo.longitude;
+		} else if(traildevils.store.data.length > 0) {
+			// reset center position to position of first trail in store
+			this.mapCenterLatitude = traildevils.store.getAt(0).data.latitude;
+			this.mapCenterLongitude = traildevils.store.getAt(0).data.longitude;
+		}
 	}
 });
 
