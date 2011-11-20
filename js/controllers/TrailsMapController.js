@@ -1,92 +1,104 @@
 Ext.regController('trailsmap', {
 	trailMarkers: [],
-	mapCenterLatitude: 0,
-	mapCenterLongitude: 0,
+	centerLatitude: 0,
+	centerLongitude: 0,
+	store: null,
+	markerImage: null,
+	markerShadow: null,
+	initialized: false,
 	
-    'addMarkers': function (options) {
-		// TODO unschoen geloest (mapCenter-Variabeln werden je nachdem woher 'addMarkers' aufgerufen wird, anders gesetzt)
-		if(this.mapCenterLatitude == 0 && this.mapCenterLongitude == 0) {
-			this.resetMapCenterPosition();
-		}
-		
-		// center map to correct position
-		traildevils.views.trailsMap.setCenterPosition(this.mapCenterLatitude, this.mapCenterLongitude);
-		
-		// reset map center position
-		this.resetMapCenterPosition();
-		
-		// remove all markers and listeners
-		google.maps.event.clearInstanceListeners(traildevils.views.trailsMap.map);
-		this.removeAllMarkers();
-		
-		// create infowindow with maxWidth depending on trailsMap Panelsize (all the markers will use this infowindow)
-		var markerInfoWindow = new google.maps.InfoWindow({
-			maxWidth: traildevils.views.trailsMap.getSize().width - 50
-		});
-		
+	initController: function() {
 		// prepare custom marker image with shadow
 		// - image created with: http://mapicons.nicolasmollet.com/
 		// - shadow created with: http://www.cycloloco.com/shadowmaker/shadowmaker.htm
-		var markerImage = new google.maps.MarkerImage("resources/images/gmap_marker_cycling.png",
+		this.markerImage = new google.maps.MarkerImage("resources/images/gmap_marker_cycling.png",
 			new google.maps.Size(32.0, 37.0),
 			new google.maps.Point(0, 0),
 			new google.maps.Point(16.0, 18.0)
 		);
-		var markerShadow = new google.maps.MarkerImage("resources/images/gmap_marker_cycling-shadow.png",
+		this.markerShadow = new google.maps.MarkerImage("resources/images/gmap_marker_cycling-shadow.png",
 			new google.maps.Size(51.0, 37.0),
 			new google.maps.Point(0, 0),
 			new google.maps.Point(16.0, 18.0)
 		);
 		
-		for(var i = 0; i < traildevils.store.data.length; i++) {
-			var trailData = traildevils.store.data.items[i].data;
-			var trailPosition = new google.maps.LatLng(trailData.latitude, trailData.longitude);
-			
-			var marker = new google.maps.Marker({
-				map: traildevils.views.trailsMap.map,
-				position: trailPosition,
-				title: trailData.title,
-				icon: markerImage,
-				shadow: markerShadow
-			});
-			
-			var shortDescription = trailData.description
-			if(shortDescription.length > 100) {
-				shortDescription = shortDescription.substring(0, 100) + "...";
-			}
-			
-			var trailDetailLinkEvent = 'Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'detail\', trail: traildevils.store.getAt(' + i + ') });';
+		this.resetControllerOptions();
 		
-			marker.content =
-				'<div class="infowindow-content">' +
-				'	<h1>' +
-				'		<a href="#" onclick="' + trailDetailLinkEvent + '" title="Details anzeigen" >' + trailData.title + '</a>' +
-				'	</h1>' +
-				'	<div class="trail-info">' +
-				'		<p class="trail-location">' + trailData.location + '</p>';
-			if(trailData.thumb != "") {
-				marker.content +=
-					'	<img class="trail-image" src="' + trailData.thumb + '" alt="' + trailData.title + '" />';
-			}
-			marker.content +=
-				'		<p class="trail-description">' + shortDescription + '</p>' +
-				'		<p><a href="#" onclick="' + trailDetailLinkEvent + '" title="Details anzeigen" >weitere Informationen...</a></p>' +
-				'	</div>' +
-				'</div>';
-			
-			// use mouseup event instead of click event
-			// click event doesn't work on mobile safari with google maps api v3 
-			google.maps.event.addListener(marker, 'mouseup', function() {
-				// this attribute references to the current marker
-				markerInfoWindow.setContent(this.content);
-				markerInfoWindow.open(traildevils.views.trailsMap.map, this);
-			});
-			
-			this.trailMarkers.push(marker);
+		this.initialized = true;
+	},
+	
+	addMarkers: function(options) {
+		if(!this.initialized) {
+			this.initController();
+		}
+		
+		// remove all markers and listeners
+		google.maps.event.clearInstanceListeners(traildevils.views.trailsMap.map);
+		this.removeAllMarkers();
+		
+		// center map to correct position
+		traildevils.views.trailsMap.setCenterPosition(this.centerLatitude, this.centerLongitude);
+		
+		// create infowindow with maxWidth depending on trailsMap panelsize (all markers will use this infowindow)
+		var markerInfoWindow = new google.maps.InfoWindow({
+			maxWidth: traildevils.views.trailsMap.getSize().width - 50
+		});
+		
+		// add markers to map
+		for(var i = 0; i < this.store.data.length; i++) {
+			this.addSingleMarker(this.store.data.items[i].data, i, markerInfoWindow);
 		}
 	},
 	
-	'map': function (options) {
+	addSingleMarker: function(trailData, index, markerInfoWindow) {
+		var trailPosition = new google.maps.LatLng(trailData.latitude, trailData.longitude);
+		
+		var marker = new google.maps.Marker({
+			map: traildevils.views.trailsMap.map,
+			position: trailPosition,
+			title: trailData.title,
+			icon: this.markerImage,
+			shadow: this.markerShadow
+		});
+
+		var shortDescription = trailData.description
+		if(shortDescription.length > 100) {
+			shortDescription = shortDescription.substring(0, 100) + "...";
+		}
+		
+		var trailDetailLinkEvent = 'Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'detail\', trail: traildevils.controllers.trailsMapController.store.getAt(' + index + ') });';
+
+		marker.content =
+			'<div class="infowindow-content">' +
+				'<h1>' +
+					'<a href="#" onclick="' + trailDetailLinkEvent + '" title="Details anzeigen" >' + trailData.title + '</a>' +
+				'</h1>' +
+				'<div class="trail-info">' +
+					'<p class="trail-location">' + trailData.location + '</p>';
+
+		if(trailData.thumb != "") {
+			marker.content +=
+						'<img class="trail-image" src="' + trailData.thumb + '" alt="' + trailData.title + '" />';
+		}
+
+		marker.content +=
+					'<p class="trail-description">' + shortDescription + '</p>' +
+					'<p><a href="#" onclick="' + trailDetailLinkEvent + '" title="Details anzeigen" >weitere Informationen...</a></p>' +
+				'</div>' +
+			'</div>';
+
+		// use mouseup event instead of click event
+		// click event doesn't work on mobile safari with google maps api v3 
+		google.maps.event.addListener(marker, 'mouseup', function() {
+			// this attribute references to the current marker
+			markerInfoWindow.setContent(this.content);
+			markerInfoWindow.open(traildevils.views.trailsMap.map, this);
+		});
+
+		this.trailMarkers.push(marker);
+	},
+	
+	map: function (options) {
 		traildevils.views.trailsMapMainPanel.setActiveItem(
 			'trailsMapPanel',
 			{
@@ -100,8 +112,9 @@ Ext.regController('trailsmap', {
 		);
 	},
 	
-	'detail': function (options) {
+	detail: function (options) {
 		traildevils.views.trailDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
+			origin: 'map',
 			trail: options.trail
 		});
 		
@@ -118,20 +131,49 @@ Ext.regController('trailsmap', {
 		traildevils.views.trailsMapMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
 	},
 	
-	'showtrailonmap': function (options) {
-		if(traildevils.views.viewport.getActiveItem() === traildevils.views.trailsMapMainPanel) {
-			Ext.dispatch({
-				controller: traildevils.controllers.trailsMapController,
-				action: 'map'
-			});
-			traildevils.views.trailsMap.setCenterPosition(options.latitude, options.longitude);
-		} else {
-			this.mapCenterLatitude = options.latitude;
-			this.mapCenterLongitude = options.longitude;
-			traildevils.views.viewport.setActiveItem('trailsMapMainPanel', 'slide');
+	showTrailOnMap: function (options) {
+		if(!this.initialized) {
+			this.initController();
+		}
+			
+		switch(options.origin) {
+			// if map was already opened
+			case 'map':
+				Ext.dispatch({
+					controller: traildevils.controllers.trailsMapController,
+					action: 'map'
+				});
+				traildevils.views.trailsMap.setCenterPosition(options.latitude, options.longitude);
+				break;
+			case 'favorite':
+				this.store = traildevils.favoritestore;
+				this.centerLatitude = options.latitude;
+				this.centerLongitude = options.longitude;
+				traildevils.views.trailsMapPanel.dockedItems.items[0].setTitle("Favoriten in der Nähe");
+				traildevils.views.viewport.setActiveItem('trailsMapMainPanel', 'slide');
+				break;
+			default:
+				this.store = traildevils.store;
+				this.centerLatitude = options.latitude;
+				this.centerLongitude = options.longitude;
+				traildevils.views.viewport.setActiveItem('trailsMapMainPanel', 'slide');
 		}
 	},
 	
+	showFavoriteTrailsOnMap: function(options) {
+		if(!this.initialized) {
+			this.initController();
+		}
+		
+		this.store = traildevils.favoritestore;
+		traildevils.views.trailsMapPanel.dockedItems.items[0].setTitle("Favoriten in der Nähe");
+		traildevils.views.viewport.setActiveItem('trailsMapMainPanel', 'slide');
+	},
+	
+	/**
+     * Removes all markers from map
+     * @private
+     */
 	removeAllMarkers: function() {
 		for(var i = 0; i < this.trailMarkers.length; i++) {
 			this.trailMarkers[i].setMap(null);
@@ -139,16 +181,22 @@ Ext.regController('trailsmap', {
 		this.trailMarkers = [];
 	},
 	
-	resetMapCenterPosition: function() {
+	/**
+     * Prepares the map center position variabels
+     * @private
+     */
+	resetControllerOptions: function() {
 		if(traildevils.geo.available) {
 			// reset center position to current position
-			this.mapCenterLatitude = traildevils.geo.latitude;
-			this.mapCenterLongitude = traildevils.geo.longitude;
+			this.centerLatitude = traildevils.geo.latitude;
+			this.centerLongitude = traildevils.geo.longitude;
 		} else if(traildevils.store.data.length > 0) {
 			// reset center position to position of first trail in store
-			this.mapCenterLatitude = traildevils.store.getAt(0).data.latitude;
-			this.mapCenterLongitude = traildevils.store.getAt(0).data.longitude;
+			this.centerLatitude = traildevils.store.getAt(0).data.latitude;
+			this.centerLongitude = traildevils.store.getAt(0).data.longitude;
 		}
+		this.store = traildevils.store;
+		traildevils.views.trailsMapPanel.dockedItems.items[0].setTitle("Trails in der Nähe");
 	}
 });
 

@@ -27,6 +27,7 @@ Ext.regApplication({
 		// initialize store
 		traildevils.store = Ext.getStore('TrailsLocal');
 		traildevils.remotestore = Ext.getStore('Trails');
+		traildevils.favoritestore = Ext.getStore('FavoriteTrailsLocal');
 		
 		//app is offline until told otherwise
 		traildevils.online = false;
@@ -45,18 +46,24 @@ Ext.regApplication({
 		// viewport Components
 		traildevils.views.trailsListMainPanel = traildevils.views.viewport.getComponent('trailsListMainPanel');
 		traildevils.views.trailsMapMainPanel = traildevils.views.viewport.getComponent('trailsMapMainPanel');
+		traildevils.views.favoriteTrailsListMainPanel = traildevils.views.viewport.getComponent('favoriteTrailsListMainPanel');
 		
 		// trailsListMainPanel Components
 		traildevils.views.trailsListPanel = traildevils.views.trailsListMainPanel.getComponent('trailsListPanel');
-		
 		// trailsListPanel Components
 		traildevils.views.trailsList = traildevils.views.trailsListPanel.getComponent('trailsList');
 		traildevils.views.trailsListSearchToolbar = traildevils.views.trailsListPanel.getComponent('trailsListSearchToolbar');
-		
 		// trailsListSearchToolbar Components
 		traildevils.views.trailsListSearch = traildevils.views.trailsListSearchToolbar.getComponent('trailsListSearch');
 		
+		// trailsMapMainPanel Components
+		traildevils.views.trailsMapPanel = traildevils.views.trailsMapMainPanel.getComponent('trailsMapPanel');
+		// trailsMapPanel Components
+		traildevils.views.trailsMap = traildevils.views.trailsMapPanel.getComponent('trailsMap');
 		
-		traildevils.views.trailsMap = Ext.getCmp('trailsMap');
+		// favoriteTrailsList
+		traildevils.views.favoriteTrailsList = Ext.getCmp('favoriteTrailsList');
+		
+		// trailsMap
 	}
 });

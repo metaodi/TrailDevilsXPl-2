@@ -69,16 +69,19 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	onListOptionTap: function(option, record) {
 		// if favorite option was tapped
 		if(option.cls == 'favorite' || option.cls == 'favorite-act') {
-			// add trail to favorite store
-			//favStore.add(record)
+			if(record.data.favorite) {
+				traildevils.favoritestore.remove(record);
+			} else {
+				traildevils.favoritestore.add(record);
+			}
 			
 			// toggle favorite flag on trail
 			record.toggleFavorite();
 			
 			// show favorite popup
 			Ext.dispatch({
-				controller: traildevils.controllers.favoritePopupController,
-				action: 'showpopup',
+				controller: traildevils.controllers.favoriteTrailsListController,
+				action: 'showPopup',
 				favorite: record.data.favorite
 			});
 		}

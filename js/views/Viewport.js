@@ -11,14 +11,12 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 	initComponent: function() {
 		this.items = [
 			{ xtype: 'trailsListMainPanel', id: 'trailsListMainPanel' },
-			{ xtype: 'trailsMapMainPanel', id: 'trailsMapMainPanel' }
+			{ xtype: 'trailsMapMainPanel', id: 'trailsMapMainPanel' },
+			{ xtype: 'favoriteTrailsListMainPanel', id: 'favoriteTrailsListMainPanel' }
 		];
 		
 		this.tabBar = {
 			dock: 'bottom',
-			scroll: {
-				direction: 'horizontal'
-			},
 			layout: {
 				align: 'left'
 			}
@@ -35,6 +33,10 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 					// if another tab than trailsList is selected set current view of trailsList back to list
 					traildevils.views.trailsListMainPanel.setActiveItem('trailsListPanel', false);
 				}
+				if(oldCard === traildevils.views.favoriteTrailsListMainPanel) {
+					// if another tab than favoriteTrailsList is selected set current view of favoriteTrailsList back to list
+					traildevils.views.favoriteTrailsListMainPanel.setActiveItem('favoriteTrailsListPanel', false);
+				}
 				// destory detail panel on each cardswitch
 				if(traildevils.views.trailDetailTabPanel !== undefined && !traildevils.views.trailDetailTabPanel.isDestroyed) {
 					traildevils.views.trailDetailTabPanel.destroy();
@@ -48,6 +50,9 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 						controller: traildevils.controllers.trailsMapController,
 						action: 'addMarkers'
 					});
+				}
+				if(oldCard === traildevils.views.trailsMapMainPanel) {
+					traildevils.controllers.trailsMapController.resetControllerOptions();
 				}
 			}
 		};
