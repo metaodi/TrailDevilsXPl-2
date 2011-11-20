@@ -10,7 +10,7 @@ class TestJSONRemoteCaller extends TraildevilsUnitTestCase {
         $this->assertEqual($jsonCaller->getURL(),$url);
     }
 	function testCallRemoteSite() {
-		$url = "file://".dirname(__FILE__)."/trails.json";
+		$url = "file://".dirname(__FILE__)."/../trails.json";
 		$localJson = $this->getTestTrailJson();
 		
         $jsonCaller = new JSONRemoteCaller($url);
