@@ -38,7 +38,7 @@ Ext.regStore('Trails', {
         type: 'ajax',
         url : 'php/AjaxHandler.class.php',
 		extraParams: {
-			className: 'DataLoader',
+			className: 'TrailsLoader',
 			functionName: 'getTrailsNear'
 		},
 		model: 'Trail',
@@ -48,7 +48,6 @@ Ext.regStore('Trails', {
         },
         listeners: {
 			exception: function() {
-				console.log('Start exception.')
 				traildevils.online = false;
 				traildevils.store.loadMask.hide();
 				console.log('App ist offline!');
