@@ -1,6 +1,6 @@
 <?php
-require_once('lib/simpletest/extensions/TraildevilsUnitTestCase.php');
-require_once('../../php/remote/JSONRemoteCaller.class.php');
+require_once(dirname(__FILE__) . '/../lib/simpletest/extensions/TraildevilsUnitTestCase.php');
+require_once(dirname(__FILE__) . '/../../../php/remote/JSONRemoteCaller.class.php');
 
 class TestJSONRemoteCaller extends TraildevilsUnitTestCase {
     function testConstructor() {
