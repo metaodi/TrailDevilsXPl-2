@@ -1,5 +1,5 @@
 Ext.regController('trailmedia', {
-    'openMediaCarousel': function (options) {
+    openMediaCarousel: function (options) {
 		var mediaCarousel = new Ext.Carousel({
             indicator: true,
             defaults: {
@@ -32,11 +32,11 @@ Ext.regController('trailmedia', {
 		
 	},
 	
-	'closeMediaCarousel': function (options) {
+	closeMediaCarousel: function (options) {
 		traildevils.views.trailDetailMediaCarouselSheet.hide();
 	},
 	
-	'carouselImagePanelTap': function(options) {
+	carouselImagePanelTap: function(options) {
 		// doesn't work on orientation change (should relayout the carousel sheet)
 		var sheetToolbar = traildevils.views.trailDetailMediaCarouselSheet.sheetToolbar;
 		if(sheetToolbar.isHidden()) {

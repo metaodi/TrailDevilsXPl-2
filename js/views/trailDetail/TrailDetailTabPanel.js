@@ -7,6 +7,8 @@
 traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 	cls: 'trailDetailTabPanel',
 	trail: null,
+	origin: '',
+	
 	tabBar: {
 		cls: 'trailDetailTabPanelTabBar',
         ui: 'light'
@@ -45,30 +47,28 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 					iconMask: true,
 					ui: 'plain',
 					trail: this.trail,
-					listeners: {
-						tap: function() {
-							if(this.trail.data.favorite) {
-								traildevils.favoritestore.remove(this.trail);
-							} else {
-								traildevils.favoritestore.add(this.trail);
-							}
-							
-							// toggle favorite flag on trail
-							this.trail.toggleFavorite();
+					handler: function() {
+						if(this.trail.data.favorite) {
+							traildevils.favoritestore.remove(this.trail);
+						} else {
+							traildevils.favoritestore.add(this.trail);
+						}
 
-							// show favorite popup
-							Ext.dispatch({
-								controller: traildevils.controllers.favoritePopupController,
-								action: 'showpopup',
-								favorite: this.trail.data.favorite
-							});
-							
-							// set correct icon class
-							if(this.trail.data.favorite) {
-								this.setIconClass('favstar-act');
-							} else {
-								this.setIconClass('favstar');
-							}
+						// toggle favorite flag on trail
+						this.trail.toggleFavorite();
+
+						// show favorite popup
+						Ext.dispatch({
+							controller: traildevils.controllers.favoriteTrailsListController,
+							action: 'showPopup',
+							favorite: this.trail.data.favorite
+						});
+
+						// set correct icon class
+						if(this.trail.data.favorite) {
+							this.setIconClass('favstar-act');
+						} else {
+							this.setIconClass('favstar');
 						}
 					}
 				}
@@ -78,7 +78,8 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
         this.items = [
 			{
 				xtype: 'trailDetailInfoPanel',
-				data: this.trail.data
+				data: this.trail.data,
+				origin: this.origin
 			}, {
 				xtype: 'trailDetailMediaThumbDataView',
 				data: this.trail.data

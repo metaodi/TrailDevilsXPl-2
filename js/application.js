@@ -50,19 +50,20 @@ Ext.regApplication({
 		
 		// trailsListMainPanel Components
 		traildevils.views.trailsListPanel = traildevils.views.trailsListMainPanel.getComponent('trailsListPanel');
-		
 		// trailsListPanel Components
 		traildevils.views.trailsList = traildevils.views.trailsListPanel.getComponent('trailsList');
 		traildevils.views.trailsListSearchToolbar = traildevils.views.trailsListPanel.getComponent('trailsListSearchToolbar');
-		
 		// trailsListSearchToolbar Components
 		traildevils.views.trailsListSearch = traildevils.views.trailsListSearchToolbar.getComponent('trailsListSearch');
 		
+		// trailsMapMainPanel Components
+		traildevils.views.trailsMapPanel = traildevils.views.trailsMapMainPanel.getComponent('trailsMapPanel');
+		// trailsMapPanel Components
+		traildevils.views.trailsMap = traildevils.views.trailsMapPanel.getComponent('trailsMap');
 		
 		// favoriteTrailsList
 		traildevils.views.favoriteTrailsList = Ext.getCmp('favoriteTrailsList');
 		
 		// trailsMap
-		traildevils.views.trailsMap = Ext.getCmp('trailsMap');
 	}
 });

@@ -9,7 +9,25 @@ traildevils.views.FavoriteTrailsListPanel = Ext.extend(Ext.Panel, {
 	
 	initComponent: function () {
 		this.dockedItems = [
-			{ xtype: 'toolbar', title: 'Favoriten' }
+			{
+				xtype: 'toolbar',
+				title: 'Favoriten',
+				items: [
+					
+					{ xtype: 'spacer' },
+					{ 
+						iconCls: 'locate',
+						iconMask: true,
+						handler: function() {
+							// show favorite trails on map
+							Ext.dispatch({
+								controller: traildevils.controllers.trailsMapController,
+								action: 'showFavoriteTrailsOnMap'
+							});
+						}
+					}
+				]
+			}
 		];
 	
         this.items = [

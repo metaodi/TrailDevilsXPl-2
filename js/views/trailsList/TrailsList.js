@@ -80,8 +80,8 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 			
 			// show favorite popup
 			Ext.dispatch({
-				controller: traildevils.controllers.favoritePopupController,
-				action: 'showpopup',
+				controller: traildevils.controllers.favoriteTrailsListController,
+				action: 'showPopup',
 				favorite: record.data.favorite
 			});
 		}

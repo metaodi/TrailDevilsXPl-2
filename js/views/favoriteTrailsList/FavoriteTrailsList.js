@@ -52,7 +52,7 @@ traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
 		// TODO close options menu on item tap
 		var trail = this.store.getAt(index);
 		Ext.dispatch({
-			controller: traildevils.controllers.trailsListController,
+			controller: traildevils.controllers.favoriteTrailsListController,
 			action: 'detail',
 			trail: trail
 		});
