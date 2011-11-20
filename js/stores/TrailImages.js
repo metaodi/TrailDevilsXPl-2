@@ -20,7 +20,7 @@ Ext.regStore('TrailImages', {
         type: 'ajax',
         url : 'php/AjaxHandler.class.php',
 		extraParams: {
-			className: 'DataLoader',
+			className: 'TrailImagesLoader',
 			functionName: 'getTrailImages',
 			// trailid params are set before each data load
 			params: '0'
