@@ -47,6 +47,12 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 					trail: this.trail,
 					listeners: {
 						tap: function() {
+							if(this.trail.data.favorite) {
+								traildevils.favoritestore.remove(this.trail);
+							} else {
+								traildevils.favoritestore.add(this.trail);
+							}
+							
 							// toggle favorite flag on trail
 							this.trail.toggleFavorite();
 

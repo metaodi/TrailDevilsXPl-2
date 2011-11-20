@@ -1,24 +1,18 @@
 /**
- * @class traildevils.views.TrailsList
+ * @class traildevils.views.FavoriteTrailsList
  * @extends Ext.List
  * 
  */
 
-traildevils.views.TrailsList = Ext.extend(Ext.List, {
+traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
 	fullscreen: true,
 	disableSelection: true,
 	grouped : true,
 	loadingText: 'Lade Trails...',
 	
 	initComponent: function() {
-		this.listOptionsPlugin = new traildevils.views.TrailsListOptionsPlugin();
-		this.plugins = [
-			{ ptype: 'trailsListPullRefreshPlugin' },
-			{ ptype: 'trailsListPagingPlugin' },
-			this.listOptionsPlugin
-		];
-	
-        this.store = traildevils.store;
+        this.store = traildevils.favoritestore;
+		this.store.load();
 		
 		var tpl =
 			'<div class="trail-item">' +
@@ -48,13 +42,10 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 		this.listeners = {
 			itemtap: function(container, index, item, e) {
 				this.onTrailItemTap(container, index, item, e);
-			},
-			menuoptiontap: function(option, record) {
-				this.onListOptionTap(option, record);
 			}
         };
 		
-        traildevils.views.TrailsList.superclass.initComponent.apply(this, arguments);
+        traildevils.views.FavoriteTrailsList.superclass.initComponent.apply(this, arguments);
     },
 	
     onTrailItemTap: function(container, index, item, e) {
@@ -65,31 +56,8 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 			action: 'detail',
 			trail: trail
 		});
-    },
-	onListOptionTap: function(option, record) {
-		// if favorite option was tapped
-		if(option.cls == 'favorite' || option.cls == 'favorite-act') {
-			if(record.data.favorite) {
-				traildevils.favoritestore.remove(record);
-			} else {
-				traildevils.favoritestore.add(record);
-			}
-			
-			// toggle favorite flag on trail
-			record.toggleFavorite();
-			
-			// show favorite popup
-			Ext.dispatch({
-				controller: traildevils.controllers.favoritePopupController,
-				action: 'showpopup',
-				favorite: record.data.favorite
-			});
-		}
-		
-		// close options menu
-		this.listOptionsPlugin.hideOptionsMenu(record);
-	}
+    }
 });
 
 // Create xtype
-Ext.reg('trailsList', traildevils.views.TrailsList);
+Ext.reg('favoriteTrailsList', traildevils.views.FavoriteTrailsList);

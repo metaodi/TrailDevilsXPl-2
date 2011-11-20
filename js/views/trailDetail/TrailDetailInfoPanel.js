@@ -12,28 +12,28 @@ traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 	initComponent: function() {
 		var xtpl =
 			'<div class="trail-detail">' +
-			'	<div class="trail-detail-head">' +
-			'		<div class="trail-info">' +
-			'			<tpl if="thumb"><div class="trail-image"><img src="{thumb}" alt="{title}" /></div></tpl>' +
-			'			<h1>{title}</h1>' +
-			'			<dl>' +
-			'				<dt>Ort:</dt>' +
-			'				<dd>{location}</dd>' +
-			'				<tpl if="distance">' +
-			'					<dt>Entfernung:</dt>' +
-			'					<dd>{formattedDistance}</dd>' +
-			'				</tpl>' +
-			'			</dl>' +
-			'				<div class="trail-types">' +
-			'				<tpl for="types">' +
-			'				<div class="trail-type">{name}</div>' +
-			'				</tpl>' +
-			'			</div>' +
-			'		</div>' +
-			'		<div class="clear"></div>' +
-			'	</div>' +
-			'	<div class="trail-detail-body">' +
-			'		<div class="trail-description">{description}</div>';
+				'<div class="trail-detail-head">' +
+					'<div class="trail-info">' +
+						'<tpl if="thumb"><div class="trail-image"><img src="{thumb}" alt="{title}" /></div></tpl>' +
+						'<h1>{title}</h1>' +
+						'<dl>' +
+							'<dt>Ort:</dt>' +
+							'<dd>{location}</dd>' +
+							'<tpl if="distance">' +
+								'<dt>Entfernung:</dt>' +
+								'<dd>{formattedDistance}</dd>' +
+							'</tpl>' +
+						'</dl>' +
+						'<div class="trail-types">' +
+							'<tpl for="types">' +
+								'<div class="trail-type">{name}</div>' +
+							'</tpl>' +
+						'</div>' +
+					'</div>' +
+					'<div class="clear"></div>' +
+				'</div>' +
+				'<div class="trail-detail-body">' +
+					'<div class="trail-description">{description}</div>';
 		
 		if(traildevils.online) {
 			var trailMapImageUrl = 'http://maps.google.com/maps/api/staticmap?';
@@ -45,16 +45,16 @@ traildevils.views.TrailDetailInfoPanel = Ext.extend(Ext.Panel, {
 			var showOnMapLinkEvent = "Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'showtrailonmap\', latitude: '" + this.data.latitude + "', longitude: '" + this.data.longitude + "' });";
 			
 			xtpl +=
-				'		<div class="trail-map">' +
-				'			<h2>' +
-				'				Kartenansicht <span>(<a href="#" onclick="' + showOnMapLinkEvent + '">auf Karte anzeigen</a>)</span>' +
-				'			</h2>' +
-				'			<img src="' + trailMapImageUrl + '" alt="Kartenansicht des Trails: {title}" />' +
-				'		</div>';
+						'<div class="trail-map">' +
+							'<h2>' +
+								'Kartenansicht <a class="trail-map-showonmap-link" href="#" onclick="' + showOnMapLinkEvent + '">auf Karte anzeigen</a>' +
+							'</h2>' +
+							'<img src="' + trailMapImageUrl + '" alt="Kartenansicht des Trails: {title}" />' +
+						'</div>';
 		}
 		
 		xtpl +=
-			'	</div>' +
+				'</div>' +
 			'</div>';
 		
         this.tpl = new Ext.XTemplate(xtpl);

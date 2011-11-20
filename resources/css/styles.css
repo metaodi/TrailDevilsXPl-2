@@ -9,23 +9,37 @@ a, .x-html a {
 	text-decoration: none;
 	color: #06C;
 }
-a:hover, a:active, a:focus,
-.x-html a:hover, .x-html a:active, .x-html a:focus {
-	text-decoration: underline;
+a:active, a:focus,
+.x-html a:active, .x-html a:focus {
+	background-color: #dfe3ec;
 	color: #06C;
+}
+
+/* remove default clearicon in searchfields (only in webkit browsers)
+   Source: http://css-tricks.com/7261-webkit-html5-search-inputs/ */
+input[type="search"]::-webkit-search-cancel-button {
+   /* Remove default */
+    -webkit-appearance: none;
 }
 
 /* ------------------------------------
    TRAILSLIST
    ------------------------------------ */
-#trailsList {
+#trailsList,
+#favoriteTrailsList {
 	font-size: 0.8em;
 }
-#trailsList .x-list-item.x-item-pressed {
+#trailsList .x-list-item,
+#favoriteTrailsList .x-list-item {
+	background-color: #fff;
+}
+#trailsList .x-list-item.x-item-pressed,
+#favoriteTrailsList .x-list-item.x-item-pressed {
 	border-top-color: #D1D1D1;
 	background: #dfe3ec none;
 }
 #trailsList .trail-item .trail-image,
+#favoriteTrailsList .trail-item .trail-image,
 .trailDetailTabPanel .trail-detail .trail-image {
 	float: left;
 	margin-right: 0.8em;
@@ -33,10 +47,12 @@ a:hover, a:active, a:focus,
 	min-height: 5em;
 }
 #trailsList .trail-item .trail-image img,
+#favoriteTrailsList .trail-item .trail-image img,
 .trailDetailTabPanel .trail-detail .trail-image img {
 	width: 6em;
 }
-#trailsList .trail-item .trail-distance {
+#trailsList .trail-item .trail-distance,
+#favoriteTrailsList .trail-item .trail-distance {
 	font-size: 0.8em;
 	float: right;
 	margin-left: 0.8em;
@@ -49,11 +65,13 @@ a:hover, a:active, a:focus,
 	background-color: #e7e7e7;
 	border: dotted 1px #a5a5a5;
 }
-#trailsList .trail-item .trail-info h1 {
+#trailsList .trail-item .trail-info h1,
+#favoriteTrailsList .trail-item .trail-info h1{
 	font-weight: bold;
 	margin-bottom: 0.2em;
 }
 #trailsList .trail-item .trail-info dl,
+#favoriteTrailsList .trail-item .trail-info dl,
 .trailDetailTabPanel .trail-detail .trail-info dl {
 	font-family: Verdana;
 	font-size: 0.8em;
@@ -61,16 +79,19 @@ a:hover, a:active, a:focus,
 	color: #6c6c6c;
 }
 #trailsList .trail-item .trail-info dt,
+#favoriteTrailsList .trail-item .trail-info dt,
 .trailDetailTabPanel .trail-detail .trail-info dt {
 	margin-right: 0.8em;
 	float: left;
 	font-weight: normal;
 }
-#trailsList .trail-types {
+#trailsList .trail-types,
+#favoriteTrailsList .trail-types {
 	float: left;
 	margin-top: 0.3em;
 }
-#trailsList .trail-types .trail-type {
+#trailsList .trail-types .trail-type,
+#favoriteTrailsList .trail-types .trail-type {
 	font-size: 0.7em;
 	float: left;
 	margin-right: 0.5em;
@@ -109,6 +130,10 @@ a:hover, a:active, a:focus,
     left: 0;
 	width: 100%;
 }
+#trailsList .x-list-paging:focus,
+#trailsList .x-list-paging:active {
+	background-color: #dfe3ec;
+}
 #trailsList .x-list-paging .x-loading-spinner {
 	margin: initial;
 }
@@ -120,7 +145,6 @@ a:hover, a:active, a:focus,
 	display: none;
 	font-size: 0.8em;
 	margin-left: 1em;
-	font-weight: normal;
 }
 #trailsList .x-list-paging.x-loading .x-list-paging-loadingmsg {
 	display: block;
@@ -174,11 +198,9 @@ a:hover, a:active, a:focus,
    Source: http://www.sencha.com/forum/showthread.php?121347-OPEN-726-bad-clear-icon-handling-when-Text-field-is-in-a-toolbar */
 .x-toolbar .x-field-clear-container {    
 	min-height: 0;
-	min-height: 0;
 	position: absolute;
 	top: 0.35em;
 	right: 0.5em;
-	font-size: 1em;
 	border-radius: 3em;
 	background-color: inherit !important;
 }
@@ -268,20 +290,38 @@ a:hover, a:active, a:focus,
 	font-weight: bold;
 	margin: 1em 0 0.5em 0;
 }
-.trailDetailTabPanel .trail-detail h2 span {
-	font-size: 0.9em;
-	margin-left: 0.5em;
-	font-weight: normal;
-}
 .trailDetailTabPanel .trail-detail dl {
 	margin-bottom: 0;
 }
 .trailDetailTabPanel .trail-detail .trail-description {
 	clear: both;
 }
-
 .trailDetailTabPanel .trail-detail .trail-map {
 	overflow: hidden;
+}
+.trailDetailTabPanel .trail-detail .trail-map a.trail-map-showonmap-link {
+	font-size: 0.9em;
+	margin: 1.2em 0 0 1em;
+	padding: 0.2em 0.7em;
+	border-radius: 0.7em;
+	
+	/* styles from: [apple.css] .x-toolbar-light .x-button */
+	border: 0.1em solid #37465a;
+	border-top-color: #415369;
+	color: white;
+	text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
+	-webkit-box-shadow: rgba(255, 255, 255, 0.1) 0 0.1em 0;
+	background-color: #5e7899;
+	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8c9fb8), color-stop(50%, #6c85a4), color-stop(51%, #5e7899), color-stop(100%, #556c89));
+	background-image: linear-gradient(#8c9fb8, #6c85a4 50%, #5e7899 51%, #556c89);
+}
+.trailDetailTabPanel .trail-detail .trail-map a.trail-map-showonmap-link:active,
+.trailDetailTabPanel .trail-detail .trail-map a.trail-map-showonmap-link:focus {
+	/* styles from: [apple.css] .x-toolbar-light .x-button */
+	-webkit-box-shadow: inset #3d526e 0 0 0.1em, rgba(255, 255, 255, 0.1) 0 0.1em 0;
+	background-color: #516783;
+	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3d4e63), color-stop(10%, #475a73), color-stop(65%, #516783), color-stop(100%, #526884));
+	background-image: linear-gradient(#3d4e63, #475a73 10%, #516783 65%, #526884);
 }
 
 /* Trail Detail - Thumblist */
