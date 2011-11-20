@@ -1,9 +1,13 @@
 <?php
 require_once('lib/simpletest/extensions/TraildevilsUnitTestCase.php');
-require_once('../../php/DataLoader.class.php');
+require_once('../../php/domain/DataLoader.class.php');
 
 class TestDataLoader extends TraildevilsUnitTestCase 
 {	
+	function testServerParameter() {
+		$this->assertTrue(ini_get("allow_url_fopen"));
+	}
+	
 	function testConvertJsonKeys()
 	{
 		 $loader = new DataLoader();

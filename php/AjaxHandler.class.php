@@ -1,15 +1,18 @@
 <?php
+require_once(dirname(__FILE__) . '/exceptions/FileDoesNotExistException.class.php');
 
 class AjaxHandler 
 {
-
+	const package = "domain";
 	public function handleRequest($className, $functionName, $params=array()) 
 	{
-		if (!file_exists(dirname(__FILE__).'/'.$className . '.class.php'))
+		$classFileName = $className.'.class.php';
+		$classFilePath = dirname(__FILE__).'/'.self::package.'/'.$classFileName;
+		if (!file_exists($classFilePath))
 		{
-			throw new FileDoesNotExistException($className . '.class.php');
+			throw new FileDoesNotExistException($classFileName);
 		}
-		require_once($className . '.class.php');
+		require_once($classFilePath);
 		$reflectionClass = new ReflectionClass($className);
 		$reflectionMethod = new ReflectionMethod($className, $functionName);
 		echo $reflectionMethod->invokeArgs($reflectionClass->newInstance(), $params);

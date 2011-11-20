@@ -1,6 +1,7 @@
 <?php
-require_once 'JSONRemoteCaller.class.php';
-require_once 'GeoLocation.class.php';
+require_once(dirname(__FILE__) . '/../remote/JSONRemoteCaller.class.php');
+require_once('GeoLocation.class.php');
+
 class DataLoader
 {
 	protected $filetypeArray = array(

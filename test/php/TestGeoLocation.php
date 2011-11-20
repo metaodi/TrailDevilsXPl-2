@@ -1,6 +1,6 @@
 <?php
 require_once('lib/simpletest/extensions/TraildevilsUnitTestCase.php');
-require_once('../../php/GeoLocation.class.php');
+require_once('../../php/domain/GeoLocation.class.php');
 
 class TestGeoLocation extends TraildevilsUnitTestCase {
     function testConstructor() {
