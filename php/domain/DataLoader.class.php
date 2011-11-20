@@ -1,5 +1,7 @@
 <?php
 require_once(dirname(__FILE__) . '/../remote/JSONRemoteCaller.class.php');
+require_once(dirname(__FILE__) . '/../util/DistanceComparator.class.php');
+require_once(dirname(__FILE__) . '/../util/TitleComparator.class.php');
 require_once('GeoLocation.class.php');
 require_once('ImageConverter.class.php');
 
@@ -9,21 +11,6 @@ class DataLoader
 	
 	public function __construct() {
 		$this->imageConv = new ImageConverter();
-	}
-	
-	public function echoData($data)
-	{
-		echo $data;
-	}
-	
-	public function distanceCmp($a, $b) {
-		if($a['distance'] == $b['distance']) {
-			return 0;
-		}
-		return ($a['distance'] < $b['distance']) ? -1 : 1;
-	}
-	public function titleCmp($a, $b) {
-	    return strcmp($a['Name'], $b['Name']);
 	}
 	
 	/**
@@ -55,10 +42,10 @@ class DataLoader
 			}
 
 			// sort array by distance
-			usort($externalTrailArray, array($this, "distanceCmp"));
+			usort($externalTrailArray, array("DistanceComparator", "compare"));
 		} else {
 			// sort array by title
-			usort($externalTrailArray, array($this, "titleCmp"));
+			usort($externalTrailArray, array("TitleComparator", "compare"));
 		}
 		
 		// only take the nearest 10 trails

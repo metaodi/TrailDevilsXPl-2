@@ -1,7 +1,7 @@
 <?php
 require_once('lib/simpletest/extensions/TraildevilsUnitTestCase.php');
-require_once('../../php/AjaxHandler.class.php');
-require_once('../../php/exceptions/FileDoesNotExistException.class.php');
+require_once(dirname(__FILE__) . '/../../php/AjaxHandler.class.php');
+require_once(dirname(__FILE__) . '/../../php/exceptions/FileDoesNotExistException.class.php');
 
 class TestAjaxHandler extends TraildevilsUnitTestCase {
     function testHandleValidRequest() {
@@ -9,7 +9,7 @@ class TestAjaxHandler extends TraildevilsUnitTestCase {
         $input = array("Testdata");
 		
 		ob_start();
-		$handler->handleRequest("DataLoader", "echoData",$input);
+		$handler->handleRequest("DataEcho", "echoData",$input);
 		$result = ob_get_contents();
         ob_end_clean();
         $this->assertEqual($result,$input[0]);
