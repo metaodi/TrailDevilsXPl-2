@@ -14,23 +14,35 @@ class TestImageConverter extends TraildevilsUnitTestCase {
 	function tearDown() {
 		$this->conv = null;
 	}
+	
+	protected static function getMethod($name) {
+	  $class = new ReflectionClass('ImageConverter');
+	  $method = $class->getMethod($name);
+	  $method->setAccessible(true);
+	  return $method;
+	}
 
 	function testGetFileTypePrefixExisting() {
-		$this->assertTrue($this->conv->getFileTypePrefix("jpg"));
-		$this->assertTrue($this->conv->getFileTypePrefix("gif"));
-		$this->assertTrue($this->conv->getFileTypePrefix("png"));
+		$method = self::getMethod("getFileTypePrefix");
+		
+		$this->assertTrue($method->invokeArgs($this->conv, array("jpg")));
+		$this->assertTrue($method->invokeArgs($this->conv, array("gif")));
+		$this->assertTrue($method->invokeArgs($this->conv, array("png")));
 		
 	}
 
 	function testGetFileTypePrefixNotExisting() {
-		$expected = $this->conv->getFileTypePrefix("jpg");
-		$this->assertEqual($this->conv->getFileTypePrefix("asadf"),$expected);
-		$this->assertEqual($this->conv->getFileTypePrefix(""),$expected);
-		$this->assertEqual($this->conv->getFileTypePrefix(null),$expected);
+		$method = self::getMethod("getFileTypePrefix");
+		
+		$expected = $method->invokeArgs($this->conv, array("jpg"));
+		$this->assertEqual($method->invokeArgs($this->conv, array("asdfs")),$expected);
+		$this->assertEqual($method->invokeArgs($this->conv, array("")),$expected);
+		$this->assertEqual($method->invokeArgs($this->conv, array(null)),$expected);
 	}
 
 	function testGetFileTypePrefixPattern() {
-		$this->assertPattern("/^data:.*;base64,$/", $this->conv->getFileTypePrefix(null));
+		$method = self::getMethod("getFileTypePrefix");
+		$this->assertPattern("/^data:.*;base64,$/", $method->invokeArgs($this->conv, array(null)));
 	}
 	
 	function testImageToDataUrlExisting() {
@@ -62,6 +74,14 @@ class TestImageConverter extends TraildevilsUnitTestCase {
 	function testImageToDataUrlNull() {
 		$filepath = null;
 		$this->assertEqual($this->conv->imageToDataUrl($filepath),"");
+	}
+	
+	function testGetFileType() {
+		$method = self::getMethod("getFileType");
+		
+		$this->assertEqual($method->invokeArgs($this->conv, array("/random/path/to_a/file/HalloVelo.png")),"png");
+		$this->assertEqual($method->invokeArgs($this->conv, array("/random/path/Random.class.php")),"php");
+		$this->assertEqual($method->invokeArgs($this->conv, array("/random/path/dir")),"");
 	}
 }
 ?>

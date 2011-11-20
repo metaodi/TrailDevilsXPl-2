@@ -5,10 +5,10 @@
  *
  * @author odi
  */
-class ErrorConversion {
+class ErrorExceptionConverter {
 	public static function startErrorConversion()
 	{
-		set_error_handler("ErrorConversion::exception_error_handler");
+		set_error_handler("ErrorExceptionConverter::exception_error_handler");
 	}
 	
 	public static function endErrorConversion() 
