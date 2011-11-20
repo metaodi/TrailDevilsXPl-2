@@ -87,6 +87,16 @@ abstract class TraildevilsUnitTestCase extends UnitTestCase {
 		return new GeoLocation(47.223357, 8.816614);
 	}
 	
+	protected function getTestSortArray()
+	{
+		$sortArray = array();
+		$sortArray[0]['property'] = "status";
+		$sortArray[0]['direction'] = "DESC";
+		$sortArray[1]['property'] = "distance";
+		$sortArray[1]['direction'] = "ASC";
+		return $sortArray;
+	}
+	
 	function setUp() {
 		ob_start();
     }

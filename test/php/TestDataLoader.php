@@ -11,7 +11,7 @@ class TestDataLoader extends TraildevilsUnitTestCase
 	function testConvertJsonKeys()
 	{
 		 $loader = new DataLoader();
-		 $convertedJson = json_decode($loader->convertTrailsJson($this->getTestTrailJson(), $this->getTestGeoLocation(), 10, 1), true);
+		 $convertedJson = json_decode($loader->convertTrailsJson($this->getTestTrailJson(), $this->getTestGeoLocation(), 10, 1, $this->getTestSortArray()), true);
 		 $this->checkJsonFormat($convertedJson["trails"][0]);
 	}
 	
@@ -19,7 +19,7 @@ class TestDataLoader extends TraildevilsUnitTestCase
 	{
 		 $loader = new DataLoader();
 		 $location = $this->getTestGeoLocation();
-		 $convertedJson = json_decode($loader->convertTrailsJson($this->getTestTrailJson(), $location, 10, 1), true);
+		 $convertedJson = json_decode($loader->convertTrailsJson($this->getTestTrailJson(), $location, 10, 1,$this->getTestSortArray()), true);
 		 $this->assertEqual(count($convertedJson["trails"]), 2, "Array should contain exactly 2 trails: %s");
 		 
 		 $values = $convertedJson["trails"][0];
@@ -38,7 +38,7 @@ class TestDataLoader extends TraildevilsUnitTestCase
         $url = "file://".dirname(__FILE__)."/trails.json";
 		$location = $this->getTestGeoLocation();
 		
-		$localJson = $loader->convertTrailsJson($this->getTestTrailJson(), $location, 10, 1);
+		$localJson = $loader->convertTrailsJson($this->getTestTrailJson(), $location, 10, 1, $this->getTestSortArray());
 		$this->checkJson($localJson);
 		
 		$result = $loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 1, $url);
