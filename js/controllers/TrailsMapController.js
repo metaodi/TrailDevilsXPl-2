@@ -76,7 +76,7 @@ Ext.regController('trailsmap', {
 				'<div class="trail-info">' +
 					'<p class="trail-location">' + trailData.location + '</p>';
 
-		if(trailData.thumb != "") {
+		if(trailData.thumb) {
 			marker.content +=
 						'<img class="trail-image" src="' + trailData.thumb + '" alt="' + trailData.title + '" />';
 		}
@@ -98,7 +98,7 @@ Ext.regController('trailsmap', {
 		this.trailMarkers.push(marker);
 	},
 	
-	map: function (options) {
+	map: function(options) {
 		traildevils.views.trailsMapMainPanel.setActiveItem(
 			'trailsMapPanel',
 			{
@@ -112,7 +112,7 @@ Ext.regController('trailsmap', {
 		);
 	},
 	
-	detail: function (options) {
+	detail: function(options) {
 		traildevils.views.trailDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
 			origin: 'map',
 			trail: options.trail
@@ -131,7 +131,7 @@ Ext.regController('trailsmap', {
 		traildevils.views.trailsMapMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
 	},
 	
-	showTrailOnMap: function (options) {
+	showTrailOnMap: function(options) {
 		if(!this.initialized) {
 			this.initController();
 		}

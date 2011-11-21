@@ -1,5 +1,5 @@
 Ext.regController('trailmedia', {
-    openMediaCarousel: function (options) {
+    openMediaCarousel: function(options) {
 		var mediaCarousel = new Ext.Carousel({
             indicator: true,
             defaults: {
@@ -32,7 +32,7 @@ Ext.regController('trailmedia', {
 		
 	},
 	
-	closeMediaCarousel: function (options) {
+	closeMediaCarousel: function(options) {
 		traildevils.views.trailDetailMediaCarouselSheet.hide();
 	},
 	
