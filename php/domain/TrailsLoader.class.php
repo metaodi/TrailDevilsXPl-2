@@ -10,8 +10,6 @@ class TrailsLoader extends DataLoader
 	protected $userGeo;
 	protected $pageSize = 10;
 	protected $page = 1;
-	protected $externalTrailArray;
-	protected $trailArray = array();
 	
 	protected $convertArray = array(
 		'id'		=> 'Id',
@@ -48,12 +46,12 @@ class TrailsLoader extends DataLoader
 
 	public function convertTrailsJson($externalTrailJson) 
 	{
-		$this->externalTrailArray = json_decode($externalTrailJson, true);
+		$this->externalArray = json_decode($externalTrailJson, true);
 		
 		$this->sortExternalArray();
 		$this->sliceExternalArray();
 
-		for ($i = 0; $i < count($this->externalTrailArray); $i++) {
+		for ($i = 0; $i < count($this->externalArray); $i++) {
 			$this->convertValues($i);
 			$this->convertLocation($i);
 			$this->convertDescription($i);
@@ -65,84 +63,79 @@ class TrailsLoader extends DataLoader
 
 		// TODO delete after development: add closed trail on first load
 		if ($this->page == 1) {
-			$this->trailArray[] = $this->getClosedTrail($this->trailArray[0]["latitude"],$this->trailArray[0]["longitude"]);
+			$lat = $this->internalArray[0]["latitude"];
+			$lon = $this->internalArray[0]["longitude"];
+			$this->internalArray[] = $this->getClosedTrail($lat,$lon);
 		}
 
-		return json_encode(array("trails" => $this->trailArray));
+		return json_encode(array("trails" => $this->internalArray));
 	}
 	
 	protected function sortExternalArray()
 	{
 		$comparator = "";
 		if ($this->sortArray[count($this->sortArray) - 1]['property'] == 'distance') {
-			$this->calcDistance($this->externalTrailArray);
+			$this->calcDistance($this->externalArray);
 			$comparator = "DistanceComparator";
 		} else
 		{
 			$comparator = "TitleComparator";
 		}
-		usort($this->externalTrailArray, array($comparator, "compare"));
+		usort($this->externalArray, array($comparator, "compare"));
 	}
 	
 	protected function sliceExternalArray()
 	{
 		$startIndex = ($this->page - 1) * $this->pageSize;
-		$this->externalTrailArray = array_slice($this->externalTrailArray, $startIndex, $this->pageSize);
+		$this->externalArray = array_slice($this->externalArray, $startIndex, $this->pageSize);
 	}
 	
 	protected function calcDistance(&$dataArray)
 	{
 		// calculate distance for each trail
-		for ($i = 0; $i < count($this->externalTrailArray); $i++) {
-			$dataArray[$i]['distance'] = $this->userGeo->distance(new GeoLocation($this->externalTrailArray[$i]["GmapX"], $this->externalTrailArray[$i]["GmapY"]));
-		}
-	}
-	
-	protected function convertValues($index)
-	{
-		foreach ($this->convertArray as $intKey => $extKey)
-		{
-			$this->trailArray[$index][$intKey] = nl2br($this->externalTrailArray[$index][$extKey]);
+		for ($i = 0; $i < count($this->externalArray); $i++) {
+			$dataArray[$i]['distance'] = $this->userGeo->distance(new GeoLocation($this->externalArray[$i]["GmapX"], $this->externalArray[$i]["GmapY"]));
 		}
 	}
 	
 	protected function convertLocation($index) 
 	{
-		$this->trailArray[$index]["location"] = ($this->externalTrailArray[$index]["NextCity"] ? $this->externalTrailArray[$index]["NextCity"] . ", " : "") . $this->externalTrailArray[$index]["Country"];
+		$this->internalArray[$index]["location"] = ($this->externalArray[$index]["NextCity"] ? $this->externalArray[$index]["NextCity"] . ", " : "") . $this->externalArray[$index]["Country"];
 	}
 	
 	protected function convertDistance($index) 
 	{
 		if ($this->sortArray[count($this->sortArray) - 1]['property'] == 'distance') 
 		{
-			$this->trailArray[$index]["distance"] = $this->externalTrailArray[$index]['distance'];
-			$this->trailArray[$index]["formattedDistance"] = $this->userGeo->getFormattedDistance($this->trailArray[$index]["distance"]);
+			$this->internalArray[$index]["distance"] = $this->externalArray[$index]['distance'];
+			$this->internalArray[$index]["formattedDistance"] = $this->userGeo->getFormattedDistance($this->internalArray[$index]["distance"]);
 		}
 	}
 	
 	protected function convertThumb($index) 
 	{
-		$this->trailArray[$index]["thumb"] = $this->imageConv->imageToDataUrl($this->externalTrailArray[$index]["ImageUrl120"]);
+		$this->internalArray[$index]["thumb"] = $this->imageConv->imageToDataUrl($this->externalArray[$index]["ImageUrl120"]);
 	}
 	
 	protected function convertDescription($index)
 	{
-		$this->trailArray[$index]["description"] = nl2br($this->externalTrailArray[$index]["Desc"]);
+		$this->internalArray[$index]["description"] = nl2br($this->externalArray[$index]["Desc"]);
 	}
 	
 	protected function convertStatus($index) 
 	{
-		$this->trailArray[$index]["status"] = $this->externalTrailArray[$index]["IsOpen"] ? "offen" : "geschlossen";
+		$this->internalArray[$index]["status"] = $this->externalArray[$index]["IsOpen"] ? "offen" : "geschlossen";
 	}
 	
 	protected function convertTypes($index)
 	{
-		$this->trailArray[$index]["types"] = $this->typesLoader->getTrailTypes($this->trailArray[$index]["id"]);
+		$this->internalArray[$index]["types"] = $this->typesLoader->getTrailTypes($this->internalArray[$index]["id"]);
 	}
 	
 	//TODO delete after development: add closed trail on first load
 	private function getClosedTrail($lat,$lon)
 	{
+		$trailArray = array();
 		$trailArray["id"] = "100";
 		$trailArray["title"] = "Geschlossener Trail";
 		$trailArray["location"] = "Winterthur";
@@ -154,6 +147,8 @@ class TrailsLoader extends DataLoader
 		$trailArray["latitude"] = $lat;
 		$trailArray["longitude"] = $lon;
 		$trailArray["types"] = "";
+		
+		return $trailArray;
 	}
 	
 	public function setUserGeo(GeoLocation $geo)
@@ -164,6 +159,16 @@ class TrailsLoader extends DataLoader
 	public function setSortArray($sortArray = array())
 	{
 		$this->sortArray = $sortArray;
+	}
+	
+	public function setPage($page)
+	{
+		$this->page = $page;
+	}
+	
+	public function setPageSize($pageSize)
+	{
+		$this->pageSize = $pageSize;
 	}
 }
 

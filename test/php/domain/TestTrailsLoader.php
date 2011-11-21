@@ -12,9 +12,18 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 	protected $loader;
 
 	function setUp() {
-		$this->loader = new TrailsLoader();
-		$this->loader->setUserGeo($this->getTestGeoLocation());
-		$this->loader->setSortArray($this->getTestSortArray());
+		$this->loader = $this->getTrailsLoader();
+	}
+	
+	function getTrailsLoader() 
+	{
+		$loader = new TrailsLoader();
+		$loader->setUserGeo($this->getTestGeoLocation());
+		$loader->setSortArray($this->getTestSortArray());
+		$loader->setPageSize(10);
+		$loader->setPage(1);
+		
+		return $loader;
 	}
 
 	function tearDown() {
@@ -45,14 +54,18 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 	}
 	
 	function testGetTrailsNearWithLocalAPI() {
+		$helperLoader = $this->getTrailsLoader();
         $url = "file://".dirname(__FILE__)."/../trails.json";
 		$location = $this->getTestGeoLocation();
 		
-		$localJson = $this->loader->convertTrailsJson($this->getTestTrailJson(), $location, 10, 1, $this->getTestSortArray());
+		$localJson = $helperLoader->convertTrailsJson($this->getTestTrailJson());
 		$this->checkJson($localJson);
 		
 		$result = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 10, 1, $this->getTestSortJson(), $url);
 		$this->assertEqualsIgnoreWhitespace($result,$localJson);
+		
+		print_r(json_decode($result,true));
+		print_r(json_decode($localJson,true));
     }
 	
 	function testGetTrailsNearWithRemoteAPIAndLocation() {
