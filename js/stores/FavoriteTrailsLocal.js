@@ -57,14 +57,13 @@ Ext.regStore('FavoriteTrailsLocal', {
 	
 	addTrail: function(trail) {
 		this.add(trail);
-		//this.sort();
+		this.sort();
 		this.sync();
 		traildevils.views.favoriteTrailsList.refresh();
 	},
 	
 	removeTrail: function(trail) {
 		this.remove(trail);
-		//this.sort();
 		this.sync();
 		traildevils.views.favoriteTrailsList.refresh();
 	}

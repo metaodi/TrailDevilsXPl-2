@@ -61,6 +61,7 @@ Ext.regStore('Trails', {
 	},
 	
 	removeAllRecordsFromStore: function() {
+		// TODO dangerous method -> shouldn't be used!
 	    this.removeAll();
 	}
 });

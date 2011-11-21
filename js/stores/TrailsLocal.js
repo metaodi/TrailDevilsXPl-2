@@ -73,6 +73,7 @@ Ext.regStore('TrailsLocal', {
 		this.resetCompleteCallbackFn = callbackFn;
 		this.resetCompleteCallbackCmp = cmp;
 	},
+	
 	onResetComplete: function() {
 		if(this.resetCompleteCallbackFn !== null) {
 			this.resetCompleteCallbackFn.call(this.resetCompleteCallbackCmp);
@@ -93,8 +94,8 @@ Ext.regStore('TrailsLocal', {
 	},
 	
 	removeAllRecordsFromStore: function() {
-	    this.removeAll();
 		this.getProxy().clear();
+		this.data.clear();
 		this.sync();
 	},
 	
