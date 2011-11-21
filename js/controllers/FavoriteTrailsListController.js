@@ -1,13 +1,6 @@
 Ext.regController('favoritetrailslist', {
     list: function(options) {
-		if(traildevils.views.trailDetailTabPanel === undefined) {
-			traildevils.views.favoriteTrailsListMainPanel.setActiveItem(
-			'favoriteTrailsListPanel', {
-				type: 'slide',
-				direction: 'right'
-			});
-		} else {
-			traildevils.views.favoriteTrailsListMainPanel.setActiveItem(
+		traildevils.views.favoriteTrailsListMainPanel.setActiveItem(
 			'favoriteTrailsListPanel', {
 				type: 'slide',
 				direction: 'right',
@@ -15,8 +8,8 @@ Ext.regController('favoritetrailslist', {
 				after: function() {
 					traildevils.views.trailDetailTabPanel.destroy();
 				}
-			});
-		}
+			}
+		);
 	},
 
     detail: function(options) {
@@ -38,9 +31,31 @@ Ext.regController('favoritetrailslist', {
 		traildevils.views.favoriteTrailsListMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
 	},
 	
-	showPopup: function(options) {
+	toggleFavorite: function(options) {
+		var newFavoriteState = options.trail.toggleFavorite();
+		
+		if(newFavoriteState) {
+			// add trail to favorite store 
+			traildevils.favoritestore.add(options.trail);
+		} else {
+			// remove trail from favorite store 
+			var trailToRemove = traildevils.favoritestore.getById(options.trail.data.id);
+			if(trailToRemove !== undefined) {
+				traildevils.favoritestore.remove(trailToRemove);
+			}
+		}
+		
+		// show favorite popup
+		this.toggleFavoritePopup(newFavoriteState);
+	},
+	
+	/**
+     * Removes all markers from map
+     * @private
+     */
+	toggleFavoritePopup: function(newFavoriteState) {
 		var popupText = 'starred';
-		if(!options.favorite) {
+		if(!newFavoriteState) {
 			popupText = 'unstarred';
 		}
 		
@@ -48,7 +63,7 @@ Ext.regController('favoritetrailslist', {
 			popupText: popupText
 		});
 		
-		if(options.favorite) {
+		if(newFavoriteState) {
 			// add active class to popup
 			traildevils.views.favoritePopupPanel.addCls('act');
 		}

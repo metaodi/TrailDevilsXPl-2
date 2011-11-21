@@ -100,8 +100,7 @@ Ext.regController('trailsmap', {
 	
 	map: function(options) {
 		traildevils.views.trailsMapMainPanel.setActiveItem(
-			'trailsMapPanel',
-			{
+			'trailsMapPanel', {
 				type: 'slide',
 				direction: 'right',
 				// destroy detail panel when returning to trailslist
@@ -137,8 +136,8 @@ Ext.regController('trailsmap', {
 		}
 			
 		switch(options.origin) {
-			// if map was already opened
 			case 'map':
+				// if map was already opened
 				Ext.dispatch({
 					controller: traildevils.controllers.trailsMapController,
 					action: 'map'

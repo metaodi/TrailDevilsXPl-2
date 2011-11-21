@@ -22,28 +22,27 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 		
 		var tpl =
 			'<div class="trail-item">' +
-			'	<div class="trail-image"><tpl if="thumb"><img src="{thumb}" alt="{title}" /></tpl></div>' +
-			'	<div class="trail-info">' +
-			'		<h1>{title}</h1>' +
-			'		<dl>' +
-			'			<dt>Ort:</dt>' +
-			'			<dd>{location}</dd>' +
-			'		</dl>' +
-			'	</div>' +
-			'	<div class="trail-types">' +
-			'		<tpl for="types">' +
-			'			<div class="trail-type">{name}</div>' +
-			'		</tpl>' +
-			'	</div>' +
-			'	<tpl if="distance">' +
-			'		<div class="trail-distance">' +
-			'			<p>{formattedDistance}</p>' +
-			'		</div>'+
-			'	</tpl>'+
+				'<div class="trail-image"><tpl if="thumb"><img src="{thumb}" alt="{title}" /></tpl></div>' +
+				'<div class="trail-info">' +
+					'<h1>{title}</h1>' +
+					'<dl>' +
+						'<dt>Ort:</dt>' +
+						'<dd>{location}</dd>' +
+					'</dl>' +
+				'</div>' +
+				'<div class="trail-types">' +
+					'<tpl for="types">' +
+						'<div class="trail-type">{name}</div>' +
+					'</tpl>' +
+				'</div>' +
+				'<tpl if="distance">' +
+					'<div class="trail-distance">' +
+						'<p>{formattedDistance}</p>' +
+					'</div>'+
+				'</tpl>'+
 			'</div>';
 		
 		this.itemTpl = tpl;
-		
 		
 		this.listeners = {
 			itemtap: function(container, index, item, e) {
@@ -54,9 +53,13 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 			}
         };
 		
-        traildevils.views.TrailsList.superclass.initComponent.apply(this, arguments);
+        traildevils.views.TrailsList.superclass.initComponent.call(this);
     },
 	
+	/**
+     * Handels tap event on trail item
+     * @private
+     */
     onTrailItemTap: function(container, index, item, e) {
 		// TODO close options menu on item tap
 		var trail = this.store.getAt(index);
@@ -66,23 +69,18 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 			trail: trail
 		});
     },
+	
+	/**
+     * Handels tap event on list option
+     * @private
+     */
 	onListOptionTap: function(option, record) {
 		// if favorite option was tapped
 		if(option.cls == 'favorite' || option.cls == 'favorite-act') {
-			if(record.data.favorite) {
-				traildevils.favoritestore.remove(record);
-			} else {
-				traildevils.favoritestore.add(record);
-			}
-			
-			// toggle favorite flag on trail
-			record.toggleFavorite();
-			
-			// show favorite popup
 			Ext.dispatch({
 				controller: traildevils.controllers.favoriteTrailsListController,
-				action: 'showPopup',
-				favorite: record.data.favorite
+				action: 'toggleFavorite',
+				trail: record
 			});
 		}
 		

@@ -1,13 +1,6 @@
 Ext.regController('trailslist', {
     list: function(options) {
-		if(traildevils.views.trailDetailTabPanel === undefined) {
-			traildevils.views.trailsListMainPanel.setActiveItem(
-			'trailsListPanel', {
-				type: 'slide',
-				direction: 'right'
-			});
-		} else {
-			traildevils.views.trailsListMainPanel.setActiveItem(
+		traildevils.views.trailsListMainPanel.setActiveItem(
 			'trailsListPanel', {
 				type: 'slide',
 				direction: 'right',
@@ -15,8 +8,8 @@ Ext.regController('trailslist', {
 				after: function() {
 					traildevils.views.trailDetailTabPanel.destroy();
 				}
-			});
-		}
+			}
+		);
 	},
 
     detail: function(options) {
