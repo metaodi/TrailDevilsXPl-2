@@ -1,16 +1,19 @@
 CACHE MANIFEST
 
-# version
+# version: #version
 
 # html files
 ./index.html
 
 # css files
+#css_files
 ./lib/sencha-touch-1.1.1/resources/css-debug/sencha-touch.css
 
 # image files
-		
+#image_files
+
 # js files
+#js_files
 ./lib/sencha-touch-1.1.1/sencha-touch-debug.js
 http://maps.google.com/maps/api/js?sensor=true
 
