@@ -24,7 +24,9 @@ Ext.regModel('Trail', {
 	
     hasMany: { model: 'Type', name: 'types' },
 	
+	// toggles favorite flag and returns new favorite state
 	toggleFavorite: function() {
 		this.data.favorite = !this.data.favorite;
+		return this.data.favorite;
 	}
 });

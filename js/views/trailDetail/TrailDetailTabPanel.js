@@ -48,27 +48,19 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 					ui: 'plain',
 					trail: this.trail,
 					handler: function() {
-						if(this.trail.data.favorite) {
-							traildevils.favoritestore.remove(this.trail);
-						} else {
-							traildevils.favoritestore.add(this.trail);
-						}
-
-						// toggle favorite flag on trail
-						this.trail.toggleFavorite();
-
-						// show favorite popup
+						var oldFavoriteState = this.trail.data.favorite;
+						
 						Ext.dispatch({
 							controller: traildevils.controllers.favoriteTrailsListController,
-							action: 'showPopup',
-							favorite: this.trail.data.favorite
+							action: 'toggleFavorite',
+							trail: this.trail
 						});
 
 						// set correct icon class
-						if(this.trail.data.favorite) {
-							this.setIconClass('favstar-act');
-						} else {
+						if(oldFavoriteState) {
 							this.setIconClass('favstar');
+						} else {
+							this.setIconClass('favstar-act');
 						}
 					}
 				}
