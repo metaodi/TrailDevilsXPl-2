@@ -16,10 +16,10 @@ class TestImageConverter extends TraildevilsUnitTestCase {
 	}
 	
 	protected static function getMethod($name) {
-	  $class = new ReflectionClass('ImageConverter');
-	  $method = $class->getMethod($name);
-	  $method->setAccessible(true);
-	  return $method;
+		$class = new ReflectionClass('ImageConverter');
+		$method = $class->getMethod($name);
+		$method->setAccessible(true);
+		return $method;
 	}
 
 	function testGetFileTypePrefixExisting() {
