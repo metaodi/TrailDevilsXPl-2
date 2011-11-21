@@ -9,6 +9,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	disableSelection: true,
 	grouped : true,
 	loadingText: 'Lade Trails...',
+	emptyText: '<div class="empty-text">Keine Trails vorhanden</div>',
 	
 	initComponent: function() {
 		this.listOptionsPlugin = new traildevils.views.TrailsListOptionsPlugin();

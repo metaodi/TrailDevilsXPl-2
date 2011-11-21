@@ -29,6 +29,19 @@ input[type="search"]::-webkit-search-cancel-button {
 #favoriteTrailsList {
 	font-size: 0.8em;
 }
+#trailsList .empty-text,
+#favoriteTrailsList .empty-text,
+.trailDetailMediaThumbPanel .empty-text {
+	margin: auto;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: #1e3c63;
+	text-align: center;
+	margin-top: 3em;
+}
+.trailDetailMediaThumbPanel .empty-text {
+	font-size: 0.9em;
+}
 #trailsList .x-list-item,
 #favoriteTrailsList .x-list-item {
 	background-color: #fff;

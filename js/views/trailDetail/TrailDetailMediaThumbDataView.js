@@ -5,8 +5,9 @@
  */
 
 traildevils.views.TrailDetailMediaThumbDataView = Ext.extend(Ext.DataView, {
-	title: 'Fotos/Videos',
+	title: 'Fotos',
 	cls: 'trailDetailMediaThumbPanel',
+	emptyText: '<div class="empty-text">Keine Bilder vorhanden</div>',
 	
 	initComponent: function () {
         this.store = Ext.getStore('TrailImages');
