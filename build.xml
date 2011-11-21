@@ -1,5 +1,5 @@
 
-<project name="traildevils-build" basedir="." default="patch">
+<project name="traildevils-build" basedir="." default="deploy">
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
 		<classpath>
 			<pathelement location="lib/antlibs/ant-contrib-1.0b3.jar"/>
@@ -27,7 +27,7 @@
 	</target>
 	
 	<target name="test" depends="clean">
-		<echo message="Runnging tests"/>
+		<echo message="Running tests"/>
 		<mkdir dir="${result.dir}"/>
 		<foreach target="exec_php" param="filename">
 			<path>
@@ -45,37 +45,49 @@
 		</exec>
 	</target>
 	
-	<target name="deploy" depends="test,clean">
+	<target name="update_manifest" depends="test">
+		<echo message="Updating manifest file ${manifest}" />
+
+		<echo message="Updating the ${manifest} version date to today (${TODAY})" />
+		<replace value="${TODAY}" token="#version" file="${manifest}" summary="true" />
+		
+		<echo message="Adding css files to manifest" />
+		<fileset id="css.fileset" dir="${css.dir}" includes="**/*.css" />
+		<pathconvert pathsep="${line.separator}" property="css.files" refid="css.fileset">
+			<globmapper from="${basedir}/*" to="./*" />
+		</pathconvert>
+		<replace value="${css.files}" token="#css_files" file="${manifest}" summary="true" />
+		
+		<echo message="Adding image files to manifest" />
+		<fileset id="image.fileset" dir="${image.dir}" includes="**/*" />
+		<pathconvert pathsep="${line.separator}" property="image.files" refid="image.fileset">
+			<globmapper from="${basedir}/*" to="./*" />
+		</pathconvert>
+		<replace value="${image.files}" token="#image_files" file="${manifest}" summary="true" />
+		
+		<echo message="Adding js files to manifest" />
+		<fileset id="js.fileset" dir="${js.dir}" includes="**/*.js" />
+		<pathconvert pathsep="${line.separator}" property="js.files" refid="js.fileset">
+			<globmapper from="${basedir}/*" to="./*" />
+		</pathconvert>
+		<replace value="${js.files}" token="#js_files" file="${manifest}" summary="true" />
+	</target>
+	
+	<target name="patch" depends="update_manifest">
+		<!-- create a version that uses the app.manifest to test offline functionality -->
+		<copy file="index.html" tofile="local.html" overwrite="true" verbose="true" />
+		<replace file="local.html" summary="true">
+			<replacetoken><![CDATA[<html>]]></replacetoken>
+			<replacevalue><![CDATA[<html manifest="app.manifest">]]></replacevalue>
+		</replace>
+		<replace token="-debug" value=""  file="local.html" summary="true" />
+		<replace token="-debug" value=""  file="app.manifest" summary="true" />
+	</target>
+	
+	<target name="deploy" depends="patch">
 		<echo message="Deploying application"/>
 		<copy todir="${webapp.dir}" overwrite="true">
 			<fileset dir="."/>
 		</copy>
-	</target>
-	
-	
-<!--	<target name="update_manifest" depends="deploy">
-		<echo message="Updating manifest file ${manifest}" />
-
-		<echo message="Updating the ${manifest} version date to today (${TODAY})" />
-		<replace value="# version" token="${TODAY}" file="${webapp.dir}/${manifest}" summary="true" />
-		
-		 add css files 
-		<echo message="Adding css files to manifest" />
-		<fileset id="css.fileset" dir="${webapp.dir}/${css.dir}/" includes="**/*.css" />
-		<property name="css.files" refid="css.fileset" />
-		<replace value="# css files" token="${css.files}" file="${webapp.dir}/${manifest}" summary="true" />
-	</target>
-	
-	<target name="patch" depends="update_manifest">-->
-	<target name="patch" depends="deploy">
-		<replace token="-debug" value=""  file="${webapp.dir}/index.html" summary="true" />
-		<replace token="-debug" value=""  file="${webapp.dir}/app.manifest" summary="true" />
-		
-		<!-- create a version that uses the app.manifest to test offline functionality -->
-		<copy file="${webapp.dir}/index.html" tofile="${webapp.dir}/local.html" overwrite="true" verbose="true" />
-		<replace file="${webapp.dir}/local.html" summary="true">
-			<replacetoken><![CDATA[<html>]]></replacetoken>
-			<replacevalue><![CDATA[<html manifest="app.manifest">]]></replacevalue>
-		</replace>
 	</target>
 </project>
