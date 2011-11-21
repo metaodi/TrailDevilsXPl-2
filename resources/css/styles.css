@@ -276,6 +276,15 @@ input[type="search"]::-webkit-search-cancel-button {
 	border-bottom: 1px solid #CCC;
 	padding: 0.9em;
 }
+.trailDetailTabPanel .trail-detail .trail-info .status-offen {
+	color: #336600;
+}
+.trailDetailTabPanel .trail-detail .trail-info .status-geschlossen {
+	color: #ff6600;
+}
+.trailDetailTabPanel .trail-detail .trail-image {
+	min-height: 6.5em;
+}
 .trailDetailTabPanel .trail-detail .trail-detail-body {
 	padding: 0.9em;
 }
@@ -400,13 +409,34 @@ input[type="search"]::-webkit-search-cancel-button {
 #trailsMap .infowindow-content {
 	font-size: 0.7em;
 }
-#trailsMap .infowindow-content h1 {
+#trailsMap .infowindow-content p {
+	margin-bottom: 0.3em;
+}
+#trailsMap .infowindow-content .trail-image {
+	float: left;
+	margin: 0 1em 0.7em 0;
+}
+#trailsMap .infowindow-content .trail-image img {
+	width: 8em;
+}
+#trailsMap .infowindow-content .trail-info {
+	margin-bottom: 0.5em;
+}
+#trailsMap .infowindow-content .trail-info h1 {
 	font-size: 1.2em;
 	font-weight: bold;
-	margin-bottom: 0.2em;
+	margin-bottom: 0.3em;
 }
-#trailsMap .infowindow-content .trail-info img {
-	margin: 0.5em 0;
+#trailsMap .infowindow-content .trail-info dl {
+	color: #6c6c6c;
+	line-height: 1.4em;
+}
+#trailsMap .infowindow-content .trail-info dt {
+	margin-right: 0.5em;
+	float: left;
+}
+#trailsMap .infowindow-content .trail-description {
+	clear: both;
 }
 
 

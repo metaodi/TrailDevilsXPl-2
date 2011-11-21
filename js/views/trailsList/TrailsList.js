@@ -18,7 +18,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 			{ ptype: 'trailsListPagingPlugin' },
 			this.listOptionsPlugin
 		];
-	
+		
         this.store = traildevils.store;
 		
 		var tpl =

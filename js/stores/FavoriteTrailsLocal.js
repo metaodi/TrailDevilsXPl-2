@@ -36,17 +36,10 @@ Ext.regStore('FavoriteTrailsLocal', {
 	
 	proxy: {
         type: 'localstorage',
-        id  : 'favorite-trails-local',
+        id: 'favorite-trails-local',
 		model: 'Trail',
 		idProperty: 'id'
     },
-	
-	/*data: [
-		{
-			id: '1',
-			title: 'fav'
-		}
-	],*/
 	
 	// group by status
 	getGroupString: function(record) {
@@ -58,5 +51,21 @@ Ext.regStore('FavoriteTrailsLocal', {
 			store.data.distance = traildevils.store.getDistance(store.data.latitude, store.data.longitude);
 			store.data.formattedDistance = traildevils.store.getFormattedDistance(store.data.distance);
 		});
+		this.sort();
+		traildevils.views.favoriteTrailsList.refresh();
+	},
+	
+	addTrail: function(trail) {
+		this.add(trail);
+		//this.sort();
+		this.sync();
+		traildevils.views.favoriteTrailsList.refresh();
+	},
+	
+	removeTrail: function(trail) {
+		this.remove(trail);
+		//this.sort();
+		this.sync();
+		traildevils.views.favoriteTrailsList.refresh();
 	}
 });

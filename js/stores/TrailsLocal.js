@@ -17,6 +17,11 @@ Ext.regStore('TrailsLocal', {
 		{ property: 'distance', direction: 'ASC' }
 	],
 	
+	// group by status
+	getGroupString: function(record) {
+		return record.get('status');
+	},
+	
 	listeners: {
 		beforeload: function() {
 			// reset store sorters depending on geolocation availability
@@ -81,6 +86,7 @@ Ext.regStore('TrailsLocal', {
 		traildevils.remotestore.each(function (record) {
 			traildevils.store.add(record.data);
 		});
+		this.initializeFavorites();
 		this.sort();
 		this.sync();
 		traildevils.views.trailsList.refresh();
@@ -90,11 +96,6 @@ Ext.regStore('TrailsLocal', {
 	    this.removeAll();
 		this.getProxy().clear();
 		this.sync();
-	},
-	
-	// group by status
-	getGroupString: function(record) {
-		return record.get('status');
 	},
 	
 	getDistance: function(lat, lng) {
@@ -114,6 +115,17 @@ Ext.regStore('TrailsLocal', {
 		this.each(function(store) {
 			store.data.distance = traildevils.store.getDistance(store.data.latitude, store.data.longitude);
 			store.data.formattedDistance = traildevils.store.getFormattedDistance(store.data.distance);
+		});
+		this.sort();
+		traildevils.views.trailsList.refresh();
+	},
+	
+	initializeFavorites: function() {
+		// check trails if they are already in favorite store
+		this.each(function(store) {
+			if(traildevils.favoritestore.getById(store.data.id) !== null) {
+				store.data.favorite = true;
+			}
 		});
 	}
 });

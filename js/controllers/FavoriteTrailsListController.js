@@ -18,6 +18,18 @@ Ext.regController('favoritetrailslist', {
 			trail: options.trail
 		});
 		
+		// change favorite button to remove favorite button
+		traildevils.views.trailDetailTabPanel.favoriteBtn.setIconClass('trash');
+		traildevils.views.trailDetailTabPanel.favoriteBtn.setHandler(
+			function() {
+				Ext.dispatch({
+					controller: traildevils.controllers.favoriteTrailsListController,
+					action: 'removeFavorite',
+					trail: this.trail
+				});
+			}
+		);
+		
 		traildevils.views.trailDetailTabPanel.backBtn.setHandler(
 			function() {
 				Ext.dispatch({
@@ -31,29 +43,46 @@ Ext.regController('favoritetrailslist', {
 		traildevils.views.favoriteTrailsListMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
 	},
 	
+	removeFavorite: function(options) {
+		options.trail.toggleFavorite();
+		
+		// remove trail from favorite store 
+		var trailToRemove = traildevils.favoritestore.getById(options.trail.data.id);
+		if(trailToRemove !== null) {
+			traildevils.favoritestore.removeTrail(trailToRemove);
+		}
+		
+		Ext.dispatch({
+			controller: traildevils.controllers.favoriteTrailsListController,
+			action: 'list'
+		});
+	},
+	
 	toggleFavorite: function(options) {
 		var newFavoriteState = options.trail.toggleFavorite();
 		
 		if(newFavoriteState) {
-			// add trail to favorite store 
-			traildevils.favoritestore.add(options.trail);
+			// add trail to favorite store if it isn't there already
+			if(traildevils.favoritestore.getById(options.trail.data.id) === null) {
+				traildevils.favoritestore.addTrail(options.trail);
+			}
 		} else {
 			// remove trail from favorite store 
 			var trailToRemove = traildevils.favoritestore.getById(options.trail.data.id);
-			if(trailToRemove !== undefined) {
-				traildevils.favoritestore.remove(trailToRemove);
+			if(trailToRemove !== null) {
+				traildevils.favoritestore.removeTrail(trailToRemove);
 			}
 		}
 		
 		// show favorite popup
-		this.toggleFavoritePopup(newFavoriteState);
+		this.showFavoritePopup(newFavoriteState);
 	},
 	
 	/**
-     * Removes all markers from map
+     * Shows the favorite popup panel
      * @private
      */
-	toggleFavoritePopup: function(newFavoriteState) {
+	showFavoritePopup: function(newFavoriteState) {
 		var popupText = 'starred';
 		if(!newFavoriteState) {
 			popupText = 'unstarred';

@@ -12,7 +12,6 @@ Ext.regApplication({
 	phoneStartupScreen: 'resources/images/phone_startup.jpg',
 	icon: 'resources/images/app_icon.jpg',
 	glossOnIcon: true,
-	//defaultUrl: 'list',
 	statusBarStyle: 'black',
 	fullscreen: true,
 	
@@ -29,20 +28,21 @@ Ext.regApplication({
 		traildevils.remotestore = Ext.getStore('Trails');
 		traildevils.favoritestore = Ext.getStore('FavoriteTrailsLocal');
 		
-		//app is offline until told otherwise
+		// app is offline until told otherwise
 		traildevils.online = false;
 		
 		// get current geolocation
 		traildevils.geo = new traildevils.util.TrailGeoLocation();
 		traildevils.geo.updateLocation(function() {
+			traildevils.favoritestore.load();
 			traildevils.store.loadPage(1);
 		});
 		traildevils.geo.setAutoUpdate(true);
 		
-		
 		// initialize viewport
 		traildevils.views.viewport = new traildevils.views.Viewport();
 		
+		// make components globally available
 		// viewport Components
 		traildevils.views.trailsListMainPanel = traildevils.views.viewport.getComponent('trailsListMainPanel');
 		traildevils.views.trailsMapMainPanel = traildevils.views.viewport.getComponent('trailsMapMainPanel');
@@ -63,7 +63,5 @@ Ext.regApplication({
 		
 		// favoriteTrailsList
 		traildevils.views.favoriteTrailsList = Ext.getCmp('favoriteTrailsList');
-		
-		// trailsMap
 	}
 });
