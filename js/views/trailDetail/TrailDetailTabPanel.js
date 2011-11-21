@@ -26,15 +26,37 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 			this.addCls('title-short');
 		}
 		
-		this.backBtn = new Ext.Button({
-			text: 'Zurück',
-			ui: 'back'
-		});
-		
 		var initFavIcon = 'favstar';
 		if(this.trail.data.favorite) {
 			initFavIcon = 'favstar-act';
 		}
+		
+		this.backBtn = new Ext.Button({
+			text: 'Zurück',
+			ui: 'back'
+		});
+		this.favoriteBtn = new Ext.Button({
+			iconCls: initFavIcon,
+			iconMask: true,
+			ui: 'plain',
+			trail: this.trail,
+			handler: function() {
+				var oldFavoriteState = this.trail.data.favorite;
+				
+				Ext.dispatch({
+					controller: traildevils.controllers.favoriteTrailsListController,
+					action: 'toggleFavorite',
+					trail: this.trail
+				});
+				
+				// set correct icon class
+				if(oldFavoriteState) {
+					this.setIconClass('favstar');
+				} else {
+					this.setIconClass('favstar-act');
+				}
+			}
+		});
 		
         this.dockedItems = [{
             xtype: 'toolbar',
@@ -42,28 +64,7 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
             items: [
 				this.backBtn,
 				{ xtype: 'spacer' },
-				{ 
-					iconCls: initFavIcon,
-					iconMask: true,
-					ui: 'plain',
-					trail: this.trail,
-					handler: function() {
-						var oldFavoriteState = this.trail.data.favorite;
-						
-						Ext.dispatch({
-							controller: traildevils.controllers.favoriteTrailsListController,
-							action: 'toggleFavorite',
-							trail: this.trail
-						});
-
-						// set correct icon class
-						if(oldFavoriteState) {
-							this.setIconClass('favstar');
-						} else {
-							this.setIconClass('favstar-act');
-						}
-					}
-				}
+				this.favoriteBtn
 			]
         }];
         

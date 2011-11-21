@@ -7,6 +7,10 @@ Ext.regController('trailsmap', {
 	markerShadow: null,
 	initialized: false,
 	
+	/**
+     * Initialized controller at first call
+     * @private
+     */
 	initController: function() {
 		// prepare custom marker image with shadow
 		// - image created with: http://mapicons.nicolasmollet.com/
@@ -50,6 +54,10 @@ Ext.regController('trailsmap', {
 		}
 	},
 	
+	/**
+     * Adds single marker to map
+     * @private
+     */
 	addSingleMarker: function(trailData, index, markerInfoWindow) {
 		var trailPosition = new google.maps.LatLng(trailData.latitude, trailData.longitude);
 		
@@ -69,20 +77,27 @@ Ext.regController('trailsmap', {
 		var trailDetailLinkEvent = 'Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'detail\', trail: traildevils.controllers.trailsMapController.store.getAt(' + index + ') });';
 
 		marker.content =
-			'<div class="infowindow-content">' +
-				'<h1>' +
-					'<a href="#" onclick="' + trailDetailLinkEvent + '" title="Details anzeigen" >' + trailData.title + '</a>' +
-				'</h1>' +
-				'<div class="trail-info">' +
-					'<p class="trail-location">' + trailData.location + '</p>';
-
+			'<div class="infowindow-content">';
+		
 		if(trailData.thumb) {
 			marker.content +=
-						'<img class="trail-image" src="' + trailData.thumb + '" alt="' + trailData.title + '" />';
+					'<div class="trail-image">' +
+						'<img src="' + trailData.thumb + '" alt="' + trailData.title + '" />' +
+					'</div>';
 		}
-
+		
 		marker.content +=
-					'<p class="trail-description">' + shortDescription + '</p>' +
+				'<div class="trail-info">' +
+					'<h1><a href="#" onclick="' + trailDetailLinkEvent + '" title="Details anzeigen" >' + trailData.title + '</a></h1>' +
+					'<dl>' +
+						'<dt>Ort:</dt>' +
+						'<dd>' + trailData.location + '</dd>' +
+						'<dt>Status:</dt>' +
+						'<dd>' + trailData.status + '</dd>' +
+					'</dl>' +
+				'</div>' +
+				'<div class="trail-description">' +
+					'<p>' + shortDescription + '</p>' +
 					'<p><a href="#" onclick="' + trailDetailLinkEvent + '" title="Details anzeigen" >weitere Informationen...</a></p>' +
 				'</div>' +
 			'</div>';
@@ -180,10 +195,6 @@ Ext.regController('trailsmap', {
 		this.trailMarkers = [];
 	},
 	
-	/**
-     * Prepares the map center position variabels
-     * @private
-     */
 	resetControllerOptions: function() {
 		if(traildevils.geo.available) {
 			// reset center position to current position

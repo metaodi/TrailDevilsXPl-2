@@ -9,10 +9,10 @@ traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
 	disableSelection: true,
 	grouped : true,
 	loadingText: 'Lade Trails...',
+	emptyText: '<div class="empty-text">Keine Favoriten vorhanden</div>',
 	
 	initComponent: function() {
         this.store = traildevils.favoritestore;
-		this.store.load();
 		
 		var tpl =
 			'<div class="trail-item">' +

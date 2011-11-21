@@ -8,12 +8,12 @@
 
 Ext.regModel('TrailImage', {
 	fields: [
-        {name: "id", type: "string"},
-        {name: "description", type: "string"},
-        {name: "image", type: "string"},
-        {name: "thumb", type: "string"},
-		{name: "width", type: "int"},
-		{name: "height", type: "int"}
+        { name: 'id',			type: 'int' },
+        { name: 'description',	type: 'string' },
+        { name: 'image',		type: 'string' },
+        { name: 'thumb',		type: 'string' },
+		{ name: 'width',		type: 'int' },
+		{ name: 'height',		type: 'int' }
     ],
 	
 	getSideToStretch: function(panelSize) {

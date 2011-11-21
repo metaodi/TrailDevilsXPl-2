@@ -52,6 +52,7 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 					});
 				}
 				if(oldCard === traildevils.views.trailsMapMainPanel) {
+					// if trailsMap is closed reset all controller options
 					traildevils.controllers.trailsMapController.resetControllerOptions();
 				}
 			}
