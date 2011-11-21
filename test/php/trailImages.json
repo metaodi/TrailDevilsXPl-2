@@ -1,0 +1,26 @@
+[{ 
+"CreatedDate":"\/Date(1076709600000+0100)\/",
+"CreatedUnixTs":1076713200,
+"DeletedDate":null,
+"DeletedUnixTs":null,
+"Id":1,
+"ModifiedDate":null,
+"ModifiedUnixTs":null,
+"Description":"Testfoto!",
+"ImageUrl120":"http:\/\/www.traildevils.ch\/media\/img\/trails\/trailimg_120_4.jpg",
+"ImageUrl800":"http:\/\/www.traildevils.ch\/media\/img\/trails\/trailimg_800_4.jpg",
+"TrailId":1
+}, 
+{
+"CreatedDate":"\/Date(1076709600000+0100)\/",
+"CreatedUnixTs":1076713200,
+"DeletedDate":null,
+"DeletedUnixTs":null,
+"Id":2,
+"ModifiedDate":null,
+"ModifiedUnixTs":null,
+"Description":"Kein Foto!",
+"ImageUrl120":"",
+"ImageUrl800":"",
+"TrailId":2
+}] 

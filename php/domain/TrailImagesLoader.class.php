@@ -1,5 +1,7 @@
 <?php
 require_once('DataLoader.class.php');
+require_once(dirname(__FILE__) . '/../exceptions/ErrorExceptionConverter.class.php');
+require_once(dirname(__FILE__) . '/../exceptions/CannotReadFileException.class.php');
 
 /**
  * Description of TrailImagesLoader
@@ -8,6 +10,12 @@ require_once('DataLoader.class.php');
  */
 class TrailImagesLoader extends DataLoader
 {
+	protected $convertArray = array(
+		'id'			=> 'Id',
+		'description'	=> 'Description',
+		'image'			=> 'ImageUrl800',
+		'thumb'			=> 'ImageUrl120',
+	);
 	/**
 	 * Get images from trail
 	 * 
@@ -24,20 +32,31 @@ class TrailImagesLoader extends DataLoader
 	}
 	
 	public function convertTrailImagesJson($externalTrailImagesJson) {
-		$externalTrailImagesArray = json_decode($externalTrailImagesJson, true);
-		$convertedTrailImagesArray = array();
-		for($i = 0; $i < count($externalTrailImagesJson); $i++) {
-			$imageSizeArray = getimagesize($externalTrailImagesArray[$i]["ImageUrl800"]);
-			
-			$convertedTrailImagesArray[$i]["id"] = $externalTrailImagesArray[$i]["Id"];
-			$convertedTrailImagesArray[$i]["description"] = $externalTrailImagesArray[$i]["Description"];
-			$convertedTrailImagesArray[$i]["image"] = $externalTrailImagesArray[$i]["ImageUrl800"];
-			$convertedTrailImagesArray[$i]["thumb"] = $externalTrailImagesArray[$i]["ImageUrl120"];
-			$convertedTrailImagesArray[$i]["width"] = $imageSizeArray[0];
-			$convertedTrailImagesArray[$i]["height"] = $imageSizeArray[1];
+		$this->externalArray = json_decode($externalTrailImagesJson, true);
+		$this->internalArray = array();
+		for($i = 0; $i < count($this->externalArray); $i++) {
+			$this->convertValues($i);
+			$this->convertImageSize($i);
 		}
 		
-		return json_encode(array("images" => $convertedTrailImagesArray));
+		return json_encode(array("images" => $this->internalArray));
+	}
+	
+	protected function convertImageSize($index)
+	{
+		$image = $this->externalArray[$index]["ImageUrl800"];
+		if ($image != "")
+		{
+			ErrorExceptionConverter::startErrorConversion();
+			try {
+				$imageSizeArray = getimagesize($image);
+				$this->internalArray[$index]["width"] = $imageSizeArray[0];
+				$this->internalArray[$index]["height"] = $imageSizeArray[1];
+			} catch (Exception $e) {
+				throw new CannotReadFileException($image);
+			}
+			ErrorExceptionConverter::endErrorConversion();
+		}
 	}
 }
 

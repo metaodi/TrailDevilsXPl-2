@@ -13,6 +13,7 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 
 	function setUp() {
 		$this->loader = $this->getTrailsLoader();
+		$this->jsonKeys = array("title","location","distance","thumb","description","status","latitude","longitude");
 	}
 	
 	function getTrailsLoader() 
@@ -59,40 +60,26 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 		$location = $this->getTestGeoLocation();
 		
 		$localJson = $helperLoader->convertTrailsJson($this->getTestTrailJson());
-		$this->checkJson($localJson);
+		$this->checkJson($localJson,"trails");
 		
 		$result = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 10, 1, $this->getTestSortJson(), $url);
 		$this->assertEqualsIgnoreWhitespace($result,$localJson);
-		
-		print_r(json_decode($result,true));
-		print_r(json_decode($localJson,true));
     }
 	
 	function testGetTrailsNearWithRemoteAPIAndLocation() {
 		$location = $this->getTestGeoLocation();
 		
 		$remoteJson = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 10, 1, $this->getTestSortJson("distance"));
-		$this->checkJson($remoteJson);
+		$this->checkJson($remoteJson,"trails");
     }
 	
 	function testGetTrailsNearWithRemoteAPIWithoutLocation() {
 		$location = $this->getTestGeoLocation();
 		
 		$remoteJson = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(),  10, 1, $this->getTestSortJson("title"));
-		$this->checkJson($remoteJson,array("title","location","thumb","description","status","latitude","longitude"));
+		$this->jsonKeys = array("title","location","thumb","description","status","latitude","longitude");
+		$this->checkJson($remoteJson,"trails");
     }
-	
-	function checkJson($json,$keys = array("title","location","distance","thumb","description","status","latitude","longitude")) {
-		$jsonArray = json_decode($json, true);
-		$this->checkJsonFormat($jsonArray["trails"][0],$keys);
-	}
-	
-	function checkJsonFormat($json,$keys = array("title","location","distance","thumb","description","status","latitude","longitude")) {
-		foreach ($keys as $key)
-		{
-			$this->assertTrue(array_key_exists($key, $json),"Key \"$key\" must exist in converted JSON array.");
-		}
-	}
 }
 
 ?>

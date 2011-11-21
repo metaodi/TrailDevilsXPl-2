@@ -9,6 +9,8 @@ require_once(dirname(__FILE__) . '/../../../../../php/domain/GeoLocation.class.p
  * @author odi
  */
 abstract class TraildevilsUnitTestCase extends UnitTestCase {
+	protected $jsonKeys;
+	
 	function report() 
 	{
 		$test = new TestSuite($this->getLabel());
@@ -81,6 +83,37 @@ abstract class TraildevilsUnitTestCase extends UnitTestCase {
 		return $trailJson;
 	}
 	
+	protected function getTestTrailImagesJson() {
+		$trailImageJson  = "[{\n"; 
+		$trailImageJson .= "\"CreatedDate\":\"\/Date(1076709600000+0100)\/\",\n";
+		$trailImageJson .= "\"CreatedUnixTs\":1076713200,\n";
+		$trailImageJson .= "\"DeletedDate\":null,\n";
+		$trailImageJson .= "\"DeletedUnixTs\":null,\n";
+		$trailImageJson .= "\"Id\":1,\n";
+		$trailImageJson .= "\"ModifiedDate\":null,\n";
+		$trailImageJson .= "\"ModifiedUnixTs\":null,\n";
+		$trailImageJson .= "\"Description\":\"Testfoto!\",\n";
+		$trailImageJson .= "\"ImageUrl120\":\"http:\/\/www.traildevils.ch\/media\/img\/trails\/trailimg_120_4.jpg\",\n";
+		$trailImageJson .= "\"ImageUrl800\":\"http:\/\/www.traildevils.ch\/media\/img\/trails\/trailimg_800_4.jpg\",\n";
+		$trailImageJson .= "\"TrailId\":1\n";
+		$trailImageJson .= "},\n"; 
+		$trailImageJson .= "{\n";
+		$trailImageJson .= "\"CreatedDate\":\"\/Date(1076709600000+0100)\/\",\n";
+		$trailImageJson .= "\"CreatedUnixTs\":1076713200,\n";
+		$trailImageJson .= "\"DeletedDate\":null,\n";
+		$trailImageJson .= "\"DeletedUnixTs\":null,\n";
+		$trailImageJson .= "\"Id\":2,\n";
+		$trailImageJson .= "\"ModifiedDate\":null,\n";
+		$trailImageJson .= "\"ModifiedUnixTs\":null,\n";
+		$trailImageJson .= "\"Description\":\"Kein Foto!\",\n";
+		$trailImageJson .= "\"ImageUrl120\":\"\",\n";
+		$trailImageJson .= "\"ImageUrl800\":\"\",\n";
+		$trailImageJson .= "\"TrailId\":2\n";
+		$trailImageJson .= "}]\n"; 
+		
+		return $trailImageJson;
+	}
+	
 	protected function getTestGeoLocation()
 	{
 		/*return Location near HSR Rapperswil */
@@ -100,6 +133,18 @@ abstract class TraildevilsUnitTestCase extends UnitTestCase {
 	protected function getTestSortJson($orderby="distance")
 	{
 		return json_encode($this->getTestSortArray($orderby));
+	}
+	
+	function checkJson($json, $root) {
+		$jsonArray = json_decode($json, true);
+		$this->checkJsonFormat($jsonArray[$root][0]);
+	}
+	
+	function checkJsonFormat($json) {
+		foreach ($this->jsonKeys as $key)
+		{
+			$this->assertTrue(array_key_exists($key, $json),"Key \"$key\" must exist in converted JSON array.");
+		}
 	}
 	
 	function setUp() {
