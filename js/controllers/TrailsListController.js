@@ -19,7 +19,7 @@ Ext.regController('trailslist', {
 		}
 	},
 
-    detail: function (options) {
+    detail: function(options) {
 		traildevils.views.trailDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
 			origin: 'list',
 			trail: options.trail
