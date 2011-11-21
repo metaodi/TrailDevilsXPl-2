@@ -13,6 +13,8 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 
 	function setUp() {
 		$this->loader = new TrailsLoader();
+		$this->loader->setUserGeo($this->getTestGeoLocation());
+		$this->loader->setSortArray($this->getTestSortArray());
 	}
 
 	function tearDown() {
@@ -21,7 +23,7 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 	
 	function testConvertJsonKeys()
 	{
-		 $convertedJson = json_decode($this->loader->convertTrailsJson($this->getTestTrailJson(), $this->getTestGeoLocation(), 10, 1, $this->getTestSortArray()), true);
+		 $convertedJson = json_decode($this->loader->convertTrailsJson($this->getTestTrailJson()), true);
 		 $this->checkJsonFormat($convertedJson["trails"][0]);
 	}
 	

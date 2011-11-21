@@ -8,8 +8,8 @@ require_once('DataLoader.class.php');
  */
 class TrailTypesLoader extends DataLoader
 {
-		public function getTrailTypes($trailId, $url = "") {
-		if($url == "") {
+	public function getTrailTypes($trailId, $url = "") {
+		if ($url == "") {
 			$url = "http://152.96.80.18:8080/api/trails/".$trailId."/types";
 		}
 		$remote = new JSONRemoteCaller($url);
