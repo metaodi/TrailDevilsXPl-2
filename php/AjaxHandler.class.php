@@ -32,9 +32,6 @@ if (isset($_REQUEST['className']) && isset($_REQUEST['functionName']))
 	if(isset($_GET['page'])) {
 		$paramArray[] = $_GET['page'];
 	}
-	if(isset($_GET['sort'])) {
-		$paramArray[] = $_GET['sort'];
-	}
 	
 	$handler->handleRequest($_REQUEST['className'], $_REQUEST['functionName'], $paramArray);
 }

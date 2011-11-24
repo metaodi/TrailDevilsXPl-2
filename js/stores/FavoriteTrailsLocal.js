@@ -7,32 +7,13 @@
 Ext.regStore('FavoriteTrailsLocal', {
 	model: 'Trail',
 	
-	// order by status descending (groups) and distance ascending
+	// order by status descending (groups), by distance ascending
+	// and if distance is not available by title
 	sorters: [
-		{ property: 'status', direction: 'DESC'}, 
-		{ property: 'distance', direction: 'ASC' }
+		{ property: 'status', direction: 'DESC'},
+		{ property: 'distance', direction: 'ASC' },
+		{ property: 'title', direction: 'ASC' }
 	],
-	
-	listeners: {
-		beforeload: function() {
-			// reset store sorters depending on geolocation availability
-			this.sorters.clear();
-			this.sorters.add(new Ext.util.Sorter(
-				{ property: 'status', direction: 'DESC' }
-			));
-			if(traildevils.geo.available) {
-				// order by status descending (groups) and distance ascending
-				this.sorters.add(new Ext.util.Sorter(
-					{ property: 'distance', direction: 'ASC' }
-				));
-			} else {
-				// order by status descending (groups) and title ascending
-				this.sorters.add(new Ext.util.Sorter(
-					{ property: 'title', direction: 'ASC' }
-				));
-			}
-		}
-	},
 	
 	proxy: {
         type: 'localstorage',
@@ -40,11 +21,6 @@ Ext.regStore('FavoriteTrailsLocal', {
 		model: 'Trail',
 		idProperty: 'id'
     },
-	
-	// group by status
-	getGroupString: function(record) {
-		return record.get('status');
-	},
 	
 	updateDistances: function() {
 		this.each(function(store) {

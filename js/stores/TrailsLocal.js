@@ -6,15 +6,17 @@
  */
 Ext.regStore('TrailsLocal', {
 	model: 'Trail',
-	clearOnPageLoad: false,
+	clearOnPageLoad: true,
 	
 	resetCompleteCallbackFn: null,
 	resetCompleteCallbackCmp: null,
 	
-	// order by status descending (groups) and distance ascending
+	// order by status descending (groups), by distance ascending
+	// and if distance is not available by title
 	sorters: [
-		{ property: 'status', direction: 'DESC'}, 
-		{ property: 'distance', direction: 'ASC' }
+		{ property: 'status', direction: 'DESC'},
+		{ property: 'distance', direction: 'ASC' },
+		{ property: 'title', direction: 'ASC' }
 	],
 	
 	// group by status
@@ -24,25 +26,6 @@ Ext.regStore('TrailsLocal', {
 	
 	listeners: {
 		beforeload: function() {
-			// reset store sorters depending on geolocation availability
-			this.sorters.clear();
-			this.sorters.add(new Ext.util.Sorter(
-				{ property: 'status', direction: 'DESC' }
-			));
-			if(traildevils.geo.available) {
-				// order by status descending (groups) and distance ascending
-				this.sorters.add(new Ext.util.Sorter(
-					{ property: 'distance', direction: 'ASC' }
-				));
-			} else {
-				// order by status descending (groups) and title ascending
-				this.sorters.add(new Ext.util.Sorter(
-					{ property: 'title', direction: 'ASC' }
-				));
-			}
-			
-			traildevils.remotestore.sorters = this.sorters;
-			
 			// reset search filter
 			if(traildevils.views.trailsListSearch !== undefined) {
 				traildevils.views.trailsListSearch.reset();
@@ -67,7 +50,6 @@ Ext.regStore('TrailsLocal', {
 	
 	reset: function(callbackFn, cmp) {
 		this.currentPage = 1;
-		traildevils.remotestore.removeAllRecordsFromStore();
 		this.loadPage(this.currentPage);
 		// TODO very ugly implementation (please refactor me!)
 		this.resetCompleteCallbackFn = callbackFn;
@@ -94,9 +76,7 @@ Ext.regStore('TrailsLocal', {
 	},
 	
 	removeAllRecordsFromStore: function() {
-		this.getProxy().clear();
-		this.data.clear();
-		this.sync();
+		
 	},
 	
 	getDistance: function(lat, lng) {
