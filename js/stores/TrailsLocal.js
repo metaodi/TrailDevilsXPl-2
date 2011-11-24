@@ -62,7 +62,36 @@ Ext.regStore('TrailsLocal', {
         type: 'localstorage',
         id  : 'trails-local',
 		model: 'Trail',
-		idProperty: 'id'
+		idProperty: 'id',
+		
+		/* WORKAROUND FOR SENCHA BUG: operation was not set to successful, therefore it is not possible to *only* remove records from a store
+		 * Source: http://www.sencha.com/forum/showthread.php?122493-WebStorageProxy-issue
+		 */
+		//inherit
+		destroy: function(operation, callback, scope) {
+			var records = operation.records,
+				length  = records.length,
+				ids     = this.getIds(),
+
+				//newIds is a copy of ids, from which we remove the destroyed records
+				newIds  = [].concat(ids),
+				i;
+
+			for (i = 0; i < length; i++) {
+				newIds.remove(records[i].getId());
+				this.removeRecord(records[i], false);
+			}
+
+			this.setIds(newIds);
+			
+			// Sencha-Bug: operation was not set completed/sucsessful
+			operation.setCompleted();
+			operation.setSuccessful();
+
+			if (typeof callback == 'function') {
+				callback.call(scope || this, operation);
+			}
+		}
     },
 	
 	reset: function(callbackFn, cmp) {
@@ -81,21 +110,24 @@ Ext.regStore('TrailsLocal', {
 		this.resetCompleteCallbackFn = null;
 	},
 	
-	//try to get data from remote
+	//copy data from remote store to local store
 	refreshData: function() {
 		this.removeAllRecordsFromStore();
 		traildevils.remotestore.each(function (record) {
-			traildevils.store.add(record.data);
+			traildevils.store.add(record);
 		});
 		this.initializeFavorites();
 		this.sort();
 		this.sync();
 		traildevils.views.trailsList.refresh();
+		this.onResetComplete();
+		this.loadMask.hide();
 	},
 	
 	removeAllRecordsFromStore: function() {
-		this.getProxy().clear();
-		this.data.clear();
+		this.each(function (record) {
+			traildevils.store.remove(record);
+		});
 		this.sync();
 	},
 	
@@ -123,9 +155,9 @@ Ext.regStore('TrailsLocal', {
 	
 	initializeFavorites: function() {
 		// check trails if they are already in favorite store
-		this.each(function(store) {
-			if(traildevils.favoritestore.getById(store.data.id) !== null) {
-				store.data.favorite = true;
+		this.each(function(record) {
+			if(traildevils.favoritestore.getById(record.data.id) !== null) {
+				record.data.favorite = true;
 			}
 		});
 	}

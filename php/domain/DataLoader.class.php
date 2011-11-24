@@ -20,8 +20,13 @@ class DataLoader
 	{
 		foreach ($this->convertArray as $intKey => $extKey)
 		{
-			$this->internalArray[$index][$intKey] = nl2br($this->externalArray[$index][$extKey]);
+			$this->internalArray[$index][$intKey] = $this->externalArray[$index][$extKey];
 		}
+	}
+	
+	protected function convertId($index)
+	{
+		$this->internalArray[$index]["id"] = intval($this->externalArray[$index]["Id"]);
 	}
 }
 ?>

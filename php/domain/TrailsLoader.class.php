@@ -12,10 +12,7 @@ class TrailsLoader extends DataLoader
 	protected $page = 1;
 	
 	protected $convertArray = array(
-		'id'		=> 'Id',
 		'title'		=> 'Name',
-		'latitude'	=> 'GmapX',
-		'longitude' => 'GmapY'
 	);
 
 	public function __construct() 
@@ -47,12 +44,13 @@ class TrailsLoader extends DataLoader
 	public function convertTrailsJson($externalTrailJson) 
 	{
 		$this->externalArray = json_decode($externalTrailJson, true);
-		
 		$this->sortExternalArray();
 		$this->sliceExternalArray();
 
 		for ($i = 0; $i < count($this->externalArray); $i++) {
+			$this->convertId($i);
 			$this->convertValues($i);
+			$this->convertLonLat($i);
 			$this->convertLocation($i);
 			$this->convertDescription($i);
 			$this->convertDistance($i);
@@ -75,7 +73,7 @@ class TrailsLoader extends DataLoader
 	{
 		$comparator = "";
 		if ($this->sortArray[count($this->sortArray) - 1]['property'] == 'distance') {
-			$this->calcDistance($this->externalArray);
+			$this->calcDistance();
 			$comparator = "DistanceComparator";
 		} else
 		{
@@ -90,12 +88,18 @@ class TrailsLoader extends DataLoader
 		$this->externalArray = array_slice($this->externalArray, $startIndex, $this->pageSize);
 	}
 	
-	protected function calcDistance(&$dataArray)
+	protected function calcDistance()
 	{
 		// calculate distance for each trail
 		for ($i = 0; $i < count($this->externalArray); $i++) {
-			$dataArray[$i]['distance'] = $this->userGeo->distance(new GeoLocation($this->externalArray[$i]["GmapX"], $this->externalArray[$i]["GmapY"]));
+			$this->externalArray[$i]['distance'] = $this->userGeo->distance(new GeoLocation($this->externalArray[$i]["GmapX"], $this->externalArray[$i]["GmapY"]));
 		}
+	}
+	
+	protected function convertLonLat($index)
+	{
+		$this->internalArray[$index]["latitude"] = floatval($this->externalArray[$index]["GmapX"]);
+		$this->internalArray[$index]["longitude"] = floatval($this->externalArray[$index]["GmapY"]);
 	}
 	
 	protected function convertLocation($index) 
@@ -136,7 +140,7 @@ class TrailsLoader extends DataLoader
 	private function getClosedTrail($lat,$lon)
 	{
 		$trailArray = array();
-		$trailArray["id"] = "100";
+		$trailArray["id"] = 100;
 		$trailArray["title"] = "Geschlossener Trail";
 		$trailArray["location"] = "Winterthur";
 		$trailArray["distance"] = $this->userGeo->distance(new GeoLocation($lat, $lon));

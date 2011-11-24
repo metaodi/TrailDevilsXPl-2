@@ -27,8 +27,6 @@ Ext.regStore('Trails', {
 		},
 		load: function() {
 			traildevils.store.refreshData();
-			traildevils.store.loadMask.hide();
-			traildevils.store.onResetComplete();
 			traildevils.online = true;
 			console.log('App ist online!');
 		}
