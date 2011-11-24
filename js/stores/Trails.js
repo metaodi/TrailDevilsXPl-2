@@ -25,6 +25,10 @@ Ext.regStore('Trails', {
 			} else {
 				this.proxy.extraParams.params = '0,0,' + this.pageSize;
 			}
+			if(this.currentPage == 1)
+			{
+				this.removeAllRecords();
+			}
 		},
 		load: function() {
 			traildevils.store.refreshData();
@@ -57,5 +61,12 @@ Ext.regStore('Trails', {
 	// group by status
 	getGroupString : function(record) {
 		return record.get('status');
+	},
+	
+	removeAllRecords: function() {
+		this.each(function (record) {
+			this.remove(record);
+		},this);
+		this.sync();
 	}
 });

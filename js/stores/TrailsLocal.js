@@ -36,7 +36,6 @@ Ext.regStore('TrailsLocal', {
                 msg: traildevils.views.trailsList.loadingText
             });
             this.loadMask.show();
-			
 			traildevils.remotestore.loadPage(this.currentPage);
 		}
 	},
@@ -94,7 +93,7 @@ Ext.regStore('TrailsLocal', {
 	
 	//copy data from remote store to local store
 	refreshData: function() {
-		this.removeAllRecordsFromStore();
+		this.removeAllRecords();
 		traildevils.remotestore.each(function (record) {
 			traildevils.store.add(record);
 		});
@@ -106,10 +105,10 @@ Ext.regStore('TrailsLocal', {
 		this.loadMask.hide();
 	},
 	
-	removeAllRecordsFromStore: function() {
+	removeAllRecords: function() {
 		this.each(function (record) {
-			traildevils.store.remove(record);
-		});
+			this.remove(record);
+		},this);
 		this.sync();
 	},
 	
