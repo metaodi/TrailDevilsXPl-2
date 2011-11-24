@@ -7,7 +7,6 @@
 traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
 	fullscreen: true,
 	disableSelection: true,
-	grouped : true,
 	loadingText: 'Lade Trails...',
 	emptyText: '<div class="empty-text">Keine Favoriten vorhanden</div>',
 	

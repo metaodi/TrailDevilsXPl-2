@@ -7,13 +7,14 @@
 Ext.regStore('Trails', {
 	model: 'Trail',
 	clearOnPageLoad: false,
-	remoteSort: true,
-    pageSize: 10,
+	pageSize: 10,
 	
-	// order by status descending (groups) and distance ascending
+	// order by status descending (groups), by distance ascending
+	// and if distance is not available by title
 	sorters: [
-		{ property: 'status', direction: 'DESC' }, 
-		{ property: 'distance', direction: 'ASC' }
+		{ property: 'status', direction: 'DESC'},
+		{ property: 'distance', direction: 'ASC' },
+		{ property: 'title', direction: 'ASC' }
 	],
 	timeout: 2000,
 	
@@ -56,10 +57,5 @@ Ext.regStore('Trails', {
 	// group by status
 	getGroupString : function(record) {
 		return record.get('status');
-	},
-	
-	removeAllRecordsFromStore: function() {
-		// TODO dangerous method -> shouldn't be used!
-	    this.removeAll();
 	}
 });

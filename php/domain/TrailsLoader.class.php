@@ -6,7 +6,7 @@ require_once('TrailTypesLoader.class.php');
 class TrailsLoader extends DataLoader 
 {
 	protected $typesLoader;
-	protected $sortArray;
+	protected $sortAttribute = "distance";
 	protected $userGeo;
 	protected $pageSize = 10;
 	protected $page = 1;
@@ -31,11 +31,14 @@ class TrailsLoader extends DataLoader
 	 * 
 	 * @TODO delete default params for latitude/longitude
 	 */
-	public function getTrailsNear($userLat=47.5101756, $userLng=8.7221472, $pageSize=10, $page=1, $sort="", $url="http://152.96.80.18:8080/api/trails") /* http://jenkins.rdmr.ch/php/mock_api.json */
+	public function getTrailsNear($userLat=47.5101756, $userLng=8.7221472, $pageSize=10, $page=1, $url="http://152.96.80.18:8080/api/trails") /* http://jenkins.rdmr.ch/php/mock_api.json */
 	{ 
 		$remote = new JSONRemoteCaller($url);
+		// choose sort attribute depending on availibility of geolocation (Lat: 0 / Lng: 0 means not available)
+		if($userLat == 0 && $userLng == 0) {
+			$this->setSortAttribute("title");
+		}
 		$this->userGeo = new GeoLocation($userLat, $userLng);
-		$this->sortArray = json_decode($sort, true);
 		$this->pageSize = $pageSize;
 		$this->page = $page;
 		return $this->convertTrailsJson($remote->callRemoteSite());
@@ -72,11 +75,10 @@ class TrailsLoader extends DataLoader
 	protected function sortExternalArray()
 	{
 		$comparator = "";
-		if ($this->sortArray[count($this->sortArray) - 1]['property'] == 'distance') {
+		if ($this->sortAttribute == "distance") {
 			$this->calcDistance();
 			$comparator = "DistanceComparator";
-		} else
-		{
+		} else {
 			$comparator = "TitleComparator";
 		}
 		usort($this->externalArray, array($comparator, "compare"));
@@ -109,8 +111,7 @@ class TrailsLoader extends DataLoader
 	
 	protected function convertDistance($index) 
 	{
-		if ($this->sortArray[count($this->sortArray) - 1]['property'] == 'distance') 
-		{
+		if ($this->sortAttribute == "distance") {
 			$this->internalArray[$index]["distance"] = $this->externalArray[$index]['distance'];
 			$this->internalArray[$index]["formattedDistance"] = $this->userGeo->getFormattedDistance($this->internalArray[$index]["distance"]);
 		}
@@ -160,9 +161,9 @@ class TrailsLoader extends DataLoader
 		$this->userGeo = $geo;
 	}
 	
-	public function setSortArray($sortArray = array())
+	public function setSortAttribute($sortAttribute)
 	{
-		$this->sortArray = $sortArray;
+		$this->sortAttribute = $sortAttribute;
 	}
 	
 	public function setPage($page)
