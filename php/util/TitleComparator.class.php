@@ -9,7 +9,7 @@ require_once('Comparable.php');
  */
 class TitleComparator implements Comparable{
 	public static function compare($a, $b) {
-	    return strcmp($a['Name'], $b['Name']);
+	    return strcasecmp($a['Name'], $b['Name']);
 	}
 }
 
