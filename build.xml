@@ -37,8 +37,8 @@
 	</target>
 	
 	<target name="exec_php">
-		<echo message="Run ${filename}"/>
 		<basename file="${filename}" property="basename"/>
+		<echo message="Run ${basename}"/>
 		<exec executable="php" dir="${test.dir}" output="${result.dir}/${basename}.xml" logError="true">
 			<arg value="-f"/>
 			<arg value="index.php"/>
