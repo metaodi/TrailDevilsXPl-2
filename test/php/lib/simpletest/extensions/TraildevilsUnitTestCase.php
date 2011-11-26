@@ -120,21 +120,6 @@ abstract class TraildevilsUnitTestCase extends UnitTestCase {
 		return new GeoLocation(47.223357, 8.816614);
 	}
 	
-	protected function getTestSortArray($orderby="distance")
-	{
-		$sortArray = array();
-		$sortArray[0]['property'] = "status";
-		$sortArray[0]['direction'] = "DESC";
-		$sortArray[1]['property'] = $orderby;
-		$sortArray[1]['direction'] = "ASC";
-		return $sortArray;
-	}
-	
-	protected function getTestSortJson($orderby="distance")
-	{
-		return json_encode($this->getTestSortArray($orderby));
-	}
-	
 	function checkJson($json, $root) {
 		$jsonArray = json_decode($json, true);
 		$this->checkJsonFormat($jsonArray[$root][0]);

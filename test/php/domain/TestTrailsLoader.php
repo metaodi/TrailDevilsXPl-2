@@ -20,7 +20,6 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 	{
 		$loader = new TrailsLoader();
 		$loader->setUserGeo($this->getTestGeoLocation());
-		$loader->setSortArray($this->getTestSortArray());
 		$loader->setPageSize(10);
 		$loader->setPage(1);
 		
@@ -40,7 +39,7 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 	function testConvertJsonValues()
 	{
 		 $location = $this->getTestGeoLocation();
-		 $convertedJson = json_decode($this->loader->convertTrailsJson($this->getTestTrailJson(), $location, 10, 1,$this->getTestSortArray()), true);
+		 $convertedJson = json_decode($this->loader->convertTrailsJson($this->getTestTrailJson(), $location, 10, 1), true);
 		 $this->assertEqual(count($convertedJson["trails"]), 3, "Array should contain exactly 3 trails: %s");
 		 
 		 $values = $convertedJson["trails"][0];
@@ -62,21 +61,21 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 		$localJson = $helperLoader->convertTrailsJson($this->getTestTrailJson());
 		$this->checkJson($localJson,"trails");
 		
-		$result = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 10, 1, $this->getTestSortJson(), $url);
+		$result = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 10, 1, $url);
 		$this->assertEqualsIgnoreWhitespace($result,$localJson);
     }
 	
 	function testGetTrailsNearWithRemoteAPIAndLocation() {
 		$location = $this->getTestGeoLocation();
 		
-		$remoteJson = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 10, 1, $this->getTestSortJson("distance"));
+		$remoteJson = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 10, 1);
 		$this->checkJson($remoteJson,"trails");
     }
 	
 	function testGetTrailsNearWithRemoteAPIWithoutLocation() {
 		$location = $this->getTestGeoLocation();
 		
-		$remoteJson = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(),  10, 1, $this->getTestSortJson("title"));
+		$remoteJson = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(),  10, 1);
 		$this->jsonKeys = array("title","location","thumb","description","status","latitude","longitude");
 		$this->checkJson($remoteJson,"trails");
     }
