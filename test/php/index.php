@@ -14,11 +14,16 @@ if (isset($argv[1]) || isset($_GET['file']))
 	}
 	
 } else {
-	//include all files to show an overview of all tests
+	//run tests in all directories
 	$basedir = dirname(__FILE__);
-	TestRunner::runTestDirectory($basedir);
-	TestRunner::runTestDirectory($basedir."/domain");
-	TestRunner::runTestDirectory($basedir."/remote");
+    $dh = opendir($basedir);
+	while (($file = readdir($dh)) !== false) {
+		if (is_dir($file) && $file != "..") 
+		{
+			TestRunner::runTestDirectory($basedir."/".$file);
+		}
+	}
+	closedir($dh);
 }
 
 ?>
