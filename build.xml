@@ -31,7 +31,7 @@
 		<mkdir dir="${result.dir}"/>
 		<foreach target="exec_php" param="filename">
 			<path>
-				<fileset dir="${test.dir}" includes="Test*.php"/>
+				<fileset dir="${test.dir}" includes="**/Test*.php"/>
 			</path>
 		</foreach>
 	</target>
