@@ -56,6 +56,10 @@ Ext.regController('favoritetrailslist', {
 			controller: traildevils.controllers.favoriteTrailsListController,
 			action: 'list'
 		});
+		
+		if(options.callbackFn !== undefined) {
+			options.callbackFn.call(options.callbackContext);
+		}
 	},
 	
 	toggleFavorite: function(options) {

@@ -8,8 +8,8 @@ Ext.regStore('TrailsLocal', {
 	model: 'Trail',
 	clearOnPageLoad: false,
 	
-	resetCompleteCallbackFn: null,
-	resetCompleteCallbackCmp: null,
+	resetCallbackFn: null,
+	resetCallbackScope: null,
 	
 	// order by status descending (groups), by distance ascending
 	// and if distance is not available by title
@@ -31,11 +31,7 @@ Ext.regStore('TrailsLocal', {
 				traildevils.views.trailsListSearch.reset();
 			}
 			
-			// show load mask
-			this.loadMask = new Ext.LoadMask(Ext.getBody(),{
-                msg: traildevils.views.trailsList.loadingText
-            });
-            this.loadMask.show();
+			// load current page on remotestore
 			traildevils.remotestore.loadPage(this.currentPage);
 		}
 	},
@@ -76,33 +72,23 @@ Ext.regStore('TrailsLocal', {
 		}
     },
 	
-	reset: function(callbackFn, cmp) {
-		this.currentPage = 1;
-		this.loadPage(this.currentPage);
-		// TODO very ugly implementation (please refactor me!)
-		this.resetCompleteCallbackFn = callbackFn;
-		this.resetCompleteCallbackCmp = cmp;
-	},
-	
-	onResetComplete: function() {
-		if(this.resetCompleteCallbackFn !== null) {
-			this.resetCompleteCallbackFn.call(this.resetCompleteCallbackCmp);
-		}
-		this.resetCompleteCallbackFn = null;
-	},
-	
 	//copy data from remote store to local store
 	refreshData: function() {
 		this.removeAllRecords();
-		traildevils.remotestore.each(function (record) {
+		traildevils.remotestore.each(function(record) {
 			traildevils.store.add(record);
+			traildevils.store.setFavoriteState(record);
 		});
-		this.initializeFavorites();
-		this.sort();
 		this.sync();
-		traildevils.views.trailsList.refresh();
+		this.sort();
 		this.onResetComplete();
-		this.loadMask.hide();
+	},
+	
+	setFavoriteState: function(record) {
+		// check trail if it is already in favorite store
+		if(traildevils.favoritestore.getById(record.data.id) !== null) {
+			record.data.favorite = true;
+		}
 	},
 	
 	removeAllRecords: function() {
@@ -112,8 +98,20 @@ Ext.regStore('TrailsLocal', {
 		this.sync();
 	},
 	
-	getDistance: function(lat, lng) {
-		return traildevils.geo.getDistance(lat, lng);
+	reset: function(callback, scope) {
+		// TODO very ugly implementation (please refactor me!)
+		this.resetCallbackFn = callback;
+		this.resetCallbackScope = scope;
+		
+		this.currentPage = 1;
+		this.load();
+	},
+	
+	onResetComplete: function() {
+		if(this.resetCallbackFn !== null) {
+			this.resetCallbackFn.call(this.resetCallbackScope);
+		}
+		this.resetCallbackFn = null;
 	},
 	
 	getFormattedDistance: function(distanceInMeters) {
@@ -127,19 +125,10 @@ Ext.regStore('TrailsLocal', {
 	
 	updateDistances: function() {
 		this.each(function(store) {
-			store.data.distance = traildevils.store.getDistance(store.data.latitude, store.data.longitude);
+			store.data.distance = traildevils.geo.getDistance(store.data.latitude, store.data.longitude);
 			store.data.formattedDistance = traildevils.store.getFormattedDistance(store.data.distance);
 		});
 		this.sort();
 		traildevils.views.trailsList.refresh();
-	},
-	
-	initializeFavorites: function() {
-		// check trails if they are already in favorite store
-		this.each(function(record) {
-			if(traildevils.favoritestore.getById(record.data.id) !== null) {
-				record.data.favorite = true;
-			}
-		});
 	}
 });

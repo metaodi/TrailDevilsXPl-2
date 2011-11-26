@@ -177,21 +177,25 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 /* list options plugin */
-#trailsList .x-list-options {
+#trailsList .x-list-options,
+#favoriteTrailsList .x-list-options {
 	background-image: url(../images/swipe_background.png);
 	background-repeat: repeat;
 	-webkit-box-shadow: inset 0 0 2em #252525;
 }
-#trailsList .x-list-options ul {
+#trailsList .x-list-options ul,
+#favoriteTrailsList .x-list-options ul {
 	width: 5em;
 }
-#trailsList .x-list-options ul li.x-menu-option {
+#trailsList .x-list-options ul li.x-menu-option,
+#favoriteTrailsList .x-list-options ul li.x-menu-option {
 	width: 5em;
 	margin: 0;
 	height: 100%;
 	-webkit-border-radius: 0;
 }
-#trailsList .x-list-options ul li.x-menu-option .x-menu-option-image {
+#trailsList .x-list-options ul li.x-menu-option .x-menu-option-image,
+#favoriteTrailsList .x-list-options ul li.x-menu-option .x-menu-option-image {
 	background-position: 50%;
 	background-repeat: no-repeat;
 	height: 100%;
@@ -202,7 +206,11 @@ input[type="search"]::-webkit-search-cancel-button {
 #trailsList .x-list-options ul li.x-menu-option .x-menu-option-image.favorite-act {
 	background-image: url('../images/fav_silver_act.png');
 }
-#trailsList .x-list-options ul li.x-menu-option-pressed {
+#favoriteTrailsList .x-list-options ul li.x-menu-option .x-menu-option-image.delete {
+	background-image: url('../images/trash_silver.png');
+}
+#trailsList .x-list-options ul li.x-menu-option-pressed,
+#favoriteTrailsList .x-list-options ul li.x-menu-option-pressed {
 	background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 30, color-stop(0%, rgba(248, 251, 254, 0.5)), color-stop(100%, rgba(248, 251, 254, 0)));
 	background-image: radial-gradient(rgba(248, 251, 254, 0.5), rgba(248, 251, 254, 0) 30px);
 }

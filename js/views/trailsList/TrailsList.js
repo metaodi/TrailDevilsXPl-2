@@ -12,14 +12,14 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 	emptyText: '<div class="empty-text">Keine Trails vorhanden</div>',
 	
 	initComponent: function() {
+		this.store = traildevils.store;
+		
 		this.listOptionsPlugin = new traildevils.views.TrailsListOptionsPlugin();
 		this.plugins = [
 			{ ptype: 'trailsListPullRefreshPlugin' },
 			{ ptype: 'trailsListPagingPlugin' },
 			this.listOptionsPlugin
 		];
-		
-        this.store = traildevils.store;
 		
 		var tpl =
 			'<div class="trail-item">' +

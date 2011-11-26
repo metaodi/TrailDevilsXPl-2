@@ -19,8 +19,8 @@ traildevils.views.TrailsListPullRefreshPlugin = Ext.extend(Ext.plugins.PullRefre
 		'</div>'
 	),
 	
-	refreshFn: function(callbackFn, plugin) {
-		traildevils.store.reset(callbackFn, plugin);
+	refreshFn: function(callback, scope) {
+		traildevils.store.reset(callback, scope);
 	},
 		
 	/**
@@ -51,8 +51,8 @@ traildevils.views.TrailsListPullRefreshPlugin = Ext.extend(Ext.plugins.PullRefre
      */
     onBeforeLoad: function() {
         if (this.isLoading && this.list.store.getCount() > 0) {
-            traildevils.store.loadMask.hide();
-            return false;
+			traildevils.remotestore.loadMask.hide();
+			return false;
         }
     }
 });

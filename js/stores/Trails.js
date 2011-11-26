@@ -25,8 +25,7 @@ Ext.regStore('Trails', {
 			} else {
 				this.proxy.extraParams.params = '0,0,' + this.pageSize;
 			}
-			if(this.currentPage == 1)
-			{
+			if(this.currentPage == 1) {
 				this.removeAllRecords();
 			}
 		},
@@ -52,7 +51,6 @@ Ext.regStore('Trails', {
         listeners: {
 			exception: function() {
 				traildevils.online = false;
-				traildevils.store.loadMask.hide();
 				console.log('App ist offline!');
 			}
         }
