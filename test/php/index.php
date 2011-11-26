@@ -1,6 +1,6 @@
 <?php
-require_once('lib/simpletest/extensions/TraildevilsUnitTestCase.php');
-require_once('lib/simpletest/extensions/TestRunner.class.php');
+require_once(dirname(__FILE__) . '/../TraildevilsUnitTestCase.php');
+require_once(dirname(__FILE__) . '/../TestRunner.class.php');
 
 //run one specific Testfile or all available tests in this directory
 if (isset($argv[1]) || isset($_GET['file']))

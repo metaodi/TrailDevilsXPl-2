@@ -1,4 +1,6 @@
 <?php
+require_once('lib/simpletest/scorer.php');
+
 class JUnitXMLReporter extends SimpleReporter {
     function __construct() {
         parent::__construct();

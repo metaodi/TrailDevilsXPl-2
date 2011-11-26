@@ -1,4 +1,5 @@
 <?php
+require_once('lib/simpletest/reporter.php');
 
 class TraildevilsHTMLReporter extends HtmlReporter {
     

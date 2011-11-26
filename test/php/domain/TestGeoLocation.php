@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . '/../lib/simpletest/extensions/TraildevilsUnitTestCase.php');
+require_once(dirname(__FILE__) . '/../../TraildevilsUnitTestCase.php');
 require_once(dirname(__FILE__) . '/../../../php/domain/GeoLocation.class.php');
 
 class TestGeoLocation extends TraildevilsUnitTestCase {

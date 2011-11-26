@@ -1,8 +1,8 @@
 <?php
-require_once(dirname(__FILE__) . '/../unit_tester.php');
+require_once(dirname(__FILE__) . '/lib/simpletest/unit_tester.php');
 require_once('TraildevilsHTMLReporter.php');
 require_once('JUnitXMLReporter.php');
-require_once(dirname(__FILE__) . '/../../../../../php/domain/GeoLocation.class.php');
+require_once(dirname(__FILE__) . '/../php/domain/GeoLocation.class.php');
 /**
  * Description of ReportableUnitTestCase
  *
