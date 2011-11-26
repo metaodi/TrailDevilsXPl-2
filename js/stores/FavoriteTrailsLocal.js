@@ -24,7 +24,7 @@ Ext.regStore('FavoriteTrailsLocal', {
 	
 	updateDistances: function() {
 		this.each(function(store) {
-			store.data.distance = traildevils.store.getDistance(store.data.latitude, store.data.longitude);
+			store.data.distance = traildevils.geo.getDistance(store.data.latitude, store.data.longitude);
 			store.data.formattedDistance = traildevils.store.getFormattedDistance(store.data.distance);
 		});
 		this.sort();

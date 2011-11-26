@@ -23,19 +23,25 @@ Ext.regApplication({
 			}
 		}
 		
+		// app is offline until told otherwise
+		traildevils.online = false;
+		
 		// initialize store
 		traildevils.store = Ext.getStore('TrailsLocal');
 		traildevils.remotestore = Ext.getStore('Trails');
 		traildevils.favoritestore = Ext.getStore('FavoriteTrailsLocal');
 		
-		// app is offline until told otherwise
-		traildevils.online = false;
+		// add loadmask to remotestore
+		traildevils.remotestore.loadMask = new Ext.LoadMask(Ext.getBody(), {
+			msg: 'Lade Trails...',
+			store: traildevils.remotestore
+		});
 		
 		// get current geolocation
 		traildevils.geo = new traildevils.util.TrailGeoLocation();
 		traildevils.geo.updateLocation(function() {
 			traildevils.favoritestore.load();
-			traildevils.store.loadPage(1);
+			traildevils.store.load();
 		});
 		traildevils.geo.setAutoUpdate(true);
 		

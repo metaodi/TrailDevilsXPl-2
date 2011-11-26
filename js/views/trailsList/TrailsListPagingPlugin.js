@@ -34,7 +34,7 @@ traildevils.views.TrailsListPagingPlugin = Ext.extend(Ext.plugins.ListPagingPlug
 	
     onBeforeLoad : function() {
         if (this.loading && this.list.store.getCount() > 0) {
-            traildevils.store.loadMask.hide();
+            traildevils.remotestore.loadMask.hide();
             return false;
         }
     }

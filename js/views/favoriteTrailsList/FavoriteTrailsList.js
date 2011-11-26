@@ -9,9 +9,15 @@ traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
 	disableSelection: true,
 	loadingText: 'Lade Trails...',
 	emptyText: '<div class="empty-text">Keine Favoriten vorhanden</div>',
+	favoriteToRemove: null,
 	
 	initComponent: function() {
         this.store = traildevils.favoritestore;
+		
+		this.listOptionsPlugin = new traildevils.views.FavoriteTrailsListOptionsPlugin();
+		this.plugins = [
+			this.listOptionsPlugin
+		];
 		
 		var tpl =
 			'<div class="trail-item">' +
@@ -41,6 +47,14 @@ traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
 		this.listeners = {
 			itemtap: function(container, index, item, e) {
 				this.onTrailItemTap(container, index, item, e);
+			},
+			menuoptiontap: function(option, record) {
+				this.onListOptionTap(option, record);
+			},
+			listoptionsclose: function() {
+				if(this.favoriteToRemove !== null) {
+					this.removeFavorite();
+				}
 			}
         };
 		
@@ -55,7 +69,35 @@ traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
 			action: 'detail',
 			trail: trail
 		});
-    }
+    },
+	
+	/**
+     * Handels tap event on list option
+     * @private
+     */
+	onListOptionTap: function(option, record) {
+		// if delete option was tapped
+		if(option.cls == 'delete') {
+			// close options menu
+			this.favoriteToRemove = record;
+		}
+		this.listOptionsPlugin.hideOptionsMenu(record);
+	},
+	
+	removeFavorite: function() {
+		Ext.dispatch({
+			controller: traildevils.controllers.favoriteTrailsListController,
+			action: 'removeFavorite',
+			trail: this.favoriteToRemove,
+			callbackFn: this.favoriteRemoved,
+			callbackContext: this
+		});
+	},
+	
+	favoriteRemoved: function() {
+		this.favoriteToRemove = null;
+	}
+	
 });
 
 // Create xtype
