@@ -31,7 +31,7 @@ class TrailsLoader extends DataLoader
 	 * 
 	 * @TODO delete default params for latitude/longitude
 	 */
-	public function getTrailsNear($userLat=47.5101756, $userLng=8.7221472, $pageSize=10, $page=1, $url="http://152.96.80.18:8080/api/trails") /* http://jenkins.rdmr.ch/php/mock_api.json */
+	public function getTrailsNear($userLat=47.5101756, $userLng=8.7221472, $pageSize=10, $page=1, $url="http://152.96.80.18:8080/api/trails") /* http://jenkins.rdmr.ch/test/php/mock_api.json */
 	{ 
 		$remote = new JSONRemoteCaller($url);
 		// choose sort attribute depending on availibility of geolocation (Lat: 0 / Lng: 0 means not available)
