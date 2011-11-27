@@ -83,6 +83,64 @@ abstract class TraildevilsUnitTestCase extends UnitTestCase {
 		return $trailJson;
 	}
 	
+	protected function getTestTrailXml()
+	{
+		$trailXml  = "<ArrayOfTrail xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n";
+		$trailXml .= "	<Trail>\n";
+		$trailXml .= "		<Id>1</Id>\n";
+		$trailXml .= "		<CreatedDate>2010-03-20T12:43:46</CreatedDate>\n";
+		$trailXml .= "		<ModifiedDate>2011-03-02T11:35:46</ModifiedDate>\n";
+		$trailXml .= "		<DeletedDate xsi:nil=\"true\"/>\n";
+		$trailXml .= "		<CreatedUnixTs>1269089026</CreatedUnixTs>\n";
+		$trailXml .= "		<ModifiedUnixTs>1299065746</ModifiedUnixTs>\n";
+		$trailXml .= "		<DeletedUnixTs xsi:nil=\"true\"/>\n";
+		$trailXml .= "		<NextCity>Winterthur</NextCity>\n";
+		$trailXml .= "		<GmapX>47.476709367794136</GmapX>\n";
+		$trailXml .= "		<GmapY>8.69793176651001</GmapY>\n";
+		$trailXml .= "		<Name>Testtrail</Name>\n";
+		$trailXml .= "		<Desc>Testbeschreibung</Desc>\n";
+		$trailXml .= "		<Journey>Reisebeschreibung</Journey>\n";
+		$trailXml .= "		<IsCommercial>supported</IsCommercial>\n";
+		$trailXml .= "		<State>ok</State>\n";
+		$trailXml .= "		<IsOpen>true</IsOpen>\n";
+		$trailXml .= "		<Url/>\n";
+		$trailXml .= "		<Favorits>25</Favorits>\n";
+		$trailXml .= "		<ImageUrl800>http://www.traildevils.ch/media/img/trails/trailimg_800_4.jpg</ImageUrl800>\n";
+		$trailXml .= "		<ImageUrl120>http://www.traildevils.ch/media/img/trails/trailimg_120_4.jpg</ImageUrl120>\n";
+		$trailXml .= "		<TraildevilsId>2</TraildevilsId>\n";
+		$trailXml .= "		<Country>Switzerland</Country>\n";
+		$trailXml .= "		<CountryId>176</CountryId>\n";
+		$trailXml .= "		<TrailTypes>\n";
+		$trailXml .= "			<TrailType>\n";
+		$trailXml .= "				<Id>1</Id>\n";
+		$trailXml .= "				<CreatedDate>2011-11-08T15:02:33.153</CreatedDate>\n";
+		$trailXml .= "				<ModifiedDate xsi:nil=\"true\"/>\n";
+		$trailXml .= "				<DeletedDate xsi:nil=\"true\"/>\n";
+		$trailXml .= "				<CreatedUnixTs>1320764553</CreatedUnixTs>\n";
+		$trailXml .= "				<ModifiedUnixTs xsi:nil=\"true\"/>\n";
+		$trailXml .= "				<DeletedUnixTs xsi:nil=\"true\"/>\n";
+		$trailXml .= "				<Name>Dirtjump</Name>\n";
+		$trailXml .= "				<Description>Eine Dirtjump-Anlage mit vorwiegend Doubles.</Description>\n";
+		$trailXml .= "			</TrailType>\n";
+		$trailXml .= "			<TrailType>\n";
+		$trailXml .= "				<Id>8</Id>\n";
+		$trailXml .= "				<CreatedDate>2011-11-08T15:02:33.157</CreatedDate>\n";
+		$trailXml .= "				<ModifiedDate xsi:nil=\"true\"/><DeletedDate xsi:nil=\"true\"/>\n";
+		$trailXml .= "				<CreatedUnixTs>1320764553</CreatedUnixTs>\n";
+		$trailXml .= "				<ModifiedUnixTs xsi:nil=\"true\"/>\n";
+		$trailXml .= "				<DeletedUnixTs xsi:nil=\"true\"/>\n";
+		$trailXml .= "				<Name>BMX-Bahn</Name>\n";
+		$trailXml .= "				<Description>Eine Renn-Anlage für BMXer.</Description>\n";
+		$trailXml .= "			</TrailType>\n";
+		$trailXml .= "		</TrailTypes>\n";
+		$trailXml .= "		<TrailImages/>\n";
+		$trailXml .= "		<TrailFeeds/>\n";
+		$trailXml .= "		<TrailCheckins/>\n";
+		$trailXml .= "	</Trail>\n";
+		$trailXml .= "</ArrayOfTrail>\n";
+		return $trailXml;
+	}
+	
 	protected function getTestTrailImagesJson() {
 		$trailImageJson  = "[{\n"; 
 		$trailImageJson .= "\"CreatedDate\":\"\/Date(1076709600000+0100)\/\",\n";

@@ -1,28 +1,33 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of RemoteCaller
- *
- * @author odi
- */
 abstract class RemoteCaller {
 	protected $url;
+	protected $curlHandler;
 	
-	function __construct($url) {
+	public function __construct($url) {
 		$this->url = $url;
 	}
 	
-	function getURL()
+	public function getURL()
 	{
 		return $this->url;
 	}
 	
-    abstract public function callRemoteSite();
+    public function callRemoteSite()
+	{
+		$this->curlHandler = curl_init($this->getURL());
+		$this->beforeCall();
+		curl_setopt($this->curlHandler, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($this->curlHandler, CURLOPT_TIMEOUT, 30);
+		$remote_answer = curl_exec($this->curlHandler);
+		
+		if(curl_errno($this->curlHandler) != 0) {
+			echo "cURL Errornumber: ".curl_errno($this->curlHandler)."<br />";
+			echo "cURL Error: ".curl_error($this->curlHandler)."<br />";
+		}
+		return $remote_answer;
+	}
+	
+	abstract protected function beforeCall();
 }
 
 ?>

@@ -1,0 +1,53 @@
+<ArrayOfTrail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Trail>
+		<Id>1</Id>
+		<CreatedDate>2010-03-20T12:43:46</CreatedDate>
+		<ModifiedDate>2011-03-02T11:35:46</ModifiedDate>
+		<DeletedDate xsi:nil="true"/>
+		<CreatedUnixTs>1269089026</CreatedUnixTs>
+		<ModifiedUnixTs>1299065746</ModifiedUnixTs>
+		<DeletedUnixTs xsi:nil="true"/>
+		<NextCity>Winterthur</NextCity>
+		<GmapX>47.476709367794136</GmapX>
+		<GmapY>8.69793176651001</GmapY>
+		<Name>Testtrail</Name>
+		<Desc>Testbeschreibung</Desc>
+		<Journey>Reisebeschreibung</Journey>
+		<IsCommercial>supported</IsCommercial>
+		<State>ok</State>
+		<IsOpen>true</IsOpen>
+		<Url/>
+		<Favorits>25</Favorits>
+		<ImageUrl800>http://www.traildevils.ch/media/img/trails/trailimg_800_4.jpg</ImageUrl800>
+		<ImageUrl120>http://www.traildevils.ch/media/img/trails/trailimg_120_4.jpg</ImageUrl120>
+		<TraildevilsId>2</TraildevilsId>
+		<Country>Switzerland</Country>
+		<CountryId>176</CountryId>
+		<TrailTypes>
+			<TrailType>
+				<Id>1</Id>
+				<CreatedDate>2011-11-08T15:02:33.153</CreatedDate>
+				<ModifiedDate xsi:nil="true"/>
+				<DeletedDate xsi:nil="true"/>
+				<CreatedUnixTs>1320764553</CreatedUnixTs>
+				<ModifiedUnixTs xsi:nil="true"/>
+				<DeletedUnixTs xsi:nil="true"/>
+				<Name>Dirtjump</Name>
+				<Description>Eine Dirtjump-Anlage mit vorwiegend Doubles.</Description>
+			</TrailType>
+			<TrailType>
+				<Id>8</Id>
+				<CreatedDate>2011-11-08T15:02:33.157</CreatedDate>
+				<ModifiedDate xsi:nil="true"/><DeletedDate xsi:nil="true"/>
+				<CreatedUnixTs>1320764553</CreatedUnixTs>
+				<ModifiedUnixTs xsi:nil="true"/>
+				<DeletedUnixTs xsi:nil="true"/>
+				<Name>BMX-Bahn</Name>
+				<Description>Eine Renn-Anlage für BMXer.</Description>
+			</TrailType>
+		</TrailTypes>
+		<TrailImages/>
+		<TrailFeeds/>
+		<TrailCheckins/>
+	</Trail>
+</ArrayOfTrail>
