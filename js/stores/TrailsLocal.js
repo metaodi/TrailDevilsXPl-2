@@ -102,9 +102,9 @@ traildevils.stores.TrailsLocalStore = Ext.extend(Ext.data.Store, {
 	},
 	
 	updateDistances: function() {
-		this.each(function(store) {
-			store.data.distance = traildevils.geo.getDistance(store.data.latitude, store.data.longitude);
-			store.data.formattedDistance = traildevils.store.getFormattedDistance(store.data.distance);
+		this.each(function(record) {
+			record.data.distance = traildevils.geo.getDistance(record.data.latitude, record.data.longitude);
+			record.data.formattedDistance = traildevils.store.getFormattedDistance(record.data.distance);
 		});
 		this.sort();
 		traildevils.views.trailsList.refresh();
