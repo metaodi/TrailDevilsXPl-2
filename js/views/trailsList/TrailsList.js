@@ -62,7 +62,6 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
      * @private
      */
     onTrailItemTap: function(container, index, item, e) {
-		// TODO close options menu on item tap
 		var trail = this.store.getAt(index);
 		Ext.dispatch({
 			controller: traildevils.controllers.trailsListController,

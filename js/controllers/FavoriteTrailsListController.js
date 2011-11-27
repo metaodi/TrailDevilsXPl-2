@@ -41,6 +41,8 @@ Ext.regController('favoritetrailslist', {
 		traildevils.views.trailDetailTabPanel.backBtn.setText('Favoriten');
 		
 		traildevils.views.favoriteTrailsListMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
+		// hide open list options
+		traildevils.views.favoriteTrailsList.listOptionsPlugin.doHideOptionsMenuWithoutAnim();
 	},
 	
 	removeFavorite: function(options) {
