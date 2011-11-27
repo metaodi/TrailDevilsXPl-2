@@ -16,7 +16,7 @@ Ext.regStore('FavoriteTrailsLocal', {
 	],
 	
 	proxy: {
-        type: 'localstorage',
+        type: 'traillocal',
         id: 'favorite-trails-local',
 		model: 'Trail',
 		idProperty: 'id'
