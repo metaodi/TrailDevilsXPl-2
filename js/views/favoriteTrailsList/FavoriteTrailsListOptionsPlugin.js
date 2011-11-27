@@ -50,7 +50,29 @@ traildevils.views.FavoriteTrailsListOptionsPlugin = Ext.extend(Ext.ux.touch.List
 		} else {
 			this.TapCancelled = true;
 		}
-	}
+	},
+	
+	/**
+	 * Hides all menu options without an animation
+	 */
+    doHideOptionsMenuWithoutAnim: function(){
+		var multiListOptions = this.parent.getEl().select('.' + this.optionsSelector);
+		
+		for(var i = 0; i < multiListOptions.elements.length; i++) {
+			var hiddenEl = Ext.get(multiListOptions.elements[i]).prev('.x-list-item');
+			var activeListOptions = Ext.get(multiListOptions.elements[i]);
+			
+			// show the List Item's 'body'
+			hiddenEl.show();
+			hiddenEl.setVisibilityMode(Ext.Element.DISPLAY);
+			
+			// remove the ListOptions DIV completely to save some resources
+			activeListOptions.remove();
+			Ext.removeNode(Ext.getDom(activeListOptions));
+
+			this.parent.fireEvent('listoptionsclose');
+		}
+    }
 	
 });
 

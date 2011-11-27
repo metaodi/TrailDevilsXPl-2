@@ -32,10 +32,14 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 				if(oldCard === traildevils.views.trailsListMainPanel) {
 					// if another tab than trailsList is selected set current view of trailsList back to list
 					traildevils.views.trailsListMainPanel.setActiveItem('trailsListPanel', false);
+					// hide open list options
+					traildevils.views.trailsList.listOptionsPlugin.doHideOptionsMenuWithoutAnim();
 				}
 				if(oldCard === traildevils.views.favoriteTrailsListMainPanel) {
 					// if another tab than favoriteTrailsList is selected set current view of favoriteTrailsList back to list
 					traildevils.views.favoriteTrailsListMainPanel.setActiveItem('favoriteTrailsListPanel', false);
+					// hide open list options
+					traildevils.views.favoriteTrailsList.listOptionsPlugin.doHideOptionsMenuWithoutAnim();
 				}
 				// destory detail panel on each cardswitch
 				if(traildevils.views.trailDetailTabPanel !== undefined && !traildevils.views.trailDetailTabPanel.isDestroyed) {
