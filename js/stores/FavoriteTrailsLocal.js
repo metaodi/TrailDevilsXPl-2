@@ -4,31 +4,17 @@
  * The Trails store definition
  * 
  */
-Ext.regStore('FavoriteTrailsLocal', {
-	model: 'Trail',
-	
-	// order by status descending (groups), by distance ascending
-	// and if distance is not available by title
-	sorters: [
-		{ property: 'status', direction: 'DESC'},
-		{ property: 'distance', direction: 'ASC' },
-		{ property: 'title', direction: 'ASC' }
-	],
-	
-	proxy: {
-        type: 'traillocal',
-        id: 'favorite-trails-local',
-		model: 'Trail',
-		idProperty: 'id'
-    },
-	
-	updateDistances: function() {
-		this.each(function(store) {
-			store.data.distance = traildevils.geo.getDistance(store.data.latitude, store.data.longitude);
-			store.data.formattedDistance = traildevils.store.getFormattedDistance(store.data.distance);
+traildevils.stores.FavoriteTrailsStore = Ext.extend(traildevils.stores.TrailsLocalStore, {
+	constructor: function(config) {
+		Ext.apply(this, {
+			proxy: {
+				type: 'traillocal',
+				id: 'favorite-trails-local',
+				model: 'Trail',
+				idProperty: 'id'
+			}
 		});
-		this.sort();
-		traildevils.views.favoriteTrailsList.refresh();
+		traildevils.stores.FavoriteTrailsStore.superclass.constructor.apply(this,config);
 	},
 	
 	addTrail: function(trail) {
@@ -44,3 +30,6 @@ Ext.regStore('FavoriteTrailsLocal', {
 		traildevils.views.favoriteTrailsList.refresh();
 	}
 });
+
+Ext.regStore('FavoriteTrailsLocal', new traildevils.stores.FavoriteTrailsStore);
+Ext.reg('favoritestore', traildevils.stores.FavoriteTrailsStore);

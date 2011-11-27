@@ -4,20 +4,34 @@
  * The Trails store definition
  * 
  */
-Ext.regStore('TrailsLocal', {
-	model: 'Trail',
-	clearOnPageLoad: false,
-	
-	resetCallbackFn: null,
-	resetCallbackScope: null,
-	
-	// order by status descending (groups), by distance ascending
-	// and if distance is not available by title
-	sorters: [
-		{ property: 'status', direction: 'DESC'},
-		{ property: 'distance', direction: 'ASC' },
-		{ property: 'title', direction: 'ASC' }
-	],
+traildevils.stores.TrailsLocalStore = Ext.extend(Ext.data.Store, {
+	constructor: function(config) {
+		var trailStoreConfig = {};
+		Ext.apply(trailStoreConfig, config);
+		Ext.applyIf(trailStoreConfig, {
+			model: 'Trail',
+			clearOnPageLoad: false,
+
+			resetCallbackFn: null,
+			resetCallbackScope: null,
+
+			// order by status descending (groups), by distance ascending
+			// and if distance is not available by title
+			sorters: [
+				{ property: 'status', direction: 'DESC'},
+				{ property: 'distance', direction: 'ASC' },
+				{ property: 'title', direction: 'ASC' }
+			],
+
+			proxy: {
+				type: 'traillocal',
+				id  : 'trails-local',
+				model: 'Trail',
+				idProperty: 'id'
+			}
+		});
+		traildevils.stores.TrailsLocalStore.superclass.constructor.call(this, trailStoreConfig);
+	},
 	
 	// group by status
 	getGroupString: function(record) {
@@ -35,13 +49,6 @@ Ext.regStore('TrailsLocal', {
 			traildevils.remotestore.loadPage(this.currentPage);
 		}
 	},
-	
-	proxy: {
-        type: 'traillocal',
-        id  : 'trails-local',
-		model: 'Trail',
-		idProperty: 'id'
-    },
 	
 	//copy data from remote store to local store
 	refreshData: function() {
@@ -101,5 +108,9 @@ Ext.regStore('TrailsLocal', {
 		});
 		this.sort();
 		traildevils.views.trailsList.refresh();
+		traildevils.views.favoriteTrailsList.refresh();
 	}
 });
+
+Ext.regStore('TrailsLocal', new traildevils.stores.TrailsLocalStore);
+Ext.reg('store', traildevils.stores.TrailsLocalStore);
