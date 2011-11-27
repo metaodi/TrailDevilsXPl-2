@@ -68,9 +68,6 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 			action: 'detail',
 			trail: trail
 		});
-		
-		// close options menu
-		this.listOptionsPlugin.doHideOptionsMenuWithoutAnim();
     },
 	
 	/**

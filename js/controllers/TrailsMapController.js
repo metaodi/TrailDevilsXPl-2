@@ -181,7 +181,12 @@ Ext.regController('trailsmap', {
 		
 		this.store = traildevils.favoritestore;
 		traildevils.views.trailsMapPanel.dockedItems.items[0].setTitle("Favoriten in der Nähe");
-		traildevils.views.viewport.setActiveItem('trailsMapMainPanel', 'slide');
+		traildevils.views.viewport.setActiveItem('trailsMapMainPanel', 
+			{
+				type: 'slide',
+				direction: 'right'
+			}
+		);
 	},
 	
 	/**
