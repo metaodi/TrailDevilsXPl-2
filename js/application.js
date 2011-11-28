@@ -69,5 +69,16 @@ Ext.regApplication({
 		
 		// favoriteTrailsList
 		traildevils.views.favoriteTrailsList = Ext.getCmp('favoriteTrailsList');
+		
+		
+		//add log listener for all relevant events
+		traildevils.on('distanceupdated', function() {this.logEvent()},this);
+		traildevils.on('datarefreshed', function() {this.logEvent()},this);
+		traildevils.on('resetdata', function() {this.logEvent()},this);
+		traildevils.on('newlocation', function() {this.logEvent()},this);
+	},
+	
+	logEvent: function() {
+		console.log('Event fired!')
 	}
 });
