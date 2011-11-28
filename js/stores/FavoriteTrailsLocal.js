@@ -20,7 +20,6 @@ traildevils.stores.FavoriteTrailsStore = Ext.extend(traildevils.stores.LocalStor
 	},
 	
 	addTrail: function(trail) {
-		console.log('add fav');
 		this.add(trail);
 		this.sort();
 		this.sync();
