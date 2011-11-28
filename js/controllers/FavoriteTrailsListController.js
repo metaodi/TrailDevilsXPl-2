@@ -59,8 +59,8 @@ Ext.regController('favoritetrailslist', {
 			action: 'list'
 		});
 		
-		if(options.callbackFn !== undefined) {
-			options.callbackFn.call(options.callbackContext);
+		if(options.callback !== undefined) {
+			options.callback.call(options.scope);
 		}
 	},
 	
