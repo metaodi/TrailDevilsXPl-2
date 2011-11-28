@@ -41,6 +41,7 @@ Ext.regStore('FavoriteTrailsLocal', {
 	removeTrail: function(trail) {
 		this.remove(trail);
 		this.sync();
+		traildevils.views.trailsList.refresh();
 		traildevils.views.favoriteTrailsList.refresh();
 	}
 });

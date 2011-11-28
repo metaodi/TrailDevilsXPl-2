@@ -5,6 +5,7 @@ Ext.regController('trailsmap', {
 	store: null,
 	markerImage: null,
 	markerShadow: null,
+	markerOwnPosition: null,
 	initialized: false,
 	
 	/**
@@ -25,6 +26,17 @@ Ext.regController('trailsmap', {
 			new google.maps.Point(0, 0),
 			new google.maps.Point(16.0, 18.0)
 		);
+		
+		// if geolocation is available add marker for own position
+		if(traildevils.geo.available) {
+			var ownPosition = new google.maps.LatLng(traildevils.geo.latitude, traildevils.geo.longitude);
+			this.markerOwnPosition = new google.maps.Marker({
+				map: traildevils.views.trailsMap.map,
+				position: ownPosition,
+				icon: 'resources/images/gmap_marker_own_position.png',
+				clickable: false
+			});
+		}
 		
 		this.resetControllerOptions();
 		
@@ -212,6 +224,13 @@ Ext.regController('trailsmap', {
 		}
 		this.store = traildevils.store;
 		traildevils.views.trailsMapPanel.dockedItems.items[0].setTitle("Trails in der Nähe");
+	},
+	
+	updateOwnPosition: function() {
+		if(this.markerOwnPosition) {
+			var ownPosition = new google.maps.LatLng(traildevils.geo.latitude, traildevils.geo.longitude);
+			this.markerOwnPosition.setPosition(ownPosition);
+		}
 	}
 });
 

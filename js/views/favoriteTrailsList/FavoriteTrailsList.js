@@ -91,8 +91,8 @@ traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
 			controller: traildevils.controllers.favoriteTrailsListController,
 			action: 'removeFavorite',
 			trail: this.favoriteToRemove,
-			callbackFn: this.favoriteRemoved,
-			callbackContext: this
+			callback: this.favoriteRemoved,
+			scope: this
 		});
 	},
 	
