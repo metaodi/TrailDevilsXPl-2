@@ -53,6 +53,10 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 				this.onListOptionTap(option, record);
 			}
         };
+		traildevils.addListener('distanceupdated', function() {
+			console.log('TrailsList: distanceupdated');
+			this.refresh();
+		},this);
 		
         traildevils.views.TrailsList.superclass.initComponent.call(this);
     },

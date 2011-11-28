@@ -6,7 +6,9 @@
  */
 traildevils.stores.FavoriteTrailsStore = Ext.extend(traildevils.stores.TrailsLocalStore, {
 	constructor: function(config) {
-		Ext.apply(this, {
+		var favStoreConfig = {};
+		Ext.apply(favStoreConfig, config);
+		Ext.applyIf(favStoreConfig, {
 			proxy: {
 				type: 'traillocal',
 				id: 'favorite-trails-local',
@@ -14,20 +16,20 @@ traildevils.stores.FavoriteTrailsStore = Ext.extend(traildevils.stores.TrailsLoc
 				idProperty: 'id'
 			}
 		});
-		traildevils.stores.FavoriteTrailsStore.superclass.constructor.apply(this,config);
+		traildevils.stores.FavoriteTrailsStore.superclass.constructor.call(this,favStoreConfig);
 	},
 	
 	addTrail: function(trail) {
 		this.add(trail);
 		this.sort();
 		this.sync();
-		traildevils.views.favoriteTrailsList.refresh();
+		traildevils.fireEvent('favoriteadded', trail);
 	},
 	
 	removeTrail: function(trail) {
 		this.remove(trail);
 		this.sync();
-		traildevils.views.favoriteTrailsList.refresh();
+		traildevils.fireEvent('favoriteremoved', trail);
 	}
 });
 

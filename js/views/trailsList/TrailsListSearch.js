@@ -26,6 +26,10 @@ traildevils.views.TrailsListSearch = Ext.extend(Ext.form.Search, {
 			}
         });
 		
+		traildevils.addListener('resetdata', function() {
+			this.reset();
+		},this);
+		
         traildevils.views.TrailsListSearch.superclass.initComponent.apply(this, arguments);
     },
 	

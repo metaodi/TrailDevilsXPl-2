@@ -18,9 +18,9 @@ traildevils.stores.TrailsLocalStore = Ext.extend(Ext.data.Store, {
 			// order by status descending (groups), by distance ascending
 			// and if distance is not available by title
 			sorters: [
-				{ property: 'status', direction: 'DESC'},
-				{ property: 'distance', direction: 'ASC' },
-				{ property: 'title', direction: 'ASC' }
+				{property: 'status', direction: 'DESC'},
+				{property: 'distance', direction: 'ASC'},
+				{property: 'title', direction: 'ASC'}
 			],
 
 			proxy: {
@@ -30,6 +30,9 @@ traildevils.stores.TrailsLocalStore = Ext.extend(Ext.data.Store, {
 				idProperty: 'id'
 			}
 		});
+		traildevils.addListener('newlocation', function() {
+			this.updateDistances();
+		},this);
 		traildevils.stores.TrailsLocalStore.superclass.constructor.call(this, trailStoreConfig);
 	},
 	
@@ -40,10 +43,7 @@ traildevils.stores.TrailsLocalStore = Ext.extend(Ext.data.Store, {
 	
 	listeners: {
 		beforeload: function() {
-			// reset search filter
-			if(traildevils.views.trailsListSearch !== undefined) {
-				traildevils.views.trailsListSearch.reset();
-			}
+			traildevils.fireEvent('resetdata');
 			
 			// load current page on remotestore
 			traildevils.remotestore.loadPage(this.currentPage);
@@ -107,8 +107,6 @@ traildevils.stores.TrailsLocalStore = Ext.extend(Ext.data.Store, {
 			record.data.formattedDistance = traildevils.store.getFormattedDistance(record.data.distance);
 		});
 		this.sort();
-		traildevils.views.trailsList.refresh();
-		traildevils.views.favoriteTrailsList.refresh();
 	}
 });
 
