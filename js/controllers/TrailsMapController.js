@@ -38,6 +38,8 @@ Ext.regController('trailsmap', {
 			});
 		}
 		
+		traildevils.on('newlocation', function() {this.updateOwnPosition()},this);
+		
 		this.resetControllerOptions();
 		
 		this.initialized = true;
