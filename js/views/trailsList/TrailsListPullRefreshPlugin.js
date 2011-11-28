@@ -20,7 +20,12 @@ traildevils.views.TrailsListPullRefreshPlugin = Ext.extend(Ext.plugins.PullRefre
 	),
 	
 	refreshFn: function(callback, scope) {
-		traildevils.store.reset(callback, scope);
+		traildevils.on({
+			datarefreshed: function() {callback.call(scope)},
+			scope: this,
+			single: true
+		});
+		traildevils.store.reset();
 	},
 		
 	/**

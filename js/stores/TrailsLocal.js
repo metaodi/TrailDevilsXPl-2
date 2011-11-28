@@ -9,9 +9,6 @@ traildevils.stores.TrailsLocalStore = Ext.extend(traildevils.stores.LocalStore, 
 		var trailStoreConfig = {};
 		Ext.apply(trailStoreConfig, config);
 		Ext.applyIf(trailStoreConfig, {
-			resetCallbackFn: null,
-			resetCallbackScope: null,
-
 			proxy: {
 				type: 'traillocal',
 				id  : 'trails-local',
@@ -45,7 +42,6 @@ traildevils.stores.TrailsLocalStore = Ext.extend(traildevils.stores.LocalStore, 
 		});
 		this.sync();
 		this.sort();
-		this.onResetComplete();
 		traildevils.fireEvent('datarefreshed');
 	},
 	
@@ -63,20 +59,9 @@ traildevils.stores.TrailsLocalStore = Ext.extend(traildevils.stores.LocalStore, 
 		this.sync();
 	},
 	
-	reset: function(callback, scope) {
-		// TODO very ugly implementation (please refactor me!)
-		this.resetCallbackFn = callback;
-		this.resetCallbackScope = scope;
-		
+	reset: function() {
 		this.currentPage = 1;
 		this.load();
-	},
-	
-	onResetComplete: function() {
-		if(this.resetCallbackFn !== null) {
-			this.resetCallbackFn.call(this.resetCallbackScope);
-		}
-		this.resetCallbackFn = null;
 	}
 });
 
