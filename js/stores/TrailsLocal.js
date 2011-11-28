@@ -1,27 +1,16 @@
 /**
- * @class Trail
+ * @class TrailsLocalStore
  * 
  * The Trails store definition
  * 
  */
-traildevils.stores.TrailsLocalStore = Ext.extend(Ext.data.Store, {
+traildevils.stores.TrailsLocalStore = Ext.extend(traildevils.stores.LocalStore, {
 	constructor: function(config) {
 		var trailStoreConfig = {};
 		Ext.apply(trailStoreConfig, config);
 		Ext.applyIf(trailStoreConfig, {
-			model: 'Trail',
-			clearOnPageLoad: false,
-
 			resetCallbackFn: null,
 			resetCallbackScope: null,
-
-			// order by status descending (groups), by distance ascending
-			// and if distance is not available by title
-			sorters: [
-				{property: 'status', direction: 'DESC'},
-				{property: 'distance', direction: 'ASC'},
-				{property: 'title', direction: 'ASC'}
-			],
 
 			proxy: {
 				type: 'traillocal',
@@ -30,9 +19,6 @@ traildevils.stores.TrailsLocalStore = Ext.extend(Ext.data.Store, {
 				idProperty: 'id'
 			}
 		});
-		traildevils.addListener('newlocation', function() {
-			this.updateDistances();
-		},this);
 		traildevils.stores.TrailsLocalStore.superclass.constructor.call(this, trailStoreConfig);
 	},
 	
@@ -60,6 +46,7 @@ traildevils.stores.TrailsLocalStore = Ext.extend(Ext.data.Store, {
 		this.sync();
 		this.sort();
 		this.onResetComplete();
+		traildevils.fireEvent('datarefreshed');
 	},
 	
 	setFavoriteState: function(record) {
@@ -90,23 +77,6 @@ traildevils.stores.TrailsLocalStore = Ext.extend(Ext.data.Store, {
 			this.resetCallbackFn.call(this.resetCallbackScope);
 		}
 		this.resetCallbackFn = null;
-	},
-	
-	getFormattedDistance: function(distanceInMeters) {
-		if(distanceInMeters > 999) {
-			// round to one decimal
-			return (Math.round(distanceInMeters / 100) / 10) + "km";
-		} else {
-			return Math.round(distanceInMeters) + "m";
-		}
-	},
-	
-	updateDistances: function() {
-		this.each(function(record) {
-			record.data.distance = traildevils.geo.getDistance(record.data.latitude, record.data.longitude);
-			record.data.formattedDistance = traildevils.store.getFormattedDistance(record.data.distance);
-		});
-		this.sort();
 	}
 });
 

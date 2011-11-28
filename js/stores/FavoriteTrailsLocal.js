@@ -4,7 +4,7 @@
  * The Trails store definition
  * 
  */
-traildevils.stores.FavoriteTrailsStore = Ext.extend(traildevils.stores.TrailsLocalStore, {
+traildevils.stores.FavoriteTrailsStore = Ext.extend(traildevils.stores.LocalStore, {
 	constructor: function(config) {
 		var favStoreConfig = {};
 		Ext.apply(favStoreConfig, config);
@@ -20,6 +20,7 @@ traildevils.stores.FavoriteTrailsStore = Ext.extend(traildevils.stores.TrailsLoc
 	},
 	
 	addTrail: function(trail) {
+		console.log('add fav');
 		this.add(trail);
 		this.sort();
 		this.sync();
