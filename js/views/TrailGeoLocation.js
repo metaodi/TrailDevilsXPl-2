@@ -32,6 +32,15 @@ traildevils.util.TrailGeoLocation = Ext.extend(Ext.util.GeoLocation, {
 		var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLng/2) * Math.sin(dLng/2) * Math.cos(thisLatitude) * Math.cos(otherLatitude); 
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		return earthRadius * c;
+	},
+	
+	getFormattedDistance: function(distanceInMeters) {
+		if(distanceInMeters > 999) {
+			// round to one decimal
+			return (Math.round(distanceInMeters / 100) / 10) + "km";
+		} else {
+			return Math.round(distanceInMeters) + "m";
+		}
 	}
 });
 
