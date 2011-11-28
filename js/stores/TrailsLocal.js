@@ -29,7 +29,7 @@ traildevils.stores.TrailsLocalStore = Ext.extend(traildevils.stores.LocalStore, 
 	
 	listeners: {
 		beforeload: function() {
-			traildevils.fireEvent('resetdata');
+			traildevils.fireEvent('beforestoreload');
 			
 			// load current page on remotestore
 			traildevils.remotestore.loadPage(this.currentPage);

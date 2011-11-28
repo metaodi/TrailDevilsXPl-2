@@ -26,7 +26,7 @@ traildevils.views.TrailsListSearch = Ext.extend(Ext.form.Search, {
 			}
         });
 		
-		traildevils.addListener('resetdata', function() {
+		traildevils.addListener('beforestoreload', function() {
 			this.reset();
 		},this);
 		
