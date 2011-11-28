@@ -25,10 +25,10 @@ traildevils.views.TrailsListSearch = Ext.extend(Ext.form.Search, {
 				}
 			}
         });
-		
-		traildevils.addListener('beforestoreload', function() {
-			this.reset();
-		},this);
+		traildevils.on({
+			scope: this,
+			beforestoreload: function() {this.reset()}
+		});
 		
         traildevils.views.TrailsListSearch.superclass.initComponent.apply(this, arguments);
     },

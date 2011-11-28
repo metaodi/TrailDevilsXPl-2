@@ -57,9 +57,13 @@ traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
 				}
 			}
         };
-		traildevils.on('distanceupdated', function() {this.refresh()},this);
-		traildevils.on('favoriteadded', function() {this.refresh()},this);
-		traildevils.on('favoriteremoved', function() {this.refresh()},this);
+		
+		traildevils.on({
+			scope: this,
+			distanceupdated: function() {this.refresh()},
+			favoriteadded: function() {this.refresh()},
+		    favoriteremoved: function() {this.refresh()}
+		});
 		
         traildevils.views.FavoriteTrailsList.superclass.initComponent.apply(this, arguments);
     },
