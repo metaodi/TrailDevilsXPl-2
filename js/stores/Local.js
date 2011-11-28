@@ -23,10 +23,12 @@ traildevils.stores.LocalStore = Ext.extend(Ext.data.Store, {
 	},
 	
 	updateDistances: function() {
-		this.each(function(record) {
-			record.data.distance = traildevils.geo.getDistance(record.data.latitude, record.data.longitude);
-			record.data.formattedDistance = traildevils.geo.getFormattedDistance(record.data.distance);
-		});
-		this.sort();
+		if(!this.isLoading()) {
+			this.each(function(record) {
+				record.data.distance = traildevils.geo.getDistance(record.data.latitude, record.data.longitude);
+				record.data.formattedDistance = traildevils.geo.getFormattedDistance(record.data.distance);
+			});
+			this.sort();
+		}
 	}
 });
