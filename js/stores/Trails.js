@@ -65,6 +65,5 @@ Ext.regStore('Trails', {
 		this.each(function (record) {
 			this.remove(record);
 		},this);
-		this.sync();
 	}
 });
