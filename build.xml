@@ -34,6 +34,9 @@
 				<fileset dir="${test.dir}" includes="**/Test*.php"/>
 			</path>
 		</foreach>
+		<echo message="###############################################################"/>
+		<echo message="# Check JavaScript Unit-Tests: http://jenkins.rdmr.ch/test/js #"/>
+		<echo message="###############################################################"/>
 	</target>
 	
 	<target name="exec_php">
