@@ -23,13 +23,13 @@ traildevils.stores.FavoriteTrailsStore = Ext.extend(traildevils.stores.LocalStor
 		this.add(trail);
 		this.sort();
 		this.sync();
-		traildevils.fireEvent('favoriteadded', trail);
+		this.fireEvent('favoriteadded', trail);
 	},
 	
 	removeTrail: function(trail) {
 		this.remove(trail);
 		this.sync();
-		traildevils.fireEvent('favoriteremoved', trail);
+		this.fireEvent('favoriteremoved', trail);
 	}
 });
 

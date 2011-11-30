@@ -38,7 +38,7 @@ Ext.regController('trailsmap', {
 			});
 		}
 		
-		traildevils.on('newlocation', function() {this.updateOwnPosition()},this);
+		traildevils.geo.on('newlocation', function() {this.updateDistances()},this);
 		
 		this.resetControllerOptions();
 		

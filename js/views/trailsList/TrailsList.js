@@ -53,10 +53,10 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 				this.onListOptionTap(option, record);
 			}
         };
-		traildevils.on({
+		traildevils.store.on({
 			scope: this,
-			distanceupdated: function() {this.refresh()},
-			datarefreshed: function() {this.refresh()}
+			datarefreshed: function() {this.refresh()},
+			distanceupdated: function() {this.refresh();}
 		});
 		
         traildevils.views.TrailsList.superclass.initComponent.call(this);

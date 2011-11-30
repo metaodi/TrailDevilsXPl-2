@@ -65,14 +65,21 @@ Ext.regApplication({
 		
 		
 		//add log listener for all relevant events
-		traildevils.on({
+		traildevils.geo.on({
 			scope: this,
-			distanceupdated: function() {this.logEvent('distanceupdated')},
-			datarefreshed: function() {this.logEvent('datarefreshed')},
-			beforestoreload: function() {this.logEvent('beforestoreload')},
-			newlocation: function() {this.logEvent('newlocation')},
-			favoriteadded: function() {this.logEvent('favoriteadded')},
-		    favoriteremoved: function() {this.logEvent('favoriteremoved')}
+			newlocation: function() {this.logEvent('[traildevils.geo] newlocation')}
+		});
+		traildevils.store.on({
+			scope: this,
+			distanceupdated: function() {this.logEvent('[traildevils.store] distanceupdated')},
+			beforestoreload: function() {this.logEvent('[traildevils.store] beforestoreload')},
+			datarefreshed: function() {this.logEvent('[traildevils.store] datarefreshed')}
+		});
+		traildevils.favoritestore.on({
+			scope: this,
+			distanceupdated: function() {this.logEvent('[traildevils.favoritestore] distanceupdated')},
+			favoriteadded: function() {this.logEvent('[traildevils.favoritestore] favoriteadded')},
+		    favoriteremoved: function() {this.logEvent('[traildevils.favoritestore] favoriteremoved')}
 		});
 	},
 	

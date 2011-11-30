@@ -18,7 +18,7 @@ traildevils.stores.LocalStore = Ext.extend(Ext.data.Store, {
 				{property: 'title', direction: 'ASC'}
 			]
 		});
-		traildevils.on('newlocation', function() {this.updateDistances()},this);
+		traildevils.geo.on('newlocation', function() {this.updateDistances()},this);
 		traildevils.stores.LocalStore.superclass.constructor.call(this, config);
 	},
 	
@@ -29,7 +29,7 @@ traildevils.stores.LocalStore = Ext.extend(Ext.data.Store, {
 				record.data.formattedDistance = traildevils.geo.getFormattedDistance(record.data.distance);
 			});
 			this.sort();
-			traildevils.fireEvent('distanceupdated');
+			this.fireEvent('distanceupdated');
 		}
 	}
 });

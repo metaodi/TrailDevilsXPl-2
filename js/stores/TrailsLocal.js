@@ -26,7 +26,7 @@ traildevils.stores.TrailsLocalStore = Ext.extend(traildevils.stores.LocalStore, 
 	
 	listeners: {
 		beforeload: function() {
-			traildevils.fireEvent('beforestoreload');
+			this.fireEvent('beforestoreload');
 			
 			// load current page on remotestore
 			traildevils.remotestore.loadPage(this.currentPage);
@@ -42,7 +42,7 @@ traildevils.stores.TrailsLocalStore = Ext.extend(traildevils.stores.LocalStore, 
 		});
 		this.sync();
 		this.sort();
-		traildevils.fireEvent('datarefreshed');
+		this.fireEvent('datarefreshed');
 	},
 	
 	setFavoriteState: function(record) {
