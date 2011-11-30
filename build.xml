@@ -34,6 +34,10 @@
 				<fileset dir="${test.dir}" includes="**/Test*.php"/>
 			</path>
 		</foreach>
+		<antcall target="test-js" />
+	</target>
+	
+	<target name="test-js">
 		<echo message="###############################################################"/>
 		<echo message="# Check JavaScript Unit-Tests: http://jenkins.rdmr.ch/test/js #"/>
 		<echo message="###############################################################"/>
