@@ -29,6 +29,7 @@ traildevils.stores.LocalStore = Ext.extend(Ext.data.Store, {
 				record.data.formattedDistance = traildevils.geo.getFormattedDistance(record.data.distance);
 			});
 			this.sort();
+			traildevils.fireEvent('distanceupdated');
 		}
 	}
 });
