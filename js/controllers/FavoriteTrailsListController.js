@@ -11,39 +11,6 @@ Ext.regController('favoritetrailslist', {
 			}
 		);
 	},
-
-    detail: function(options) {
-		traildevils.views.trailDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
-			origin: 'favorite',
-			trail: options.trail
-		});
-		
-		// change favorite button to remove favorite button
-		traildevils.views.trailDetailTabPanel.favoriteBtn.setIconClass('trash');
-		traildevils.views.trailDetailTabPanel.favoriteBtn.setHandler(
-			function() {
-				Ext.dispatch({
-					controller: traildevils.controllers.favoriteTrailsListController,
-					action: 'removeFavorite',
-					trail: this.trail
-				});
-			}
-		);
-		
-		traildevils.views.trailDetailTabPanel.backBtn.setHandler(
-			function() {
-				Ext.dispatch({
-					controller: traildevils.controllers.favoriteTrailsListController,
-					action: 'list'
-				});
-			}
-		);
-		traildevils.views.trailDetailTabPanel.backBtn.setText('Favoriten');
-		
-		traildevils.views.favoriteTrailsListMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
-		// hide open list options
-		traildevils.views.favoriteTrailsList.listOptionsPlugin.doHideOptionsMenuWithoutAnim();
-	},
 	
 	removeFavorite: function(options) {
 		options.trail.toggleFavorite();

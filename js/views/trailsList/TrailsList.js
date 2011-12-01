@@ -73,10 +73,15 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
     onTrailItemTap: function(container, index, item, e) {
 		var trail = this.store.getAt(index);
 		Ext.dispatch({
-			controller: traildevils.controllers.trailsListController,
-			action: 'detail',
-			trail: trail
+			controller: traildevils.controllers.detailController,
+			action: 'showTrailDetail',
+			trail: trail,
+			parentType: 'normal',
+			origin: 'list'
 		});
+		
+		// close options menu
+		this.listOptionsPlugin.doHideOptionsMenuWithoutAnim();
     },
 	
 	/**

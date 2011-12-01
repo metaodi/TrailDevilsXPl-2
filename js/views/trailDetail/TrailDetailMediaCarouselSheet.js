@@ -30,7 +30,7 @@ traildevils.views.TrailDetailMediaCarouselSheet = Ext.extend(Ext.Sheet, {
 			text: 'Schliessen',
 			handler: function(button, event) {
 				Ext.dispatch({
-					controller: traildevils.controllers.trailMediaController,
+					controller: traildevils.controllers.detailController,
 					action: 'closeMediaCarousel'
 				});
 			}

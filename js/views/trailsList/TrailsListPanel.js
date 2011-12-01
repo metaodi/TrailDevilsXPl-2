@@ -9,7 +9,7 @@ traildevils.views.TrailsListPanel = Ext.extend(Ext.Panel, {
 	
 	initComponent: function () {
 		this.dockedItems = [
-			{ xtype: 'toolbar', title: 'Trailliste' },
+			{ xtype: 'toolbar', title: 'Trails' },
 			{
 				xtype: 'toolbar',
 				id: 'trailsListSearchToolbar',

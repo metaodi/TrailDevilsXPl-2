@@ -69,9 +69,11 @@ traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
     onTrailItemTap: function(container, index, item, e) {
 		var trail = this.store.getAt(index);
 		Ext.dispatch({
-			controller: traildevils.controllers.favoriteTrailsListController,
-			action: 'detail',
-			trail: trail
+			controller: traildevils.controllers.detailController,
+			action: 'showTrailDetail',
+			trail: trail,
+			parentType: 'favorite',
+			origin: 'favorite'
 		});
 		
 		// close options menu
