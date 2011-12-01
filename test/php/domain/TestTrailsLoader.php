@@ -40,7 +40,7 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 	{
 		 $location = $this->getTestGeoLocation();
 		 $convertedJson = json_decode($this->loader->convertTrailsJson($this->getTestTrailJson(), $location, 10, 1), true);
-		 $this->assertEqual(count($convertedJson["trails"]), 3, "Array should contain exactly 3 trails: %s");
+		 $this->assertEqual(count($convertedJson["trails"]), 2, "Array should contain exactly 2 trails: %s");
 		 
 		 $values = $convertedJson["trails"][0];
 		 $this->assertEqual($values["title"], "Testtrail");
