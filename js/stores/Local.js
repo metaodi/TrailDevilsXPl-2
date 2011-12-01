@@ -20,6 +20,7 @@ traildevils.stores.LocalStore = Ext.extend(Ext.data.Store, {
 		});
 		traildevils.geo.on('newlocation', function() {this.updateDistances()},this);
 		traildevils.stores.LocalStore.superclass.constructor.call(this, config);
+		this.addEvents('distanceupdated');
 	},
 	
 	updateDistances: function() {
