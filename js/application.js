@@ -19,7 +19,12 @@ Ext.regApplication({
 		// app is offline until told otherwise
 		traildevils.online = false;
 		
-		// initialize store
+		//create application objects
+		traildevils.geo = new traildevils.util.TrailGeoLocation();
+		Ext.regStore('TrailsLocal', new traildevils.stores.TrailsLocalStore);
+		Ext.regStore('FavoriteTrailsLocal', new traildevils.stores.FavoriteTrailsStore);
+		
+		// initialize stores
 		traildevils.store = Ext.getStore('TrailsLocal');
 		traildevils.remotestore = Ext.getStore('Trails');
 		traildevils.favoritestore = Ext.getStore('FavoriteTrailsLocal');
@@ -31,7 +36,6 @@ Ext.regApplication({
 		});
 		
 		// get current geolocation
-		traildevils.geo = new traildevils.util.TrailGeoLocation();
 		traildevils.geo.updateLocation(function() {
 			traildevils.favoritestore.load();
 			traildevils.store.load();

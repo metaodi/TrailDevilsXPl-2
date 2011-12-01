@@ -33,5 +33,4 @@ traildevils.stores.FavoriteTrailsStore = Ext.extend(traildevils.stores.LocalStor
 	}
 });
 
-Ext.regStore('FavoriteTrailsLocal', new traildevils.stores.FavoriteTrailsStore);
 Ext.reg('favoritestore', traildevils.stores.FavoriteTrailsStore);
