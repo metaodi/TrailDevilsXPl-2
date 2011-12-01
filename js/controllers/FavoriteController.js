@@ -1,5 +1,5 @@
-Ext.regController('favoritetrailslist', {
-    list: function(options) {
+Ext.regController('favorite', {
+    showFavoriteList: function(options) {
 		traildevils.views.favoriteTrailsListMainPanel.setActiveItem(
 			'favoriteTrailsListPanel', {
 				type: 'slide',
@@ -22,8 +22,8 @@ Ext.regController('favoritetrailslist', {
 		}
 		
 		Ext.dispatch({
-			controller: traildevils.controllers.favoriteTrailsListController,
-			action: 'list'
+			controller: traildevils.controllers.favoriteController,
+			action: 'showFavoriteList'
 		});
 		
 		if(options.callback !== undefined) {
@@ -77,4 +77,4 @@ Ext.regController('favoritetrailslist', {
 	}
 });
 
-traildevils.controllers.favoriteTrailsListController = Ext.ControllerManager.get('favoritetrailslist');
+traildevils.controllers.favoriteController = Ext.ControllerManager.get('favorite');

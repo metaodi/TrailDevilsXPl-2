@@ -45,7 +45,7 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 				var oldFavoriteState = this.trail.data.favorite;
 				
 				Ext.dispatch({
-					controller: traildevils.controllers.favoriteTrailsListController,
+					controller: traildevils.controllers.favoriteController,
 					action: 'toggleFavorite',
 					trail: this.trail
 				});

@@ -92,7 +92,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 		// if favorite option was tapped
 		if(option.cls == 'favorite' || option.cls == 'favorite-act') {
 			Ext.dispatch({
-				controller: traildevils.controllers.favoriteTrailsListController,
+				controller: traildevils.controllers.favoriteController,
 				action: 'toggleFavorite',
 				trail: record
 			});

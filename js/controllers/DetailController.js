@@ -37,7 +37,7 @@ Ext.regController('detail', {
 				traildevils.views.trailDetailTabPanel.favoriteBtn.setHandler(
 					function() {
 						Ext.dispatch({
-							controller: traildevils.controllers.favoriteTrailsListController,
+							controller: traildevils.controllers.favoriteController,
 							action: 'removeFavorite',
 							trail: this.trail
 						});
@@ -47,8 +47,8 @@ Ext.regController('detail', {
 				traildevils.views.trailDetailTabPanel.backBtn.setHandler(
 					function() {
 						Ext.dispatch({
-							controller: traildevils.controllers.favoriteTrailsListController,
-							action: 'list'
+							controller: traildevils.controllers.favoriteController,
+							action: 'showFavoriteList'
 						});
 					}
 				);
