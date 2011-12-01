@@ -14,7 +14,7 @@ traildevils.util.TrailGeoLocation = Ext.extend(Ext.util.GeoLocation, {
     listeners: {
 		locationupdate: function(geo) {
 			this.available = true;
-			traildevils.fireEvent('newlocation');
+			traildevils.fireEvent('locationchanged');
 		},
 		locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
 			this.available = false;

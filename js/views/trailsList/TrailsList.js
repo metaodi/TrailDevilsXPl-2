@@ -55,8 +55,12 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
         };
 		traildevils.on({
 			scope: this,
-			distanceupdated: function() {this.refresh()},
-			datarefreshed: function() {this.refresh()}
+			storedatachanged: function() {this.refresh()}
+		});
+		traildevils.on({
+			scope: this,
+			favoritedatachanged: function() {this.refresh()},
+			delay: 600
 		});
 		
         traildevils.views.TrailsList.superclass.initComponent.call(this);

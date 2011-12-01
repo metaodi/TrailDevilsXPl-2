@@ -23,13 +23,24 @@ traildevils.stores.FavoriteTrailsStore = Ext.extend(traildevils.stores.LocalStor
 		this.add(trail);
 		this.sort();
 		this.sync();
-		traildevils.fireEvent('favoriteadded', trail);
+		traildevils.fireEvent('favoritedatachanged');
 	},
 	
 	removeTrail: function(trail) {
 		this.remove(trail);
 		this.sync();
-		traildevils.fireEvent('favoriteremoved', trail);
+		traildevils.fireEvent('favoritedatachanged');
+	},
+	
+	updateDistances: function() {
+		if(!this.isLoading()) {
+			this.each(function(record) {
+				record.data.distance = traildevils.geo.getDistance(record.data.latitude, record.data.longitude);
+				record.data.formattedDistance = traildevils.geo.getFormattedDistance(record.data.distance);
+			});
+			this.sort();
+			traildevils.fireEvent('favoritedatachanged');
+		}
 	}
 });
 

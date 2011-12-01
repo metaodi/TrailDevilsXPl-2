@@ -42,7 +42,8 @@ traildevils.stores.TrailsLocalStore = Ext.extend(traildevils.stores.LocalStore, 
 		});
 		this.sync();
 		this.sort();
-		traildevils.fireEvent('datarefreshed');
+		traildevils.fireEvent('storedatachanged');
+		traildevils.fireEvent('storedatarefreshed');
 	},
 	
 	setFavoriteState: function(record) {
@@ -62,6 +63,17 @@ traildevils.stores.TrailsLocalStore = Ext.extend(traildevils.stores.LocalStore, 
 	reset: function() {
 		this.currentPage = 1;
 		this.load();
+	},
+	
+	updateDistances: function() {
+		if(!this.isLoading()) {
+			this.each(function(record) {
+				record.data.distance = traildevils.geo.getDistance(record.data.latitude, record.data.longitude);
+				record.data.formattedDistance = traildevils.geo.getFormattedDistance(record.data.distance);
+			});
+			this.sort();
+			traildevils.fireEvent('storedatachanged');
+		}
 	}
 });
 

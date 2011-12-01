@@ -27,7 +27,7 @@ Ext.regController('trailsmap', {
 			new google.maps.Point(16.0, 18.0)
 		);
 		
-		traildevils.on('newlocation', function() {this.updateOwnPosition()},this);
+		traildevils.on('locationchanged', function() {this.updateOwnPosition()},this);
 		
 		this.resetControllerOptions();
 		

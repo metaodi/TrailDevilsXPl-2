@@ -60,9 +60,7 @@ traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
 		
 		traildevils.on({
 			scope: this,
-			distanceupdated: function() {this.refresh()},
-			favoriteadded: function() {this.refresh()},
-		    favoriteremoved: function() {this.refresh()}
+			favoritedatachanged: function() {this.refresh()}
 		});
 		
         traildevils.views.FavoriteTrailsList.superclass.initComponent.apply(this, arguments);
