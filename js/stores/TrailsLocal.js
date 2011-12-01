@@ -65,4 +65,5 @@ traildevils.stores.TrailsLocalStore = Ext.extend(traildevils.stores.LocalStore, 
 	}
 });
 
+Ext.regStore('TrailsLocal', new traildevils.stores.TrailsLocalStore);
 Ext.reg('store', traildevils.stores.TrailsLocalStore);
