@@ -8,6 +8,11 @@ Ext.namespace('traildevils.util');
  */
 
 traildevils.util.TrailGeoLocation = Ext.extend(Ext.util.GeoLocation, {
+	constructor: function() {
+		this.superclass.constructor.call(this);
+		this.addEvents('newlocation');
+	},
+	
 	autoUpdate: false,
 	available: true,
 	
