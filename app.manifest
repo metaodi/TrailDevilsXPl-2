@@ -7,7 +7,7 @@ CACHE MANIFEST
 
 # css files
 #css_files
-./lib/sencha-touch-1.1.1/resources/css-debug/sencha-touch.css
+./lib/sencha-touch-1.1.1/resources/css-debug/apple.css
 
 # image files
 #image_files
