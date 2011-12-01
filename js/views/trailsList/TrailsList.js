@@ -77,7 +77,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 			action: 'showTrailDetail',
 			trail: trail,
 			parentType: 'normal',
-			origin: 'list'
+			origin: 'trails'
 		});
 		
 		// close options menu

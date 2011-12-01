@@ -1,5 +1,5 @@
-Ext.regController('trailslist', {
-    list: function(options) {
+Ext.regController('trails', {
+    showTrailsList: function(options) {
 		traildevils.views.trailsListMainPanel.setActiveItem(
 			'trailsListPanel', {
 				type: 'slide',
@@ -13,4 +13,4 @@ Ext.regController('trailslist', {
 	}
 });
 
-traildevils.controllers.trailsListController = Ext.ControllerManager.get('trailslist');
+traildevils.controllers.trailsController = Ext.ControllerManager.get('trails');

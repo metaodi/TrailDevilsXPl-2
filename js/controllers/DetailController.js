@@ -7,12 +7,12 @@ Ext.regController('detail', {
 		});
 		
 		if(options.parentType === 'normal') {
-			if(options.origin === 'list') {
+			if(options.origin === 'trails') {
 				traildevils.views.trailDetailTabPanel.backBtn.setHandler(
 					function() {
 						Ext.dispatch({
-							controller: traildevils.controllers.trailsListController,
-							action: 'list'
+							controller: traildevils.controllers.trailsController,
+							action: 'showTrailsList'
 						});
 					}
 				);
