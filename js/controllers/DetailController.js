@@ -22,8 +22,8 @@ Ext.regController('detail', {
 				traildevils.views.trailDetailTabPanel.backBtn.setHandler(
 					function() {
 						Ext.dispatch({
-							controller: traildevils.controllers.trailsMapController,
-							action: 'map'
+							controller: traildevils.controllers.mapController,
+							action: 'showMap'
 						});
 					}
 				);
@@ -60,8 +60,8 @@ Ext.regController('detail', {
 				traildevils.views.trailDetailTabPanel.backBtn.setHandler(
 					function() {
 						Ext.dispatch({
-							controller: traildevils.controllers.trailsMapController,
-							action: 'map'
+							controller: traildevils.controllers.mapController,
+							action: 'showMap'
 						});
 					}
 				);

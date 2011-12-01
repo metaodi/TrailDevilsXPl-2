@@ -21,7 +21,7 @@ traildevils.views.FavoriteTrailsListPanel = Ext.extend(Ext.Panel, {
 						handler: function() {
 							// show favorite trails on map
 							Ext.dispatch({
-								controller: traildevils.controllers.trailsMapController,
+								controller: traildevils.controllers.mapController,
 								action: 'showFavoriteTrailsOnMap',
 								parentType: 'favorite'
 							});
