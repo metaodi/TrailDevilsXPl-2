@@ -25,7 +25,7 @@ traildevils.views.TrailsListSearch = Ext.extend(Ext.form.Search, {
 				}
 			}
         });
-		traildevils.store.on({
+		traildevils.on({
 			scope: this,
 			beforestoreload: function() {this.reset()}
 		});
