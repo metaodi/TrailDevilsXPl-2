@@ -9,7 +9,7 @@ Ext.namespace('traildevils.util');
 
 traildevils.util.TrailGeoLocation = Ext.extend(Ext.util.GeoLocation, {
 	autoUpdate: false,
-	available: true,
+	available: false,
 	
     listeners: {
 		locationupdate: function(geo) {
