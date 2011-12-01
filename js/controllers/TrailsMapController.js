@@ -27,17 +27,6 @@ Ext.regController('trailsmap', {
 			new google.maps.Point(16.0, 18.0)
 		);
 		
-		// if geolocation is available add marker for own position
-		if(traildevils.geo.available) {
-			var ownPosition = new google.maps.LatLng(traildevils.geo.latitude, traildevils.geo.longitude);
-			this.markerOwnPosition = new google.maps.Marker({
-				map: traildevils.views.trailsMap.map,
-				position: ownPosition,
-				icon: 'resources/images/gmap_marker_own_position.png',
-				clickable: false
-			});
-		}
-		
 		traildevils.on('newlocation', function() {this.updateOwnPosition()},this);
 		
 		this.resetControllerOptions();
@@ -48,6 +37,17 @@ Ext.regController('trailsmap', {
 	addMarkers: function(options) {
 		if(!this.initialized) {
 			this.initController();
+		}
+		
+		// if geolocation is available add marker for own position
+		if(traildevils.geo.available && this.markerOwnPosition == null) {
+			var ownPosition = new google.maps.LatLng(traildevils.geo.latitude, traildevils.geo.longitude);
+			this.markerOwnPosition = new google.maps.Marker({
+				map: traildevils.views.trailsMap.map,
+				position: ownPosition,
+				icon: 'resources/images/gmap_marker_own_position.png',
+				clickable: false
+			});
 		}
 		
 		// remove all markers and listeners
@@ -229,7 +229,7 @@ Ext.regController('trailsmap', {
 	},
 	
 	updateOwnPosition: function() {
-		if(this.markerOwnPosition) {
+		if(this.markerOwnPosition != null) {
 			var ownPosition = new google.maps.LatLng(traildevils.geo.latitude, traildevils.geo.longitude);
 			this.markerOwnPosition.setPosition(ownPosition);
 		}
