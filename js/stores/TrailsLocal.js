@@ -6,9 +6,8 @@
  */
 traildevils.stores.TrailsLocalStore = Ext.extend(traildevils.stores.LocalStore, {
 	constructor: function(config) {
-		var trailStoreConfig = {};
-		Ext.apply(trailStoreConfig, config);
-		Ext.applyIf(trailStoreConfig, {
+		config = config || {};
+		Ext.applyIf(config, {
 			proxy: {
 				type: 'traillocal',
 				id  : 'trails-local',
@@ -16,7 +15,7 @@ traildevils.stores.TrailsLocalStore = Ext.extend(traildevils.stores.LocalStore, 
 				idProperty: 'id'
 			}
 		});
-		traildevils.stores.TrailsLocalStore.superclass.constructor.call(this, trailStoreConfig);
+		traildevils.stores.TrailsLocalStore.superclass.constructor.call(this, config);
 	},
 	
 	// group by status

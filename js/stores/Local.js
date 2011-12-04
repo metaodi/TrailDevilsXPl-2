@@ -6,15 +6,16 @@
  */
 traildevils.stores.LocalStore = Ext.extend(Ext.data.Store, {
 	constructor: function(config) {
-		Ext.apply(this, {
+		config = config || {};
+		Ext.applyIf(config, {
 			model: 'Trail',
 			clearOnPageLoad: false,
 			
 			// order by status descending (groups), by distance ascending
 			// and if distance is not available by title
 			sorters: [
-				{property: 'status', direction: 'ASC'},
-				{property: 'distance', direction: 'DESC'},
+				{property: 'status', direction: 'DESC'},
+				{property: 'distance', direction: 'ASC'},
 				{property: 'title', direction: 'ASC'}
 			]
 		});
