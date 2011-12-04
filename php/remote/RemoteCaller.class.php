@@ -31,6 +31,7 @@ abstract class RemoteCaller {
 	}
 	
 	abstract protected function beforeCall();
+	abstract public function getDefaultResponse();
 }
 
 ?>

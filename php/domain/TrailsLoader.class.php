@@ -45,7 +45,10 @@ class TrailsLoader extends DataLoader
 		$convertedJson = "";
 		try {
 			$convertedJson = $this->convertTrailsJson($remote->callRemoteSite());
-		} catch(Exception $e){}
+		} catch(Exception $e)
+		{
+			$convertedJson = $remote->getDefaultResponse();
+		}
 		return $convertedJson;
 	}
 

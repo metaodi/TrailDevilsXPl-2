@@ -6,6 +6,11 @@ class XMLRemoteCaller extends RemoteCaller {
 	{
 		curl_setopt($this->curlHandler, CURLOPT_HTTPHEADER, array('Accept: application/xml'));
 	}
+	
+	public function getDefaultResponse()
+	{
+		return "";
+	}
 }
 
 ?>
