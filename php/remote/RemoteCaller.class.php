@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(__FILE__) . '/../exceptions/RemoteException.class.php');
+
 abstract class RemoteCaller {
 	protected $url;
 	protected $curlHandler;
@@ -21,8 +23,9 @@ abstract class RemoteCaller {
 		$remote_answer = curl_exec($this->curlHandler);
 		
 		if(curl_errno($this->curlHandler) != 0) {
-			echo "cURL Errornumber: ".curl_errno($this->curlHandler)."<br />";
-			echo "cURL Error: ".curl_error($this->curlHandler)."<br />";
+			$msgErrorNo = "cURL Errornumber: ".curl_errno($this->curlHandler);
+			$msgError = "cURL Error: ".curl_error($this->curlHandler);
+			throw new RemoteException($this->url,$msgErrorNo." ".$msgError);
 		}
 		return $remote_answer;
 	}

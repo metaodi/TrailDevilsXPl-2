@@ -41,7 +41,12 @@ class TrailsLoader extends DataLoader
 		$this->userGeo = new GeoLocation($userLat, $userLng);
 		$this->pageSize = $pageSize;
 		$this->page = $page;
-		return $this->convertTrailsJson($remote->callRemoteSite());
+		
+		$convertedJson = "";
+		try {
+			$convertedJson = $this->convertTrailsJson($remote->callRemoteSite());
+		} catch(Exception $e){}
+		return $convertedJson;
 	}
 
 	public function convertTrailsJson($externalTrailJson) 

@@ -28,7 +28,11 @@ class TrailImagesLoader extends DataLoader
 			$url = "http://152.96.80.18:8080/api/trails/".$trailId."/images";
 		}
 		$remote = new JSONRemoteCaller($url);
-		return $this->convertTrailImagesJson($remote->callRemoteSite());
+		$convertedJson = "";
+		try {
+			$convertedJson = $this->convertTrailImagesJson($remote->callRemoteSite());
+		} catch(Exception $e){}
+		return $convertedJson;
 	}
 	
 	public function convertTrailImagesJson($externalTrailImagesJson) {

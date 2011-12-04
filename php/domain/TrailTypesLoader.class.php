@@ -13,7 +13,11 @@ class TrailTypesLoader extends DataLoader
 			$url = "http://152.96.80.18:8080/api/trails/".$trailId."/types";
 		}
 		$remote = new JSONRemoteCaller($url);
-		return $this->convertTrailTypesJson($remote->callRemoteSite(), $trailId);
+		$convertedJson = "";
+		try {
+			$convertedJson = $this->convertTrailTypesJson($remote->callRemoteSite(), $trailId);
+		} catch(Exception $e){}
+		return $convertedJson;
 	}
 	
 	public function convertTrailTypesJson($externalTrailTypesJson, $trailId) {
