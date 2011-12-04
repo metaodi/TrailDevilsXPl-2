@@ -45,8 +45,8 @@ Ext.regStore('Trails', {
 		},
 		model: 'Trail',
         reader: {
-            type: 'json',
-			root: 'trails'
+            type: 'json'
+			//root: 'trails'
         },
         listeners: {
 			exception: function() {

@@ -33,16 +33,16 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 	function testConvertJsonKeys()
 	{
 		 $convertedJson = json_decode($this->loader->convertTrailsJson($this->getTestTrailJson()), true);
-		 $this->checkJsonFormat($convertedJson["trails"][0]);
+		 $this->checkJsonFormat($convertedJson[0]);
 	}
 	
 	function testConvertJsonValues()
 	{
 		 $location = $this->getTestGeoLocation();
-		 $convertedJson = json_decode($this->loader->convertTrailsJson($this->getTestTrailJson(), $location, 10, 1), true);
-		 $this->assertEqual(count($convertedJson["trails"]), 2, "Array should contain exactly 2 trails: %s");
+		 $convertedJson = json_decode($this->loader->convertTrailsJson($this->getTestTrailJson()), true);
+		 $this->assertEqual(count($convertedJson), 2, "Array should contain exactly 2 trails: %s");
 		 
-		 $values = $convertedJson["trails"][0];
+		 $values = $convertedJson[0];
 		 $this->assertEqual($values["title"], "Testtrail");
 		 $this->assertEqual($values["location"], "Zürich, Switzerland");
 		 $this->assertEqual($values["distance"], 0.0);
@@ -59,7 +59,7 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 		$location = $this->getTestGeoLocation();
 		
 		$localJson = $helperLoader->convertTrailsJson($this->getTestTrailJson());
-		$this->checkJson($localJson,"trails");
+		$this->checkJson($localJson);
 		
 		$result = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 10, 1, $url);
 		$this->assertEqualsIgnoreWhitespace($result,$localJson);
@@ -69,7 +69,7 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 		$location = $this->getTestGeoLocation();
 		
 		$remoteJson = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(), 10, 1);
-		$this->checkJson($remoteJson,"trails");
+		$this->checkJson($remoteJson);
     }
 	
 	function testGetTrailsNearWithRemoteAPIWithoutLocation() {
@@ -77,7 +77,7 @@ class TestTrailsLoader extends TraildevilsUnitTestCase
 		
 		$remoteJson = $this->loader->getTrailsNear($location->getLatitude(),$location->getLongitude(),  10, 1);
 		$this->jsonKeys = array("title","location","thumb","description","status","latitude","longitude");
-		$this->checkJson($remoteJson,"trails");
+		$this->checkJson($remoteJson);
     }
 }
 

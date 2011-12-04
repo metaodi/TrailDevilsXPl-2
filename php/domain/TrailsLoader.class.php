@@ -72,10 +72,13 @@ class TrailsLoader extends DataLoader
 			$lat = $this->internalArray[0]["latitude"];
 			$lon = $this->internalArray[0]["longitude"];
 			// replacing last trail of first page with closed trail
-			$this->internalArray[count($this->internalArray)-2] = $this->getClosedTrail($lat,$lon);
+			if(count($this->internalArray) > 5)
+			{
+				$this->internalArray[count($this->internalArray)-2] = $this->getClosedTrail($lat,$lon);
+			}
 		}
 
-		return json_encode(array("trails" => $this->internalArray));
+		return json_encode($this->internalArray);
 	}
 	
 	protected function sortExternalArray()

@@ -178,9 +178,15 @@ abstract class TraildevilsUnitTestCase extends UnitTestCase {
 		return new GeoLocation(47.223357, 8.816614);
 	}
 	
-	function checkJson($json, $root) {
+	function checkJson($json, $root=null) {
 		$jsonArray = json_decode($json, true);
-		$this->checkJsonFormat($jsonArray[$root][0]);
+		if ($root == null)
+		{
+			$checkArray = $jsonArray[0];
+		} else {
+			$checkArray = $jsonArray[$root][0];
+		}
+		$this->checkJsonFormat($checkArray);
 	}
 	
 	function checkJsonFormat($json) {
