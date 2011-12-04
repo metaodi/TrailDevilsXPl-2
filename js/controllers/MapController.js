@@ -1,7 +1,8 @@
-Ext.regController('trailsmap', {
+Ext.regController('map', {
 	trailMarkers: [],
 	centerLatitude: 0,
 	centerLongitude: 0,
+	parentType: 'normal',
 	store: null,
 	markerImage: null,
 	markerShadow: null,
@@ -88,7 +89,7 @@ Ext.regController('trailsmap', {
 			shortDescription = shortDescription.substring(0, 100) + "...";
 		}
 		
-		var trailDetailLinkEvent = 'Ext.dispatch({ controller: traildevils.controllers.trailsMapController, action: \'detail\', trail: traildevils.controllers.trailsMapController.store.getAt(' + index + ') });';
+		var trailDetailLinkEvent = 'Ext.dispatch({ controller: traildevils.controllers.detailController, action: \'showTrailDetail\', trail: traildevils.controllers.mapController.store.getAt(' + index + '), parentType: \'' + this.parentType + '\', origin: \'map\' });';
 
 		marker.content =
 			'<div class="infowindow-content">';
@@ -127,7 +128,7 @@ Ext.regController('trailsmap', {
 		this.trailMarkers.push(marker);
 	},
 	
-	map: function(options) {
+	showMap: function(options) {
 		traildevils.views.trailsMapMainPanel.setActiveItem(
 			'trailsMapPanel', {
 				type: 'slide',
@@ -140,36 +141,19 @@ Ext.regController('trailsmap', {
 		);
 	},
 	
-	detail: function(options) {
-		traildevils.views.trailDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
-			origin: 'map',
-			trail: options.trail
-		});
-		
-		traildevils.views.trailDetailTabPanel.backBtn.setHandler(
-			function() {
-				Ext.dispatch({
-					controller: traildevils.controllers.trailsMapController,
-					action: 'map'
-				});
-			}
-		);
-		traildevils.views.trailDetailTabPanel.backBtn.setText('Map');
-		
-		traildevils.views.trailsMapMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
-	},
-	
 	showTrailOnMap: function(options) {
 		if(!this.initialized) {
 			this.initController();
 		}
-			
+		
+		this.parentType = options.parentType;
+		
 		switch(options.origin) {
 			case 'map':
 				// if map was already opened
 				Ext.dispatch({
-					controller: traildevils.controllers.trailsMapController,
-					action: 'map'
+					controller: traildevils.controllers.mapController,
+					action: 'showMap'
 				});
 				traildevils.views.trailsMap.setCenterPosition(options.latitude, options.longitude);
 				break;
@@ -192,6 +176,8 @@ Ext.regController('trailsmap', {
 		if(!this.initialized) {
 			this.initController();
 		}
+		
+		this.parentType = options.parentType;
 		
 		this.store = traildevils.favoritestore;
 		traildevils.views.trailsMapPanel.dockedItems.items[0].setTitle("Favoriten in der Nähe");
@@ -224,6 +210,7 @@ Ext.regController('trailsmap', {
 			this.centerLatitude = traildevils.store.getAt(0).data.latitude;
 			this.centerLongitude = traildevils.store.getAt(0).data.longitude;
 		}
+		this.parentType = 'normal';
 		this.store = traildevils.store;
 		traildevils.views.trailsMapPanel.dockedItems.items[0].setTitle("Trails in der Nähe");
 	},
@@ -236,4 +223,4 @@ Ext.regController('trailsmap', {
 	}
 });
 
-traildevils.controllers.trailsMapController = Ext.ControllerManager.get('trailsmap');
+traildevils.controllers.mapController = Ext.ControllerManager.get('map');

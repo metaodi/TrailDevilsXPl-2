@@ -31,7 +31,7 @@ traildevils.views.TrailDetailMediaThumbDataView = Ext.extend(Ext.DataView, {
 			},
 			itemtap: function(cmp, index, item, e){ 
 				Ext.dispatch({
-					controller: traildevils.controllers.trailMediaController,
+					controller: traildevils.controllers.detailController,
 					action: 'openMediaCarousel',
 					imgdata: this.store.data.items,
 					index: index

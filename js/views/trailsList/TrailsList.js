@@ -73,10 +73,15 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
     onTrailItemTap: function(container, index, item, e) {
 		var trail = this.store.getAt(index);
 		Ext.dispatch({
-			controller: traildevils.controllers.trailsListController,
-			action: 'detail',
-			trail: trail
+			controller: traildevils.controllers.detailController,
+			action: 'showTrailDetail',
+			trail: trail,
+			parentType: 'normal',
+			origin: 'trails'
 		});
+		
+		// close options menu
+		this.listOptionsPlugin.doHideOptionsMenuWithoutAnim();
     },
 	
 	/**
@@ -87,7 +92,7 @@ traildevils.views.TrailsList = Ext.extend(Ext.List, {
 		// if favorite option was tapped
 		if(option.cls == 'favorite' || option.cls == 'favorite-act') {
 			Ext.dispatch({
-				controller: traildevils.controllers.favoriteTrailsListController,
+				controller: traildevils.controllers.favoriteController,
 				action: 'toggleFavorite',
 				trail: record
 			});

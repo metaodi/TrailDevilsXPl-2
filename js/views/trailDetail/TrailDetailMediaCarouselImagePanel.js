@@ -31,7 +31,7 @@ traildevils.views.TrailDetailMediaCarouselImagePanel = Ext.extend(Ext.Panel, {
 	
 	panelTap: function() {
 		Ext.dispatch({
-			controller: traildevils.controllers.trailMediaController,
+			controller: traildevils.controllers.detailController,
 			action: 'carouselImagePanelTap'
 		});
 	},

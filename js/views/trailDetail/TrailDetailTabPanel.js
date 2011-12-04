@@ -8,6 +8,7 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 	cls: 'trailDetailTabPanel',
 	trail: null,
 	origin: '',
+	parentType: '',
 	
 	tabBar: {
 		cls: 'trailDetailTabPanelTabBar',
@@ -44,7 +45,7 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 				var oldFavoriteState = this.trail.data.favorite;
 				
 				Ext.dispatch({
-					controller: traildevils.controllers.favoriteTrailsListController,
+					controller: traildevils.controllers.favoriteController,
 					action: 'toggleFavorite',
 					trail: this.trail
 				});
@@ -72,7 +73,8 @@ traildevils.views.TrailDetailTabPanel = Ext.extend(Ext.TabPanel, {
 			{
 				xtype: 'trailDetailInfoPanel',
 				data: this.trail.data,
-				origin: this.origin
+				origin: this.origin,
+				parentType: this.parentType
 			}, {
 				xtype: 'trailDetailMediaThumbDataView',
 				data: this.trail.data

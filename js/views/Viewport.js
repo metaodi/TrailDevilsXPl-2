@@ -28,13 +28,13 @@ traildevils.views.Viewport = Ext.extend(Ext.TabPanel, {
 				if(newCard === traildevils.views.trailsMapMainPanel) {
 					// if trailsMap is opened redraw all markers
 					Ext.dispatch({
-						controller: traildevils.controllers.trailsMapController,
+						controller: traildevils.controllers.mapController,
 						action: 'addMarkers'
 					});
 				}
 				if(oldCard === traildevils.views.trailsMapMainPanel) {
 					// if trailsMap is closed reset all controller options
-					traildevils.controllers.trailsMapController.resetControllerOptions();
+					traildevils.controllers.mapController.resetControllerOptions();
 				}
 				if(oldCard === traildevils.views.favoriteTrailsListMainPanel) {
 					// if another tab than favoriteTrailsList is selected set current view of favoriteTrailsList back to list

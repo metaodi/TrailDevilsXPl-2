@@ -1,5 +1,5 @@
-Ext.regController('favoritetrailslist', {
-    list: function(options) {
+Ext.regController('favorite', {
+    showFavoriteList: function(options) {
 		traildevils.views.favoriteTrailsListMainPanel.setActiveItem(
 			'favoriteTrailsListPanel', {
 				type: 'slide',
@@ -10,39 +10,6 @@ Ext.regController('favoritetrailslist', {
 				}
 			}
 		);
-	},
-
-    detail: function(options) {
-		traildevils.views.trailDetailTabPanel = new traildevils.views.TrailDetailTabPanel({
-			origin: 'favorite',
-			trail: options.trail
-		});
-		
-		// change favorite button to remove favorite button
-		traildevils.views.trailDetailTabPanel.favoriteBtn.setIconClass('trash');
-		traildevils.views.trailDetailTabPanel.favoriteBtn.setHandler(
-			function() {
-				Ext.dispatch({
-					controller: traildevils.controllers.favoriteTrailsListController,
-					action: 'removeFavorite',
-					trail: this.trail
-				});
-			}
-		);
-		
-		traildevils.views.trailDetailTabPanel.backBtn.setHandler(
-			function() {
-				Ext.dispatch({
-					controller: traildevils.controllers.favoriteTrailsListController,
-					action: 'list'
-				});
-			}
-		);
-		traildevils.views.trailDetailTabPanel.backBtn.setText('Favoriten');
-		
-		traildevils.views.favoriteTrailsListMainPanel.setActiveItem(traildevils.views.trailDetailTabPanel, 'slide');
-		// hide open list options
-		traildevils.views.favoriteTrailsList.listOptionsPlugin.doHideOptionsMenuWithoutAnim();
 	},
 	
 	removeFavorite: function(options) {
@@ -55,8 +22,8 @@ Ext.regController('favoritetrailslist', {
 		}
 		
 		Ext.dispatch({
-			controller: traildevils.controllers.favoriteTrailsListController,
-			action: 'list'
+			controller: traildevils.controllers.favoriteController,
+			action: 'showFavoriteList'
 		});
 		
 		if(options.callback !== undefined) {
@@ -110,4 +77,4 @@ Ext.regController('favoritetrailslist', {
 	}
 });
 
-traildevils.controllers.favoriteTrailsListController = Ext.ControllerManager.get('favoritetrailslist');
+traildevils.controllers.favoriteController = Ext.ControllerManager.get('favorite');
