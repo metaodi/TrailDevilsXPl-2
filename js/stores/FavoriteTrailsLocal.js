@@ -13,7 +13,14 @@ traildevils.stores.FavoriteTrailsStore = Ext.extend(traildevils.stores.LocalStor
 				id: 'favorite-trails-local',
 				model: 'Trail',
 				idProperty: 'id'
-			}
+			},
+			
+			//order by distance ascending
+			//and if distance is not available by title
+			sorters: [
+				{property: 'distance', direction: 'ASC'},
+				{property: 'title', direction: 'ASC'}
+			]
 		});
 		traildevils.stores.FavoriteTrailsStore.superclass.constructor.call(this,config);
 	},
