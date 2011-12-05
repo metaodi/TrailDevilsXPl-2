@@ -10,6 +10,11 @@ require_once(dirname(__FILE__) . '/../../../php/domain/TrailImagesLoader.class.p
 class TestTrailImagesLoader extends TraildevilsUnitTestCase 
 {
 	protected $loader;
+	
+	function __construct() 
+	{
+		parent::__construct("Traildevils - TestTrailImagesLoader");
+	}
 
 	function setUp() {
 		$this->loader = new TrailImagesLoader();

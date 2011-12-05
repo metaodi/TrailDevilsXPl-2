@@ -3,7 +3,13 @@ require_once(dirname(__FILE__) . '/../TraildevilsUnitTestCase.php');
 require_once(dirname(__FILE__) . '/../../php/AjaxHandler.class.php');
 require_once(dirname(__FILE__) . '/../../php/exceptions/FileDoesNotExistException.class.php');
 
-class TestAjaxHandler extends TraildevilsUnitTestCase {
+class TestAjaxHandler extends TraildevilsUnitTestCase 
+{
+	function __construct() 
+	{
+		parent::__construct("Traildevils - TestAjaxHandler");
+	}
+	
     function testHandleValidRequest() {
         $handler = new AjaxHandler();
         $input = array("Testdata");

@@ -11,6 +11,10 @@ require_once(dirname(__FILE__) . '/../php/domain/GeoLocation.class.php');
 abstract class TraildevilsUnitTestCase extends UnitTestCase {
 	protected $jsonKeys;
 	
+	function __construct($label="Traildevils - Test Case") {
+		parent::__construct($label);
+	}
+	
 	function report() 
 	{
 		$test = new TestSuite($this->getLabel());

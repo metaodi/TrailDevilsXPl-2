@@ -2,7 +2,13 @@
 require_once(dirname(__FILE__) . '/../../TraildevilsUnitTestCase.php');
 require_once(dirname(__FILE__) . '/../../../php/util/DistanceComparator.class.php');
 
-class TestDistanceComparator extends TraildevilsUnitTestCase {
+class TestDistanceComparator extends TraildevilsUnitTestCase 
+{
+	function __construct() 
+	{
+		parent::__construct("Traildevils - TestDistanceComparator");
+	}
+	
 	function testCompareEqual() 
 	{
 		$first['distance'] = 0;

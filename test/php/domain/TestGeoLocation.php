@@ -2,8 +2,15 @@
 require_once(dirname(__FILE__) . '/../../TraildevilsUnitTestCase.php');
 require_once(dirname(__FILE__) . '/../../../php/domain/GeoLocation.class.php');
 
-class TestGeoLocation extends TraildevilsUnitTestCase {
-    function testConstructor() {
+class TestGeoLocation extends TraildevilsUnitTestCase 
+{
+	function __construct() 
+	{
+		parent::__construct("Traildevils - TestGeoLocation");
+	}
+	
+    function testConstructor() 
+	{
 		$lat = 8.1234;
 		$lng = 47.1988;
         $geo = new GeoLocation($lat,$lng);
@@ -12,7 +19,8 @@ class TestGeoLocation extends TraildevilsUnitTestCase {
 		$this->assertEqual($geo->getLongitude(),$lng);
     }
 	
-	function testDistance() {
+	function testDistance() 
+	{
 		$lat1 = 47.223344;
 		$lng1 = 8.886644;
 		
@@ -26,7 +34,8 @@ class TestGeoLocation extends TraildevilsUnitTestCase {
 		$this->assertEqual($geo2->distance($geo1), $geo1->distance($geo2));
     }
 	
-	function testDistanceZero() {
+	function testDistanceZero() 
+	{
 		$lat = 8.1234;
 		$lng = 47.1988;
 		

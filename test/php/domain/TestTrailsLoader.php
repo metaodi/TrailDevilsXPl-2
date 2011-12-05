@@ -10,6 +10,11 @@ require_once(dirname(__FILE__) . '/../../../php/domain/TrailsLoader.class.php');
 class TestTrailsLoader extends TraildevilsUnitTestCase 
 {
 	protected $loader;
+	
+	function __construct() 
+	{
+		parent::__construct("Traildevils - TestTrailsLoader");
+	}
 
 	function setUp() {
 		$this->loader = $this->getTrailsLoader();

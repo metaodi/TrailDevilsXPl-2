@@ -2,7 +2,13 @@
 require_once(dirname(__FILE__) . '/../../TraildevilsUnitTestCase.php');
 require_once(dirname(__FILE__) . '/../../../php/util/TitleComparator.class.php');
 
-class TestTitleComparator extends TraildevilsUnitTestCase {
+class TestTitleComparator extends TraildevilsUnitTestCase 
+{
+	function __construct() 
+	{
+		parent::__construct("Traildevils - TestTitleComparator");
+	}
+	
 	function testCompareEqual() 
 	{
 		$first['Name'] = "Müller";
