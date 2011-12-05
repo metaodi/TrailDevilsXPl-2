@@ -190,16 +190,8 @@ Ext.regController('map', {
 	},
 	
 	/**
-     * Removes all markers from map
-     * @private
+     * Resets controller options to default values
      */
-	removeAllMarkers: function() {
-		for(var i = 0; i < this.trailMarkers.length; i++) {
-			this.trailMarkers[i].setMap(null);
-		}
-		this.trailMarkers = [];
-	},
-	
 	resetControllerOptions: function() {
 		if(traildevils.geo.available) {
 			// reset center position to current position
@@ -215,6 +207,21 @@ Ext.regController('map', {
 		traildevils.views.trailsMapPanel.dockedItems.items[0].setTitle("Trails in der Nähe");
 	},
 	
+	/**
+     * Removes all markers from map
+     * @private
+     */
+	removeAllMarkers: function() {
+		for(var i = 0; i < this.trailMarkers.length; i++) {
+			this.trailMarkers[i].setMap(null);
+		}
+		this.trailMarkers = [];
+	},
+	
+	/**
+     * Updates own position marker to current position
+	 * @private
+     */
 	updateOwnPosition: function() {
 		if(this.markerOwnPosition != null) {
 			var ownPosition = new google.maps.LatLng(traildevils.geo.latitude, traildevils.geo.longitude);

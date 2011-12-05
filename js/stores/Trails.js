@@ -12,13 +12,17 @@ traildevils.stores.Trails = Ext.extend(Ext.data.Store, {
 			clearOnPageLoad: false,
 			pageSize: 10,
 			
-			// order by status descending (groups), by distance ascending
-			// and if distance is not available by title
+			/**
+			 * Order data by status descending (groups), by distance ascending
+			 * and if distance is not available by title ascending
+			 */
 			sorters: [
 				{ property: 'status', direction: 'DESC'},
 				{ property: 'distance', direction: 'ASC' },
 				{ property: 'title', direction: 'ASC' }
 			],
+			
+			// TODO still needed?
 			timeout: 2000,
 			
 			listeners: {
@@ -71,11 +75,18 @@ traildevils.stores.Trails = Ext.extend(Ext.data.Store, {
 	},
 	
 	
-	// group by status
-	getGroupString : function(record) {
+	/**
+     * Group data by status
+	 * @private
+     */
+	getGroupString: function(record) {
 		return record.get('status');
 	},
 	
+	/**
+     * Removes all records from store
+	 * @private
+     */
 	removeAllRecords: function() {
 		this.each(function (record) {
 			this.remove(record);

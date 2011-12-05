@@ -1,18 +1,20 @@
 /**
- * @class LocalStore
+ * @class TrailsLocalStore
  * 
  * The local storage store definition
  * 
  */
-traildevils.stores.LocalStore = Ext.extend(Ext.data.Store, {
+traildevils.stores.TrailsLocalStore = Ext.extend(Ext.data.Store, {
 	constructor: function(config) {
 		config = config || {};
 		Ext.applyIf(config, {
 			model: 'Trail',
 			clearOnPageLoad: false,
 			
-			// order by status descending (groups), by distance ascending
-			// and if distance is not available by title
+			/**
+			 * Order data by status descending (groups), by distance ascending
+			 * and if distance is not available by title ascending
+			 */
 			sorters: [
 				{property: 'status', direction: 'DESC'},
 				{property: 'distance', direction: 'ASC'},
@@ -20,7 +22,6 @@ traildevils.stores.LocalStore = Ext.extend(Ext.data.Store, {
 			]
 		});
 		traildevils.on('locationchanged', function() {this.updateDistances()},this);
-		traildevils.stores.LocalStore.superclass.constructor.call(this, config);
+		traildevils.stores.TrailsLocalStore.superclass.constructor.call(this, config);
 	}
-	
 });
