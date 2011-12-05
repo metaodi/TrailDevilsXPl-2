@@ -66,6 +66,10 @@ traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
         traildevils.views.FavoriteTrailsList.superclass.initComponent.apply(this, arguments);
     },
 	
+	/**
+     * Handels tap event on trail item
+     * @private
+     */
     onTrailItemTap: function(container, index, item, e) {
 		var trail = this.store.getAt(index);
 		Ext.dispatch({
@@ -93,6 +97,10 @@ traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
 		this.listOptionsPlugin.hideOptionsMenu(record);
 	},
 	
+	/**
+     * Removes trail from favorite list
+     * @private
+     */
 	removeFavorite: function() {
 		Ext.dispatch({
 			controller: traildevils.controllers.favoriteController,
@@ -103,6 +111,9 @@ traildevils.views.FavoriteTrailsList = Ext.extend(Ext.List, {
 		});
 	},
 	
+	/**
+     * Resets component after favorite was removed
+     */
 	favoriteRemoved: function() {
 		this.favoriteToRemove = null;
 	}
