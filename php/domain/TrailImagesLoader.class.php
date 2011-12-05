@@ -43,7 +43,7 @@ class TrailImagesLoader extends DataLoader
 			$this->convertImageSize($i);
 		}
 		
-		return json_encode(array("images" => $this->internalArray));
+		return json_encode($this->internalArray);
 	}
 	
 	protected function convertImageSize($index)

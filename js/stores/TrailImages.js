@@ -27,8 +27,16 @@ Ext.regStore('TrailImages', {
 		},
 		model: 'TrailImage',
         reader: {
-            type: 'json',
-			root: 'images'
-        }
+            type: 'json'
+        },
+		listeners: {
+			exception: function(store, response, op) {
+				/* WORKAROUND FOR SENCHA BUG: operation is not sucessful, therefore there are no records present
+				 * replace the undefined variable with an empty array to avoid "Uncaught TypeError: Cannot read property 'length' of undefined"
+				* Source: http://stackoverflow.com/questions/7119775/handling-404-exceptions-in-sencha-touch-store-with-an-ajax-proxy
+				*/
+				op.records = [];
+			}
+		}
 	}
 });

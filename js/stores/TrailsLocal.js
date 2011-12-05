@@ -46,8 +46,14 @@ traildevils.stores.TrailsLocal = Ext.extend(traildevils.stores.TrailsLocalStore,
 		});
 		this.sync();
 		this.sort();
+		this.finishLoad();
+	},
+	
+	/**
+     * Fires an event when the load action is finished
+     */
+	finishLoad: function() {
 		traildevils.fireEvent('storedatachanged');
-		traildevils.fireEvent('storedatarefreshed');
 	},
 	
 	/**

@@ -41,6 +41,8 @@ traildevils.stores.Trails = Ext.extend(Ext.data.Store, {
 						traildevils.store.refreshData();
 						traildevils.online = true;
 						console.log('App ist online!');
+					} else {
+						traildevils.store.finishLoad();
 					}
 				}
 			},
@@ -55,7 +57,6 @@ traildevils.stores.Trails = Ext.extend(Ext.data.Store, {
 				model: 'Trail',
 				reader: {
 					type: 'json'
-					//root: 'trails'
 				},
 				listeners: {
 					exception: function(store, response, op) {
