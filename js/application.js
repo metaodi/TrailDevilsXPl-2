@@ -16,6 +16,15 @@ Ext.regApplication({
 	fullscreen: true,
 	
 	launch: function() {
+		// adding all global events
+		traildevils.addEvents(
+			'storedatachanged',
+			'storedatarefreshed',
+			'beforestoreload',
+			'favoritedatachanged',
+			'locationchanged'
+		);
+		
 		// app is offline until told otherwise
 		traildevils.online = false;
 		
