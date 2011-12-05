@@ -29,7 +29,7 @@ class TestTrailImagesLoader extends TraildevilsUnitTestCase
 	{
 		$url = "file://".dirname(__FILE__)."/../trailImages.json";
 		$localJson = $this->loader->convertTrailImagesJson($this->getTestTrailImagesJson());
-		$this->checkJson($localJson,"images");
+		$this->checkJson($localJson);
 		
 		$result = $this->loader->getTrailImages(null, $url);
 		$this->assertEqualsIgnoreWhitespace($result,$localJson);
