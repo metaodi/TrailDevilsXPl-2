@@ -33,14 +33,12 @@ traildevils.stores.FavoriteTrailsStore = Ext.extend(traildevils.stores.LocalStor
 		 * WORKAROUND FOR SENCHA BUG: needsAdd flag of records doesn't get resetted
 		 * Source: http://www.sencha.com/forum/showthread.php?132548-Ext.Store.onProxyWrite-doesn-t-set-needsAdd-to-false
 		 */
-		console.log('Before load');
 		this.load({
 			scope: this,
 			callback: function(records, operation, success) {
 				traildevils.fireEvent('favoritedatachanged');
 			}
 		});
-		console.log('After load');
 	},
 	
 	removeTrail: function(trail) {
