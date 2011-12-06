@@ -355,11 +355,17 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 /* Trail Detail - Thumblist */
+.trailDetailMediaThumbPanel {
+	margin: 0.4em 0 0 0.4em;
+}
+.trailDetailMediaThumbPanel .trail-images-thumblist {
+	float: left;
+}
 .trailDetailMediaThumbPanel .trail-images-thumblist .imagebox {
 	border: 0.083em solid #C7C7C7;
 	background-color: #fff;
 	float: left;
-	margin: 0.4em;
+	margin: 0 0.4em 0.4em 0;
 	padding: 0.3em;
 }
 .trailDetailMediaThumbPanel .trail-images-thumblist .imagebox .image {
