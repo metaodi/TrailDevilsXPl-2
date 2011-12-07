@@ -82,13 +82,17 @@
 	</target>
 	
 	<target name="patch" depends="update_manifest">
-		<!-- create a version that uses the app.manifest to test offline functionality -->
-		<copy file="index.html" tofile="local.html" overwrite="true" verbose="true" />
-		<replace file="local.html" summary="true">
+		<!-- create a version that does not use the app.manifest (nocache.html) -->
+		<copy file="index.html" tofile="nocache.html" overwrite="true" verbose="true" />
+		
+		<!-- add app.manifest to index.html -->
+		<replace file="index.html" summary="true">
 			<replacetoken><![CDATA[<html>]]></replacetoken>
 			<replacevalue><![CDATA[<html manifest="app.manifest">]]></replacevalue>
 		</replace>
-		<replace token="-debug" value=""  file="local.html" summary="true" />
+		
+		<!-- use compressed version of library instead of the more verbose debug version -->
+		<replace token="-debug" value=""  file="index.html" summary="true" />
 		<replace token="-debug" value=""  file="app.manifest" summary="true" />
 	</target>
 	

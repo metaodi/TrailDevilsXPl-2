@@ -4,6 +4,6 @@
 </Files>
 
 RewriteEngine on
-RewriteRule   ^local$ local.html
+RewriteRule   ^nocache$ nocache.html
 
 AddType text/cache-manifest manifest
