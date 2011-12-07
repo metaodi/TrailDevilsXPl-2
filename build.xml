@@ -92,8 +92,12 @@
 			<replacevalue>nocache.html</replacevalue>
 		</replace>
 		
-		<!-- add app.manifest to index.html -->
+		<!-- add app.manifest to index pages -->
 		<replace file="index.html" summary="true">
+			<replacetoken><![CDATA[<html>]]></replacetoken>
+			<replacevalue><![CDATA[<html manifest="app.manifest">]]></replacevalue>
+		</replace>
+		<replace file="index_iphone.html" summary="true">
 			<replacetoken><![CDATA[<html>]]></replacetoken>
 			<replacevalue><![CDATA[<html manifest="app.manifest">]]></replacevalue>
 		</replace>
