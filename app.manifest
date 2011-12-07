@@ -4,6 +4,7 @@ CACHE MANIFEST
 
 # html files
 ./index.html
+./index_iphone.html
 
 # css files
 #css_files
