@@ -85,6 +85,13 @@
 		<!-- create a version that does not use the app.manifest (nocache.html) -->
 		<copy file="index.html" tofile="nocache.html" overwrite="true" verbose="true" />
 		
+		<!-- create nocache-version of iphone preview page -->
+		<copy file="index_iphone.html" tofile="nocache_iphone.html" overwrite="true" verbose="true" />
+		<replace file="nocache_iphone.html" summary="true">
+			<replacetoken>index.html</replacetoken>
+			<replacevalue>nocache.html</replacevalue>
+		</replace>
+		
 		<!-- add app.manifest to index.html -->
 		<replace file="index.html" summary="true">
 			<replacetoken><![CDATA[<html>]]></replacetoken>
