@@ -6,13 +6,14 @@
 		</classpath>
 	</taskdef>
 	
-	<property name="webapp.dir" value="/var/www/html" />
-	<property name="result.dir" value="test-results" />
-	<property name="test.dir"	value="test/php" />
-	<property name="css.dir"	value="resources/css" />
-	<property name="image.dir"	value="resources/images" />
-	<property name="js.dir"		value="js" />
-	<property name="manifest"	value="app.manifest" />
+	<property name="webapp.dir"		value="/var/www/html" />
+	<property name="result.dir"		value="test-results" />
+	<property name="test.dir"		value="test/php" />
+	<property name="css.dir"		value="resources/css" />
+	<property name="image.dir"		value="resources/images" />
+	<property name="js.dir"			value="js" />
+	<property name="manifest"		value="app.manifest" />
+	<property name="mobilemanifest"	value="iphone.manifest" />
 	
 	<tstamp>
 		<format property="TODAY" pattern="dd.MM.yyyy HH:mm:ss" />
@@ -58,6 +59,7 @@
 
 		<echo message="Updating the ${manifest} version date to today (${TODAY})" />
 		<replace value="${TODAY}" token="#version" file="${manifest}" summary="true" />
+		<replace value="${TODAY}" token="#version" file="${mobilemanifest}" summary="true" />
 		
 		<echo message="Adding css files to manifest" />
 		<fileset id="css.fileset" dir="${css.dir}" includes="**/*.css" />
@@ -92,14 +94,14 @@
 			<replacevalue>nocache.html</replacevalue>
 		</replace>
 		
-		<!-- add app.manifest to index pages -->
+		<!-- add manifest to index pages -->
 		<replace file="index.html" summary="true">
 			<replacetoken><![CDATA[<html>]]></replacetoken>
 			<replacevalue><![CDATA[<html manifest="app.manifest">]]></replacevalue>
 		</replace>
 		<replace file="index_iphone.html" summary="true">
 			<replacetoken><![CDATA[<html>]]></replacetoken>
-			<replacevalue><![CDATA[<html manifest="app.manifest">]]></replacevalue>
+			<replacevalue><![CDATA[<html manifest="iphone.manifest">]]></replacevalue>
 		</replace>
 		
 		<!-- use compressed version of library instead of the more verbose debug version -->

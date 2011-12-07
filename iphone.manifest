@@ -1,0 +1,16 @@
+CACHE MANIFEST
+
+# version: #version
+
+# html files
+./index_iphone.html
+
+# image files
+./resources/images/iphone.png
+./resources/images/favicon.png
+
+
+FALLBACK:
+
+NETWORK:
+*
