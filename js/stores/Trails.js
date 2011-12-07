@@ -11,6 +11,7 @@ traildevils.stores.Trails = Ext.extend(Ext.data.Store, {
 			model: 'Trail',
 			clearOnPageLoad: false,
 			pageSize: 10,
+			timeout: 2000,
 			
 			/**
 			 * Order data by status descending (groups), by distance ascending
@@ -21,9 +22,6 @@ traildevils.stores.Trails = Ext.extend(Ext.data.Store, {
 				{ property: 'distance', direction: 'ASC' },
 				{ property: 'title', direction: 'ASC' }
 			],
-			
-			// TODO still needed?
-			timeout: 2000,
 			
 			listeners: {
 				beforeload: function() {
