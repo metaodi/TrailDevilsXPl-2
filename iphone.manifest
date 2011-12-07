@@ -4,6 +4,7 @@ CACHE MANIFEST
 
 # html files
 ./index_iphone.html
+./index.html
 
 # image files
 ./resources/images/iphone.png
