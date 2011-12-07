@@ -4,6 +4,8 @@
 </Files>
 
 RewriteEngine on
-RewriteRule   ^nocache$ nocache.html
+RewriteRule   ^nocache$			nocache.html
+RewriteRule   ^iphone$			index_iphone.html
+RewriteRule   ^nocacheiphone$	nocache_iphone.html
 
 AddType text/cache-manifest manifest
