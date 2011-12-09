@@ -74,10 +74,12 @@ class TrailsLoader extends DataLoader
 		if ($this->page == 1) {
 			$lat = $this->internalArray[0]["latitude"];
 			$lon = $this->internalArray[0]["longitude"];
+			$thumb = $this->internalArray[0]["thumb"];
+			$types = $this->internalArray[0]["types"];
 			// replacing last trail of first page with closed trail
 			if(count($this->internalArray) > 5)
 			{
-				$this->internalArray[count($this->internalArray)-2] = $this->getClosedTrail($lat,$lon);
+				$this->internalArray[count($this->internalArray)-2] = $this->getClosedTrail($lat,$lon,$thumb,$types);
 			}
 		}
 
@@ -150,20 +152,20 @@ class TrailsLoader extends DataLoader
 	}
 	
 	//TODO delete after development: add closed trail on first load
-	private function getClosedTrail($lat,$lon)
+	private function getClosedTrail($lat,$lon,$thumb,$types)
 	{
 		$trailArray = array();
 		$trailArray["id"] = 100;
 		$trailArray["title"] = "Geschlossener Trail";
-		$trailArray["location"] = "Winterthur";
+		$trailArray["location"] = "Irgendwo";
 		$trailArray["distance"] = $this->userGeo->distance(new GeoLocation($lat, $lon));
 		$trailArray["formattedDistance"] = $this->userGeo->getFormattedDistance($trailArray["distance"]);
-		$trailArray["thumb"] = "";
+		$trailArray["thumb"] = $thumb;
 		$trailArray["description"] = "Beschreibung des geschlossenen Trails.";
 		$trailArray["status"] = "geschlossen";
 		$trailArray["latitude"] = $lat;
 		$trailArray["longitude"] = $lon;
-		$trailArray["types"] = "";
+		$trailArray["types"] = $types;
 		
 		return $trailArray;
 	}
