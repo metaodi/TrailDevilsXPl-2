@@ -475,3 +475,6 @@ input[type="search"]::-webkit-search-cancel-button {
 .x-panel.favoritePopupPanel.act .x-panel-body {
 	background: url(../images/fav_white_act.png) no-repeat 50% 0 transparent;
 }
+.x-panel.favoritePopupPanel.trash .x-panel-body {
+	background: url(../images/trash_white.png) no-repeat 50% 0 transparent;
+}

@@ -29,6 +29,9 @@ Ext.regController('favorite', {
 		if(options.callback !== undefined) {
 			options.callback.call(options.scope);
 		}
+		
+		// show favorite popup
+		this.showRemoveFavoritePopup();
 	},
 	
 	toggleFavorite: function(options) {
@@ -48,14 +51,14 @@ Ext.regController('favorite', {
 		}
 		
 		// show favorite popup
-		this.showFavoritePopup(newFavoriteState);
+		this.showToggleFavoritePopup(newFavoriteState);
 	},
 	
 	/**
      * Shows the favorite popup panel
      * @private
      */
-	showFavoritePopup: function(newFavoriteState) {
+	showToggleFavoritePopup: function(newFavoriteState) {
 		var popupText = 'starred';
 		if(!newFavoriteState) {
 			popupText = 'unstarred';
@@ -71,9 +74,29 @@ Ext.regController('favorite', {
 		}
 		
 		traildevils.views.favoritePopupPanel.show('pop');
-		// hide popup after 600ms and destroy it after 1000ms
-		setTimeout('traildevils.views.favoritePopupPanel.hide()', 800);
-		setTimeout('traildevils.views.favoritePopupPanel.destroy()', 1200);
+		// hide popup after 1000ms and destroy it after 1800ms
+		setTimeout('traildevils.views.favoritePopupPanel.hide()', 1000);
+		setTimeout('traildevils.views.favoritePopupPanel.destroy()', 1800);
+	},
+	
+	/**
+     * Shows the favorite removed popup panel
+     * @private
+     */
+	showRemoveFavoritePopup: function() {
+		var popupText = 'removed';
+		
+		traildevils.views.favoritePopupPanel = new traildevils.views.FavoritePopupPanel({
+			popupText: popupText
+		});
+		
+		// add trash class to popup
+		traildevils.views.favoritePopupPanel.addCls('trash');
+		
+		traildevils.views.favoritePopupPanel.show('pop');
+		// hide popup after 1000ms and destroy it after 1800ms
+		setTimeout('traildevils.views.favoritePopupPanel.hide()', 1000);
+		setTimeout('traildevils.views.favoritePopupPanel.destroy()', 1800);
 	}
 });
 

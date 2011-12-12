@@ -10,14 +10,9 @@ traildevils.views.FavoritePopupPanel = Ext.extend(Ext.Panel, {
 	width: 110,
 	height: 110,
 	cls: 'favoritePopupPanel',
-	active: false,
 	popupText: 'unstarred',
 	
 	initComponent: function() {
-		if(this.active) {
-			this.popupText = 'starred';
-			this.cls = 'favoritePopupPanel act'
-		}
 		this.html = '<p>' + this.popupText + '</p>';
 		
         traildevils.views.FavoritePopupPanel.superclass.initComponent.call(this);
