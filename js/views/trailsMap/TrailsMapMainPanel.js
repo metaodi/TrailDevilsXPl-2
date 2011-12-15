@@ -6,7 +6,7 @@
 
 traildevils.views.TrailsMapMainPanel = Ext.extend(Ext.Panel, {
 	iconCls: 'locate',
-	title: 'Map',
+	title: 'Karte',
 	layout: 'card',
 	
 	initComponent: function () {
