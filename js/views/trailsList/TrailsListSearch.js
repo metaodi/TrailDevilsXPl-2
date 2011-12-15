@@ -5,7 +5,7 @@
  */
 
 traildevils.views.TrailsListSearch = Ext.extend(Ext.form.Search, {
-	placeHolder: 'Suche...',
+	placeHolder: 'Filtern...',
 	cls: 'trailsListSearch',
 	useClearIcon: true,
 	store: null,
