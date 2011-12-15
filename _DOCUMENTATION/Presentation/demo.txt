@@ -1,0 +1,15 @@
+1. Seite laden
+2. Bookmark erstellen
+3. App via Homescreen neustarten
+4. Trailliste (Sortierung nach Abstand, Gruppierung)
+5. Filter
+6. Weitere Trails laden
+7. Pulldown Refresh
+8. Detailansicht
+9. Fotos
+10. Karte (Aktuelle Position, Detail)
+11. Swipe auf Trailliste (Hinzufügen/Entfernen)
+12. Favoritenliste
+13. Karte der Favoriten
+14. Swipe zum entfernen
+15. Flugzeugmodus einschalten, App neustarten

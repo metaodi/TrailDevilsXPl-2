@@ -1,0 +1,14 @@
+Einleitung			Jürg
+Agenda				Jürg
+Technologie			Odi
+System-Architektur	Odi
+Sencha Touch		Jürg
+Hello World			Jürg
+MVC					Odi
+List				Odi
+Ziele				Jürg
+Demo				Jürg/Odi
+UI Richtlinien		Jürg
+Offlinefähigkeit	Odi
+Zukunft				Jürg
+DMSW				Odi
