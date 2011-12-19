@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+	xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		= "com.phonegap.traildevils"
+	version 	= "1.0.0">
+
+	<name>traildevils</name>
+
+	<description>
+		biketrails on your phone
+	</description>
+
+	<author href="http://readmore.ch"
+		email="oderbolz@gmail.com">
+		Stefan Oderbolz
+	</author>
+
+	<icon src="./resources/images/app_icon.jpg" gap:role="default" />
+</widget>
